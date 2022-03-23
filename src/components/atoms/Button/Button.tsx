@@ -1,7 +1,12 @@
 export interface IButtonProps {}
 
 const Button = () => (
-  <div className='p-4 bg-blue-500'>Hello, This is THE Button component!</div>
+  <button
+    type='button'
+    className='px-4 py-2 border border-black rounded shadow-lg'
+  >
+    Click me
+  </button>
 )
 
 export default Button
