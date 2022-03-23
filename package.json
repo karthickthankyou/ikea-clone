@@ -15,7 +15,8 @@
     "lint": "eslint --ext .tsx,.ts .",
     "type:check": "tsc",
     "validate": "run-p lint type:check format:check",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "chromatic": "npx chromatic --project-token=70cc3e8213a7"
   },
   "dependencies": {
     "next": "12.1.0",
