@@ -3,7 +3,7 @@ export interface IButtonProps {}
 const Button = () => (
   <button
     type='button'
-    className='px-4 py-2 border border-gray-900 rounded shadow-lg'
+    className='px-4 py-2 border rounded shadow-lg border-primary-600'
   >
     Click me
   </button>
