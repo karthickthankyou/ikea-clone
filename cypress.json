@@ -1,0 +1,9 @@
+{
+  "projectId": "ikea-clone",
+  "component": {
+    "componentFolder": "src/components",
+    "testFiles": "**/*test.{js,jsx,ts,tsx}",
+    "viewportWidth": 1200,
+    "viewportHeight": 800
+  }
+}
