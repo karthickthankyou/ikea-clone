@@ -1,0 +1,9 @@
+query GetProducts {
+  products(limit: 10, order_by: { discount: desc_nulls_last }) {
+    category
+    createdAt
+    discount
+    id
+    name
+  }
+}
