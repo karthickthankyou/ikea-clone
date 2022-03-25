@@ -6,10 +6,10 @@ export interface IButtonProps {
   children: Children
   size?: 'sm' | 'md' | 'lg'
   variant?: 'contained' | 'outlined' | 'text'
-  color?: 'primary' | 'success' | 'error'
+  color?: 'primary' | 'success' | 'error' | 'white' | 'black'
   fullWidth?: boolean
   disabled?: boolean
-  onClickAction?: MouseEventHandler<HTMLButtonElement>
+  onClick?: MouseEventHandler<HTMLButtonElement>
   className?: string
   isLoading?: boolean
 }
@@ -17,6 +17,8 @@ export interface IButtonProps {
 const variantColor = {
   contained: {
     primary: 'text-white bg-primary-600 hover:bg-primary-700',
+    white: 'text-black bg-white hover:bg-gray-50',
+    black: 'text-white bg-black hover:bg-gray-900',
     success: 'text-white bg-green-600 hover:bg-green-700',
     error: 'text-white bg-red-600 hover:bg-red-700',
   },
@@ -24,11 +26,15 @@ const variantColor = {
   outlined: {
     primary:
       'border-2 border-primary-600 text-primary-600 hover:bg-primary-100',
+    white: 'border-2 border-white text-black hover:bg-white/10',
+    black: 'border-2 border-black text-white hover:bg-black/10',
     success: 'border-2 border-green-600 text-green-600 hover:bg-green-100',
     error: 'border-2 border-red-600 text-red-600 hover:bg-red-100',
   },
   text: {
     primary: 'text-primary-600 hover:bg-primary-100',
+    white: 'text-black hover:bg-white/10',
+    black: 'text-white hover:bg-black/10',
     success: 'text-green-600 hover:bg-green-100',
     error: 'text-red-600 hover:bg-red-100',
   },
@@ -48,7 +54,7 @@ const Button = ({
   disabled = false,
   children = '',
   // eslint-disable-next-line no-console
-  onClickAction = () => console.error('onClick not implemented'),
+  onClick = () => console.error('onClick not implemented'),
   className = '',
   isLoading = false,
 }: IButtonProps) => {
@@ -64,7 +70,7 @@ const Button = ({
     <button
       type='button'
       disabled={disabled || isLoading}
-      onClick={onClickAction}
+      onClick={onClick}
       className={`uppercase rounded-sm relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} ${className}`}
     >
       {isLoading && (

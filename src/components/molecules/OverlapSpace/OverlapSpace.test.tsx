@@ -1,12 +1,12 @@
 import { mount } from '@cypress/react'
-import OverlapSpace, { OverlapSpaceChild } from './OverlapSpace'
+import OverlapSpace from './OverlapSpace'
 
 describe('OverlapSpace Component', () => {
   it('OverlapSpace renders', () => {
     mount(
       <OverlapSpace>
-        <OverlapSpaceChild className='-z-10'>First element</OverlapSpaceChild>
-        <OverlapSpaceChild>Second element</OverlapSpaceChild>
+        <OverlapSpace.Child className='-z-10'>First element</OverlapSpace.Child>
+        <OverlapSpace.Child>Second element</OverlapSpace.Child>
       </OverlapSpace>
     )
   })

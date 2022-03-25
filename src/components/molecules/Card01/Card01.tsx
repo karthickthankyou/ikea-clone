@@ -1,7 +1,5 @@
 import Image from 'src/components/atoms/Image'
-import OverlapSpace, {
-  OverlapSpaceChild,
-} from 'src/components/molecules/OverlapSpace/OverlapSpace'
+import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
 import { Children } from 'src/types'
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 import Link from 'src/components/atoms/Link'
@@ -32,9 +30,9 @@ const ImageBlock = ({
   children: ReactElement
 }) => (
   <OverlapSpace>
-    <OverlapSpaceChild className='-z-10'>
+    <OverlapSpace.Child className='-z-10'>
       <Image src={src} alt='' />
-    </OverlapSpaceChild>
+    </OverlapSpace.Child>
     {children}
   </OverlapSpace>
 )
@@ -45,7 +43,7 @@ const ImageBlockChild = ({
 }: {
   children: Children
   className?: string
-}) => <OverlapSpaceChild className={className}>{children}</OverlapSpaceChild>
+}) => <OverlapSpace.Child className={className}>{children}</OverlapSpace.Child>
 
 const DetailsBlock = ({
   children,
