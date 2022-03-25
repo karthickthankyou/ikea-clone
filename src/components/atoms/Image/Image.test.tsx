@@ -7,7 +7,7 @@ describe('Image Component', () => {
     mount(
       <Image
         src='https://via.placeholder.com/150'
-        blurDataURL='ttps://via.placeholder.com/10'
+        blurDataURL='https://via.placeholder.com/10'
         layout='fill'
         alt=''
       />

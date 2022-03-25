@@ -26,7 +26,6 @@ const primaryPallete = colorGen({ hue: 215 })
 const greenPallete = colorGen({ hue: 100 })
 const yellowPallete = colorGen({ hue: 50 })
 const grayPallete = colorGen({ hue: 215, saturation: '10%' })
-console.log('redPallete', redPallete)
 
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
@@ -44,6 +43,10 @@ module.exports = {
       accent: 'hsl(215, 100%, 50%)',
     },
     extend: {
+      borderWidth: {
+        // DEFAULT: '1px',
+        1.5: '1.5px',
+      },
       animation: {
         'spin-reverse': 'reverse-spin 1s linear infinite',
         'spin-slow': 'spin 3s linear infinite',

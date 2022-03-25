@@ -1,0 +1,97 @@
+import Image from 'src/components/atoms/Image'
+import OverlapSpace, {
+  OverlapSpaceChild,
+} from 'src/components/molecules/OverlapSpace/OverlapSpace'
+import { Children } from 'src/types'
+import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
+import Link from 'src/components/atoms/Link'
+import { ReactElement } from 'react'
+
+export interface ICard01Props {
+  href: string
+  children: Children
+}
+
+const Card01 = ({ children, href }: ICard01Props) => (
+  <Link href={href} className='group'>
+    {children}
+  </Link>
+)
+
+const Title = ({ children }: { children: Children }) => (
+  <div className='text-2xl font-semibold group-hover:underline underline-offset-2'>
+    {children}
+  </div>
+)
+
+const ImageBlock = ({
+  src,
+  children,
+}: {
+  src: string
+  children: ReactElement
+}) => (
+  <OverlapSpace>
+    <OverlapSpaceChild className='-z-10'>
+      <Image src={src} alt='' />
+    </OverlapSpaceChild>
+    {children}
+  </OverlapSpace>
+)
+
+const ImageBlockChild = ({
+  children,
+  className,
+}: {
+  children: Children
+  className?: string
+}) => <OverlapSpaceChild className={className}>{children}</OverlapSpaceChild>
+
+const DetailsBlock = ({
+  children,
+  className = 'h-56 p-8 ',
+  flex = 'flex flex-col items-start justify-between',
+  bg = 'bg-red-200',
+  text = 'text-black',
+}: {
+  children: Children
+  className?: string
+
+  flex?: string
+  bg?: string
+  text?: string
+}) => <div className={`${className} ${flex} ${bg} ${text}`}>{children}</div>
+
+const arrowColors = {
+  black: {
+    bg: 'bg-black',
+    text: 'text-white',
+  },
+  white: {
+    bg: 'bg-white',
+    text: 'text-black',
+  },
+}
+
+export const ArrowButton = ({
+  color = 'black',
+}: {
+  color?: 'black' | 'white'
+}) => (
+  <button
+    type='button'
+    className={`inline p-3 font-semibold transition-all ${arrowColors[color].bg} rounded-full cursor-pointer group-hover:-translate-y-2 group-hover:shadow-xl shadow-black/40`}
+  >
+    <ArrowRightIcon
+      className={`w-6 h-6 ${arrowColors[color].text} group-hover:animate-slide`}
+    />
+  </button>
+)
+
+Card01.ImageBlock = ImageBlock
+Card01.ImageBlockChild = ImageBlockChild
+Card01.DetailsBlock = DetailsBlock
+Card01.Title = Title
+Card01.ArrowButton = ArrowButton
+
+export default Card01
