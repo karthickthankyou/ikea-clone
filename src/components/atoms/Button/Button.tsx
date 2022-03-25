@@ -71,7 +71,7 @@ const Button = ({
       type='button'
       disabled={disabled || isLoading}
       onClick={onClick}
-      className={`uppercase rounded-sm relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} ${className}`}
+      className={`rounded-full relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} ${className}`}
     >
       {isLoading && (
         <div className='absolute inset-0 flex items-center justify-center'>
