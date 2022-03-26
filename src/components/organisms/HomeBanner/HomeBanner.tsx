@@ -1,6 +1,6 @@
 import Button from 'src/components/atoms/Button/Button'
-import BlurredCirle from '../BlurredCirle/BlurredCirle'
-import OverlapSpace from '../OverlapSpace/OverlapSpace'
+import BlurredCirle from 'src/components/molecules/BlurredCirle/BlurredCirle'
+import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
 
 export interface IHomeBannerProps {}
 

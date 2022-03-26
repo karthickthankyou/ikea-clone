@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import BlurredCirle from './BlurredCirle'
 
 export default {
-  title: 'src/components/molecules/BlurredCirle',
+  title: 'molecules/BlurredCirle',
   component: BlurredCirle,
 } as ComponentMeta<typeof BlurredCirle>
 

@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import HomeBanner from './HomeBanner'
 
 export default {
-  title: 'src/components/molecules/HomeBanner',
+  title: 'organisms/HomeBanner',
   component: HomeBanner,
 } as ComponentMeta<typeof HomeBanner>
 
