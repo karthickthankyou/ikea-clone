@@ -4,7 +4,7 @@ import Container from 'src/components/atoms/Container/Container'
 import BannerCard02 from './BannerCard02'
 
 export default {
-  title: 'src/components/molecules/BannerCard02',
+  title: 'molecules/BannerCard02',
   component: BannerCard02,
 } as ComponentMeta<typeof BannerCard02>
 

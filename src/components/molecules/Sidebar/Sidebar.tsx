@@ -31,8 +31,13 @@ const Footer = ({ children }: Pick<ISidebarProps, 'children'>) => (
   <div className='p-4 border-t'>{children}</div>
 )
 
-const Body = ({ children }: Pick<ISidebarProps, 'children'>) => (
-  <div className='flex flex-col flex-grow p-4 pb-12 overflow-y-scroll '>
+const Body = ({
+  children,
+  className,
+}: Pick<ISidebarProps, 'children' | 'className'>) => (
+  <div
+    className={`flex flex-col flex-grow p-4 pb-12 overflow-y-scroll ${className} `}
+  >
     {children}
   </div>
 )

@@ -4,7 +4,7 @@ import Image from 'src/components/atoms/Image'
 import Paragraphs from './Paragraphs'
 
 export default {
-  title: 'src/components/molecules/Paragraphs',
+  title: 'molecules/Paragraphs',
   component: Paragraphs,
 } as ComponentMeta<typeof Paragraphs>
 

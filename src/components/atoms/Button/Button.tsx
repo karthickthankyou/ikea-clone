@@ -72,7 +72,7 @@ const Button = ({
       // eslint-disable-next-line react/button-has-type
       type={type}
       disabled={disabled || isLoading}
-      className={`rounded-full relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} ${className}`}
+      className={`rounded-full relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} `}
       {...props}
     >
       {isLoading && (
@@ -80,7 +80,9 @@ const Button = ({
           <RefreshIcon className='w-5 h-5 animate-spin-reverse' />
         </div>
       )}
-      <span className={loadingCls}>{children}</span>
+      <span className={`${className} font-medium ${loadingCls}`}>
+        {children}
+      </span>
     </button>
   )
 }

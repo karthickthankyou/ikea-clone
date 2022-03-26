@@ -104,6 +104,7 @@ const NavSidebarUser = ({
     </Sidebar.Footer>
   </Sidebar>
 )
+
 const NavSidebar = ({
   open,
   setOpen,

@@ -43,7 +43,7 @@ svg path {
   }
   [type='checkbox'],
   [type='radio'] {
-    @apply text-black border-gray-300 rounded focus:ring-black;
+    @apply text-black border-gray-200 rounded focus:ring-black;
   }
   a,
   input,
@@ -59,7 +59,7 @@ label {
 }
 
 input[type='checkbox'] {
-  @apply w-5 h-5 accent-accent;
+  @apply accent-black/40;
 }
 
 @layer utilities {

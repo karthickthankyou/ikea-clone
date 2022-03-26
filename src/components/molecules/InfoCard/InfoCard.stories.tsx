@@ -4,7 +4,7 @@ import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import InfoCard from './InfoCard'
 
 export default {
-  title: 'src/components/molecules/InfoCard',
+  title: 'molecules/InfoCard',
   component: InfoCard,
 } as ComponentMeta<typeof InfoCard>
 
