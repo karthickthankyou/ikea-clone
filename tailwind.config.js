@@ -1,4 +1,5 @@
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const template = {
   25: '98%',
@@ -31,6 +32,10 @@ module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
   important: true,
   theme: {
+    screens: {
+      xs: '480px',
+      ...defaultTheme.screens,
+    },
     colors: {
       transparent: colors.transparent,
       black: colors.black,

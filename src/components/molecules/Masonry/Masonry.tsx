@@ -20,7 +20,7 @@ const Masonry = ({ items }: IMasonryProps) => {
   const shortOne = Math.ceil(items.length / divideBy)
 
   return (
-    <div className='space-y-4 lg:columns-3 columns-1 sm:columns-2 rows-'>
+    <div className='gap-4 space-y-4 lg:columns-3 columns-1 sm:columns-2'>
       {items.map((item, index) => (
         <div
           className={`relative p-8 shadow-lg shadow-black/10 ${
