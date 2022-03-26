@@ -88,4 +88,5 @@ module.exports = {
       },
     },
   ],
+  ignorePatterns: ['**/generated/*'],
 }
