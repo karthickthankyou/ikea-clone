@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import FormError from './FormError'
 
 export default {
-  title: 'src/components/atoms/FormError',
+  title: 'atoms/FormError',
   component: FormError,
 } as ComponentMeta<typeof FormError>
 

@@ -17,7 +17,7 @@ export interface IButtonProps {
 const variantColor = {
   contained: {
     primary: 'text-white bg-primary-600 hover:bg-primary-700',
-    white: 'text-black bg-white hover:bg-gray-50',
+    white: 'text-black bg-white',
     black: 'text-white bg-black hover:bg-gray-900',
     success: 'text-white bg-green-600 hover:bg-green-700',
     error: 'text-white bg-red-600 hover:bg-red-700',

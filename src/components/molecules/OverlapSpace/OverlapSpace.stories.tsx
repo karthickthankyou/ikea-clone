@@ -3,11 +3,13 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import OverlapSpace from './OverlapSpace'
 
 export default {
-  title: 'src/components/molecules/OverlapSpace',
+  title: 'molecules/OverlapSpace',
   component: OverlapSpace,
 } as ComponentMeta<typeof OverlapSpace>
 
-const Template: ComponentStory<typeof OverlapSpace> = (args) => <OverlapSpace {...args} />
+const Template: ComponentStory<typeof OverlapSpace> = (args) => (
+  <OverlapSpace {...args} />
+)
 
 export const Primary = Template.bind({})
 Primary.args = {}

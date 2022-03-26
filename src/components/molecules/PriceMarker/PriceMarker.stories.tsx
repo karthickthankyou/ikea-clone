@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import PriceMarker from './PriceMarker'
 
 export default {
-  title: 'src/components/molecules/PriceMarker',
+  title: 'molecules/PriceMarker',
   component: PriceMarker,
 } as ComponentMeta<typeof PriceMarker>
 

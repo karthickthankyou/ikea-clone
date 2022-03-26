@@ -5,7 +5,7 @@ import Card01 from './Card01'
 import PriceMarker from '../PriceMarker/PriceMarker'
 
 export default {
-  title: 'src/components/molecules/Card01',
+  title: 'molecules/Card01',
   component: Card01,
 } as ComponentMeta<typeof Card01>
 

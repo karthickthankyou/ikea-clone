@@ -16,7 +16,7 @@ a {
 }
 
 svg path {
-  stroke-width: 1.5;
+  stroke-width: '1.5px';
 }
 
 @tailwind base;
