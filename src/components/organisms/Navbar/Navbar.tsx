@@ -85,13 +85,13 @@ const NavSidebarUser = ({
         <>
           <Link
             href='/login'
-            className='py-2 block w-full border border-primary-500 rounded-full text-primary-500 text-center mt-1.5 font-medium capitalize'
+            className='py-2 block w-full border border-primary rounded-full text-primary text-center mt-1.5 font-medium capitalize'
           >
             Login
           </Link>
           <Link
             href='/signup'
-            className='py-2 block w-full bg-primary-500 font-medium border border-primary-500 rounded-full text-white text-center mt-1.5 capitalize'
+            className='py-2 block w-full bg-primary font-medium border border-primary rounded-full text-white text-center mt-1.5 capitalize'
           >
             Join now
           </Link>
@@ -157,13 +157,13 @@ const NavSidebar = ({
         <>
           <Link
             href='/login'
-            className='py-2 block w-full border border-primary-500 rounded-full text-primary-500 text-center mt-1.5 font-medium capitalize'
+            className='py-2 block w-full border border-primary rounded-full text-primary text-center mt-1.5 font-medium capitalize'
           >
             Login
           </Link>
           <Link
             href='/signup'
-            className='py-2 block w-full bg-primary-500 font-medium border border-primary-500 rounded-full text-white text-center mt-1.5 capitalize'
+            className='py-2 block w-full bg-primary font-medium border border-primary rounded-full text-white text-center mt-1.5 capitalize'
           >
             Join now
           </Link>

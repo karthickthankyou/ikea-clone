@@ -13,11 +13,11 @@ const Badge = ({ children, size = 'md', variant = 'gray' }: IBadgeProps) => {
     lg: 'px-3 py-1.5',
   }
   const variantCls = {
-    primary: 'bg-primary-500 text-white',
-    gray: 'bg-gray-500 text-white',
-    red: 'bg-red-500 text-white',
-    yellow: 'bg-yellow-500  text-black',
-    green: 'bg-green-500  text-black',
+    primary: 'bg-primary text-white',
+    gray: 'bg-gray text-white',
+    red: 'bg-red text-white',
+    yellow: 'bg-yellow  text-black',
+    green: 'bg-green  text-black',
   }
   return (
     <span
