@@ -1,8 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import RefreshIcon from '@heroicons/react/outline/RefreshIcon'
 
+type ButtonSizes = 'sm' | 'md' | 'lg' | 'xl'
+
 export type IButtonProps = {
-  size?: 'sm' | 'md' | 'lg'
+  size?: ButtonSizes
   variant?: 'contained' | 'outlined' | 'text'
   color?: 'primary' | 'success' | 'error' | 'white' | 'black'
   fullWidth?: boolean
@@ -38,10 +40,11 @@ const variantColor = {
   },
 }
 
-const sizes = {
+const sizes: { [key in ButtonSizes]: string } = {
   sm: 'px-3 py-1.5 text-xs',
   md: 'px-4 py-2 text-sm',
   lg: 'px-5 py-2 text-base',
+  xl: 'px-8 py-3 text-xl',
 }
 
 const Button = ({
