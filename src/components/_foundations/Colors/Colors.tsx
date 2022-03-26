@@ -71,26 +71,29 @@ const ColorPill = ({
 
 const ColorsLayout = ({ color }: { color: string }) => (
   <>
-    {[25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900].map((shade) => {
-      const bgColor = `bg-${color}-${shade}`
-      const textColor = `text-${color}-${shade}`
+    {[25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 'DEFAULT'].map(
+      (shade) => {
+        const DEFAULT = shade === 'DEFAULT'
+        const bgColor = DEFAULT ? `bg-${color}` : `bg-${color}-${shade}`
+        const textColor = DEFAULT ? `text-${color}` : `text-${color}-${shade}`
 
-      // For making the text visible over differect lightnesses.
-      const buttonClasses =
-        shade > 500
-          ? `text-white border-white/10`
-          : 'text-black border-black/10'
+        // For making the text visible over differect lightnesses.
+        const buttonClasses =
+          shade > 400 || DEFAULT
+            ? `text-white border-white/10`
+            : 'text-black border-black/10'
 
-      return (
-        <ColorPill
-          key={shade}
-          shade={shade.toString()}
-          bgColor={bgColor}
-          buttonClasses={buttonClasses}
-          textColor={textColor}
-        />
-      )
-    })}
+        return (
+          <ColorPill
+            key={shade}
+            shade={shade.toString()}
+            bgColor={bgColor}
+            buttonClasses={buttonClasses}
+            textColor={textColor}
+          />
+        )
+      }
+    )}
   </>
 )
 const BaseLayout = () => (
@@ -206,6 +209,7 @@ const Colors = () => {
 const colors = [
   {
     primary: [
+      'bg-primary',
       'bg-primary-25',
       'bg-primary-50',
       'bg-primary-100',
@@ -219,6 +223,7 @@ const colors = [
       'bg-primary-900',
     ],
     gray: [
+      'bg-gray',
       'bg-gray-25',
       'bg-gray-50',
       'bg-gray-100',
@@ -232,6 +237,7 @@ const colors = [
       'bg-gray-900',
     ],
     red: [
+      'bg-red',
       'bg-red-25',
       'bg-red-50',
       'bg-red-100',
@@ -245,6 +251,7 @@ const colors = [
       'bg-red-900',
     ],
     green: [
+      'bg-green',
       'bg-green-25',
       'bg-green-50',
       'bg-green-100',
@@ -258,6 +265,7 @@ const colors = [
       'bg-green-900',
     ],
     yellow: [
+      'bg-yellow',
       'bg-yellow-25',
       'bg-yellow-50',
       'bg-yellow-100',

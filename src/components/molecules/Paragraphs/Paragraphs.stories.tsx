@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Image from 'src/components/atoms/Image'
 import Paragraphs from './Paragraphs'
@@ -104,23 +104,26 @@ const items = [
   },
 ]
 
-const ImageChildren = () =>
-  items.map((item, index) => {
-    const mod = (index % 5) + 3
+const ImageChildren = () => (
+  <>
+    {items.map((item, index) => {
+      const mod = (index % 5) + 3
 
-    const height = 100 * mod
-    return (
-      <div key={item.src} className='break-inside-avoid'>
-        <Image
-          alt=''
-          height={height}
-          width={400}
-          layout='responsive'
-          src={item.src}
-        />
-      </div>
-    )
-  })
+      const height = 100 * mod
+      return (
+        <div key={item.src} className='break-inside-avoid'>
+          <Image
+            alt=''
+            height={height}
+            width={400}
+            layout='responsive'
+            src={item.src}
+          />
+        </div>
+      )
+    })}
+  </>
+)
 
 export const Primary = Template.bind({})
 Primary.args = {

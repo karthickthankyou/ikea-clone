@@ -1,6 +1,5 @@
 import Image from 'src/components/atoms/Image'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
-import Button from 'src/components/atoms/Button/Button'
 import OverlapSpace from '../OverlapSpace'
 import Rating from '../Rating/Rating'
 import Price from '../Price/Price'
