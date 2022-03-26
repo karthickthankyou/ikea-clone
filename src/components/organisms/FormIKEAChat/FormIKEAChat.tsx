@@ -6,6 +6,7 @@ import Input from 'src/components/atoms/HtmlInput'
 import Label from 'src/components/atoms/HtmlLabel'
 import Select from 'src/components/atoms/HtmlSelect'
 import TextArea from 'src/components/atoms/HtmlTextArea'
+import Button from 'src/components/atoms/Button/Button'
 
 export interface IFormIKEAChatProps {}
 const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
@@ -138,7 +139,7 @@ const FormIKEAChat = () => {
       <Label title='Message' error={errors.message}>
         <TextArea placeholder='Type something here.' {...register('message')} />
       </Label>
-      <button type='submit'>Submit</button>
+      <Button type='submit'>Submit</Button>
     </form>
   )
 }

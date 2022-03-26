@@ -1,18 +1,16 @@
-import { MouseEventHandler } from 'react'
-import { Children } from 'src/types'
+/* eslint-disable react/jsx-props-no-spreading */
 import RefreshIcon from '@heroicons/react/outline/RefreshIcon'
 
-export interface IButtonProps {
-  children: Children
+export type IButtonProps = {
   size?: 'sm' | 'md' | 'lg'
   variant?: 'contained' | 'outlined' | 'text'
   color?: 'primary' | 'success' | 'error' | 'white' | 'black'
   fullWidth?: boolean
-  disabled?: boolean
-  onClick?: MouseEventHandler<HTMLButtonElement>
-  className?: string
   isLoading?: boolean
-}
+} & React.DetailedHTMLProps<
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>
 
 const variantColor = {
   contained: {
@@ -52,11 +50,11 @@ const Button = ({
   color = 'primary',
   fullWidth = false,
   disabled = false,
-  children = '',
-  // eslint-disable-next-line no-console
-  onClick = () => console.error('onClick not implemented'),
-  className = '',
+  children,
+  className,
   isLoading = false,
+  type = 'button',
+  ...props
 }: IButtonProps) => {
   const sizeCls = sizes[size]
   const variantCls = variantColor[variant][color]
@@ -68,10 +66,11 @@ const Button = ({
 
   return (
     <button
-      type='button'
+      // eslint-disable-next-line react/button-has-type
+      type={type}
       disabled={disabled || isLoading}
-      onClick={onClick}
       className={`rounded-full relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} ${className}`}
+      {...props}
     >
       {isLoading && (
         <div className='absolute inset-0 flex items-center justify-center'>
