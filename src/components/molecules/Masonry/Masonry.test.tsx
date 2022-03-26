@@ -3,6 +3,6 @@ import Masonry from './Masonry'
 
 describe('Masonry Component', () => {
   it('Masonry renders', () => {
-    mount(<Masonry />)
+    mount(<Masonry items={[]} />)
   })
 })
