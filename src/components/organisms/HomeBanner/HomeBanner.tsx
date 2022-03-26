@@ -21,16 +21,16 @@ const HomeBanner = () => (
     </OverlapSpace.Child>
     <OverlapSpace.Child className='relative -z-10'>
       <div className='absolute translate-x-1/2 -translate-y-1/2 top-full right-1/2'>
-        <BlurredCirle className='fill-yellow-500/20 -z-10' radius={800} />
+        <BlurredCirle className='fill-yellow/20 -z-10' radius={800} />
       </div>
       <div className='absolute translate-x-1/2 right-full'>
-        <BlurredCirle className='fill-red-500/10 -z-10' radius={500} />
+        <BlurredCirle className='fill-red/10 -z-10' radius={500} />
       </div>
       <div className='absolute right-0 translate-x-1/2 -translate-y-1/2'>
-        <BlurredCirle className='fill-green-500/20 -z-10' radius={290} />
+        <BlurredCirle className='fill-green/20 -z-10' radius={290} />
       </div>
       <div className='absolute left-1/2'>
-        <BlurredCirle className='fill-primary-500/30 -z-10' radius={200} />
+        <BlurredCirle className='fill-primary/30 -z-10' radius={200} />
       </div>
     </OverlapSpace.Child>
   </OverlapSpace>

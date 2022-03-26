@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import UserIcon from '@heroicons/react/outline/UserIcon'
 import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon'
 import ChevronRightIcon from '@heroicons/react/outline/ChevronRightIcon'

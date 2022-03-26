@@ -1,36 +1,10 @@
+import { AllColors } from 'src/types'
+import { bgClasses, colorClasses } from 'src/util'
 import Link from '../Link'
 
-type Colors =
-  | 'primary'
-  | 'black'
-  | 'white'
-  | 'red'
-  | 'green'
-  | 'yellow'
-  | 'gray'
-
 export interface ILogoProps {
-  color?: Colors
-  bg?: Colors
-}
-
-const colorClasses: { [key in Colors]: string } = {
-  primary: 'text-primary',
-  black: 'text-black',
-  white: 'text-white',
-  red: 'text-red',
-  yellow: 'text-yellow',
-  green: 'text-green',
-  gray: 'text-gray',
-}
-const bgClasses: { [key in Colors]: string } = {
-  primary: 'bg-primary',
-  black: 'bg-black',
-  white: 'bg-white',
-  red: 'bg-red',
-  yellow: 'bg-yellow',
-  green: 'bg-green',
-  gray: 'bg-gray',
+  color?: AllColors
+  bg?: AllColors
 }
 
 const Logo = ({ color = 'primary', bg = 'yellow' }: ILogoProps) => (
