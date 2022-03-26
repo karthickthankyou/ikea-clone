@@ -87,3 +87,19 @@ input[type='checkbox'] {
 input[type='file']::file-selector-button {
   @apply px-4 py-2 -ml-1 text-sm bg-white border-0 rounded shadow-lg cursor-pointer text-primary-600;
 }
+
+.thin-scrollbar::-webkit-scrollbar {
+  @apply w-1 h-1;
+}
+
+.thin-scrollbar::-webkit-scrollbar-track {
+  @apply bg-black/5;
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  @apply w-1 h-1 rounded-full bg-black/80;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

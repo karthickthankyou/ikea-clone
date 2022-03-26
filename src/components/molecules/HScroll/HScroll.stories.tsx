@@ -104,7 +104,7 @@ export const PicturesArrowsTop = TemplatePicturesArrowTop.bind({})
 
 const TemplateText: ComponentStory<typeof HScroll> = () => (
   <HScroll className='flex'>
-    <HScroll.Body className='gap-2'>
+    <HScroll.Body className='gap-2 no-scrollbar'>
       {buttons.map((buttonText) => (
         <HScroll.Child key={buttonText} className='py-2'>
           <Button className='shadow' color='white'>
