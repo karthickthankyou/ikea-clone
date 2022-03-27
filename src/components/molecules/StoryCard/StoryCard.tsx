@@ -71,7 +71,7 @@ const StoryCard = ({ src, title, description }: IStoryCardProps) => (
     <StoryContent>
       <div className='w-full p-6 bg-white shadow-xl'>
         <div className='text-gray-600'>Story</div>
-        <div className='mt-4 text-2xl font-bold'>{title}</div>
+        <div className='mt-1 text-2xl font-bold'>{title}</div>
         <StoryDescription>{description}</StoryDescription>
       </div>
     </StoryContent>

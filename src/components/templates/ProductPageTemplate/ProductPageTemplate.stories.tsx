@@ -7,7 +7,11 @@ export default {
   component: ProductPageTemplate,
 } as ComponentMeta<typeof ProductPageTemplate>
 
-const Template: ComponentStory<typeof ProductPageTemplate> = (args) => <ProductPageTemplate {...args} />
+const Template: ComponentStory<typeof ProductPageTemplate> = (args) => (
+  <div className='mt-24'>
+    <ProductPageTemplate />
+  </div>
+)
 
 export const Primary = Template.bind({})
 Primary.args = {}

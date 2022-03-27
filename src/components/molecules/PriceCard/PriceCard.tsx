@@ -9,10 +9,9 @@ import Rating from '../Rating'
 export interface IPriceCardProps {
   title: string
   category: string
-  description: string
   price: number
   oldPrice: number
-  notInStock: boolean
+  notInStock?: boolean
 }
 
 const PriceCard = ({
@@ -20,24 +19,22 @@ const PriceCard = ({
   category,
   price,
   oldPrice,
-  description,
   notInStock,
 }: IPriceCardProps) => (
   <div className='max-w-lg'>
-    <div className='flex-wrap items-start justify-between gap-2 sm:flex'>
-      <div>
-        <div className='text-2xl font-bold'>{title}</div>
-        <div className='text-lg font-light'>{category}</div>
-      </div>
-      <Price
-        showTaxComment
-        className='mt-4 sm:mt-0'
-        price={price}
-        oldPrice={oldPrice}
-      />
+    <div>
+      <div className='text-3xl font-bold'>{title}</div>
+      <div className='text-lg font-light '>{category}</div>
     </div>
+    <Price showTaxComment className='mt-8' price={price} oldPrice={oldPrice} />
 
-    <Rating value={4.5} color='black' className='mt-4' reviews={112} />
+    <Rating
+      value={4.5}
+      size='medium'
+      color='black'
+      className='mt-4'
+      reviews={112}
+    />
 
     {notInStock && (
       <div className='mt-4 text-sm text-gray-600'>
@@ -56,7 +53,7 @@ const PriceCard = ({
     <Button
       size='lg'
       disabled={notInStock}
-      classNameOuter='mt-4'
+      classNameOuter='mt-8'
       className='flex items-center gap-2'
     >
       <ShoppingCartIcon className='w-5 h-5 text-white' /> Add to shopping cart
