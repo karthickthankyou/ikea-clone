@@ -12,6 +12,7 @@ export interface IPriceCardProps {
   description: string
   price: number
   oldPrice: number
+  notInStock: boolean
 }
 
 const PriceCard = ({
@@ -20,29 +21,44 @@ const PriceCard = ({
   price,
   oldPrice,
   description,
+  notInStock,
 }: IPriceCardProps) => (
   <div className='max-w-lg'>
-    <div className='flex flex-wrap justify-between'>
-      <div className='text-2xl font-bold'>{title}</div>
-      <Price price={price} oldPrice={oldPrice} />
+    <div className='flex-wrap items-start justify-between gap-2 sm:flex'>
+      <div>
+        <div className='text-2xl font-bold'>{title}</div>
+        <div className='text-lg font-light'>{category}</div>
+      </div>
+      <Price
+        showTaxComment
+        className='mt-4 sm:mt-0'
+        price={price}
+        oldPrice={oldPrice}
+      />
     </div>
-    <div className='text-lg font-light'>{category}</div>
 
-    <div className='mt-2 text-sm text-gray-600'>Price incl. of all taxes</div>
-    <Rating value={4.5} color='black' className='mt-1' reviews={112} />
-    <div className='mt-4 text-xs'>
-      We are currently not delivering to your area.
-      <Tooltip
-        placement='top'
-        arrow
-        text='white'
-        bg='black'
-        title='You know this is a portfolio project right?'
-      >
-        <InformationCircleIcon className='inline w-4 h-4 ml-2' />
-      </Tooltip>
-    </div>
-    <Button size='lg' classNameOuter='mt-4' className='flex items-center gap-2'>
+    <Rating value={4.5} color='black' className='mt-4' reviews={112} />
+
+    {notInStock && (
+      <div className='mt-4 text-sm text-gray-600'>
+        Product not in stock.
+        <Tooltip
+          placement='top'
+          arrow
+          text='white'
+          bg='black'
+          title='Even if the product is in stock we(I) can not serve you as this is just a portfolio project?'
+        >
+          <InformationCircleIcon className='inline w-4 h-4 ml-2' />
+        </Tooltip>
+      </div>
+    )}
+    <Button
+      size='lg'
+      disabled={notInStock}
+      classNameOuter='mt-4'
+      className='flex items-center gap-2'
+    >
       <ShoppingCartIcon className='w-5 h-5 text-white' /> Add to shopping cart
     </Button>
   </div>
