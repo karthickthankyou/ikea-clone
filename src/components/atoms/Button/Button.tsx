@@ -9,6 +9,7 @@ export type IButtonProps = {
   color?: 'primary' | 'success' | 'error' | 'white' | 'black'
   fullWidth?: boolean
   isLoading?: boolean
+  classNameOuter?: string
 } & React.DetailedHTMLProps<
   React.ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
@@ -56,6 +57,7 @@ const Button = ({
   disabled = false,
   children,
   className,
+  classNameOuter,
   isLoading = false,
   type = 'button',
   ...props
@@ -73,7 +75,7 @@ const Button = ({
       // eslint-disable-next-line react/button-has-type
       type={type}
       disabled={disabled || isLoading}
-      className={`rounded-full relative ${sizeCls} ${fwCls} ${variantCls} ${disCls} `}
+      className={`rounded-full relative ${sizeCls} ${fwCls} ${variantCls} ${disCls}  ${classNameOuter}`}
       {...props}
     >
       {isLoading && (
