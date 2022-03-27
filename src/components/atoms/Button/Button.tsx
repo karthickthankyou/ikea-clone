@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import RefreshIcon from '@heroicons/react/outline/RefreshIcon'
 
-type ButtonSizes = 'sm' | 'md' | 'lg' | 'xl'
+type ButtonSizes = 'none' | 'sm' | 'md' | 'lg' | 'xl'
 
 export type IButtonProps = {
   size?: ButtonSizes
@@ -32,15 +32,16 @@ const variantColor = {
     error: 'border-2 border-red-600 text-red-600 hover:bg-red-100',
   },
   text: {
-    primary: 'text-primary-600 hover:bg-primary-100',
-    white: 'text-black hover:bg-white/10',
-    black: 'text-white hover:bg-black/10',
-    success: 'text-green-600 hover:bg-green-100',
-    error: 'text-red-600 hover:bg-red-100',
+    primary: 'text-primary-600 ',
+    white: 'text-black',
+    black: 'text-white',
+    success: 'text-green-600 ',
+    error: 'text-red-600 ',
   },
 }
 
 const sizes: { [key in ButtonSizes]: string } = {
+  none: 'text-sm',
   sm: 'px-3 py-1.5 text-xs',
   md: 'px-4 py-2 text-sm',
   lg: 'px-5 py-2 text-base',
@@ -59,8 +60,8 @@ const Button = ({
   type = 'button',
   ...props
 }: IButtonProps) => {
-  const sizeCls = sizes[size]
   const variantCls = variantColor[variant][color]
+  const sizeCls = variant === 'text' ? sizes.none : sizes[size]
 
   const fwCls = fullWidth && 'w-full'
   const disCls = (disabled || isLoading) && 'opacity-60 cursor-auto'
