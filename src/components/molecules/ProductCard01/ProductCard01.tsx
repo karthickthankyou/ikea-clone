@@ -8,10 +8,10 @@ export interface IProductCard01Props {
   title: string
   description: string
   src: string
-  rating: number
-  reviews: number
+  rating?: number
+  reviews?: number
   price: number
-  oldPrice: number
+  oldPrice?: number
 }
 
 const ProductCard01 = ({

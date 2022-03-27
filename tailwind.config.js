@@ -102,6 +102,7 @@ module.exports = {
         wiggle: 'wiggle 1s ease-in-out infinite',
         slide: 'slide 1s ease-in-out infinite',
         'slide-left': 'slide-left 1s ease-in-out infinite',
+        'slide-right': 'slide-right 1s linear infinite',
         breathe: 'breathe 6s ease-in-out infinite',
       },
       keyframes: {
@@ -115,22 +116,26 @@ module.exports = {
           '50%': { transform: 'rotate(3deg)' },
         },
         slide: {
-          '0%': { transform: 'translateX(-25%)', opacity: 0 },
-          '50%': {
+          '0%': { opacity: 1 },
+          '100%': { transform: 'translateX(25%)' },
+        },
+        'slide-right': {
+          '40%,60%': {
             opacity: 1,
           },
-          '100%': {
-            transform: 'translateX(25%)',
+          '46%': { transform: 'translateX(25%)', opacity: 0 },
+          '54%': {
+            transform: 'translateX(-25%)',
             opacity: 0,
           },
         },
         'slide-left': {
-          '0%': { transform: 'translateX(25%)', opacity: 0 },
-          '50%': {
+          '40%,60%': {
             opacity: 1,
           },
-          '100%': {
-            transform: 'translateX(-25%)',
+          '46%': { transform: 'translateX(-25%)', opacity: 0 },
+          '54%': {
+            transform: 'translateX(25%)',
             opacity: 0,
           },
         },

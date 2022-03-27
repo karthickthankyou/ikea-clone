@@ -17,7 +17,5 @@ Primary.args = {
   category: 'Desk, white',
   price: 7990,
   oldPrice: 9000,
-  description:
-    'Lorem, ipsum dolor sit amet consectetur adipisicing elit. In temporibus vel provident dolorum, laudantium autem ad repellat voluptas voluptatem veniam quod atque, unde possimus!',
 }
 Primary.parameters = {}

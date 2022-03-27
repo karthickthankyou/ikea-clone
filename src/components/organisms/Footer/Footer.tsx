@@ -84,7 +84,7 @@ const FooterFooter = () => (
 )
 
 const Footer = () => (
-  <div className='py-12 bg-gray-100'>
+  <div className='py-12 mt-12 bg-gray-50'>
     <Container>
       <div className='gap-4 sm:flex'>
         <JoinFamily />
