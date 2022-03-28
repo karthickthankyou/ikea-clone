@@ -15,7 +15,9 @@ const Header = ({
   children,
   className,
 }: Pick<ISidebarProps, 'children' | 'className'>) => (
-  <div className={`relative p-4 ${className}`}>{children}</div>
+  <div className={`relative p-4 text-xl font-semibold ${className}`}>
+    {children}
+  </div>
 )
 
 const Footer = ({ children }: Pick<ISidebarProps, 'children'>) => (
@@ -75,7 +77,7 @@ const Sidebar = ({
             <div className='flex flex-col w-screen max-w-md'>
               <button
                 type='button'
-                className='absolute top-0 right-0 m-2 ml-auto rounded-full text-primary bg-white/80'
+                className='absolute top-0 right-0 z-10 m-2 ml-auto rounded-full text-primary bg-white/80'
                 onClick={() => {
                   console.log('Clicked')
                   setOpen(false)

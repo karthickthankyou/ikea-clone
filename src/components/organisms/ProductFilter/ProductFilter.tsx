@@ -102,9 +102,9 @@ const SidebarFilter = ({
   const formData = watch()
   console.log('Form data: ', formData, dirtyFields)
   return (
-    <Sidebar open={open} setOpen={setOpen}>
-      <Sidebar.Header setOpen={setOpen}>
-        <div className='max-w-xs'>Filter</div>
+    <Sidebar overlayBlur={false} open={open} setOpen={setOpen}>
+      <Sidebar.Header>
+        <div>Filter</div>
       </Sidebar.Header>
       <Sidebar.Body className='space-y-12'>
         <div>
