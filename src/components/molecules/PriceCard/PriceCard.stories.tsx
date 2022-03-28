@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import PriceCard from './PriceCard'
 
 export default {
-  title: 'src/components/molecules/PriceCard',
+  title: 'molecules/PriceCard',
   component: PriceCard,
 } as ComponentMeta<typeof PriceCard>
 

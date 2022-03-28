@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import ProductPageTemplate from './ProductPageTemplate'
 
 export default {
-  title: 'src/components/templates/ProductPageTemplate',
+  title: 'templates/ProductPageTemplate',
   component: ProductPageTemplate,
 } as ComponentMeta<typeof ProductPageTemplate>
 
