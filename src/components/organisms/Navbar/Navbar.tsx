@@ -105,7 +105,7 @@ const NavSidebarUser = ({
   </Sidebar>
 )
 
-const NavSidebar = ({
+export const NavSidebar = ({
   open,
   setOpen,
   uid,

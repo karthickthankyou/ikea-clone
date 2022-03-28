@@ -40,7 +40,7 @@ const useHeightLimit = (heightLimit: number) => {
 }
 
 const StoryDescription = ({ children }: { children: Children }) => {
-  const [ref, heightAbove160] = useHeightLimit(200)
+  const [ref, heightAbove160] = useHeightLimit(240)
   const [showFullText, setShowFullText] = useState(false)
   return (
     <>
@@ -49,7 +49,7 @@ const StoryDescription = ({ children }: { children: Children }) => {
           heightAbove160 && !showFullText && 'h-40'
         }`}
       >
-        <div className='max-w-md mt-4 space-y-6' ref={ref}>
+        <div className='max-w-md mt-4 space-y-6 leading-7' ref={ref}>
           {children}
         </div>
       </div>

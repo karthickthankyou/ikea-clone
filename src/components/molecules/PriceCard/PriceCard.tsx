@@ -44,7 +44,7 @@ const PriceCard = ({
           arrow
           text='white'
           bg='black'
-          title='Even if the product is in stock we(I) can not serve you as this is just a portfolio project?'
+          title='Even if the product is in stock, we(I) can not serve you as this is just a portfolio project?'
         >
           <InformationCircleIcon className='inline w-4 h-4 ml-2' />
         </Tooltip>
@@ -53,8 +53,7 @@ const PriceCard = ({
     <Button
       size='lg'
       disabled={notInStock}
-      classNameOuter='mt-8'
-      className='flex items-center gap-2'
+      className='flex items-center gap-2 mt-8'
     >
       <ShoppingCartIcon className='w-5 h-5 text-white' /> Add to shopping cart
     </Button>

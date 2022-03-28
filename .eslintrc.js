@@ -40,6 +40,7 @@ module.exports = {
         extensions: ['tsx'],
       },
     ],
+    'react/jsx-no-useless-fragment': 'warn',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': ['warn'],
     'no-use-before-define': 'off',

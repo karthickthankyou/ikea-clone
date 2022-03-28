@@ -1,9 +1,10 @@
 import { circularProgressClasses } from '@mui/material'
 import Image from 'src/components/atoms/Image'
+import { Children } from 'src/types'
 
 export interface IDesignerThoughtsCardProps {
   designerName: string
-  thoughts: string
+  thoughts: Children
   src: string
 }
 
@@ -13,30 +14,26 @@ const DesignerThoughtsCard = ({
   src,
 }: IDesignerThoughtsCardProps) => (
   <div>
-    <p className='mb-6 text-2xl text-gray-700'>Designer thougths</p>
-    <img
-      src={src}
-      // height={100}
-      // width={100}
-      // layout='intrinsic'
-      className='float-left w-56 h-56 mb-12 mr-12 border rounded-full shadow-lg border-white/10'
-      style={{ shapeOutside: 'circle(50%)' }}
-    />
+    <p className='mb-6 text-xl font-semibold '>Designer thougths</p>
 
-    <div className='font-serif'>
-      <p className='max-w-xl font-light leading-relaxed'>
-        <span className='absolute opacity-20 text-9xl -z-10 text-primary'>
-          &ldquo;
-        </span>
-        <span className='text-xl text-gray-600'>{thoughts}</span>
-        <span className='absolute text-5xl leading-3 opacity-20 text-primary'>
-          &bdquo;
-        </span>
-      </p>
-      <p className='clear-both mt-6 text-xl font-semibold'>
-        {designerName}
-        <span className='text-primary'>&mdash;</span>
-      </p>
+    <div className='h-full'>
+      <div
+        style={{ shapeOutside: 'circle(50%)' }}
+        className='float-left object-cover border rounded-full shadow-lg mb-14 mr-14 w-36 h-36 border-white/10'
+      >
+        <img src={src} className='object-cover rounded-full aspect-square' />
+        <div className='mt-4 text-xs tracking-widest text-center text-black uppercase'>
+          {designerName}
+        </div>
+      </div>
+      <div className='font-serif italic'>
+        <p className='max-w-lg font-light leading-relaxed '>
+          <span className='absolute z-10 text-9xl text-primary/30'>
+            &ldquo;
+          </span>
+          <span className='mt-12 text-lg text-gray-600 '>{thoughts}</span>
+        </p>
+      </div>
     </div>
   </div>
 )

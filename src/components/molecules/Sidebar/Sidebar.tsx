@@ -8,23 +8,14 @@ export interface ISidebarProps {
   children: (string | ReactElement | null) | (string | ReactElement | null)[]
   // eslint-disable-next-line react/no-unused-prop-types
   className?: string
+  overlayBlur?: boolean
 }
 
 const Header = ({
   children,
   className,
-  setOpen,
-}: Partial<Omit<ISidebarProps, 'open'>>) => (
-  <div className={`relative p-4 border-b ${className}`}>
-    <div>{children}</div>
-    <button
-      type='button'
-      className='absolute top-0 right-0 m-2 ml-auto rounded-full text-primary bg-white/80'
-      onClick={() => setOpen && setOpen(false)}
-    >
-      <XIcon className='w-6 h-6 p-1' aria-hidden='true' />
-    </button>
-  </div>
+}: Pick<ISidebarProps, 'children' | 'className'>) => (
+  <div className={`relative p-4 ${className}`}>{children}</div>
 )
 
 const Footer = ({ children }: Pick<ISidebarProps, 'children'>) => (
@@ -42,7 +33,12 @@ const Body = ({
   </div>
 )
 
-const Sidebar = ({ open, setOpen, children }: ISidebarProps) => (
+const Sidebar = ({
+  open,
+  setOpen,
+  children,
+  overlayBlur = true,
+}: ISidebarProps) => (
   <Transition.Root show={open} as={Fragment}>
     <Dialog
       as='div'
@@ -59,7 +55,11 @@ const Sidebar = ({ open, setOpen, children }: ISidebarProps) => (
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
         >
-          <Dialog.Overlay className='fixed inset-0 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm' />
+          <Dialog.Overlay
+            className={`fixed inset-0 bg-black bg-opacity-40  ${
+              overlayBlur && 'backdrop-filter backdrop-blur-sm'
+            }`}
+          />
         </Transition.Child>
 
         <div className='fixed inset-y-0 right-0 flex max-w-full bg-white'>
@@ -72,7 +72,19 @@ const Sidebar = ({ open, setOpen, children }: ISidebarProps) => (
             leaveFrom='translate-x-0'
             leaveTo='translate-x-full'
           >
-            <div className='flex flex-col w-screen max-w-md'>{children}</div>
+            <div className='flex flex-col w-screen max-w-md'>
+              <button
+                type='button'
+                className='absolute top-0 right-0 m-2 ml-auto rounded-full text-primary bg-white/80'
+                onClick={() => {
+                  console.log('Clicked')
+                  setOpen(false)
+                }}
+              >
+                <XIcon className='w-6 h-6 p-1' aria-hidden='true' />
+              </button>
+              {children}
+            </div>
           </Transition.Child>
         </div>
       </div>
