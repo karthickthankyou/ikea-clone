@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import Fade from '@mui/material/Fade'
 import MuiTooltip, { TooltipProps } from '@mui/material/Tooltip'
 import { AllColors } from 'src/types'
 import { bgClasses, colorClasses } from 'src/util'

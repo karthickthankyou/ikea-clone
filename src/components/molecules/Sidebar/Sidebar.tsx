@@ -79,7 +79,6 @@ const Sidebar = ({
                 type='button'
                 className='absolute top-0 right-0 z-10 m-2 ml-auto rounded-full text-primary bg-white/80'
                 onClick={() => {
-                  console.log('Clicked')
                   setOpen(false)
                 }}
               >

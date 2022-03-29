@@ -7,6 +7,17 @@ import { store } from 'src/store'
 
 import type { AppProps } from 'next/app'
 import '../src/globals.css'
+import Notifications from 'src/components/molecules/Notification/Notification'
+import { useDebouncedDispatch } from 'src/hooks'
+import { useUserListener } from 'src/store/user'
+import Layout from 'src/components/templates/Layout/Layout'
+
+export const AppLevelHooks = () => {
+  useDebouncedDispatch()
+  useUserListener()
+
+  return null
+}
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   if (pageProps.urqlState) {
@@ -16,7 +27,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ReduxProvider store={store}>
       <UrqlProvider>
-        <Component {...pageProps} />
+        <Layout>
+          <Notifications />
+          <AppLevelHooks />
+          <Component {...pageProps} />
+        </Layout>
       </UrqlProvider>
     </ReduxProvider>
   )

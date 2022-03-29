@@ -3,7 +3,6 @@ import { sampleImagesForMasonry } from 'src/components/molecules/Masonry/data'
 import Masonry from 'src/components/molecules/Masonry/Masonry'
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 import PriceCard from 'src/components/molecules/PriceCard/PriceCard'
-import Button from 'src/components/atoms/Button'
 
 import StoryCard from 'src/components/molecules/StoryCard'
 import Image from 'src/components/atoms/Image/Image'

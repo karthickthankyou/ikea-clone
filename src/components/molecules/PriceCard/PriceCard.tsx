@@ -1,4 +1,3 @@
-import TruckIcon from '@heroicons/react/outline/TruckIcon'
 import InformationCircleIcon from '@heroicons/react/outline/InformationCircleIcon'
 import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import Tooltip from 'src/components/atoms/Tooltip'

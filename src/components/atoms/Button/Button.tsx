@@ -79,7 +79,7 @@ const Button = ({
           <div className='absolute inset-0 flex items-center justify-center'>
             <RefreshIcon className='w-5 h-5 animate-spin-reverse' />
           </div>
-          <span className='opacity-0'>{children}</span>
+          <span className='opacity-20'>{children}</span>
         </>
       ) : (
         <>{children}</>

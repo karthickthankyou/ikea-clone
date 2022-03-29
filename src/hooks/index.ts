@@ -1,5 +1,5 @@
 import { RefObject, useEffect, useRef, useState } from 'react'
-
+import { v4 as uuidv4 } from 'uuid'
 import {
   catchError,
   debounceTime,
@@ -10,6 +10,8 @@ import {
   takeUntil,
   timer,
   switchMap,
+  distinctUntilChanged,
+  delay,
 } from 'rxjs'
 import { useAppDispatch, useAppSelector } from 'src/store'
 
@@ -17,6 +19,11 @@ import { NotificationType } from 'src/types'
 import { useRouter } from 'next/router'
 
 import { selectUid } from 'src/store/user/userSlice'
+import {
+  addNotification,
+  removeNotification,
+  resetNotification,
+} from 'src/store/utils/utilsStore'
 
 export const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -138,6 +145,28 @@ export const notify = ({
   notifySubject$.next({ message, type, position })
 }
 
+export const useNotification = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const subscription = notifySubject$
+      .pipe(
+        debounceTime(100),
+        distinctUntilChanged(),
+        map((v) => ({ ...v, id: uuidv4() })),
+        tap((v) => dispatch(addNotification(v))),
+        delay(4000),
+        tap((v) => dispatch(removeNotification(v.id))),
+        catchError(() => EMPTY)
+      )
+      .subscribe()
+    return () => {
+      dispatch(resetNotification())
+      subscription.unsubscribe()
+    }
+  }, [dispatch])
+}
+
 const debouncedDispatchSubject$ = new Subject<{
   payload: any
   type: string
@@ -229,4 +258,31 @@ export const useRedirectUnAuthenticatedUsers = () => {
     notify({ message: 'You are not logged in', type: 'warning' })
     if (typeof window !== 'undefined') router.push('/login')
   }
+}
+
+export const useAuthPageResponses = () => {
+  const {
+    error,
+    data: { user },
+  } = useAppSelector((state) => state.user)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (error)
+      notify({
+        type: 'error',
+        message: 'Authentication failed. Please try again.',
+      })
+  }, [error])
+
+  useEffect(() => {
+    if (user?.uid) {
+      notify({
+        type: 'success',
+        message: 'Authentication success. Welcome.',
+      })
+      router.push('/')
+    }
+  }, [user, router])
 }

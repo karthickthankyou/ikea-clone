@@ -31,7 +31,7 @@ const ProductCard01 = ({
       <OverlapSpace.Child className='flex items-start justify-end p-2'>
         <button
           type='button'
-          onClick={() => console.log('Clicked')}
+          onClick={() => console.log('Heart clicked')}
           className='p-2 rounded-full hover:shadow-lg bg-white/50 shadow-black/20'
         >
           <HeartIcon className='w-6 h-6' />

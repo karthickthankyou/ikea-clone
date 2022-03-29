@@ -1,5 +1,3 @@
-import { circularProgressClasses } from '@mui/material'
-import Image from 'src/components/atoms/Image'
 import { Children } from 'src/types'
 
 export interface IDesignerThoughtsCardProps {
@@ -21,7 +19,12 @@ const DesignerThoughtsCard = ({
         style={{ shapeOutside: 'circle(50%)' }}
         className='float-left object-cover border rounded-full shadow-lg mb-14 mr-14 w-36 h-36 border-white/10'
       >
-        <img src={src} className='object-cover rounded-full aspect-square' />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt=''
+          src={src}
+          className='object-cover rounded-full aspect-square'
+        />
         <div className='mt-4 text-xs tracking-widest text-center text-black uppercase'>
           {designerName}
         </div>

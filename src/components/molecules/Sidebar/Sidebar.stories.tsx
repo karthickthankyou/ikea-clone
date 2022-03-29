@@ -68,7 +68,7 @@ const WithHeaderAndFooterTemplate: ComponentStory<typeof Sidebar> = () => {
         Open sidebar
       </button>
       <Sidebar open={open} setOpen={setOpen}>
-        <Sidebar.Header setOpen={setOpen}>Sample header</Sidebar.Header>
+        <Sidebar.Header>Sample header</Sidebar.Header>
         <Sidebar.Body>
           <SomeContent />
           <SomeContent />

@@ -13,7 +13,7 @@ const HtmlSelect = React.forwardRef<
     <select
       {...props}
       ref={ref}
-      className='block w-full px-3 py-2 border border-gray-200 rounded shadow-sm appearance-none placeholder-gray bg-gray-50 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm'
+      className='block w-full px-3 py-2 border border-gray-200 rounded shadow-sm appearance-none placeholder-gray bg-gray-25 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm'
     >
       {children}
     </select>

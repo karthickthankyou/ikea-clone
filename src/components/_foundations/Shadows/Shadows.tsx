@@ -22,7 +22,7 @@ const Shadows = () => (
           ].map((shadow) => (
             <div
               key={shadow}
-              className={`px-2 py-4 mt-2 bg-white rounded ${shadow} bg-gray-50 border border-white`}
+              className={`px-2 py-4 mt-2 bg-white rounded ${shadow} bg-gray-25 border border-white`}
             >
               {shadow}
             </div>

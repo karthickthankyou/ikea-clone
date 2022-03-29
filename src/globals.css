@@ -85,7 +85,7 @@ input[type='checkbox'] {
 }
 
 input[type='file']::file-selector-button {
-  @apply px-4 py-2 -ml-1 text-sm bg-white border-0 rounded shadow-lg cursor-pointer text-primary-600;
+  @apply px-3 py-1.5 -ml-1 text-sm border-0 rounded shadow bg-primary-50 border-primary-50 text-primary-700;
 }
 
 .thin-scrollbar::-webkit-scrollbar {

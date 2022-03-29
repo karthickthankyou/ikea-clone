@@ -7,7 +7,7 @@ export default {
   component: ProductPageTemplate,
 } as ComponentMeta<typeof ProductPageTemplate>
 
-const Template: ComponentStory<typeof ProductPageTemplate> = (args) => (
+const Template: ComponentStory<typeof ProductPageTemplate> = () => (
   <div className='mt-24'>
     <ProductPageTemplate />
   </div>

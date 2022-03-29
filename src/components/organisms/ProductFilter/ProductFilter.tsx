@@ -100,7 +100,7 @@ const SidebarFilter = ({
   })
 
   const formData = watch()
-  console.log('Form data: ', formData, dirtyFields)
+
   return (
     <Sidebar overlayBlur={false} open={open} setOpen={setOpen}>
       <Sidebar.Header>

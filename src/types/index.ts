@@ -100,3 +100,48 @@ export type OptionalPick<T, K extends PropertyKey> = Pick<
 
 export type OptionalExceptFor<T, TRequired extends keyof T> = Partial<T> &
   Pick<T, TRequired>
+
+export type Category =
+  | 'Furniture'
+  | 'Kitchen & appliances'
+  | 'Beds & mattresses'
+  | 'Storage & organisation'
+  | 'Working from home'
+  | 'Textiles'
+  | 'Decoration'
+  | 'Bathroom products'
+  | 'Outdoor products'
+  | 'Lighting'
+  | 'Carpets, mats & flooring'
+  | 'Baby & children'
+  | 'Pots & plants'
+  | 'Kitchenware & tableware'
+  | 'Home electronics'
+  | 'Laundry & cleaning'
+  | 'Home smart'
+  | 'Vinter Collections'
+  | 'Home improvement'
+  | 'Food & beverages'
+
+export const categories = [
+  'Furniture',
+  'Kitchen & appliances',
+  'Beds & mattresses',
+  'Storage & organisation',
+  'Working from home',
+  'Textiles',
+  'Decoration',
+  'Bathroom products',
+  'Outdoor products',
+  'Lighting',
+  'Carpets, mats & flooring',
+  'Baby & children',
+  'Pots & plants',
+  'Kitchenware & tableware',
+  'Home electronics',
+  'Laundry & cleaning',
+  'Home smart',
+  'Vinter Collections',
+  'Home improvement',
+  'Food & beverages',
+]
