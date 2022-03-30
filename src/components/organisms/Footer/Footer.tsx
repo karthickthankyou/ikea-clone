@@ -1,20 +1,29 @@
+import { useRouter } from 'next/router'
 import Button from 'src/components/atoms/Button/Button'
 import Container from 'src/components/atoms/Container'
 
 export interface IFooterProps {}
 
-const JoinFamily = () => (
-  <div>
-    <div className='font-bold'>Join IKEA Family</div>
-    <div className='max-w-md mt-4 text-sm'>
-      Get exclusive offers, inspiration, and lots more to help bring your ideas
-      to life. All for free.
+const JoinFamily = () => {
+  const router = useRouter()
+  return (
+    <div>
+      <div className='font-bold'>Join IKEA Family</div>
+      <div className='max-w-md mt-4 text-sm'>
+        Get exclusive offers, inspiration, and lots more to help bring your
+        ideas to life. All for free.
+      </div>
+      <Button
+        color='black'
+        size='lg'
+        className='mt-8'
+        onClick={() => router.push('createAccount')}
+      >
+        Join us
+      </Button>
     </div>
-    <Button color='black' size='lg' className='mt-8'>
-      Join us
-    </Button>
-  </div>
-)
+  )
+}
 
 const FooterMenu = ({ title, items }: { title: string; items: string[] }) => (
   <div className='max-w-sm space-y-2'>

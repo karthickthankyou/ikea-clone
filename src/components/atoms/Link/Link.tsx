@@ -18,7 +18,7 @@ const MyLink = ({
   ...linkProps
 }: ILinkProps) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
-  <Link href={href} {...linkProps}>
+  <Link href={href} passHref {...linkProps}>
     <a
       role='link'
       tabIndex={0}

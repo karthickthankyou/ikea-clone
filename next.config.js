@@ -7,6 +7,10 @@ const nextConfig = {
   future: {
     webpack5: true,
   },
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 }
 
 module.exports = nextConfig

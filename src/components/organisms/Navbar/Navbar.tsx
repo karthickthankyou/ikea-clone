@@ -215,16 +215,22 @@ const Navbar = () => {
               onClick={() => setOpenUser((state) => !state)}
               type='button'
               className='p-2 '
+              aria-label='Open user menu'
             >
               <UserIcon className='w-5 h-5' />
             </button>
-            <Link className='p-2 ' href='/cart'>
+            <Link
+              className='p-2 '
+              href='/cart'
+              aria-label='Go to shopping cart'
+            >
               <ShoppingCartIcon className='w-5 h-5' />
             </Link>
             <button
               type='button'
               onClick={() => setOpen((state) => !state)}
               className='p-2 '
+              aria-label='Open main menu'
             >
               <MenuIcon className='w-5 h-5' />
             </button>
