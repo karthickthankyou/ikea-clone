@@ -18,9 +18,9 @@ Primary.args = {
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!',
   src: 'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
   rating: 4.2,
+  reviews: 12,
   price: 2.29,
   oldPrice: 2.99,
-  reviews: 12,
 }
 Primary.parameters = {}
 

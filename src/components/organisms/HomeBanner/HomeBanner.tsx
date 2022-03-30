@@ -19,6 +19,7 @@ const HomeBanner = () => (
           <Button
             size='xl'
             className='mt-12'
+            color='black'
             onClick={() => console.log('Clicked')}
           >
             Shop now

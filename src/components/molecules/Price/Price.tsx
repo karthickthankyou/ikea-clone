@@ -20,7 +20,7 @@ const Price = ({
       )}
       <div className='flex items-start'>
         <div className='text-sm font-medium'>Rs.</div>
-        <div className='text-2xl font-semibold leading-none'>
+        <div className='text-xl font-semibold leading-none'>
           {price.toLocaleString('hi')}
         </div>
       </div>

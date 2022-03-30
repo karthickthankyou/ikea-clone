@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import NextImage, { ImageProps } from 'next/image'
-import * as React from 'react'
 
 const Image = ({
   className,
@@ -11,17 +10,23 @@ const Image = ({
   alt = '',
   quality = 75,
   ...props
-}: ImageProps) => (
-  <NextImage
-    className={`object-cover ${className}`}
-    src={src}
-    width={width}
-    height={height}
-    layout={layout}
-    alt={alt}
-    quality={quality}
-    {...props}
-  />
-)
+}: ImageProps) => {
+  const imgWidth = layout === 'responsive' ? width : undefined
+  const imgHeight = layout === 'responsive' ? height : undefined
+  return (
+    <NextImage
+      className={`object-cover ${className}`}
+      src={src}
+      width={imgWidth}
+      height={imgHeight}
+      layout={layout}
+      alt={alt}
+      quality={quality}
+      placeholder='blur'
+      blurDataURL='/images/blur.png'
+      {...props}
+    />
+  )
+}
 
 export default Image

@@ -7,17 +7,18 @@ import { ReactElement } from 'react'
 
 export interface ICard01Props {
   href: string
+  className?: string
   children: Children
 }
 
-const Card01 = ({ children, href }: ICard01Props) => (
-  <Link href={href} className=' group'>
+const Card01 = ({ className, children, href }: ICard01Props) => (
+  <Link href={href} className={`group ${className}`}>
     {children}
   </Link>
 )
 
 const Title = ({ children }: { children: Children }) => (
-  <div className='text-2xl font-semibold group-hover:underline underline-offset-2'>
+  <div className='text-lg font-semibold break-words md:text-2xl group-hover:underline underline-offset-2'>
     {children}
   </div>
 )
@@ -47,7 +48,7 @@ const ImageBlockChild = ({
 
 const DetailsBlock = ({
   children,
-  className = 'h-56 p-8 ',
+  className = 'p-4 space-y-6 md:p-8',
   flex = 'flex flex-col items-start justify-between',
   bg = 'bg-red-200',
   text = 'text-black',

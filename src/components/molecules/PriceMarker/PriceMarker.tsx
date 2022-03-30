@@ -1,4 +1,5 @@
 import { Children } from 'src/types'
+import Price from '../Price/Price'
 
 export interface IPriceMarkerProps {
   displayName: string
@@ -15,14 +16,11 @@ const PriceMarker = ({
   badge,
   className,
 }: IPriceMarkerProps) => (
-  <div className={`flex flex-col ${className}`}>
+  <div className={`flex flex-col h-full ${className}`}>
     {badge}
     <div className='font-bold uppercase'>{displayName}</div>
-    <div className='font-light'>{category}</div>
-    <div className='flex items-start mt-1 font-semibold'>
-      <div className='text-xs'>Rs.</div>
-      <div className='text-xl leading-none'>{price}</div>
-    </div>
+    <div className='-mt-0.5 font-light'>{category}</div>
+    <Price className='mt-1' price={price} />
   </div>
 )
 

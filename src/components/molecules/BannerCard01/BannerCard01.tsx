@@ -24,10 +24,10 @@ const BannerCard01 = ({
       </h2>
       <p className='max-w-md mt-2 text-sm text-gray-600'>{description}</p>
       <OverlapSpace className='mt-4'>
-        <OverlapSpace.Child className='-z-10'>
+        <OverlapSpace.Child className='-z-20'>
           <Image src={src} alt='' />
         </OverlapSpace.Child>
-        <OverlapSpace.Child className='flex items-end justify-end p-4 -z-10'>
+        <OverlapSpace.Child className='flex items-end justify-end p-4'>
           <Button onClick={() => router.push(href)} color='white'>
             Shop now
           </Button>

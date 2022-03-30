@@ -12,12 +12,16 @@ export interface ICardCategory01Props {
 const CardCategory01 = ({ text, href, src }: ICardCategory01Props) => {
   const router = useRouter()
   return (
-    <OverlapSpace className='h-full mt-4'>
+    <OverlapSpace className='h-full mt-4 group'>
       <OverlapSpace.Child className=' -z-10'>
         <Image src={src} alt='' layout='fill' />
       </OverlapSpace.Child>
       <OverlapSpace.Child className='flex items-end justify-center p-8'>
-        <Button onClick={() => router.push(href)} color='white'>
+        <Button
+          className='transition-all group-hover:-translate-y-2 group-hover:shadow-xl'
+          onClick={() => router.push(href)}
+          color='white'
+        >
           {text}
         </Button>
       </OverlapSpace.Child>

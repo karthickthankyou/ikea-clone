@@ -5,6 +5,7 @@ import Rating from '../Rating/Rating'
 import Price from '../Price/Price'
 
 export interface IProductCard01Props {
+  tag?: string
   title: string
   description: string
   src: string
@@ -15,6 +16,7 @@ export interface IProductCard01Props {
 }
 
 const ProductCard01 = ({
+  tag,
   title,
   description,
   src,
@@ -23,7 +25,7 @@ const ProductCard01 = ({
   price,
   oldPrice,
 }: IProductCard01Props) => (
-  <div>
+  <div className='group'>
     <OverlapSpace>
       <OverlapSpace.Child className='-z-10'>
         <Image src={src} alt='' />
@@ -32,13 +34,13 @@ const ProductCard01 = ({
         <button
           type='button'
           onClick={() => console.log('Heart clicked')}
-          className='p-2 rounded-full hover:shadow-lg bg-white/50 shadow-black/20'
+          className='p-2 transition-all rounded-full group-hover:scale-110 group-hover:bg-white hover:shadow-lg hover:bg-white bg-white/50 shadow-black/20'
         >
           <HeartIcon className='w-6 h-6' />
         </button>
       </OverlapSpace.Child>
     </OverlapSpace>
-    <div className='mt-4 font-semibold text-primary-600'>IKEA Family price</div>
+    <div className='mt-4 font-semibold text-primary'>{tag}</div>
     <div className='mt-1 font-bold line-clamp-1'>{title}</div>
     <div className='mt-1 text-sm text-gray-600 line-clamp-2'>{description}</div>
     <Price price={price} oldPrice={oldPrice} className='mt-3' />

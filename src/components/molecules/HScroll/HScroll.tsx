@@ -81,7 +81,7 @@ const HScrollBody = ({ children, className }: HScrollBodyProps) => {
     <div
       ref={scrollEl}
       onScroll={scrollListener}
-      className={`flex w-full thin-scrollbar py-3 overflow-x-scroll snap-x snap-mandatory scrollbar-hide ${className}`}
+      className={`flex items-stretch w-full thin-scrollbar overflow-x-scroll snap-x snap-mandatory scrollbar-hide ${className}`}
     >
       {children}
     </div>

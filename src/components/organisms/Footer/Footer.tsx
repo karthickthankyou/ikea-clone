@@ -6,11 +6,11 @@ export interface IFooterProps {}
 const JoinFamily = () => (
   <div>
     <div className='font-bold'>Join IKEA Family</div>
-    <div className='max-w-md mt-1 text-sm'>
+    <div className='max-w-md mt-4 text-sm'>
       Get exclusive offers, inspiration, and lots more to help bring your ideas
       to life. All for free.
     </div>
-    <Button color='black' size='lg' className='mt-4'>
+    <Button color='black' size='lg' className='mt-8'>
       Join us
     </Button>
   </div>
@@ -90,8 +90,8 @@ const Footer = () => (
         <JoinFamily />
         <div className='grid grid-cols-1 gap-4 mt-6 xs:grid-cols-2 lg:grid-cols-4 sm:mt-0'>
           <FooterMenu title='About IKEA' items={menuItems.AboutIKEA} />
+          <FooterMenu title='IKEA Family' items={menuItems.IKEAFamily} />
           <FooterMenu title='Help' items={menuItems.Help} />
-          <FooterMenu title='IKEAFamily' items={menuItems.IKEAFamily} />
           <FooterMenu title='Services' items={menuItems.Services} />
         </div>
       </div>

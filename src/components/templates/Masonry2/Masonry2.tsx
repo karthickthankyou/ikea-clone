@@ -41,21 +41,20 @@ const Masonry = ({
   gap = '2',
   shortOnes,
   columns = '3',
-  childrenLimit = 10,
+  childrenLimit,
   heights = ['h-80', 'h-96'],
 }: IMasonryProps) => {
-  const { width } = useWindowSize()
-  console.log('Width: ', width)
-
   const columnClass = columnClasses[columns]
   const gapClass = gapClasses[gap]
+
+  const limit = childrenLimit || React.Children.count(children)
 
   return (
     <div className={`${gapClass}  ${columnClass} ${className}`}>
       {React.Children.map(
         children,
         (child, index) =>
-          index < childrenLimit && (
+          index < limit && (
             <div
               className={`relative overflow-hidden ${childClassName} ${
                 shortOnes?.includes(index) ? heights[0] : heights[1]
