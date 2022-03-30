@@ -6,7 +6,7 @@ export interface IProductListingProps {}
 const ProductListing = () => (
   <div>
     <ProductFilter />
-    <div className='grid grid-cols-3 gap-6 mt-12'>
+    <div className='grid grid-cols-3 mt-12 gap-responsive'>
       {[1, 2, 3, 4, 5, 6].map((item) => (
         <ProductCard01
           key={item}

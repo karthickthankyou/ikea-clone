@@ -12,9 +12,9 @@ export interface ICardCategory01Props {
 const CardCategory01 = ({ text, href, src }: ICardCategory01Props) => {
   const router = useRouter()
   return (
-    <OverlapSpace className='mt-4'>
-      <OverlapSpace.Child className='-z-10'>
-        <Image src={src} alt='' />
+    <OverlapSpace className='h-full mt-4'>
+      <OverlapSpace.Child className=' -z-10'>
+        <Image src={src} alt='' layout='fill' />
       </OverlapSpace.Child>
       <OverlapSpace.Child className='flex items-end justify-center p-8'>
         <Button onClick={() => router.push(href)} color='white'>

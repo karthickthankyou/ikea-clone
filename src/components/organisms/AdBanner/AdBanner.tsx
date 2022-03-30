@@ -19,7 +19,7 @@ const AdBanner = ({
 }: IAdBannerProps) => {
   const router = useRouter()
   return (
-    <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
+    <div className='grid grid-cols-1 gap-responsive sm:grid-cols-2'>
       <div>
         <Image alt='' height={300} width={400} src={src} />
       </div>

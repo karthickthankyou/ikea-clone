@@ -40,7 +40,7 @@ const RecentlyViewedProducts = ({ title }: { title: string }) => {
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
-      <HScroll className='flex gap-6'>
+      <HScroll className='flex gap-responsive'>
         <HScroll.Body className='gap-1'>
           {items.map((item) => (
             <HScroll.Child className='relative mb-12 w-52' key={item.src}>
@@ -68,7 +68,7 @@ const RelatedProducts = ({ title }: { title: string }) => {
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
-      <HScroll className='flex gap-6'>
+      <HScroll className='flex gap-responsive'>
         <HScroll.Body className='gap-1'>
           {items.map((item) => (
             <HScroll.Child className='relative mb-12 w-72' key={item.src}>

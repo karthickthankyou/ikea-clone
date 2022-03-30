@@ -10,7 +10,8 @@ export interface IMasonryProps {
   }[]
   gap?: GapType
   columns?: ColumnsType
-  shortOne?: number
+  shortOnes?: number[]
+  shortHeight?: string
 }
 
 const getDivideBy = (width: number) => {
@@ -39,12 +40,11 @@ const gapClasses: { [key in GapType]: string } = {
 const Masonry = ({
   items,
   gap = '2',
-  shortOne,
+  shortOnes,
   columns = '3',
+  shortHeight = 'h-3/4',
 }: IMasonryProps) => {
-  const { width } = useWindowSize()
-  const divideBy = getDivideBy(width)
-  const shortElement = shortOne || Math.ceil(items.length / divideBy)
+  // const { width } = useWindowSize()
 
   const columnClass = columnClasses[columns]
   const gapClass = gapClasses[gap]
@@ -54,7 +54,7 @@ const Masonry = ({
       {items.map((item, index) => (
         <div
           className={`relative p-8 ${
-            index === shortElement ? 'h-64' : 'h-96'
+            shortOnes?.includes(index) && shortHeight
           } break-inside-avoid`}
           key={item.src}
         >

@@ -11,7 +11,7 @@ export interface ICard01Props {
 }
 
 const Card01 = ({ children, href }: ICard01Props) => (
-  <Link href={href} className='group'>
+  <Link href={href} className=' group'>
     {children}
   </Link>
 )

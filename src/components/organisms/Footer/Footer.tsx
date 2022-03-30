@@ -84,7 +84,7 @@ const FooterFooter = () => (
 )
 
 const Footer = () => (
-  <div className='py-12 mt-12 bg-gray-50'>
+  <footer className='py-12 mt-12 bg-gray-50'>
     <Container>
       <div className='gap-4 sm:flex'>
         <JoinFamily />
@@ -97,7 +97,7 @@ const Footer = () => (
       </div>
       <FooterFooter />
     </Container>
-  </div>
+  </footer>
 )
 
 export default Footer

@@ -9,6 +9,7 @@ import Button from 'src/components/atoms/Button/Button'
 import Logo from 'src/components/atoms/Logo/Logo'
 import { signout } from 'src/store/user/userActions'
 import { useAppDispatch, useAppSelector } from 'src/store'
+import Container from 'src/components/atoms/Container/Container'
 
 export interface INavbarProps {}
 
@@ -203,29 +204,33 @@ const Navbar = () => {
   const [openUser, setOpenUser] = useState(false)
 
   return (
-    <nav className='flex items-baseline justify-between'>
-      <NavSidebar open={open} setOpen={setOpen} />
-      <NavSidebarUser open={openUser} setOpen={setOpenUser} />
-      <Logo />
-      <div className='flex gap-3'>
-        <button
-          onClick={() => setOpenUser((state) => !state)}
-          type='button'
-          className='p-2 border rounded-full'
-        >
-          <UserIcon className='w-5 h-5' />
-        </button>
-        <Link className='p-2 border rounded-full' href='/cart'>
-          <ShoppingCartIcon className='w-5 h-5' />
-        </Link>
-        <button
-          type='button'
-          onClick={() => setOpen((state) => !state)}
-          className='p-2 border rounded-full'
-        >
-          <MenuIcon className='w-5 h-5' />
-        </button>
-      </div>
+    <nav className='z-50 bg-white/20 backdrop-blur backdrop-filter'>
+      <Container>
+        <div className='flex items-baseline justify-between py-2 '>
+          <NavSidebar open={open} setOpen={setOpen} />
+          <NavSidebarUser open={openUser} setOpen={setOpenUser} />
+          <Logo />
+          <div className='flex gap-3'>
+            <button
+              onClick={() => setOpenUser((state) => !state)}
+              type='button'
+              className='p-2 '
+            >
+              <UserIcon className='w-5 h-5' />
+            </button>
+            <Link className='p-2 ' href='/cart'>
+              <ShoppingCartIcon className='w-5 h-5' />
+            </Link>
+            <button
+              type='button'
+              onClick={() => setOpen((state) => !state)}
+              className='p-2 '
+            >
+              <MenuIcon className='w-5 h-5' />
+            </button>
+          </div>
+        </div>
+      </Container>
     </nav>
   )
 }

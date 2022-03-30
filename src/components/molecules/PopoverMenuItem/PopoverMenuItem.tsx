@@ -1,4 +1,4 @@
-import { Popover as HeadlessPopover, Transition } from '@headlessui/react'
+import { Popover as HeadlessPopover } from '@headlessui/react'
 import { createContext, ReactElement, useContext } from 'react'
 
 import { ChevronRightIcon } from '@heroicons/react/solid'
@@ -70,7 +70,7 @@ const PopoverPanel = ({
   className?: string
 }) => (
   <HeadlessPopover.Panel
-    className={`flex p-3 space-y-2 rounded-b-sm shadow-lg border-2 border-white justify-center absolute z-10 gap-6 bg-white/90 top-11 ${className}`}
+    className={`flex p-3 space-y-2 rounded-b-sm shadow-lg border-2 border-white justify-center absolute z-10 gap-responsive bg-white/90 top-11 ${className}`}
   >
     {children}
   </HeadlessPopover.Panel>
