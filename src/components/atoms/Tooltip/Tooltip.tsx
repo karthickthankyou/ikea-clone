@@ -17,7 +17,7 @@ const Tooltip = ({
 }: ITooltipProps) => (
   <MuiTooltip
     classes={{
-      tooltip: ` ${bgClasses[bg]}  ${colorClasses[text]} shadow-lg shadow/black/30 `,
+      tooltip: ` ${bgClasses[bg]} text-sm  ${colorClasses[text]} shadow-lg shadow/black/30 `,
       arrow: `${colorClasses[bg]}`,
     }}
     // TransitionComponent={Fade}

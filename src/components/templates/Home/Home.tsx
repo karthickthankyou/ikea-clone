@@ -19,6 +19,9 @@ import { Children } from 'src/types'
 import InfoCard from 'src/components/molecules/InfoCard'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import Link from 'src/components/atoms/Link'
+import InformationCircleIcon from '@heroicons/react/solid/InformationCircleIcon'
+import Tooltip from 'src/components/atoms/Tooltip/Tooltip'
+import DeveloperCommentary from 'src/components/molecules/DeveloperCommentary/DeveloperCommentary'
 
 const tags = [
   'Sofas',
@@ -288,7 +291,20 @@ const Home: NextPage = () => {
       <HomeBanner />
       <Container className='mt-24 space-y-24'>
         <div>
-          <Heading>Highlights</Heading>
+          <Heading className='flex items-center gap-1'>
+            <div>Highlights</div>
+            <DeveloperCommentary>
+              <div>
+                In the real IKEA, they use images along with the price cards
+                stamped over it.
+              </div>
+              <div>
+                Here, we can place the price cards dynamically. After all, any
+                image probably has some free spot to write on.
+              </div>
+            </DeveloperCommentary>
+          </Heading>
+
           <ColorCardScroll />
         </div>
         <div>
@@ -310,7 +326,19 @@ const Home: NextPage = () => {
         </div>
 
         <div>
-          <Heading>Top categories</Heading>
+          <Heading className='flex items-center gap-1'>
+            <div>Top categories</div>
+            <DeveloperCommentary>
+              <div>
+                In the real IKEA, they use two rows of these cards. That&apos;ll
+                do but it is a bit plain and boring.
+              </div>
+              <div>We use css columns to create a masonry here!</div>
+              <div>
+                Also, it is completely responsive. Try resizing the window.
+              </div>
+            </DeveloperCommentary>
+          </Heading>
           <Masonry2
             columns='5'
             gap='4'
@@ -342,7 +370,19 @@ const Home: NextPage = () => {
         </div>
         <div>
           <Heading className='flex items-center justify-between gap-4'>
-            <div className='break-words'>IKEA family products</div>
+            <div className='flex items-center gap-1'>
+              <div className='break-words'>IKEA family products</div>
+              <DeveloperCommentary>
+                <div>
+                  In the real IKEA, they use two rows of these cards.
+                  That&apos;ll do but it is a bit plain and boring.
+                </div>
+                <div>We use css columns to create a masonry here!</div>
+                <div>
+                  Also, it is completely responsive. Try resizing the window.
+                </div>
+              </DeveloperCommentary>
+            </div>
             <Button className='mt-4' variant='outlined' color='black'>
               Show all offers
             </Button>
@@ -382,7 +422,20 @@ const Home: NextPage = () => {
           </div>
         </div>
         <div>
-          <Heading>Shop products for a more sustainable home</Heading>
+          <Heading className='flex items-center gap-1'>
+            <div>Shop products for a more sustainable home</div>
+            <DeveloperCommentary>
+              <div>Notice the position of the arrows?</div>
+              <div>
+                In the Hightlights section, we placed these arrows{' '}
+                <strong className='text-primary-200'>absolutely</strong>.
+              </div>
+              <div>
+                This corousel is a custom made compount component. That allows
+                us to easily reuse it for multiple scenarios.
+              </div>
+            </DeveloperCommentary>
+          </Heading>
           <HScroll>
             <HScroll.Body className='gap-responsive pb-responsive'>
               <HScroll.Child className='relative w-56 h-72'>
@@ -434,10 +487,26 @@ const Home: NextPage = () => {
                 />
               </HScroll.Child>
             </HScroll.Body>
+            <div className='flex justify-end gap-2 mt-2'>
+              <HScroll.Arrow />
+              <HScroll.Arrow right />
+            </div>
           </HScroll>
         </div>
         <div>
-          <Heading>More ideas and inspiration</Heading>
+          <Heading className='flex items-center gap-1'>
+            <div>More ideas and inspiration</div>
+            <DeveloperCommentary>
+              <div>
+                Product markers over the photographs is a cool feature of IKEA
+                site.
+              </div>
+              <div>
+                It is not yet implemented in this clone. The below is a
+                responsive masonry with plain images. Stay tuned for updates.
+              </div>
+            </DeveloperCommentary>
+          </Heading>
           <Masonry2
             columns='3'
             gap='4'

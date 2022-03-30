@@ -2,6 +2,10 @@ import Button from 'src/components/atoms/Button/Button'
 import BlurredCirle from 'src/components/molecules/BlurredCirle/BlurredCirle'
 import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
 import ArrowDownIcon from '@heroicons/react/outline/ArrowDownIcon'
+import Tooltip from 'src/components/atoms/Tooltip/Tooltip'
+import InformationCircleIcon from '@heroicons/react/outline/InformationCircleIcon'
+import DeveloperCommentary from 'src/components/molecules/DeveloperCommentary/DeveloperCommentary'
+import Link from 'src/components/atoms/Link/Link'
 
 export interface IHomeBannerProps {}
 
@@ -12,6 +16,39 @@ const HomeBanner = () => (
         <div className='my-auto'>
           <div className='max-w-md pb-6 text-5xl font-extrabold tracking-tight text-luxury lg:text-8xl md:text-7xl md:max-w-lg lg:max-w-2xl'>
             Celebrations begin at home.
+            <DeveloperCommentary>
+              <div>Hello There.</div>
+              <div>
+                Welcome to IKEA clone. I am{' '}
+                <span className='font-bold text-primary-200'>
+                  Karthick Ragavendran
+                </span>
+                . I am a full stack developer.
+              </div>
+              <div>This project deals with the below technologies.</div>
+              <ul className='list-disk'>
+                <li>UX</li>
+                <li>UI</li>
+                <li>Tailwind</li>
+                <li>Storybook</li>
+                <li>Redux</li>
+                <li>Urql</li>
+                <li>Cypress</li>
+                <li>and more...</li>
+              </ul>
+              <div>
+                Find the repository{' '}
+                <a
+                  href='https://github.com/karthickthankyou/ikea-clone'
+                  className='font-bold text-primary-200'
+                  rel='noreferrer'
+                  target='_blank'
+                >
+                  here
+                </a>
+                .
+              </div>
+            </DeveloperCommentary>
           </div>
           <div className='mt-6 text-md lg:text-xl md:text-lg'>
             Enjoy festive offers from 25 March to 16 April

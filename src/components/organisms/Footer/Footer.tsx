@@ -72,7 +72,7 @@ const menuItems = {
 }
 
 const FooterFooter = () => (
-  <div className='justify-between py-8 my-8 text-xs border-t sm:flex'>
+  <div className='justify-between pt-8 mt-8 text-xs border-t sm:flex'>
     <div>© Karthick Ragavendran 2022</div>
     <div className='flex flex-wrap gap-2 mt-2 sm:mt-0'>
       <div>Privacy policy</div>
@@ -84,7 +84,7 @@ const FooterFooter = () => (
 )
 
 const Footer = () => (
-  <footer className='py-12 mt-12 bg-gray-50'>
+  <footer className='py-12 mt-12 bg-yellow-50'>
     <Container>
       <div className='gap-4 sm:flex'>
         <JoinFamily />
