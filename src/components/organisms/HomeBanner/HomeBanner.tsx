@@ -24,7 +24,6 @@ const HomeBanner = () => (
             Shop now
           </Button>
         </div>
-        <ArrowDownIcon className='w-6 h-6 animate-bounce' />
       </div>
     </OverlapSpace.Child>
     <OverlapSpace.Child className='relative -z-20'>
@@ -39,6 +38,9 @@ const HomeBanner = () => (
       </div>
       <div className='absolute left-1/2'>
         <BlurredCirle className='fill-primary/30 ' radius={200} />
+      </div>
+      <div className='absolute bottom-0 flex items-center justify-center translate-x-1/2 right-1/2'>
+        <ArrowDownIcon className='w-8 h-8 rounded-full bg-white/10 right-1/2 animate-bounce' />
       </div>
     </OverlapSpace.Child>
   </OverlapSpace>
