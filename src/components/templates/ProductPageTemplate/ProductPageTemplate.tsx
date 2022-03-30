@@ -44,7 +44,7 @@ const RecentlyViewedProducts = ({ title }: { title: string }) => {
         <HScroll.Body className='gap-1'>
           {items.map((item) => (
             <HScroll.Child className='relative mb-12 w-52' key={item.src}>
-              <Image src={item.src} />
+              <Image src={item.src} alt='' />
             </HScroll.Child>
           ))}
         </HScroll.Body>
@@ -157,7 +157,7 @@ const ProductPageTemplate = () => {
               columns='2'
               gap='4'
               items={sampleImagesForMasonry.slice(0, 6)}
-              shortOne={3}
+              shortOnes={[3]}
             />
             <div className='max-w-2xl text-xl font-light leading-relaxed text-gray-700'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate

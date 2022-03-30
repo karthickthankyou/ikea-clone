@@ -13,6 +13,17 @@ import Link from 'src/components/atoms/Link/Link'
 import { useAppDispatch, useAppSelector } from 'src/store'
 import { signin } from 'src/store/user'
 import { useAuthPageResponses } from 'src/hooks'
+import ArrowLeftIcon from '@heroicons/react/outline/ArrowLeftIcon'
+
+export const BackToHome = () => (
+  <Link
+    href='/'
+    className='flex items-center justify-start w-full gap-1 mt-8 group'
+  >
+    <ArrowLeftIcon className='w-4 h-4 group-hover:animate-slide-left' /> Back to
+    home
+  </Link>
+)
 
 const ikeaLoginSchema = yup
   .object({
@@ -81,16 +92,25 @@ const Login = () => (
       <OverlapSpace className='relative overflow-hidden'>
         <OverlapSpace.Child>
           <div className='flex flex-col items-center justify-center min-h-screen p-12 '>
-            <div className='text-4xl '>
-              <span className='font-bold text-primary'>Login</span> to your IKEA
-              account.
-            </div>
-            <div className='mt-4 text-sm text-primary-800'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
-              inventore, nihil beatae perspiciatis.
+            <div className='max-w-sm'>
+              <div className='text-4xl '>
+                <span className='font-bold text-primary'>Login</span> to your
+                IKEA account.
+              </div>
+              <div className='mt-4 text-sm text-primary-800'>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
+                inventore, nihil beatae perspiciatis.
+              </div>
             </div>
 
             <LoginForm className='p-6 sm:hidden' />
+            <Link
+              href='/'
+              className='flex items-center justify-start w-full gap-1 mt-8 group'
+            >
+              <ArrowLeftIcon className='w-4 h-4 group-hover:animate-slide-left' />{' '}
+              Back to home
+            </Link>
           </div>
         </OverlapSpace.Child>
         <OverlapSpace.Child className='relative shadow-inner -z-10 bg-primary-25/50 '>
@@ -109,7 +129,7 @@ const Login = () => (
         </OverlapSpace.Child>
       </OverlapSpace>
       <div className='items-center justify-center hidden sm:flex'>
-        <LoginForm className='p-12' />
+        <LoginForm className='max-w-md p-12 ' />
       </div>
     </div>
   </Container>

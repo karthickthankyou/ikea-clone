@@ -13,6 +13,7 @@ import Link from 'src/components/atoms/Link/Link'
 import { useAppDispatch } from 'src/store'
 import { signup } from 'src/store/user/userActions'
 import { useAuthPageResponses } from 'src/hooks'
+import { BackToHome } from '../Login/Login'
 
 const ikeaCreateAccountSchema = yup
   .object({
@@ -82,17 +83,20 @@ const CreateAccount = () => (
     <div className='sm:grid sm:grid-cols-2'>
       <OverlapSpace className='relative overflow-hidden'>
         <OverlapSpace.Child>
-          <div className='flex flex-col justify-center min-h-screen p-12 '>
-            <div className='max-w-sm text-4xl'>
-              <span className='font-bold text-primary'>Create</span> an IKEA
-              Family Profile.
-            </div>
-            <div className='max-w-xs mt-4 text-sm text-primary-800'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
-              inventore, nihil beatae perspiciatis.
+          <div className='flex flex-col items-center justify-center min-h-screen p-12 '>
+            <div className='max-w-sm'>
+              <div className='text-4xl '>
+                <span className='font-bold text-primary'>Create</span> an IKEA
+                Family Profile.
+              </div>
+              <div className='mt-4 text-sm text-primary-800'>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi
+                inventore, nihil beatae perspiciatis.
+              </div>
             </div>
 
             <CreateAccountForm className='p-6 sm:hidden' />
+            <BackToHome />
           </div>
         </OverlapSpace.Child>
         <OverlapSpace.Child className='relative shadow-inner -z-10 bg-primary-25/50 '>
@@ -114,7 +118,7 @@ const CreateAccount = () => (
         </OverlapSpace.Child>
       </OverlapSpace>
       <div className='items-center justify-center hidden sm:flex'>
-        <CreateAccountForm className='p-12' />
+        <CreateAccountForm className='max-w-md p-12' />
       </div>
     </div>
   </Container>

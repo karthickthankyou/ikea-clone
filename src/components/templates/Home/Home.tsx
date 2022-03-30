@@ -8,10 +8,7 @@ import BannerCard01 from 'src/components/molecules/BannerCard01/BannerCard01'
 import CardCategory01 from 'src/components/molecules/CardCategory01/CardCategory01'
 import ColorCard from 'src/components/molecules/ColorCard/ColorCard'
 import HScroll from 'src/components/molecules/HScroll'
-import {
-  sampleImages,
-  sampleImagesForMasonry,
-} from 'src/components/molecules/Masonry/data'
+import { sampleImages } from 'src/components/molecules/Masonry/data'
 import PriceMarker from 'src/components/molecules/PriceMarker/PriceMarker'
 import ProductCard01 from 'src/components/molecules/ProductCard01'
 import AdBanner from 'src/components/organisms/AdBanner/AdBanner'
@@ -19,6 +16,32 @@ import HomeBanner from 'src/components/organisms/HomeBanner'
 import Masonry2 from 'src/components/templates/Masonry2'
 import { useGetProductsQuery } from 'src/generated/graphql'
 import { Children } from 'src/types'
+import InfoCard from 'src/components/molecules/InfoCard'
+import HeartIcon from '@heroicons/react/outline/HeartIcon'
+import Link from 'src/components/atoms/Link'
+
+const tags = [
+  'Sofas',
+  'Beds',
+  'Dining',
+  'Tv units',
+  'Mattresses',
+  'Seating',
+  'Coffee',
+  'Tables',
+  'Wardrobes',
+  'Storage',
+  'Bookshelves',
+  'Shoe racks',
+  'Decor',
+  'Bathroom',
+  'Textiles',
+  'Pots & plants',
+  'Home electronics',
+  'Home',
+  'Improvement',
+  'Lighting',
+]
 
 const Heading = ({
   children,
@@ -67,7 +90,21 @@ const ColorCardScroll = () => (
       </HScroll.Child>
       <HScroll.Child className='w-56 md:w-64 lg:w-80'>
         <ColorCard
-          src='https://res.cloudinary.com/thankyou/image/upload/v1648659014/IKEA/linh-le-Ebwp2-6BG8E-unsplash_dlook3.jpg'
+          src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
+          title='Unbox your true potential of your home'
+          detailsColor='yellow'
+        >
+          <PriceMarker
+            displayName='Brimnes'
+            category='Cabinet with doors'
+            price={8990}
+            className='flex items-center justify-start text-right text-black '
+          />
+        </ColorCard>
+      </HScroll.Child>
+      <HScroll.Child className='w-56 md:w-64 lg:w-80'>
+        <ColorCard
+          src='https://res.cloudinary.com/thankyou/image/upload/v1648670456/IKEA/katrin-hauf-gdUxNykbuZc-unsplash_da0eol.jpg'
           title='Everyday essentials under Rs.499'
           detailsColor='gray'
         >
@@ -80,21 +117,7 @@ const ColorCardScroll = () => (
             displayName='Korken'
             category='Bottle with stopper'
             price={199}
-            className='flex items-end justify-end text-black '
-          />
-        </ColorCard>
-      </HScroll.Child>
-      <HScroll.Child className='w-56 md:w-64 lg:w-80'>
-        <ColorCard
-          src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
-          title='Unbox your true potential of your home'
-          detailsColor='yellow'
-        >
-          <PriceMarker
-            displayName='Brimnes'
-            category='Cabinet with doors'
-            price={8990}
-            className='flex items-end justify-start text-black '
+            className='flex items-start justify-start text-black '
           />
         </ColorCard>
       </HScroll.Child>
@@ -308,7 +331,6 @@ const Home: NextPage = () => {
             {CategoryCards}
           </Masonry2>
           <Masonry2
-            childrenLimit={10}
             columns='2'
             gap='2'
             shortOnes={[4, 5]}
@@ -461,6 +483,85 @@ const Home: NextPage = () => {
           buttonText='Download now'
           href='/'
         />
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-responsive'>
+          <InfoCard
+            Icon={HeartIcon}
+            title='Returns policy'
+            description='Exceptions during COVID19'
+            href='/'
+            className='p-responsive'
+          />
+          <InfoCard
+            Icon={HeartIcon}
+            title='Click & collect'
+            description='Safe click and collect shopping at IKEA Stores!'
+            href='/'
+            className='p-responsive'
+          />
+          <InfoCard
+            Icon={HeartIcon}
+            title='Planning tools'
+            description='Our planning tools will help you give shape to your ideas'
+            href='/'
+            className='p-responsive'
+          />
+          <InfoCard
+            Icon={HeartIcon}
+            title='Safety at IKEA store'
+            description='Safe shopping experience at IKEA'
+            href='/'
+            className='p-responsive'
+          />
+        </div>
+        <div>
+          <Heading>Explore our furniture & home furnishing range</Heading>
+          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+            <div>
+              <div className='flex flex-wrap items-center justify-start gap-4'>
+                {tags.map((tag) => (
+                  <Link
+                    href='/'
+                    key={tag}
+                    className='inline-block px-3 py-1.5 transition-all border border-yellow-100 bg-yellow-25 hover:border-black hover:shadow-xl hover:-translate-y-0.5 hover:bg-white'
+                  >
+                    {tag}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className='gap-8 mt-8 space-y-8 text-sm font-light text-gray-800 columns-2 md:mt-0'>
+              <p className='font-bold text-primary'>
+                IKEA is a global leader in life at home.
+              </p>
+              <p>
+                Whether you just moved into a new home or looking to revamp your
+                current one, we at IKEA are here to inspire you with affordable
+                home furniture solutions, there is a piece of furniture to every
+                corner of your home. Create a home that is perfect for you.
+              </p>
+              <p>
+                Shopping at IKEA is a bit different and exciting compared to
+                your shopping at an everyday retail. It is about experiencing
+                solutions first hand and getting to know ideas and inspirations
+                that can fit perfectly into your home. That’s why, we offer more
+                than 7500 products, solutions at our store along with home
+                furnishing ideas and services for you to explore.
+              </p>
+              <p>
+                When you visit IKEA store, make yourself at home in our many
+                room settings in the store. Squeeze the upholsteries, feel the
+                oriental rugs, try the sofa beds and open the cabinets to feel
+                the quality. On the price tag, you’ll find all you need to know
+                about a product, including where in the store you can pick it
+                up.
+              </p>
+              <p>
+                Since most IKEA furniture is flat-packed, they are quite easy to
+                bring home when you buy from the store.
+              </p>
+            </div>
+          </div>
+        </div>
       </Container>
     </div>
   )

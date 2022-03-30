@@ -1,6 +1,4 @@
 import React from 'react'
-import useWindowSize from 'react-use/lib/useWindowSize'
-import Image from 'src/components/atoms/Image'
 import { Children } from 'src/types'
 
 export type ColumnsType = '1' | '2' | '3' | '4' | '5'
