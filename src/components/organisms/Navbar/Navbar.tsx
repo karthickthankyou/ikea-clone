@@ -45,15 +45,15 @@ const NavSidebarUser = ({
   const dispatch = useAppDispatch()
   return (
     <Sidebar open={open} setOpen={setOpen}>
-      <Sidebar.Header className='pt-24 text-white bg-primary'>
+      <Sidebar.Header className='pt-24 text-black bg-yellow-200'>
         <div className='flex items-end justify-between'>
           <div className='text-xl'>
-            <div className='max-w-xs text-4xl font-bold '>
+            <div className='max-w-xs text-5xl font-bold '>
               Hej{' '}
               {uid ? (
-                <span className=' text-yellow'>{displayName}</span>
+                <span className='text-primary'>{displayName}</span>
               ) : (
-                'Visitor'
+                'Visitor.'
               )}
             </div>
           </div>
@@ -106,13 +106,13 @@ const NavSidebarUser = ({
           <>
             <Link
               href='/login'
-              className='py-2 block w-full border border-primary rounded-full text-primary text-center mt-1.5 font-medium capitalize'
+              className='py-2 block w-full border border-black rounded-full text-black text-center mt-1.5 font-medium capitalize'
             >
               Login
             </Link>
             <Link
               href='/createAccount'
-              className='py-2 block w-full bg-primary font-medium border border-primary rounded-full text-white text-center mt-1.5 capitalize'
+              className='py-2 block w-full bg-black font-medium border border-black rounded-full text-white text-center mt-1.5 capitalize'
             >
               Create account
             </Link>
@@ -178,15 +178,15 @@ export const NavSidebar = ({
           <>
             <Link
               href='/login'
-              className='py-2 block w-full border border-primary rounded-full text-primary text-center mt-1.5 font-medium capitalize'
+              className='py-2 block w-full border border-black rounded-full text-black text-center mt-1.5 font-medium capitalize'
             >
               Login
             </Link>
             <Link
               href='/signup'
-              className='py-2 block w-full bg-primary font-medium border border-primary rounded-full text-white text-center mt-1.5 capitalize'
+              className='py-2 block w-full bg-black font-medium border border-black rounded-full text-white text-center mt-1.5 capitalize'
             >
-              Join now
+              Create account
             </Link>
           </>
         ) : (
