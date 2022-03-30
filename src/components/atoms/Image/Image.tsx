@@ -1,30 +1,31 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react'
-import NextImage from 'next/image'
-import fallbackImg from 'src/assets/fallback.jpg'
+import NextImage, { ImageProps } from 'next/image'
 
-export type IImageProps = React.ComponentProps<typeof NextImage> & {
-  fallbackSrc?: string
-  className?: string
-}
-
-const Image = (props: IImageProps) => {
-  const { src, fallbackSrc = fallbackImg, className, alt, ...rest } = props
-  const [imgSrc, setImgSrc] = useState(src)
-
+const Image = ({
+  className,
+  src,
+  width = 240,
+  height = 240,
+  layout = 'responsive',
+  alt = '',
+  quality = 75,
+  ...props
+}: ImageProps) => {
+  const imgWidth = layout === 'responsive' ? width : undefined
+  const imgHeight = layout === 'responsive' ? height : undefined
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <NextImage
-        {...rest}
-        alt={alt}
-        src={imgSrc}
-        className='object-cover h-full'
-        layout='fill'
-        onError={() => {
-          setImgSrc(fallbackSrc)
-        }}
-      />
-    </div>
+    <NextImage
+      className={`object-cover ${className}`}
+      src={src}
+      width={imgWidth}
+      height={imgHeight}
+      layout={layout}
+      alt={alt}
+      quality={quality}
+      placeholder='blur'
+      blurDataURL='/images/blur.png'
+      {...props}
+    />
   )
 }
 

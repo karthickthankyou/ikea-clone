@@ -7,7 +7,7 @@ const FlexboxGrid = () => (
       We use all the utility classes provided by tailwind about flexbox and grid
       as it is. Refer to the{' '}
       <a
-        className='text-primary-500'
+        className='text-primary'
         href='https://tailwindcss.com/docs/flex-direction'
       >
         official documentation

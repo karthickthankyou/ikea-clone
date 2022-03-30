@@ -1,27 +1,27 @@
-import { ReactElement } from 'react'
+import { Children } from 'src/types'
 
 export interface IBadgeProps {
-  children: ReactElement | string
+  children: Children
   size?: 'sm' | 'md' | 'lg'
   variant?: 'primary' | 'gray' | 'red' | 'yellow' | 'green'
 }
 
 const Badge = ({ children, size = 'md', variant = 'gray' }: IBadgeProps) => {
   const sizeCls = {
-    sm: 'px-2  text-xs',
+    sm: 'px-1 py-0.5 text-xs',
     md: 'px-2 py-1.5 text-sm',
     lg: 'px-3 py-1.5',
   }
   const variantCls = {
-    primary: 'bg-primary-100 border border-white shadow text-primary-700',
-    gray: 'bg-gray-100 border border-white shadow text-gray-700',
-    red: 'bg-red-100 border border-white shadow text-red-700',
-    yellow: 'bg-yellow-100 border border-white shadow  text-yellow-700',
-    green: 'bg-green-100 border border-white shadow  text-green-700',
+    primary: 'bg-primary text-white',
+    gray: 'bg-gray text-white',
+    red: 'bg-red text-white',
+    yellow: 'bg-yellow  text-black',
+    green: 'bg-green  text-black',
   }
   return (
     <span
-      className={`transition-all  py-1 px-2 items-center justify-center duration-300  rounded-full ${sizeCls[size]} ${variantCls[variant]}`}
+      className={`transition-all inline-block font-semibold ${sizeCls[size]} ${variantCls[variant]}`}
     >
       {children}
     </span>

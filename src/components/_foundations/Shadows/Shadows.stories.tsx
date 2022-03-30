@@ -55,11 +55,11 @@ const ColoredTemplate: ComponentStory<typeof Shadows> = () => (
     >
       {[
         ' shadow-black/20',
-        ' shadow-primary-500/20',
-        ' shadow-gray-500/20',
-        ' shadow-red-500/20',
-        ' shadow-green-500/20',
-        ' shadow-yellow-500/20',
+        ' shadow-primary/20',
+        ' shadow-gray/20',
+        ' shadow-red/20',
+        ' shadow-green/20',
+        ' shadow-yellow/20',
       ].map((shadow) => (
         <div
           key={shadow}
@@ -75,11 +75,11 @@ const ColoredTemplate: ComponentStory<typeof Shadows> = () => (
     >
       {[
         'border border-black shadow-black/20',
-        'border border-primary-500 shadow-primary-500/20',
-        'border border-gray-500 shadow-gray-500/20',
-        'border border-red-500 shadow-red-500/20',
-        'border border-green-500 shadow-green-500/20',
-        'border border-yellow-500 shadow-yellow-500/20',
+        'border border-primary shadow-primary/20',
+        'border border-gray shadow-gray/20',
+        'border border-red shadow-red/20',
+        'border border-green shadow-green/20',
+        'border border-yellow shadow-yellow/20',
       ].map((shadow) => (
         <div
           key={shadow}
@@ -95,11 +95,11 @@ const ColoredTemplate: ComponentStory<typeof Shadows> = () => (
     >
       {[
         'shadow-black',
-        'shadow-primary-500',
-        'shadow-gray-500',
-        'shadow-red-500',
-        'shadow-green-500',
-        'shadow-yellow-500',
+        'shadow-primary',
+        'shadow-gray',
+        'shadow-red',
+        'shadow-green',
+        'shadow-yellow',
       ].map((shadow) => (
         <div
           key={shadow}

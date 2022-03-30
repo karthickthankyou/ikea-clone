@@ -62,7 +62,7 @@ const LetterHeightTemplate: ComponentStory<typeof Typography> = () => (
   <RenderScale
     title='Line height'
     display={
-      <div className='inline-block bg-gray-50'>
+      <div className='inline-block bg-gray-25'>
         Hello World <br />
         Lorem ipsum dolor sit amet consectetur.
       </div>

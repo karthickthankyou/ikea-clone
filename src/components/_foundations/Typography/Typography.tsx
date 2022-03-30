@@ -57,7 +57,7 @@ export const RenderScale = ({
           key={style.title}
           className='pl-2 mt-8 border-l border-primary-200'
         >
-          <div className='inline-block px-2 py-0.5 text-xs text-primary-800 rounded-r-full border border-primary-200 shadow-lg shadow-primary-500/20'>
+          <div className='inline-block px-2 py-0.5 text-xs text-primary-800 rounded-r-full border border-primary-200 shadow-lg shadow-primary/20'>
             {style.title}
           </div>
 
