@@ -13,6 +13,7 @@ export interface IProductCard01Props {
   reviews?: number
   price: number
   oldPrice?: number
+  className?: string
 }
 
 const ProductCard01 = ({
@@ -24,8 +25,9 @@ const ProductCard01 = ({
   reviews,
   price,
   oldPrice,
+  className,
 }: IProductCard01Props) => (
-  <div className='group'>
+  <div className={`group ${className}`}>
     <OverlapSpace>
       <OverlapSpace.Child className='-z-10'>
         <Image src={src} alt='' />

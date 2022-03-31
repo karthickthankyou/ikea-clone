@@ -7,12 +7,18 @@ export interface ICardCategory01Props {
   text: string
   href: string
   src: string
+  className?: string
 }
 
-const CardCategory01 = ({ text, href, src }: ICardCategory01Props) => {
+const CardCategory01 = ({
+  text,
+  href,
+  src,
+  className,
+}: ICardCategory01Props) => {
   const router = useRouter()
   return (
-    <OverlapSpace className='h-full mt-4 group'>
+    <OverlapSpace className={`h-full mt-4 group ${className}`}>
       <OverlapSpace.Child className=' -z-10'>
         <Image src={src} alt='' layout='fill' />
       </OverlapSpace.Child>

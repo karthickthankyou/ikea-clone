@@ -387,10 +387,11 @@ const Home: NextPage = () => {
               Show all offers
             </Button>
           </Heading>
-          <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
+          <div className='grid grid-cols-2 gap-responsive'>
             <ProductCard01
               tag='IKEA family price'
               title='BOKKREMLA'
+              className='mb-6'
               description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
               src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
               price={2.29}
@@ -437,49 +438,55 @@ const Home: NextPage = () => {
             </DeveloperCommentary>
           </Heading>
           <HScroll>
-            <HScroll.Body className='gap-responsive pb-responsive'>
-              <HScroll.Child className='relative w-56 h-72'>
+            <HScroll.Body className='gap-responsive'>
+              <HScroll.Child className='relative mb-responsive'>
                 <CardCategory01
                   text='Storage & organisation'
                   key='Storage & organisation'
                   href='/'
+                  className='w-56 h-72'
                   src='https://res.cloudinary.com/thankyou/image/upload/v1648660778/IKEA/nathan-oakley-jSbBnR22cXc-unsplash_xakhbu.jpg'
                 />
               </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
+              <HScroll.Child className='relative mb-responsive'>
                 <CardCategory01
+                  className='w-56 h-72'
                   text='Baby & children'
                   key='Baby & children'
                   href='/'
                   src='https://res.cloudinary.com/thankyou/image/upload/v1648661196/IKEA/kids-me-germany-Zzgmde4_lYU-unsplash_tcx3xa.jpg'
                 />
               </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
+              <HScroll.Child className='relative mb-responsive'>
                 <CardCategory01
+                  className='w-56 h-72'
                   text='Table and desks'
                   key='Table and desks'
                   href='/'
                   src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
                 />
               </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
+              <HScroll.Child className='relative mb-responsive'>
                 <CardCategory01
+                  className='w-56 h-72'
                   text='Beds'
                   key='Beds'
                   href='/'
                   src='https://res.cloudinary.com/thankyou/image/upload/v1648661142/IKEA/chastity-cortijo-M8iGdeTSOkg-unsplash_htvvhi.jpg'
                 />
               </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
+              <HScroll.Child className='relative mb-responsive'>
                 <CardCategory01
+                  className='w-56 h-72'
                   text='Chairs'
                   key='Chairs'
                   href='/'
                   src='https://res.cloudinary.com/thankyou/image/upload/v1648660432/IKEA/thestandingdesk-_mpablfu5pM-unsplash_jzqojr.jpg'
                 />
               </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52'>
+              <HScroll.Child className='relative mb-responsive'>
                 <CardCategory01
+                  className='w-56 h-72'
                   text='Shoe rack and clothes stand'
                   key='Shoe rack and clothes stand'
                   href='/'
@@ -584,9 +591,9 @@ const Home: NextPage = () => {
         </div>
         <div>
           <Heading>Explore our furniture & home furnishing range</Heading>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+          <div className='grid grid-cols-1 gap-responsive md:grid-cols-2'>
             <div>
-              <div className='flex flex-wrap items-center justify-start gap-4'>
+              <div className='flex flex-wrap items-center justify-start gap-responsive'>
                 {tags.map((tag) => (
                   <Link
                     href='/'
