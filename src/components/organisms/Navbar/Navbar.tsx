@@ -1,6 +1,7 @@
 import UserIcon from '@heroicons/react/outline/UserIcon'
 import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon'
 import ChevronRightIcon from '@heroicons/react/outline/ChevronRightIcon'
+import SearchIcon from '@heroicons/react/outline/SearchIcon'
 import MenuIcon from '@heroicons/react/outline/MenuIcon'
 import Link from 'src/components/atoms/Link/Link'
 import Sidebar from 'src/components/molecules/Sidebar/Sidebar'
@@ -211,6 +212,13 @@ const Navbar = () => {
           <NavSidebarUser open={openUser} setOpen={setOpenUser} />
           <Logo />
           <div className='flex gap-3'>
+            <Link
+              className='p-2 '
+              href='/products'
+              aria-label='Go to search products page.'
+            >
+              <SearchIcon className='w-5 h-5' />
+            </Link>
             <button
               onClick={() => setOpenUser((state) => !state)}
               type='button'

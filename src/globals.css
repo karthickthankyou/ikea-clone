@@ -80,6 +80,9 @@ input[type='checkbox'] {
   .pb-responsive {
     @apply pb-2 md:pb-3 lg:pb-4;
   }
+  .mt-responsive {
+    @apply mt-2 md:mt-3 lg:mt-4;
+  }
   .mb-responsive {
     @apply mb-2 md:mb-3 lg:mb-4;
   }

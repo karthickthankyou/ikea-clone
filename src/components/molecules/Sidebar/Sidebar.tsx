@@ -1,14 +1,16 @@
+/* eslint-disable react/no-unused-prop-types */
 import { Dispatch, Fragment, ReactElement, SetStateAction } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+
 import { XIcon } from '@heroicons/react/outline'
 
 export interface ISidebarProps {
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
   children: (string | ReactElement | null) | (string | ReactElement | null)[]
-  // eslint-disable-next-line react/no-unused-prop-types
   className?: string
   overlayBlur?: boolean
+  show?: boolean
 }
 
 const Header = ({
@@ -20,8 +22,21 @@ const Header = ({
   </div>
 )
 
-const Footer = ({ children }: Pick<ISidebarProps, 'children'>) => (
-  <div className='p-4'>{children}</div>
+const Footer = ({
+  children,
+  show,
+}: Pick<ISidebarProps, 'children' | 'show'>) => (
+  <Transition
+    show={show}
+    enter='transition-all duration-300'
+    enterFrom='translate-y-10 '
+    enterTo='translate-y-0'
+    leave='transition-all duration-300'
+    leaveFrom='translate-y-0'
+    leaveTo='translate-y-10'
+  >
+    <div className='px-4 py-2 border-t'>{children}</div>
+  </Transition>
 )
 
 const Body = ({

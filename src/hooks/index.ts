@@ -24,6 +24,11 @@ import {
   removeNotification,
   resetNotification,
 } from 'src/store/utils/utilsStore'
+import {
+  useFilterProductsQuery,
+  useSearchProductsQuery,
+} from 'src/generated/graphql'
+import { setProducts } from 'src/store/search'
 
 export const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -285,4 +290,39 @@ export const useAuthPageResponses = () => {
       router.push('/')
     }
   }, [user, router])
+}
+
+export const useWhenFilterChangesFetchProducts = () => {
+  const dispatch = useAppDispatch()
+  const { args, ...queryArgs } = useAppSelector(
+    (state) => state.search.queryArgs
+  )
+
+  const [searchData] = useSearchProductsQuery({
+    variables: { args, ...queryArgs },
+    pause: Boolean(!args.search),
+  })
+  const [filterData] = useFilterProductsQuery({
+    variables: queryArgs,
+    pause: Boolean(args.search),
+  })
+
+  console.log(searchData, filterData)
+
+  useEffect(() => {
+    if (args.search) {
+      const { data, error, fetching, stale } = searchData
+      dispatch(
+        setProducts({
+          data: { products: data?.search_products || [] },
+          error,
+          fetching,
+          stale,
+        })
+      )
+    } else {
+      const { data, error, fetching, stale } = filterData
+      dispatch(setProducts({ data, error, fetching, stale }))
+    }
+  }, [args.search, dispatch, filterData, searchData])
 }

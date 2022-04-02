@@ -7,7 +7,7 @@ import Price from '../Price/Price'
 export interface IProductCard01Props {
   tag?: string
   title: string
-  description: string
+  description?: string
   src: string
   rating?: number
   reviews?: number

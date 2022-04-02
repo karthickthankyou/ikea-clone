@@ -5,11 +5,13 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import userReducer from './user'
 import utilReducer from './utils/utilsStore'
+import searchReducer from './search'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     utils: utilReducer,
+    search: searchReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,4 +1,3 @@
-/* eslint-ignore */
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
 export type Maybe<T> = T | null
@@ -1637,6 +1636,10 @@ export type Query_Root = {
   rooms_aggregate: Rooms_Aggregate
   /** fetch data from the table: "rooms" using primary key columns */
   rooms_by_pk?: Maybe<Rooms>
+  /** execute function "search_products" which returns "products" */
+  search_products: Array<Products>
+  /** execute function "search_products" and query aggregates on result of table type "products" */
+  search_products_aggregate: Products_Aggregate
   /** fetch data from the table: "user_products" */
   user_products: Array<User_Products>
   /** fetch aggregated fields from the table: "user_products" */
@@ -1775,6 +1778,24 @@ export type Query_RootRooms_AggregateArgs = {
 
 export type Query_RootRooms_By_PkArgs = {
   name: Scalars['String']
+}
+
+export type Query_RootSearch_ProductsArgs = {
+  args: Search_Products_Args
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Products_Order_By>>
+  where?: InputMaybe<Products_Bool_Exp>
+}
+
+export type Query_RootSearch_Products_AggregateArgs = {
+  args: Search_Products_Args
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Products_Order_By>>
+  where?: InputMaybe<Products_Bool_Exp>
 }
 
 export type Query_RootUser_ProductsArgs = {
@@ -1938,6 +1959,10 @@ export enum Rooms_Update_Column {
   Name = 'name',
 }
 
+export type Search_Products_Args = {
+  search?: InputMaybe<Scalars['String']>
+}
+
 /** Boolean expression to compare columns of type "smallint". All fields are combined with logical 'AND'. */
 export type Smallint_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['smallint']>
@@ -1989,6 +2014,10 @@ export type Subscription_Root = {
   rooms_aggregate: Rooms_Aggregate
   /** fetch data from the table: "rooms" using primary key columns */
   rooms_by_pk?: Maybe<Rooms>
+  /** execute function "search_products" which returns "products" */
+  search_products: Array<Products>
+  /** execute function "search_products" and query aggregates on result of table type "products" */
+  search_products_aggregate: Products_Aggregate
   /** fetch data from the table: "user_products" */
   user_products: Array<User_Products>
   /** fetch aggregated fields from the table: "user_products" */
@@ -2129,6 +2158,24 @@ export type Subscription_RootRooms_By_PkArgs = {
   name: Scalars['String']
 }
 
+export type Subscription_RootSearch_ProductsArgs = {
+  args: Search_Products_Args
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Products_Order_By>>
+  where?: InputMaybe<Products_Bool_Exp>
+}
+
+export type Subscription_RootSearch_Products_AggregateArgs = {
+  args: Search_Products_Args
+  distinct_on?: InputMaybe<Array<Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Products_Order_By>>
+  where?: InputMaybe<Products_Bool_Exp>
+}
+
 export type Subscription_RootUser_ProductsArgs = {
   distinct_on?: InputMaybe<Array<User_Products_Select_Column>>
   limit?: InputMaybe<Scalars['Int']>
@@ -2208,7 +2255,7 @@ export type User_Products = {
   createdAt: Scalars['timestamptz']
   id: Scalars['Int']
   pid: Scalars['String']
-  type: User_Products_Type_Enum
+  type: Scalars['String']
   uid: Scalars['String']
   updatedAt: Scalars['timestamptz']
 }
@@ -2256,7 +2303,7 @@ export type User_Products_Bool_Exp = {
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
   id?: InputMaybe<Int_Comparison_Exp>
   pid?: InputMaybe<String_Comparison_Exp>
-  type?: InputMaybe<User_Products_Type_Enum_Comparison_Exp>
+  type?: InputMaybe<String_Comparison_Exp>
   uid?: InputMaybe<String_Comparison_Exp>
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
 }
@@ -2277,7 +2324,7 @@ export type User_Products_Insert_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']>
   id?: InputMaybe<Scalars['Int']>
   pid?: InputMaybe<Scalars['String']>
-  type?: InputMaybe<User_Products_Type_Enum>
+  type?: InputMaybe<Scalars['String']>
   uid?: InputMaybe<Scalars['String']>
   updatedAt?: InputMaybe<Scalars['timestamptz']>
 }
@@ -2288,6 +2335,7 @@ export type User_Products_Max_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>
   id?: Maybe<Scalars['Int']>
   pid?: Maybe<Scalars['String']>
+  type?: Maybe<Scalars['String']>
   uid?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['timestamptz']>
 }
@@ -2298,6 +2346,7 @@ export type User_Products_Min_Fields = {
   createdAt?: Maybe<Scalars['timestamptz']>
   id?: Maybe<Scalars['Int']>
   pid?: Maybe<Scalars['String']>
+  type?: Maybe<Scalars['String']>
   uid?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['timestamptz']>
 }
@@ -2354,7 +2403,7 @@ export type User_Products_Set_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']>
   id?: InputMaybe<Scalars['Int']>
   pid?: InputMaybe<Scalars['String']>
-  type?: InputMaybe<User_Products_Type_Enum>
+  type?: InputMaybe<Scalars['String']>
   uid?: InputMaybe<Scalars['String']>
   updatedAt?: InputMaybe<Scalars['timestamptz']>
 }
@@ -2422,23 +2471,6 @@ export type User_Products_Type_Bool_Exp = {
 export enum User_Products_Type_Constraint {
   /** unique or primary key constraint */
   UserProductsTypePkey = 'user_products_type_pkey',
-}
-
-export enum User_Products_Type_Enum {
-  InCart = 'IN_CART',
-  Purchased = 'PURCHASED',
-  RemovedFromWishlist = 'REMOVED_FROM_WISHLIST',
-  SavedForLater = 'SAVED_FOR_LATER',
-  Wishlisted = 'WISHLISTED',
-}
-
-/** Boolean expression to compare columns of type "user_products_type_enum". All fields are combined with logical 'AND'. */
-export type User_Products_Type_Enum_Comparison_Exp = {
-  _eq?: InputMaybe<User_Products_Type_Enum>
-  _in?: InputMaybe<Array<User_Products_Type_Enum>>
-  _is_null?: InputMaybe<Scalars['Boolean']>
-  _neq?: InputMaybe<User_Products_Type_Enum>
-  _nin?: InputMaybe<Array<User_Products_Type_Enum>>
 }
 
 /** input type for inserting data into table "user_products_type" */
@@ -2718,9 +2750,66 @@ export type GetProductsQuery = {
   }>
 }
 
+export type SearchProductsQueryVariables = Exact<{
+  args: Search_Products_Args
+  distinct_on?: InputMaybe<
+    Array<Products_Select_Column> | Products_Select_Column
+  >
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Products_Order_By> | Products_Order_By>
+  where?: InputMaybe<Products_Bool_Exp>
+}>
+
+export type SearchProductsQuery = {
+  __typename?: 'query_root'
+  search_products: Array<{
+    __typename?: 'products'
+    name: string
+    id: number
+    category: string
+    subCategory: string
+    outOfStock?: boolean | null
+    price: any
+    rating?: any | null
+    reviews?: any | null
+    discount?: any | null
+    oldPrice?: any | null
+  }>
+}
+
+export type FilterProductsQueryVariables = Exact<{
+  distinct_on?: InputMaybe<
+    Array<Products_Select_Column> | Products_Select_Column
+  >
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Products_Order_By> | Products_Order_By>
+  where?: InputMaybe<Products_Bool_Exp>
+}>
+
+export type FilterProductsQuery = {
+  __typename?: 'query_root'
+  products: Array<{
+    __typename?: 'products'
+    name: string
+    id: number
+    category: string
+    subCategory: string
+    outOfStock?: boolean | null
+    price: any
+    rating?: any | null
+    reviews?: any | null
+    discount?: any | null
+    oldPrice?: any | null
+  }>
+}
+
 export const namedOperations = {
   Query: {
     GetProducts: 'GetProducts',
+    SearchProducts: 'SearchProducts',
+    FilterProducts: 'FilterProducts',
   },
 }
 
@@ -2741,6 +2830,82 @@ export function useGetProductsQuery(
 ) {
   return Urql.useQuery<GetProductsQuery>({
     query: GetProductsDocument,
+    ...options,
+  })
+}
+export const SearchProductsDocument = /*#__PURE__*/ gql`
+  query SearchProducts(
+    $args: search_products_args!
+    $distinct_on: [products_select_column!]
+    $limit: Int
+    $offset: Int
+    $order_by: [products_order_by!]
+    $where: products_bool_exp
+  ) {
+    search_products(
+      args: $args
+      distinct_on: $distinct_on
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: $where
+    ) {
+      name
+      id
+      category
+      subCategory
+      outOfStock
+      price
+      rating
+      reviews
+      discount
+      oldPrice
+    }
+  }
+`
+
+export function useSearchProductsQuery(
+  options: Omit<Urql.UseQueryArgs<SearchProductsQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<SearchProductsQuery>({
+    query: SearchProductsDocument,
+    ...options,
+  })
+}
+export const FilterProductsDocument = /*#__PURE__*/ gql`
+  query FilterProducts(
+    $distinct_on: [products_select_column!]
+    $limit: Int
+    $offset: Int
+    $order_by: [products_order_by!]
+    $where: products_bool_exp
+  ) {
+    products(
+      distinct_on: $distinct_on
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: $where
+    ) {
+      name
+      id
+      category
+      subCategory
+      outOfStock
+      price
+      rating
+      reviews
+      discount
+      oldPrice
+    }
+  }
+`
+
+export function useFilterProductsQuery(
+  options?: Omit<Urql.UseQueryArgs<FilterProductsQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<FilterProductsQuery>({
+    query: FilterProductsDocument,
     ...options,
   })
 }
