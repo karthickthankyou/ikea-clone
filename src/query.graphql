@@ -16,7 +16,17 @@ query SearchProducts(
   $order_by: [products_order_by!]
   $where: products_bool_exp
 ) {
-  search_products(
+  products_aggregate: search_products_aggregate(
+    args: $args
+    distinct_on: $distinct_on
+    order_by: $order_by
+    where: $where
+  ) {
+    aggregate {
+      count
+    }
+  }
+  products: search_products(
     args: $args
     distinct_on: $distinct_on
     limit: $limit
@@ -43,6 +53,15 @@ query FilterProducts(
   $order_by: [products_order_by!]
   $where: products_bool_exp
 ) {
+  products_aggregate(
+    distinct_on: $distinct_on
+    order_by: $order_by
+    where: $where
+  ) {
+    aggregate {
+      count
+    }
+  }
   products(
     distinct_on: $distinct_on
     limit: $limit

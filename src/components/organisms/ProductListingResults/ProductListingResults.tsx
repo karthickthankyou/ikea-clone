@@ -1,6 +1,7 @@
 import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
 import Skeleton from 'src/components/molecules/Skeleton/Skeleton'
 import { FilterProductsQuery } from 'src/generated/graphql'
+import { useAppSelector } from 'src/store'
 import { Children } from 'src/types'
 import { UseQueryState } from 'urql'
 
@@ -15,11 +16,18 @@ const Grid = ({ children }: { children: Children }) => (
 )
 
 const ProductListingResults = ({ products }: IProductListingResultsProps) => {
+  const limit = useAppSelector((state) => state.search.queryArgs.limit) || 0
   if (products.fetching)
     return (
       <Grid>
-        {[1, 2, 3, 4, 5, 6].map((item) => (
-          <Skeleton key={item} className='w-full h-64' />
+        {Array.from(Array(limit).keys()).map((item) => (
+          <div key={item}>
+            <Skeleton className='w-full aspect-square' />
+            <Skeleton className='w-3/4 h-8 mt-3' />
+            <Skeleton className='w-full h-8 mt-1' />
+            <Skeleton className='w-1/2 h-6 mt-1' />
+            <Skeleton className='w-3/4 h-6 mt-1' />
+          </div>
         ))}
       </Grid>
     )

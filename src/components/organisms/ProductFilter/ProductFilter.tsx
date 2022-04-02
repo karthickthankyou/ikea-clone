@@ -142,16 +142,13 @@ const SidebarFilter = ({
         </div>
 
         <div>
-          <FilterHeading
-            dirty={'categories' in dirtyFields}
-            title='Categories'
-          />
+          <FilterHeading dirty={'category' in dirtyFields} title='Category' />
           <Controller
-            name='categories'
+            name='category'
             control={control}
             render={({ field: { onChange, value } }) => (
               <fieldset className='flex flex-col gap-4'>
-                {filterDefaultValues.categories.map((c) => (
+                {filterDefaultValues.category.map((c) => (
                   <label key={c} className='flex items-start whitespace-nowrap'>
                     <input
                       onChange={() => {

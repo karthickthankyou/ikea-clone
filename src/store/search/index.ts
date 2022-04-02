@@ -22,6 +22,8 @@ const initialState: SearchSlice = {
     args: {
       search: '',
     },
+    offset: 0,
+    limit: 12,
   },
   products: {
     stale: false,
@@ -33,7 +35,7 @@ const search = createSlice({
   name: 'search',
   initialState,
   reducers: {
-    setProducFilter: (
+    setProductFilter: (
       state,
       action: PayloadAction<SearchSlice['productsFilter']>
     ) => {
@@ -43,15 +45,36 @@ const search = createSlice({
       state,
       action: PayloadAction<SearchSlice['queryArgs']>
     ) => {
-      state.queryArgs = action.payload
+      state.queryArgs.args = action.payload.args
+      state.queryArgs.where = action.payload.where
+      state.queryArgs.order_by = action.payload.order_by
+      state.queryArgs.offset = 0
     },
     setProducts: (state, action: PayloadAction<SearchSlice['products']>) => {
       state.products = castDraft(action.payload)
     },
+    setProductsOffset: (
+      state,
+      action: PayloadAction<SearchSlice['queryArgs']['offset']>
+    ) => {
+      const offset = action.payload && action.payload < 0 ? 0 : action.payload
+      state.queryArgs.offset = offset
+    },
+    setProductsLimit: (
+      state,
+      action: PayloadAction<SearchSlice['queryArgs']['limit']>
+    ) => {
+      state.queryArgs.limit = action.payload
+    },
   },
 })
 
-export const { setProducFilter, setFilterQueryArgs, setProducts } =
-  search.actions
+export const {
+  setProductFilter,
+  setFilterQueryArgs,
+  setProducts,
+  setProductsOffset,
+  setProductsLimit,
+} = search.actions
 
 export default search.reducer

@@ -2763,7 +2763,14 @@ export type SearchProductsQueryVariables = Exact<{
 
 export type SearchProductsQuery = {
   __typename?: 'query_root'
-  search_products: Array<{
+  products_aggregate: {
+    __typename?: 'products_aggregate'
+    aggregate?: {
+      __typename?: 'products_aggregate_fields'
+      count: number
+    } | null
+  }
+  products: Array<{
     __typename?: 'products'
     name: string
     id: number
@@ -2790,6 +2797,13 @@ export type FilterProductsQueryVariables = Exact<{
 
 export type FilterProductsQuery = {
   __typename?: 'query_root'
+  products_aggregate: {
+    __typename?: 'products_aggregate'
+    aggregate?: {
+      __typename?: 'products_aggregate_fields'
+      count: number
+    } | null
+  }
   products: Array<{
     __typename?: 'products'
     name: string
@@ -2842,7 +2856,17 @@ export const SearchProductsDocument = /*#__PURE__*/ gql`
     $order_by: [products_order_by!]
     $where: products_bool_exp
   ) {
-    search_products(
+    products_aggregate: search_products_aggregate(
+      args: $args
+      distinct_on: $distinct_on
+      order_by: $order_by
+      where: $where
+    ) {
+      aggregate {
+        count
+      }
+    }
+    products: search_products(
       args: $args
       distinct_on: $distinct_on
       limit: $limit
@@ -2880,6 +2904,15 @@ export const FilterProductsDocument = /*#__PURE__*/ gql`
     $order_by: [products_order_by!]
     $where: products_bool_exp
   ) {
+    products_aggregate(
+      distinct_on: $distinct_on
+      order_by: $order_by
+      where: $where
+    ) {
+      aggregate {
+        count
+      }
+    }
     products(
       distinct_on: $distinct_on
       limit: $limit

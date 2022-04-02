@@ -71,7 +71,7 @@ export const filterDefaultValues = {
   search: '',
   price: [0, 20000] as [number, number],
   rating: rating[0],
-  categories,
+  category: categories,
   sort: 'Best match' as SortTypes,
 }
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import {
   catchError,
   debounceTime,
-  distinct,
   distinctUntilChanged,
   EMPTY,
   map,
@@ -10,7 +9,7 @@ import {
   tap,
 } from 'rxjs'
 import { useAppDispatch } from 'src/store'
-import { setFilterQueryArgs, setProducFilter } from 'src/store/search'
+import { setFilterQueryArgs, setProductFilter } from 'src/store/search'
 import {
   DirtyFilterType,
   SearchFilterKeys,
@@ -38,7 +37,7 @@ export const useDispatchHomeFilter = ({
   useEffect(() => {
     const subscription = input$
       .pipe(
-        debounceTime(600),
+        debounceTime(300),
         // Deep compare the inputs.
         distinctUntilChanged(
           (prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)
@@ -50,16 +49,16 @@ export const useDispatchHomeFilter = ({
             Object.entries(data).filter(([key]) => keys.includes(key))
           )
         }),
-        tap((v) => dispatch(setProducFilter(v))),
+        tap((v) => dispatch(setProductFilter(v))),
         map((v) => {
-          const { search, price, rating, categories, sort } = v
+          const { search, price, rating, category, sort } = v
           const productsWhere: Partial<{ [key in SearchFilterKeys]: any }> = {}
           const productRating = ((rating || '').match(/★/g) || []).length
 
           if (price) productsWhere.price = { _gte: price[0], _lte: price[1] }
           if (productRating) productsWhere.rating = { _gte: productRating }
-          if (categories) {
-            productsWhere.categories = { _in: categories }
+          if (category) {
+            productsWhere.category = { _in: category }
           }
 
           const orderBy = sort ? sortOptions[sort] : {}

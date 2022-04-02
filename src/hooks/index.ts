@@ -312,14 +312,7 @@ export const useWhenFilterChangesFetchProducts = () => {
   useEffect(() => {
     if (args.search) {
       const { data, error, fetching, stale } = searchData
-      dispatch(
-        setProducts({
-          data: { products: data?.search_products || [] },
-          error,
-          fetching,
-          stale,
-        })
-      )
+      dispatch(setProducts({ data, error, fetching, stale }))
     } else {
       const { data, error, fetching, stale } = filterData
       dispatch(setProducts({ data, error, fetching, stale }))
