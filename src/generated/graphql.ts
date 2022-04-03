@@ -695,6 +695,8 @@ export type Order_Logs = {
   activity: Scalars['String']
   createdAt: Scalars['timestamptz']
   id: Scalars['Int']
+  /** An object relationship */
+  order: Orders
   orderId: Scalars['uuid']
   updatedAt: Scalars['timestamptz']
 }
@@ -728,10 +730,37 @@ export type Order_Logs_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>
 }
 
+/** order by aggregate values of table "order_logs" */
+export type Order_Logs_Aggregate_Order_By = {
+  avg?: InputMaybe<Order_Logs_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<Order_Logs_Max_Order_By>
+  min?: InputMaybe<Order_Logs_Min_Order_By>
+  stddev?: InputMaybe<Order_Logs_Stddev_Order_By>
+  stddev_pop?: InputMaybe<Order_Logs_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<Order_Logs_Stddev_Samp_Order_By>
+  sum?: InputMaybe<Order_Logs_Sum_Order_By>
+  var_pop?: InputMaybe<Order_Logs_Var_Pop_Order_By>
+  var_samp?: InputMaybe<Order_Logs_Var_Samp_Order_By>
+  variance?: InputMaybe<Order_Logs_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "order_logs" */
+export type Order_Logs_Arr_Rel_Insert_Input = {
+  data: Array<Order_Logs_Insert_Input>
+  /** upsert condition */
+  on_conflict?: InputMaybe<Order_Logs_On_Conflict>
+}
+
 /** aggregate avg on columns */
 export type Order_Logs_Avg_Fields = {
   __typename?: 'order_logs_avg_fields'
   id?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "order_logs" */
+export type Order_Logs_Avg_Order_By = {
+  id?: InputMaybe<Order_By>
 }
 
 /** Boolean expression to filter rows from the table "order_logs". All fields are combined with a logical 'AND'. */
@@ -742,6 +771,7 @@ export type Order_Logs_Bool_Exp = {
   activity?: InputMaybe<String_Comparison_Exp>
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
   id?: InputMaybe<Int_Comparison_Exp>
+  order?: InputMaybe<Orders_Bool_Exp>
   orderId?: InputMaybe<Uuid_Comparison_Exp>
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
 }
@@ -762,6 +792,7 @@ export type Order_Logs_Insert_Input = {
   activity?: InputMaybe<Scalars['String']>
   createdAt?: InputMaybe<Scalars['timestamptz']>
   id?: InputMaybe<Scalars['Int']>
+  order?: InputMaybe<Orders_Obj_Rel_Insert_Input>
   orderId?: InputMaybe<Scalars['uuid']>
   updatedAt?: InputMaybe<Scalars['timestamptz']>
 }
@@ -776,6 +807,15 @@ export type Order_Logs_Max_Fields = {
   updatedAt?: Maybe<Scalars['timestamptz']>
 }
 
+/** order by max() on columns of table "order_logs" */
+export type Order_Logs_Max_Order_By = {
+  activity?: InputMaybe<Order_By>
+  createdAt?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  orderId?: InputMaybe<Order_By>
+  updatedAt?: InputMaybe<Order_By>
+}
+
 /** aggregate min on columns */
 export type Order_Logs_Min_Fields = {
   __typename?: 'order_logs_min_fields'
@@ -784,6 +824,15 @@ export type Order_Logs_Min_Fields = {
   id?: Maybe<Scalars['Int']>
   orderId?: Maybe<Scalars['uuid']>
   updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "order_logs" */
+export type Order_Logs_Min_Order_By = {
+  activity?: InputMaybe<Order_By>
+  createdAt?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  orderId?: InputMaybe<Order_By>
+  updatedAt?: InputMaybe<Order_By>
 }
 
 /** response of any mutation on the table "order_logs" */
@@ -807,6 +856,7 @@ export type Order_Logs_Order_By = {
   activity?: InputMaybe<Order_By>
   createdAt?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
+  order?: InputMaybe<Orders_Order_By>
   orderId?: InputMaybe<Order_By>
   updatedAt?: InputMaybe<Order_By>
 }
@@ -845,10 +895,20 @@ export type Order_Logs_Stddev_Fields = {
   id?: Maybe<Scalars['Float']>
 }
 
+/** order by stddev() on columns of table "order_logs" */
+export type Order_Logs_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>
+}
+
 /** aggregate stddev_pop on columns */
 export type Order_Logs_Stddev_Pop_Fields = {
   __typename?: 'order_logs_stddev_pop_fields'
   id?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "order_logs" */
+export type Order_Logs_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>
 }
 
 /** aggregate stddev_samp on columns */
@@ -857,10 +917,20 @@ export type Order_Logs_Stddev_Samp_Fields = {
   id?: Maybe<Scalars['Float']>
 }
 
+/** order by stddev_samp() on columns of table "order_logs" */
+export type Order_Logs_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>
+}
+
 /** aggregate sum on columns */
 export type Order_Logs_Sum_Fields = {
   __typename?: 'order_logs_sum_fields'
   id?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "order_logs" */
+export type Order_Logs_Sum_Order_By = {
+  id?: InputMaybe<Order_By>
 }
 
 /** update columns of table "order_logs" */
@@ -883,16 +953,31 @@ export type Order_Logs_Var_Pop_Fields = {
   id?: Maybe<Scalars['Float']>
 }
 
+/** order by var_pop() on columns of table "order_logs" */
+export type Order_Logs_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>
+}
+
 /** aggregate var_samp on columns */
 export type Order_Logs_Var_Samp_Fields = {
   __typename?: 'order_logs_var_samp_fields'
   id?: Maybe<Scalars['Float']>
 }
 
+/** order by var_samp() on columns of table "order_logs" */
+export type Order_Logs_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>
+}
+
 /** aggregate variance on columns */
 export type Order_Logs_Variance_Fields = {
   __typename?: 'order_logs_variance_fields'
   id?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "order_logs" */
+export type Order_Logs_Variance_Order_By = {
+  id?: InputMaybe<Order_By>
 }
 
 /** Order status type */
@@ -1002,10 +1087,32 @@ export type Orders = {
   activities: Scalars['_text']
   createdAt: Scalars['timestamptz']
   id: Scalars['uuid']
+  /** An array relationship */
+  order_logs: Array<Order_Logs>
+  /** An aggregate relationship */
+  order_logs_aggregate: Order_Logs_Aggregate
   pid: Scalars['Int']
   status: Scalars['String']
   uid: Scalars['String']
   updatedAt: Scalars['timestamptz']
+}
+
+/** Order information */
+export type OrdersOrder_LogsArgs = {
+  distinct_on?: InputMaybe<Array<Order_Logs_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Order_Logs_Order_By>>
+  where?: InputMaybe<Order_Logs_Bool_Exp>
+}
+
+/** Order information */
+export type OrdersOrder_Logs_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Order_Logs_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Order_Logs_Order_By>>
+  where?: InputMaybe<Order_Logs_Bool_Exp>
 }
 
 /** aggregated selection of "orders" */
@@ -1051,6 +1158,7 @@ export type Orders_Bool_Exp = {
   activities?: InputMaybe<_Text_Comparison_Exp>
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
   id?: InputMaybe<Uuid_Comparison_Exp>
+  order_logs?: InputMaybe<Order_Logs_Bool_Exp>
   pid?: InputMaybe<Int_Comparison_Exp>
   status?: InputMaybe<String_Comparison_Exp>
   uid?: InputMaybe<String_Comparison_Exp>
@@ -1073,6 +1181,7 @@ export type Orders_Insert_Input = {
   activities?: InputMaybe<Scalars['_text']>
   createdAt?: InputMaybe<Scalars['timestamptz']>
   id?: InputMaybe<Scalars['uuid']>
+  order_logs?: InputMaybe<Order_Logs_Arr_Rel_Insert_Input>
   pid?: InputMaybe<Scalars['Int']>
   status?: InputMaybe<Scalars['String']>
   uid?: InputMaybe<Scalars['String']>
@@ -1110,6 +1219,13 @@ export type Orders_Mutation_Response = {
   returning: Array<Orders>
 }
 
+/** input type for inserting object relation for remote table "orders" */
+export type Orders_Obj_Rel_Insert_Input = {
+  data: Orders_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<Orders_On_Conflict>
+}
+
 /** on_conflict condition type for table "orders" */
 export type Orders_On_Conflict = {
   constraint: Orders_Constraint
@@ -1122,6 +1238,7 @@ export type Orders_Order_By = {
   activities?: InputMaybe<Order_By>
   createdAt?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
+  order_logs_aggregate?: InputMaybe<Order_Logs_Aggregate_Order_By>
   pid?: InputMaybe<Order_By>
   status?: InputMaybe<Order_By>
   uid?: InputMaybe<Order_By>
@@ -1239,11 +1356,33 @@ export type Products = {
   tags?: Maybe<Scalars['jsonb']>
   updatedAt: Scalars['timestamptz']
   url: Scalars['String']
+  /** An array relationship */
+  user_products: Array<User_Products>
+  /** An aggregate relationship */
+  user_products_aggregate: User_Products_Aggregate
 }
 
 /** Products */
 export type ProductsTagsArgs = {
   path?: InputMaybe<Scalars['String']>
+}
+
+/** Products */
+export type ProductsUser_ProductsArgs = {
+  distinct_on?: InputMaybe<Array<User_Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<User_Products_Order_By>>
+  where?: InputMaybe<User_Products_Bool_Exp>
+}
+
+/** Products */
+export type ProductsUser_Products_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<User_Products_Order_By>>
+  where?: InputMaybe<User_Products_Bool_Exp>
 }
 
 /** aggregated selection of "products" */
@@ -1310,6 +1449,7 @@ export type Products_Bool_Exp = {
   tags?: InputMaybe<Jsonb_Comparison_Exp>
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
   url?: InputMaybe<String_Comparison_Exp>
+  user_products?: InputMaybe<User_Products_Bool_Exp>
 }
 
 /** unique or primary key constraints on table "products" */
@@ -1359,6 +1499,7 @@ export type Products_Insert_Input = {
   tags?: InputMaybe<Scalars['jsonb']>
   updatedAt?: InputMaybe<Scalars['timestamptz']>
   url?: InputMaybe<Scalars['String']>
+  user_products?: InputMaybe<User_Products_Arr_Rel_Insert_Input>
 }
 
 /** aggregate max on columns */
@@ -1404,6 +1545,13 @@ export type Products_Mutation_Response = {
   returning: Array<Products>
 }
 
+/** input type for inserting object relation for remote table "products" */
+export type Products_Obj_Rel_Insert_Input = {
+  data: Products_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<Products_On_Conflict>
+}
+
 /** on_conflict condition type for table "products" */
 export type Products_On_Conflict = {
   constraint: Products_Constraint
@@ -1427,6 +1575,7 @@ export type Products_Order_By = {
   tags?: InputMaybe<Order_By>
   updatedAt?: InputMaybe<Order_By>
   url?: InputMaybe<Order_By>
+  user_products_aggregate?: InputMaybe<User_Products_Aggregate_Order_By>
 }
 
 /** primary key columns input for table: products */
@@ -1606,9 +1755,9 @@ export type Query_Root = {
   categories_aggregate: Categories_Aggregate
   /** fetch data from the table: "categories" using primary key columns */
   categories_by_pk?: Maybe<Categories>
-  /** fetch data from the table: "order_logs" */
+  /** An array relationship */
   order_logs: Array<Order_Logs>
-  /** fetch aggregated fields from the table: "order_logs" */
+  /** An aggregate relationship */
   order_logs_aggregate: Order_Logs_Aggregate
   /** fetch data from the table: "order_logs" using primary key columns */
   order_logs_by_pk?: Maybe<Order_Logs>
@@ -1640,9 +1789,9 @@ export type Query_Root = {
   search_products: Array<Products>
   /** execute function "search_products" and query aggregates on result of table type "products" */
   search_products_aggregate: Products_Aggregate
-  /** fetch data from the table: "user_products" */
+  /** An array relationship */
   user_products: Array<User_Products>
-  /** fetch aggregated fields from the table: "user_products" */
+  /** An aggregate relationship */
   user_products_aggregate: User_Products_Aggregate
   /** fetch data from the table: "user_products" using primary key columns */
   user_products_by_pk?: Maybe<User_Products>
@@ -1984,9 +2133,9 @@ export type Subscription_Root = {
   categories_aggregate: Categories_Aggregate
   /** fetch data from the table: "categories" using primary key columns */
   categories_by_pk?: Maybe<Categories>
-  /** fetch data from the table: "order_logs" */
+  /** An array relationship */
   order_logs: Array<Order_Logs>
-  /** fetch aggregated fields from the table: "order_logs" */
+  /** An aggregate relationship */
   order_logs_aggregate: Order_Logs_Aggregate
   /** fetch data from the table: "order_logs" using primary key columns */
   order_logs_by_pk?: Maybe<Order_Logs>
@@ -2018,9 +2167,9 @@ export type Subscription_Root = {
   search_products: Array<Products>
   /** execute function "search_products" and query aggregates on result of table type "products" */
   search_products_aggregate: Products_Aggregate
-  /** fetch data from the table: "user_products" */
+  /** An array relationship */
   user_products: Array<User_Products>
-  /** fetch aggregated fields from the table: "user_products" */
+  /** An aggregate relationship */
   user_products_aggregate: User_Products_Aggregate
   /** fetch data from the table: "user_products" using primary key columns */
   user_products_by_pk?: Maybe<User_Products>
@@ -2254,10 +2403,14 @@ export type User_Products = {
   __typename?: 'user_products'
   createdAt: Scalars['timestamptz']
   id: Scalars['Int']
-  pid: Scalars['String']
-  type: Scalars['String']
+  pid: Scalars['Int']
+  /** An object relationship */
+  product: Products
+  type: User_Products_Type_Enum
   uid: Scalars['String']
   updatedAt: Scalars['timestamptz']
+  /** An object relationship */
+  user_products_type: User_Products_Type
 }
 
 /** aggregated selection of "user_products" */
@@ -2289,10 +2442,39 @@ export type User_Products_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>
 }
 
+/** order by aggregate values of table "user_products" */
+export type User_Products_Aggregate_Order_By = {
+  avg?: InputMaybe<User_Products_Avg_Order_By>
+  count?: InputMaybe<Order_By>
+  max?: InputMaybe<User_Products_Max_Order_By>
+  min?: InputMaybe<User_Products_Min_Order_By>
+  stddev?: InputMaybe<User_Products_Stddev_Order_By>
+  stddev_pop?: InputMaybe<User_Products_Stddev_Pop_Order_By>
+  stddev_samp?: InputMaybe<User_Products_Stddev_Samp_Order_By>
+  sum?: InputMaybe<User_Products_Sum_Order_By>
+  var_pop?: InputMaybe<User_Products_Var_Pop_Order_By>
+  var_samp?: InputMaybe<User_Products_Var_Samp_Order_By>
+  variance?: InputMaybe<User_Products_Variance_Order_By>
+}
+
+/** input type for inserting array relation for remote table "user_products" */
+export type User_Products_Arr_Rel_Insert_Input = {
+  data: Array<User_Products_Insert_Input>
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_Products_On_Conflict>
+}
+
 /** aggregate avg on columns */
 export type User_Products_Avg_Fields = {
   __typename?: 'user_products_avg_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by avg() on columns of table "user_products" */
+export type User_Products_Avg_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** Boolean expression to filter rows from the table "user_products". All fields are combined with a logical 'AND'. */
@@ -2302,14 +2484,18 @@ export type User_Products_Bool_Exp = {
   _or?: InputMaybe<Array<User_Products_Bool_Exp>>
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>
   id?: InputMaybe<Int_Comparison_Exp>
-  pid?: InputMaybe<String_Comparison_Exp>
-  type?: InputMaybe<String_Comparison_Exp>
+  pid?: InputMaybe<Int_Comparison_Exp>
+  product?: InputMaybe<Products_Bool_Exp>
+  type?: InputMaybe<User_Products_Type_Enum_Comparison_Exp>
   uid?: InputMaybe<String_Comparison_Exp>
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>
+  user_products_type?: InputMaybe<User_Products_Type_Bool_Exp>
 }
 
 /** unique or primary key constraints on table "user_products" */
 export enum User_Products_Constraint {
+  /** unique or primary key constraint */
+  UserProductsPidUidKey = 'user_products_pid_uid_key',
   /** unique or primary key constraint */
   UserProductsPkey = 'user_products_pkey',
 }
@@ -2317,16 +2503,19 @@ export enum User_Products_Constraint {
 /** input type for incrementing numeric columns in table "user_products" */
 export type User_Products_Inc_Input = {
   id?: InputMaybe<Scalars['Int']>
+  pid?: InputMaybe<Scalars['Int']>
 }
 
 /** input type for inserting data into table "user_products" */
 export type User_Products_Insert_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']>
   id?: InputMaybe<Scalars['Int']>
-  pid?: InputMaybe<Scalars['String']>
-  type?: InputMaybe<Scalars['String']>
+  pid?: InputMaybe<Scalars['Int']>
+  product?: InputMaybe<Products_Obj_Rel_Insert_Input>
+  type?: InputMaybe<User_Products_Type_Enum>
   uid?: InputMaybe<Scalars['String']>
   updatedAt?: InputMaybe<Scalars['timestamptz']>
+  user_products_type?: InputMaybe<User_Products_Type_Obj_Rel_Insert_Input>
 }
 
 /** aggregate max on columns */
@@ -2334,10 +2523,18 @@ export type User_Products_Max_Fields = {
   __typename?: 'user_products_max_fields'
   createdAt?: Maybe<Scalars['timestamptz']>
   id?: Maybe<Scalars['Int']>
-  pid?: Maybe<Scalars['String']>
-  type?: Maybe<Scalars['String']>
+  pid?: Maybe<Scalars['Int']>
   uid?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by max() on columns of table "user_products" */
+export type User_Products_Max_Order_By = {
+  createdAt?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
+  uid?: InputMaybe<Order_By>
+  updatedAt?: InputMaybe<Order_By>
 }
 
 /** aggregate min on columns */
@@ -2345,10 +2542,18 @@ export type User_Products_Min_Fields = {
   __typename?: 'user_products_min_fields'
   createdAt?: Maybe<Scalars['timestamptz']>
   id?: Maybe<Scalars['Int']>
-  pid?: Maybe<Scalars['String']>
-  type?: Maybe<Scalars['String']>
+  pid?: Maybe<Scalars['Int']>
   uid?: Maybe<Scalars['String']>
   updatedAt?: Maybe<Scalars['timestamptz']>
+}
+
+/** order by min() on columns of table "user_products" */
+export type User_Products_Min_Order_By = {
+  createdAt?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
+  uid?: InputMaybe<Order_By>
+  updatedAt?: InputMaybe<Order_By>
 }
 
 /** response of any mutation on the table "user_products" */
@@ -2372,9 +2577,11 @@ export type User_Products_Order_By = {
   createdAt?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   pid?: InputMaybe<Order_By>
+  product?: InputMaybe<Products_Order_By>
   type?: InputMaybe<Order_By>
   uid?: InputMaybe<Order_By>
   updatedAt?: InputMaybe<Order_By>
+  user_products_type?: InputMaybe<User_Products_Type_Order_By>
 }
 
 /** primary key columns input for table: user_products */
@@ -2402,8 +2609,8 @@ export enum User_Products_Select_Column {
 export type User_Products_Set_Input = {
   createdAt?: InputMaybe<Scalars['timestamptz']>
   id?: InputMaybe<Scalars['Int']>
-  pid?: InputMaybe<Scalars['String']>
-  type?: InputMaybe<Scalars['String']>
+  pid?: InputMaybe<Scalars['Int']>
+  type?: InputMaybe<User_Products_Type_Enum>
   uid?: InputMaybe<Scalars['String']>
   updatedAt?: InputMaybe<Scalars['timestamptz']>
 }
@@ -2412,30 +2619,80 @@ export type User_Products_Set_Input = {
 export type User_Products_Stddev_Fields = {
   __typename?: 'user_products_stddev_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev() on columns of table "user_products" */
+export type User_Products_Stddev_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** aggregate stddev_pop on columns */
 export type User_Products_Stddev_Pop_Fields = {
   __typename?: 'user_products_stddev_pop_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_pop() on columns of table "user_products" */
+export type User_Products_Stddev_Pop_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** aggregate stddev_samp on columns */
 export type User_Products_Stddev_Samp_Fields = {
   __typename?: 'user_products_stddev_samp_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by stddev_samp() on columns of table "user_products" */
+export type User_Products_Stddev_Samp_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** aggregate sum on columns */
 export type User_Products_Sum_Fields = {
   __typename?: 'user_products_sum_fields'
   id?: Maybe<Scalars['Int']>
+  pid?: Maybe<Scalars['Int']>
+}
+
+/** order by sum() on columns of table "user_products" */
+export type User_Products_Sum_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** Types of actions user can do on a product */
 export type User_Products_Type = {
   __typename?: 'user_products_type'
   type: Scalars['String']
+  /** An array relationship */
+  user_products: Array<User_Products>
+  /** An aggregate relationship */
+  user_products_aggregate: User_Products_Aggregate
+}
+
+/** Types of actions user can do on a product */
+export type User_Products_TypeUser_ProductsArgs = {
+  distinct_on?: InputMaybe<Array<User_Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<User_Products_Order_By>>
+  where?: InputMaybe<User_Products_Bool_Exp>
+}
+
+/** Types of actions user can do on a product */
+export type User_Products_TypeUser_Products_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<User_Products_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<User_Products_Order_By>>
+  where?: InputMaybe<User_Products_Bool_Exp>
 }
 
 /** aggregated selection of "user_products_type" */
@@ -2465,6 +2722,7 @@ export type User_Products_Type_Bool_Exp = {
   _not?: InputMaybe<User_Products_Type_Bool_Exp>
   _or?: InputMaybe<Array<User_Products_Type_Bool_Exp>>
   type?: InputMaybe<String_Comparison_Exp>
+  user_products?: InputMaybe<User_Products_Bool_Exp>
 }
 
 /** unique or primary key constraints on table "user_products_type" */
@@ -2473,9 +2731,27 @@ export enum User_Products_Type_Constraint {
   UserProductsTypePkey = 'user_products_type_pkey',
 }
 
+export enum User_Products_Type_Enum {
+  InCart = 'IN_CART',
+  Purchased = 'PURCHASED',
+  RemovedFromWishlist = 'REMOVED_FROM_WISHLIST',
+  SavedForLater = 'SAVED_FOR_LATER',
+  Wishlisted = 'WISHLISTED',
+}
+
+/** Boolean expression to compare columns of type "user_products_type_enum". All fields are combined with logical 'AND'. */
+export type User_Products_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<User_Products_Type_Enum>
+  _in?: InputMaybe<Array<User_Products_Type_Enum>>
+  _is_null?: InputMaybe<Scalars['Boolean']>
+  _neq?: InputMaybe<User_Products_Type_Enum>
+  _nin?: InputMaybe<Array<User_Products_Type_Enum>>
+}
+
 /** input type for inserting data into table "user_products_type" */
 export type User_Products_Type_Insert_Input = {
   type?: InputMaybe<Scalars['String']>
+  user_products?: InputMaybe<User_Products_Arr_Rel_Insert_Input>
 }
 
 /** aggregate max on columns */
@@ -2499,6 +2775,13 @@ export type User_Products_Type_Mutation_Response = {
   returning: Array<User_Products_Type>
 }
 
+/** input type for inserting object relation for remote table "user_products_type" */
+export type User_Products_Type_Obj_Rel_Insert_Input = {
+  data: User_Products_Type_Insert_Input
+  /** upsert condition */
+  on_conflict?: InputMaybe<User_Products_Type_On_Conflict>
+}
+
 /** on_conflict condition type for table "user_products_type" */
 export type User_Products_Type_On_Conflict = {
   constraint: User_Products_Type_Constraint
@@ -2509,6 +2792,7 @@ export type User_Products_Type_On_Conflict = {
 /** Ordering options when selecting data from "user_products_type". */
 export type User_Products_Type_Order_By = {
   type?: InputMaybe<Order_By>
+  user_products_aggregate?: InputMaybe<User_Products_Aggregate_Order_By>
 }
 
 /** primary key columns input for table: user_products_type */
@@ -2553,18 +2837,39 @@ export enum User_Products_Update_Column {
 export type User_Products_Var_Pop_Fields = {
   __typename?: 'user_products_var_pop_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by var_pop() on columns of table "user_products" */
+export type User_Products_Var_Pop_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** aggregate var_samp on columns */
 export type User_Products_Var_Samp_Fields = {
   __typename?: 'user_products_var_samp_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by var_samp() on columns of table "user_products" */
+export type User_Products_Var_Samp_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** aggregate variance on columns */
 export type User_Products_Variance_Fields = {
   __typename?: 'user_products_variance_fields'
   id?: Maybe<Scalars['Float']>
+  pid?: Maybe<Scalars['Float']>
+}
+
+/** order by variance() on columns of table "user_products" */
+export type User_Products_Variance_Order_By = {
+  id?: InputMaybe<Order_By>
+  pid?: InputMaybe<Order_By>
 }
 
 /** The information about users */
@@ -2750,6 +3055,31 @@ export type GetProductsQuery = {
   }>
 }
 
+export type GetProductQueryVariables = Exact<{
+  id: Scalars['Int']
+}>
+
+export type GetProductQuery = {
+  __typename?: 'query_root'
+  product?: {
+    __typename?: 'products'
+    category: string
+    createdAt: any
+    discount?: any | null
+    id: number
+    name: string
+    oldPrice?: any | null
+    outOfStock?: boolean | null
+    price: any
+    rating?: any | null
+    reviews?: any | null
+    subCategory: string
+    tags?: any | null
+    updatedAt: any
+    url: string
+  } | null
+}
+
 export type SearchProductsQueryVariables = Exact<{
   args: Search_Products_Args
   distinct_on?: InputMaybe<
@@ -2819,11 +3149,60 @@ export type FilterProductsQuery = {
   }>
 }
 
+export type InsertUserProductsOneMutationVariables = Exact<{
+  object: User_Products_Insert_Input
+}>
+
+export type InsertUserProductsOneMutation = {
+  __typename?: 'mutation_root'
+  insert_user_products_one?: {
+    __typename?: 'user_products'
+    createdAt: any
+    id: number
+    pid: number
+    type: User_Products_Type_Enum
+    uid: string
+    updatedAt: any
+  } | null
+}
+
+export type GetUserProductsQueryVariables = Exact<{
+  uid: Scalars['String']
+}>
+
+export type GetUserProductsQuery = {
+  __typename?: 'query_root'
+  user_products: Array<{
+    __typename?: 'user_products'
+    createdAt: any
+    id: number
+    pid: number
+    type: User_Products_Type_Enum
+    uid: string
+    updatedAt: any
+    product: {
+      __typename?: 'products'
+      name: string
+      price: any
+      outOfStock?: boolean | null
+      category: string
+      subCategory: string
+      rating?: any | null
+      reviews?: any | null
+    }
+  }>
+}
+
 export const namedOperations = {
   Query: {
     GetProducts: 'GetProducts',
+    GetProduct: 'GetProduct',
     SearchProducts: 'SearchProducts',
     FilterProducts: 'FilterProducts',
+    GetUserProducts: 'GetUserProducts',
+  },
+  Mutation: {
+    InsertUserProductsOne: 'InsertUserProductsOne',
   },
 }
 
@@ -2844,6 +3223,35 @@ export function useGetProductsQuery(
 ) {
   return Urql.useQuery<GetProductsQuery>({
     query: GetProductsDocument,
+    ...options,
+  })
+}
+export const GetProductDocument = /*#__PURE__*/ gql`
+  query GetProduct($id: Int!) {
+    product: products_by_pk(id: $id) {
+      category
+      createdAt
+      discount
+      id
+      name
+      oldPrice
+      outOfStock
+      price
+      rating
+      reviews
+      subCategory
+      tags
+      updatedAt
+      url
+    }
+  }
+`
+
+export function useGetProductQuery(
+  options: Omit<Urql.UseQueryArgs<GetProductQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<GetProductQuery>({
+    query: GetProductDocument,
     ...options,
   })
 }
@@ -2939,6 +3347,61 @@ export function useFilterProductsQuery(
 ) {
   return Urql.useQuery<FilterProductsQuery>({
     query: FilterProductsDocument,
+    ...options,
+  })
+}
+export const InsertUserProductsOneDocument = /*#__PURE__*/ gql`
+  mutation InsertUserProductsOne($object: user_products_insert_input!) {
+    insert_user_products_one(
+      object: $object
+      on_conflict: {
+        constraint: user_products_pid_uid_key
+        update_columns: [pid, type]
+      }
+    ) {
+      createdAt
+      id
+      pid
+      type
+      uid
+      updatedAt
+    }
+  }
+`
+
+export function useInsertUserProductsOneMutation() {
+  return Urql.useMutation<
+    InsertUserProductsOneMutation,
+    InsertUserProductsOneMutationVariables
+  >(InsertUserProductsOneDocument)
+}
+export const GetUserProductsDocument = /*#__PURE__*/ gql`
+  query GetUserProducts($uid: String!) {
+    user_products(where: { uid: { _eq: $uid } }) {
+      createdAt
+      id
+      pid
+      type
+      uid
+      updatedAt
+      product {
+        name
+        price
+        outOfStock
+        category
+        subCategory
+        rating
+        reviews
+      }
+    }
+  }
+`
+
+export function useGetUserProductsQuery(
+  options: Omit<Urql.UseQueryArgs<GetUserProductsQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<GetUserProductsQuery>({
+    query: GetUserProductsDocument,
     ...options,
   })
 }

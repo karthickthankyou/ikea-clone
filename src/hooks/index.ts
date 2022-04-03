@@ -307,8 +307,6 @@ export const useWhenFilterChangesFetchProducts = () => {
     pause: Boolean(args.search),
   })
 
-  console.log(searchData, filterData)
-
   useEffect(() => {
     if (args.search) {
       const { data, error, fetching, stale } = searchData

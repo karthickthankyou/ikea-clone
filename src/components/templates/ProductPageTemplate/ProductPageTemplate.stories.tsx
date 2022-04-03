@@ -9,7 +9,7 @@ export default {
 
 const Template: ComponentStory<typeof ProductPageTemplate> = () => (
   <div className='mt-24'>
-    <ProductPageTemplate />
+    <ProductPageTemplate product={{ fetching: false, stale: false }} />
   </div>
 )
 

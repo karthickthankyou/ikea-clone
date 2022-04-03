@@ -15,13 +15,13 @@ const Price = ({
     <div className={`flex gap-2 items-center flex-wrap ${className}`}>
       {oldPrice && (
         <div className='flex items-start leading-none line-through'>
-          Rs.{oldPrice.toLocaleString('hi')}
+          Rs.{oldPrice?.toLocaleString('hi')}
         </div>
       )}
       <div className='flex items-start'>
         <div className='text-sm font-medium'>Rs.</div>
         <div className='text-xl font-semibold leading-none'>
-          {price.toLocaleString('hi')}
+          {price?.toLocaleString('hi')}
         </div>
       </div>
     </div>

@@ -11,4 +11,3 @@ const Template: ComponentStory<typeof ProductListing> = () => <ProductListing />
 
 export const Primary = Template.bind({})
 Primary.args = {}
-Primary.parameters = {}

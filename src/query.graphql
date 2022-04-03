@@ -8,6 +8,25 @@ query GetProducts {
   }
 }
 
+query GetProduct($id: Int!) {
+  product: products_by_pk(id: $id) {
+    category
+    createdAt
+    discount
+    id
+    name
+    oldPrice
+    outOfStock
+    price
+    rating
+    reviews
+    subCategory
+    tags
+    updatedAt
+    url
+  }
+}
+
 query SearchProducts(
   $args: search_products_args!
   $distinct_on: [products_select_column!]
@@ -79,5 +98,42 @@ query FilterProducts(
     reviews
     discount
     oldPrice
+  }
+}
+
+mutation InsertUserProductsOne($object: user_products_insert_input!) {
+  insert_user_products_one(
+    object: $object
+    on_conflict: {
+      constraint: user_products_pid_uid_key
+      update_columns: [pid, type]
+    }
+  ) {
+    createdAt
+    id
+    pid
+    type
+    uid
+    updatedAt
+  }
+}
+
+query GetUserProducts($uid: String!) {
+  user_products(where: { uid: { _eq: $uid } }) {
+    createdAt
+    id
+    pid
+    type
+    uid
+    updatedAt
+    product {
+      name
+      price
+      outOfStock
+      category
+      subCategory
+      rating
+      reviews
+    }
   }
 }

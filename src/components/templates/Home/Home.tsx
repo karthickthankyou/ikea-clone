@@ -389,6 +389,7 @@ const Home: NextPage = () => {
           </Heading>
           <div className='grid grid-cols-2 gap-responsive'>
             <ProductCard01
+              id={1}
               tag='IKEA family price'
               title='BOKKREMLA'
               className='mb-6'
@@ -397,6 +398,7 @@ const Home: NextPage = () => {
               price={2.29}
             />
             <ProductCard01
+              id={2}
               tag='IKEA family price'
               title='BOKKREMLA'
               description='Lunch bag'
@@ -407,6 +409,7 @@ const Home: NextPage = () => {
               reviews={12}
             />
             <ProductCard01
+              id={3}
               tag='IKEA family price'
               title='EKTORP'
               description='Arm chair'
@@ -414,6 +417,7 @@ const Home: NextPage = () => {
               price={2.29}
             />
             <ProductCard01
+              id={4}
               tag='IKEA family price'
               title='BOKKREMLA'
               description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'

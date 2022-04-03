@@ -42,7 +42,6 @@ export const useDispatchHomeFilter = ({
         distinctUntilChanged(
           (prev, curr) => JSON.stringify(prev) === JSON.stringify(curr)
         ),
-        tap((v) => console.log(v, 'Come on.')),
         map(({ data, dirtyData }): Partial<SearchFilterType> => {
           const keys = Object.keys(dirtyData)
           return Object.fromEntries(

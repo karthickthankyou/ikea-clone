@@ -4,10 +4,14 @@ import HtmlInput from 'src/components/atoms/HtmlInput'
 import { useForm, FormProvider } from 'react-hook-form'
 import { useAppSelector } from 'src/store'
 import ProductListingResults from 'src/components/organisms/ProductListingResults/ProductListingResults'
+import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
+import { FilterProductsQuery } from 'src/generated/graphql'
 import { filterDefaultValues } from './data'
 import { useDispatchHomeFilter } from './filterUtils'
 
-export interface IProductListingProps {}
+export interface IProductListingProps {
+  products: UseQueryState<FilterProductsQuery, object>
+}
 
 const ProductListing = () => {
   const methods = useForm({ defaultValues: filterDefaultValues })
@@ -17,8 +21,6 @@ const ProductListing = () => {
   } = methods
   const filterData = watch()
   useDispatchHomeFilter({ filterData, dirtyFields })
-
-  const products = useAppSelector((state) => state.search.products)
 
   return (
     <div>
@@ -32,7 +34,7 @@ const ProductListing = () => {
           <ProductFilter />
         </div>
       </FormProvider>
-      <ProductListingResults products={products} />
+      <ProductListingResults />
     </div>
   )
 }

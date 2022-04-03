@@ -1,7 +1,9 @@
-import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
-import Skeleton from 'src/components/molecules/Skeleton/Skeleton'
+import ProductCard01, {
+  ProductCard01Skeleton,
+} from 'src/components/molecules/ProductCard01/ProductCard01'
 import { FilterProductsQuery } from 'src/generated/graphql'
 import { useAppSelector } from 'src/store'
+import { selectProductsWithWishlist } from 'src/store/search'
 import { Children } from 'src/types'
 import { UseQueryState } from 'urql'
 
@@ -15,19 +17,15 @@ const Grid = ({ children }: { children: Children }) => (
   </div>
 )
 
-const ProductListingResults = ({ products }: IProductListingResultsProps) => {
+const ProductListingResults = () => {
   const limit = useAppSelector((state) => state.search.queryArgs.limit) || 0
+  const products = useAppSelector(selectProductsWithWishlist)
+
   if (products.fetching)
     return (
       <Grid>
         {Array.from(Array(limit).keys()).map((item) => (
-          <div key={item}>
-            <Skeleton className='w-full aspect-square' />
-            <Skeleton className='w-3/4 h-8 mt-3' />
-            <Skeleton className='w-full h-8 mt-1' />
-            <Skeleton className='w-1/2 h-6 mt-1' />
-            <Skeleton className='w-3/4 h-6 mt-1' />
-          </div>
+          <ProductCard01Skeleton key={item} />
         ))}
       </Grid>
     )
@@ -46,10 +44,12 @@ const ProductListingResults = ({ products }: IProductListingResultsProps) => {
         Oops. No results found.
       </div>
     )
+
   return (
     <Grid>
       {productList.map((item) => (
         <ProductCard01
+          id={item.id}
           key={item.id}
           title={item.name}
           description={`${item.category} | ${item.subCategory}`}
@@ -58,6 +58,9 @@ const ProductListingResults = ({ products }: IProductListingResultsProps) => {
           price={item.price}
           oldPrice={item.oldPrice}
           reviews={item.reviews}
+          // Todo: Fix this problem. We made wishlist available in the item.
+          // @ts-ignore
+          wishlisted={item.wishlisted}
         />
       ))}
     </Grid>

@@ -3,6 +3,6 @@ import ProductPageTemplate from './ProductPageTemplate'
 
 describe('ProductPageTemplate Component', () => {
   it('ProductPageTemplate renders', () => {
-    mount(<ProductPageTemplate />)
+    mount(<ProductPageTemplate product={{ fetching: false, stale: false }} />)
   })
 })

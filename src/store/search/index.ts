@@ -1,14 +1,17 @@
 /* eslint-disable camelcase */
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { castDraft } from 'immer'
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import produce, { castDraft } from 'immer'
 import { SearchFilterType } from 'src/components/templates/ProductListing/data'
 import {
   FilterProductsQuery,
   Query_RootProductsArgs,
   Search_Products_Args,
+  User_Products_Type_Enum,
 } from 'src/generated/graphql'
 import { UseQueryResponse } from 'urql'
+import { RootState } from '..'
+import { selectUserProducts } from '../userProducts/userProductsSlice'
 
 export type SearchSlice = {
   productsFilter: Partial<SearchFilterType>
@@ -76,5 +79,47 @@ export const {
   setProductsOffset,
   setProductsLimit,
 } = search.actions
+
+export const selectSearchProducts = (state: RootState) => state.search.products
+
+type ProductsWithWishlist = NonNullable<
+  SearchSlice['products']['data']
+>['products'][number] & {
+  wishlisted?: User_Products_Type_Enum
+}
+
+export type ProductsWishlisted = SearchSlice['products'] & {
+  data?:
+    | (Omit<SearchSlice['products']['data'], 'products'> & {
+        products: Array<ProductsWithWishlist>
+      })
+    | undefined
+}
+
+export const selectProductsWithWishlist = createSelector(
+  [selectSearchProducts, selectUserProducts],
+  (products, userProducts): ProductsWishlisted => {
+    const wishlistedProducts = userProducts.data?.user_products || []
+
+    const productsUpdated = products.data?.products.map((product) => {
+      const isWishlisted = wishlistedProducts.find(
+        (wishlistedProduct) => wishlistedProduct.pid === product.id
+      )
+
+      if (!isWishlisted) return product
+
+      return {
+        ...product,
+        wishlisted: isWishlisted.type,
+      }
+    })
+
+    return produce(products, (productDraft) => {
+      if (productDraft?.data?.products) {
+        productDraft.data.products = productsUpdated!
+      }
+    })
+  }
+)
 
 export default search.reducer

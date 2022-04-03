@@ -43,8 +43,5 @@ export const getToken = async () => {
   // const t0 = performance.now()
   const token = await auth.currentUser?.getIdToken(false)
 
-  // const t1 = performance.now()
-  // console.log(`Call to doSomething took ${t1 - t0} milliseconds.`)
-
   return token
 }

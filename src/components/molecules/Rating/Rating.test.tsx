@@ -4,6 +4,6 @@ import Rating from './Rating'
 
 describe('Rating Component', () => {
   it('Rating renders', () => {
-    mount(<Rating value={3} />)
+    mount(<Rating rating={3} />)
   })
 })

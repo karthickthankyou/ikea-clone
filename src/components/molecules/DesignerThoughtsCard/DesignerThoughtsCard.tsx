@@ -30,12 +30,12 @@ const DesignerThoughtsCard = ({
         </div>
       </div>
       <div className='font-serif italic'>
-        <p className='max-w-lg font-light leading-relaxed '>
+        <div className='max-w-lg font-light leading-relaxed '>
           <span className='absolute z-10 text-9xl text-primary/30'>
             &ldquo;
           </span>
           <span className='mt-12 text-lg text-gray-600 '>{thoughts}</span>
-        </p>
+        </div>
       </div>
     </div>
   </div>

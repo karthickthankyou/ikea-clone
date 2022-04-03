@@ -11,10 +11,12 @@ import Notifications from 'src/components/molecules/Notification/Notification'
 import { useDebouncedDispatch } from 'src/hooks'
 import { useUserListener } from 'src/store/user'
 import Layout from 'src/components/templates/Layout/Layout'
+import { useGetWishlisted } from 'src/store/userProducts/userProductsHook'
 
 export const AppLevelHooks = () => {
   useDebouncedDispatch()
   useUserListener()
+  useGetWishlisted()
 
   return null
 }

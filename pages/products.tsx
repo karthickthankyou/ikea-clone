@@ -2,6 +2,7 @@
 
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
+import dynamic from 'next/dynamic'
 import { FormProvider, useForm } from 'react-hook-form'
 import Container from 'src/components/atoms/Container/Container'
 
@@ -10,15 +11,18 @@ import { filterDefaultValues } from 'src/components/templates/ProductListing/dat
 import { useDispatchHomeFilter } from 'src/components/templates/ProductListing/filterUtils'
 import { useWhenFilterChangesFetchProducts } from 'src/hooks'
 import { useAppDispatch, useAppSelector } from 'src/store'
-import { setProductsLimit, setProductsOffset } from 'src/store/search'
-
-import dynamic from 'next/dynamic'
+import {
+  selectProductsWithWishlist,
+  setProductsLimit,
+  setProductsOffset,
+} from 'src/store/search'
 
 const Pagination = dynamic(
-  () => import('src/components/molecules/Pagination/Pagination')
+  () => import('../src/components/molecules/Pagination/Pagination'),
+  { ssr: false }
 )
 
-const LoginPage: NextPage = () => {
+const SearchProductsPage: NextPage = () => {
   const methods = useForm({ defaultValues: filterDefaultValues })
   const {
     watch,
@@ -35,11 +39,15 @@ const LoginPage: NextPage = () => {
   useDispatchHomeFilter({ filterData, dirtyFields })
   useWhenFilterChangesFetchProducts()
 
+  const products = useAppSelector((state) => state.search.products)
+  const searchProducts = useAppSelector(selectProductsWithWishlist)
+
+  const productsLength = products.data?.products.length
   return (
     <Container>
       <FormProvider {...methods}>
         <NextSeo
-          title='Search page - Ikea clone | Karthick Ragavendran'
+          title={`${productsLength} Search page - Ikea clone | Karthick Ragavendran`}
           description='Search products and actually buy.'
         />
         <ProductListing />
@@ -51,7 +59,6 @@ const LoginPage: NextPage = () => {
           rowsPerPageOptions={[12, 24, 36, 48]}
           onPageChange={(v, c) => dispatch(setProductsOffset(c * limit))}
           onRowsPerPageChange={(v) => {
-            console.log('V ', v)
             dispatch(setProductsLimit(+v.target.value))
           }}
         />
@@ -60,4 +67,4 @@ const LoginPage: NextPage = () => {
   )
 }
 
-export default LoginPage
+export default SearchProductsPage
