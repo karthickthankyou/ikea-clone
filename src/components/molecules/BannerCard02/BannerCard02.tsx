@@ -40,7 +40,7 @@ const BannerCard02 = ({
             className='mt-3'
             onClick={() => router.push(href)}
           >
-            <ArrowRightIcon className='w-4 h-4' />
+            <ArrowRightIcon className={`w-4 h-4 ${colorClasses[textColor]}`} />
           </button>
         </div>
       </OverlapSpace.Child>

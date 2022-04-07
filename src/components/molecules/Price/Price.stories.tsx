@@ -19,3 +19,8 @@ export const OnlyPrice = Template.bind({})
 OnlyPrice.args = {
   price: 2.29,
 }
+export const WithTaxMessage = Template.bind({})
+WithTaxMessage.args = {
+  price: 2.29,
+  showTaxComment: true,
+}

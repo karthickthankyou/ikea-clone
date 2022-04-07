@@ -26,7 +26,7 @@ const InfoCard = ({
       {description}
     </div>
     <Link
-      className='mt-auto mb-2 text-xs underline transition-all group-hover:text-sm group-hover:text-primary group-hover:underline-offset-4 underline-offset-2 group-hover:-translate-y-1'
+      className='mt-auto mb-4 text-xs underline transition-all group-hover:text-sm group-hover:text-primary group-hover:underline-offset-4 underline-offset-2 group-hover:-translate-y-1'
       href={href}
     >
       {buttonText}

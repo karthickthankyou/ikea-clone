@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import ColorCard from './ColorCard'
 
 export default {
-  title: 'src/components/molecules/ColorCard',
+  title: 'molecules/ColorCard',
   component: ColorCard,
 } as ComponentMeta<typeof ColorCard>
 

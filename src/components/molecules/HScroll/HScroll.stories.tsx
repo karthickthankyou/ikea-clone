@@ -40,10 +40,10 @@ const buttons = [
 
 const TemplatePictures: ComponentStory<typeof HScroll> = () => (
   <div className='p-12'>
-    <HScroll className='flex gap-6'>
-      <HScroll.Body className='gap-1'>
+    <HScroll className='flex gap-6 '>
+      <HScroll.Body className='gap-1 '>
         {data.map((item) => (
-          <HScroll.Child className='relative w-72 h-96' key={item}>
+          <HScroll.Child className='relative mb-6 w-72 h-96' key={item}>
             <Image
               src={item}
               alt=''
@@ -87,7 +87,7 @@ const TemplatePicturesArrowTop: ComponentStory<typeof HScroll> = () => (
       </div>
       <HScroll.Body className='gap-1 mt-2'>
         {data.map((item) => (
-          <HScroll.Child className='relative h-96 w-72 ' key={item}>
+          <HScroll.Child className='relative mb-6 h-96 w-72' key={item}>
             <Image
               src={item}
               alt=''
@@ -106,7 +106,7 @@ const TemplateText: ComponentStory<typeof HScroll> = () => (
   <HScroll className='flex'>
     <HScroll.Body className='gap-2 no-scrollbar'>
       {buttons.map((buttonText) => (
-        <HScroll.Child key={buttonText} className='py-2'>
+        <HScroll.Child key={buttonText} className='py-2 mb-2'>
           <Button className='shadow' color='white'>
             {buttonText}
           </Button>

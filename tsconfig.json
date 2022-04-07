@@ -18,5 +18,5 @@
     "types": ["cypress", "@testing-library/cypress"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/_document.jsx"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "instrumented"]
 }

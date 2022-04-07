@@ -10,8 +10,7 @@ export default {
 
 const Template: ComponentStory<typeof Masonry> = (args) => <Masonry {...args} />
 
-export const Primary = Template.bind({})
-Primary.args = {
+export const Deprecated = Template.bind({})
+Deprecated.args = {
   items: sampleImagesForMasonry,
 }
-Primary.parameters = {}

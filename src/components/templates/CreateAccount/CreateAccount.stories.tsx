@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import CreateAccount from './CreateAccount'
 
 export default {
-  title: 'src/components/templates/CreateAccount',
+  title: 'templates/CreateAccount',
   component: CreateAccount,
 } as ComponentMeta<typeof CreateAccount>
 

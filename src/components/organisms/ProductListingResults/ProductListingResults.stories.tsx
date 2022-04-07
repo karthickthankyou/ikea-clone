@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import ProductListingResults from './ProductListingResults'
 
 export default {
-  title: 'src/components/organisms/ProductListingResults',
+  title: 'organisms/ProductListingResults',
   component: ProductListingResults,
 } as ComponentMeta<typeof ProductListingResults>
 

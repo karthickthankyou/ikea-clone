@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Masonry2 from './Masonry2'
 
 export default {
-  title: 'src/components/templates/Masonry2',
+  title: 'templates/Masonry2',
   component: Masonry2,
 } as ComponentMeta<typeof Masonry2>
 

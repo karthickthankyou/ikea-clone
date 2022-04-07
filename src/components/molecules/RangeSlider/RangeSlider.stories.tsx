@@ -59,6 +59,7 @@ const LabelFormatTemplate: ComponentStory<typeof RangeSlider> = ({
             onChange={onChange}
             value={value}
             initialData={initialData}
+            labelFormat={(sliderValue) => `Rs.${sliderValue.toLocaleString()}`}
           />
         )}
       />
@@ -76,9 +77,4 @@ export const LabelFormat = LabelFormatTemplate.bind({})
 LabelFormat.args = {
   initialData: [0, 10_000_000],
   step: 10_000,
-}
-LabelFormat.parameters = {
-  notes: {
-    Introduction: 'We can use the labelFormat prop to modify the text format.',
-  },
 }

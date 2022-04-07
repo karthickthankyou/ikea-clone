@@ -1,5 +1,6 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import Badge from '../../atoms/Badge'
 import PriceMarker from './PriceMarker'
 
 export default {
@@ -17,4 +18,16 @@ Primary.args = {
   category: 'Office chair',
   price: 14990,
 }
-Primary.parameters = {}
+
+export const WithBadge = Template.bind({})
+WithBadge.args = {
+  displayName: 'Markus',
+  category: 'Office chair',
+  price: 14990,
+  className: 'items-start',
+  badge: (
+    <Badge size='sm' variant='primary'>
+      Top seller
+    </Badge>
+  ),
+}

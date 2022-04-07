@@ -31,6 +31,25 @@ const store = createStore(combineReducers({ utils: utilsReducer }), {
     ],
   },
 })
+const InfoStore = createStore(combineReducers({ utils: utilsReducer }), {
+  utils: {
+    notifications: [
+      {
+        id: 'string',
+        type: 'info',
+        message: (
+          <div className='max-w-md'>
+            <h2 className='text-lg font-semibold'>Notification</h2>
+            <p className='mt-2'>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+              illum hic placeat?
+            </p>
+          </div>
+        ),
+      },
+    ],
+  },
+})
 const storeTwoMessages = createStore(combineReducers({ utils: utilsReducer }), {
   utils: {
     notifications: [
@@ -60,6 +79,7 @@ const storeTwoMessages = createStore(combineReducers({ utils: utilsReducer }), {
       },
       {
         id: '03',
+        type: 'success',
         message: (
           <div className='max-w-md'>
             <h2 className='text-lg font-semibold'>Meh. Who cares.</h2>
@@ -78,6 +98,9 @@ export const Primary = Template.bind({})
 Primary.args = {}
 Primary.parameters = {}
 Primary.decorators = [(story) => <Provider store={store}>{story()}</Provider>]
+
+export const Info = Template.bind({})
+Info.decorators = [(story) => <Provider store={InfoStore}>{story()}</Provider>]
 
 export const MultipleMessages = Template.bind({})
 MultipleMessages.args = {}
