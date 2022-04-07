@@ -1,6 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import FormError from './FormError'
+import HtmlLabel from '../HtmlLabel/HtmlLabel'
 
 export default {
   title: 'atoms/FormError',
@@ -12,5 +13,9 @@ const Template: ComponentStory<typeof FormError> = (args) => (
 )
 
 export const Primary = Template.bind({})
-Primary.args = {}
-Primary.parameters = {}
+Primary.args = {
+  error: {
+    type: 'Custom',
+    message: 'Sample form error. It makes sense along with an input element.',
+  },
+}

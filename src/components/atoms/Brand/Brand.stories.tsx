@@ -7,10 +7,10 @@ export default {
   component: Brand,
 } as ComponentMeta<typeof Brand>
 
-const Template: ComponentStory<typeof Brand> = (args) => <Brand {...args} />
+const Template: ComponentStory<typeof Brand> = () => (
+  <div className='relative h-12 w-36'>
+    <Brand />
+  </div>
+)
 
 export const Primary = Template.bind({})
-export const Red = Template.bind({})
-Red.args = {
-  className: 'fill-red-600',
-}

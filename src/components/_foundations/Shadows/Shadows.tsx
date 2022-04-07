@@ -1,7 +1,7 @@
 export interface IShadowsProps {}
 
 const Shadows = () => (
-  <div className='bg-gray-100 '>
+  <div>
     <div className='container p-6 mx-auto space-y-10'>
       <div className='max-w-lg p-6 mx-auto'>
         <h1 className='text-3xl font-thin'>Shadows</h1>

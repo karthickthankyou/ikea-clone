@@ -1,27 +1,58 @@
 /* eslint-disable camelcase */
-import produce from 'immer'
+import axios from 'axios'
+
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 import Container from 'src/components/atoms/Container'
 import Link from 'src/components/atoms/Link'
-import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
 import CartCard from 'src/components/organisms/CartCard/CartCard'
-import Login from 'src/components/templates/Login'
 import { User_Products_Type_Enum } from 'src/generated/graphql'
+import { loadStripe } from '@stripe/stripe-js'
 
-import { useRedirectLoggedInUsers } from 'src/hooks'
 import { useAppSelector } from 'src/store'
-import { selectProductsWithWishlist } from 'src/store/search'
 import { selectUserProducts } from 'src/store/userProducts/userProductsSlice'
+import Button from 'src/components/atoms/Button/Button'
 
-const WishlistPage: NextPage = () => {
+const CartPage: NextPage = () => {
   const products = useAppSelector(selectUserProducts)
+  const router = useRouter()
+  const { status } = router.query
+
+  const [loading, setLoading] = useState(false)
   const cartProducts = products.data?.user_products.filter(
     (item) => item.type === User_Products_Type_Enum.InCart
   )
   const savedForLater = products.data?.user_products.filter(
     (item) => item.type === User_Products_Type_Enum.SavedForLater
   )
+
+  const transformedCart = cartProducts?.map((item) => ({
+    name: item.product.name,
+    description: item.product.category + item.product.subCategory,
+    image:
+      'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80',
+    price: Math.round(item.product.price * 100),
+  }))
+
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+
+  const stripePromise = loadStripe(publishableKey || '')
+  const createCheckOutSession = async () => {
+    setLoading(true)
+    const stripe = await stripePromise
+    const checkoutSession = await axios.post('/api/create-stripe-session', {
+      items: transformedCart,
+    })
+    const result = await stripe?.redirectToCheckout({
+      sessionId: checkoutSession.data.id,
+    })
+    if (result?.error) {
+      alert(result.error.message)
+    }
+    setLoading(false)
+  }
 
   return (
     <Container>
@@ -43,6 +74,9 @@ const WishlistPage: NextPage = () => {
           />
         ))}
       </div>
+
+      <Button onClick={createCheckOutSession}>Checkout</Button>
+
       <Link href='/products' className='inline-block mt-4'>
         Shop more
       </Link>
@@ -64,4 +98,4 @@ const WishlistPage: NextPage = () => {
   )
 }
 
-export default WishlistPage
+export default CartPage

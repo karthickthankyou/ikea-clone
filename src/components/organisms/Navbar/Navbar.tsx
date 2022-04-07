@@ -90,7 +90,7 @@ const NavSidebarUser = ({
             { name: 'Track & manage my order', href: '/' },
             { name: 'Wish list', href: '/wishlist' },
             { name: 'Cart', href: '/cart' },
-            { name: 'Shopping list', href: '/' },
+            { name: 'Shopping list', href: '/purchased' },
             { name: 'Planners', href: '/' },
             { name: 'Manage account', href: '/' },
           ].map((item) => (

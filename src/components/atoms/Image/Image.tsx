@@ -11,8 +11,9 @@ const Image = ({
   quality = 75,
   ...props
 }: ImageProps) => {
-  const imgWidth = layout === 'responsive' ? width : undefined
-  const imgHeight = layout === 'responsive' ? height : undefined
+  const imgWidth = layout === 'fill' ? undefined : width
+  const imgHeight = layout === 'fill' ? undefined : height
+
   return (
     <NextImage
       className={`object-cover ${className}`}

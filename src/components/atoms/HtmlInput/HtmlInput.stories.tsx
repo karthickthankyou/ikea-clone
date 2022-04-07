@@ -16,11 +16,14 @@ const Template: ComponentStory<typeof HtmlInput> = (args) => (
 )
 
 export const Primary = Template.bind({})
-Primary.args = {}
+Primary.args = {
+  placeholder: 'Type something...',
+}
 
 export const Password = Template.bind({})
 Password.args = {
   type: 'password',
+  placeholder: '********',
 }
 export const DateTime = Template.bind({})
 DateTime.args = {
