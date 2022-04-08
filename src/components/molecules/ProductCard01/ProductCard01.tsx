@@ -5,7 +5,6 @@ import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import HeartIconSolid from '@heroicons/react/solid/HeartIcon'
 import RefreshIcon from '@heroicons/react/outline/RefreshIcon'
 import {
-  useGetUserProductsQuery,
   useInsertUserProductsOneMutation,
   User_Products_Type_Enum,
 } from 'src/generated/graphql'

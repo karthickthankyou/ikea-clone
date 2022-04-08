@@ -48,7 +48,7 @@ const PriceCard = ({
     <div className='max-w-lg'>
       <div>
         <div className='text-3xl font-bold'>{title}</div>
-        <div className='text-lg font-light '>{category}</div>
+        <div className='text-lg font-light'>{category}</div>
       </div>
       <Price
         showTaxComment

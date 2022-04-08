@@ -1,10 +1,28 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import userReducer, {
+  initialState as userInitialState,
+} from 'src/store/user/userSlice'
+import { combineReducers, createStore } from '@reduxjs/toolkit'
+import { Provider } from 'react-redux'
 import ProductCard01 from './ProductCard01'
+
+const reducers = { user: userReducer }
+
+const store = createStore(combineReducers(reducers), {
+  user: userInitialState,
+})
 
 export default {
   title: 'molecules/ProductCard01',
   component: ProductCard01,
+  decorators: [
+    (story) => (
+      <div className='max-w-xs'>
+        <Provider store={store}>{story()}</Provider>
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof ProductCard01>
 
 const Template: ComponentStory<typeof ProductCard01> = (args) => (
@@ -22,7 +40,6 @@ Primary.args = {
   price: 2.29,
   oldPrice: 2.99,
 }
-Primary.parameters = {}
 
 export const HugePrice = Template.bind({})
 HugePrice.args = {
