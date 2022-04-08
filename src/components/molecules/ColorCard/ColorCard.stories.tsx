@@ -8,7 +8,9 @@ export default {
 } as ComponentMeta<typeof ColorCard>
 
 const Template: ComponentStory<typeof ColorCard> = (args) => (
-  <ColorCard {...args} />
+  <div className='max-w-sm'>
+    <ColorCard {...args} />
+  </div>
 )
 
 export const Primary = Template.bind({})

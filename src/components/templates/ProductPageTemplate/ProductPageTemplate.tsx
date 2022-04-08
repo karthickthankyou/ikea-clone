@@ -1,6 +1,6 @@
 import Container from 'src/components/atoms/Container'
-import { sampleImagesForMasonry } from 'src/components/molecules/Masonry/data'
-import Masonry from 'src/components/molecules/Masonry/Masonry'
+import { sampleImagesForMasonry } from 'src/components/templates/Masonry2/data'
+
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 import PriceCard from 'src/components/molecules/PriceCard/PriceCard'
 
@@ -9,7 +9,7 @@ import Image from 'src/components/atoms/Image/Image'
 import HScroll from 'src/components/molecules/HScroll/HScroll'
 import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
 import DesignerThoughtsCard from 'src/components/molecules/DesignerThoughtsCard'
-import Footer from 'src/components/organisms/Footer/Footer'
+
 import { Dispatch, SetStateAction, useState } from 'react'
 
 import Sidebar from 'src/components/molecules/Sidebar'

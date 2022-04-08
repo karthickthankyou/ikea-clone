@@ -130,8 +130,8 @@ Primary.args = {
   gap: 8,
   children: Textchildren,
 }
-export const ParagraphWithBg = Template.bind({})
-ParagraphWithBg.args = {
+export const ParagraphWithBgToExposeEvenGap = Template.bind({})
+ParagraphWithBgToExposeEvenGap.args = {
   gap: 6,
   children: TextchildrenWithBg,
 }

@@ -24,7 +24,7 @@ const ImageTemplate: ComponentStory<typeof OverlapSpace> = (args) => (
       />
     </OverlapSpace.Child>
     <OverlapSpace.Child className='z-10'>
-      Wow. I can read now.
+      Wow. I can read now. (Text over image. )
     </OverlapSpace.Child>
   </OverlapSpace>
 )
