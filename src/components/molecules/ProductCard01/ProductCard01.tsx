@@ -3,12 +3,12 @@ import Image from 'src/components/atoms/Image'
 import Link from 'src/components/atoms/Link/Link'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import HeartIconSolid from '@heroicons/react/solid/HeartIcon'
-import RefreshIcon from '@heroicons/react/outline/RefreshIcon'
 import {
   useInsertUserProductsOneMutation,
   User_Products_Type_Enum,
 } from 'src/generated/graphql'
 import { useAppSelector } from 'src/store'
+import { SimpleUserProducts } from 'src/store/search'
 import { useRouter } from 'next/router'
 import OverlapSpace from '../OverlapSpace'
 import Rating from '../Rating/Rating'
@@ -26,27 +26,28 @@ export interface IProductCard01Props {
   price: number
   oldPrice?: number
   className?: string
-  wishlisted?: User_Products_Type_Enum
+  userProducts?: SimpleUserProducts
 }
 
 const HeartIconComponent = ({
   fetching,
-  type,
-  wishlisted,
+  mutationStatus,
+  status,
 }: {
   fetching: boolean
-  type: User_Products_Type_Enum | undefined
-  wishlisted: User_Products_Type_Enum | undefined
+  mutationStatus: User_Products_Type_Enum | undefined
+  status: User_Products_Type_Enum | undefined
 }) => {
-  if (fetching) return <RefreshIcon className='w-6 h-6 animate-spin-reverse' />
+  if (fetching)
+    return <HeartIconSolid className='w-6 h-6 fill-gray-200 animate-pulse' />
 
   if (
-    wishlisted === User_Products_Type_Enum.Wishlisted ||
-    type === User_Products_Type_Enum.Wishlisted
+    status === User_Products_Type_Enum.Wishlisted ||
+    mutationStatus === User_Products_Type_Enum.Wishlisted
   )
     return <HeartIconSolid className='w-6 h-6 fill-red' />
 
-  return <HeartIcon className='w-6 h-6' />
+  return <HeartIcon className='w-6 h-6 text-red' />
 }
 
 const ProductCard01 = ({
@@ -60,11 +61,11 @@ const ProductCard01 = ({
   price,
   oldPrice,
   className,
-  wishlisted,
+  userProducts,
 }: IProductCard01Props) => {
   const [{ fetching, data, error }, wishlistProduct] =
     useInsertUserProductsOneMutation()
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const uid = useAppSelector((state) => state.user?.data.user?.uid)
 
   const router = useRouter()
 
@@ -77,7 +78,7 @@ const ProductCard01 = ({
             onClick={() => {
               if (!uid) router.push('/login')
               const targetState =
-                wishlisted === User_Products_Type_Enum.Wishlisted
+                userProducts?.status === User_Products_Type_Enum.Wishlisted
                   ? User_Products_Type_Enum.RemovedFromWishlist
                   : User_Products_Type_Enum.Wishlisted
               wishlistProduct({
@@ -87,9 +88,9 @@ const ProductCard01 = ({
             className='z-10 p-2 transition-all rounded-full group-hover:bg-white hover:shadow-lg hover:bg-white bg-white/50 shadow-black/20'
           >
             <HeartIconComponent
-              fetching={fetching}
-              type={data?.insert_user_products_one?.type}
-              wishlisted={wishlisted}
+              fetching={userProducts?.fetching || fetching}
+              mutationStatus={data?.insert_user_products_one?.type}
+              status={userProducts?.status}
             />
           </button>
         </OverlapSpace.Child>

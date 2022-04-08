@@ -19,7 +19,7 @@ export type SearchSlice = {
   products: UseQueryResponse<FilterProductsQuery, object>[0]
 }
 
-const initialState: SearchSlice = {
+export const initialState: SearchSlice = {
   productsFilter: {},
   queryArgs: {
     args: {
@@ -82,10 +82,16 @@ export const {
 
 export const selectSearchProducts = (state: RootState) => state.search.products
 
+export type SimpleUserProducts = {
+  status?: User_Products_Type_Enum
+  fetching?: boolean
+  error?: boolean
+}
+
 type ProductsWithWishlist = NonNullable<
   SearchSlice['products']['data']
 >['products'][number] & {
-  wishlisted?: User_Products_Type_Enum
+  userProducts?: SimpleUserProducts
 }
 
 export type ProductsWishlisted = SearchSlice['products'] & {
@@ -101,16 +107,26 @@ export const selectProductsWithWishlist = createSelector(
   (products, userProducts): ProductsWishlisted => {
     const wishlistedProducts = userProducts.data?.user_products || []
 
+    console.log('userProducts ', userProducts)
     const productsUpdated = products.data?.products.map((product) => {
+      if (userProducts.fetching)
+        return {
+          ...product,
+          userProducts: {
+            fetching: true,
+          },
+        }
+
       const isWishlisted = wishlistedProducts.find(
         (wishlistedProduct) => wishlistedProduct.pid === product.id
       )
-
       if (!isWishlisted) return product
 
       return {
         ...product,
-        wishlisted: isWishlisted.type,
+        userProducts: {
+          status: isWishlisted.type,
+        },
       }
     })
 

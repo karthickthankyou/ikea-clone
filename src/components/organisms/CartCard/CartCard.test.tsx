@@ -11,7 +11,7 @@ describe('CartCard Component', () => {
         src='sdf'
         title='sdf'
         description='sdf'
-        price='sdf'
+        price={2.99}
         buttonType={User_Products_Type_Enum.InCart}
       />
     )

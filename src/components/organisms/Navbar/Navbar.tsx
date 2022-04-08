@@ -207,9 +207,9 @@ const Navbar = () => {
   const [openUser, setOpenUser] = useState(false)
 
   return (
-    <nav className='z-50 bg-white/20 backdrop-blur backdrop-filter'>
+    <nav className='z-50 h-16 bg-white/20 backdrop-blur backdrop-filter'>
       <Container>
-        <div className='flex items-baseline justify-between py-2 '>
+        <div className='flex items-center justify-between py-2 '>
           <NavSidebar open={open} setOpen={setOpen} />
           <NavSidebarUser open={openUser} setOpen={setOpenUser} />
           <Logo />

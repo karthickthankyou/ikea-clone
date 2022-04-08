@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import Button from 'src/components/atoms/Button/Button'
 import Image from 'src/components/atoms/Image'
+import Price from 'src/components/molecules/Price/Price'
 import {
   useInsertUserProductsOneMutation,
   User_Products_Type_Enum,
@@ -12,7 +13,7 @@ export interface ICartCardProps {
   src: string
   title: string
   description: string
-  price: string
+  price: number
   buttonType: User_Products_Type_Enum
 }
 
@@ -29,7 +30,7 @@ const CartCard = ({
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   return (
     <div className='md:flex group'>
-      <div className='w-24 h-24 mr-2'>
+      <div className='flex-shrink-0 w-24 h-24 mr-2'>
         <Image src={src} alt='' className='rounded-lg ' />
       </div>
       <div className='flex-grow'>
@@ -37,7 +38,8 @@ const CartCard = ({
         <div className='text-gray-600'>{description}</div>
       </div>
       <div className='flex flex-col items-end justify-between '>
-        <div className='font-medium'>{price}</div>
+        <Price price={price} />
+
         {fetching && <div>Loading...</div>}
         <Button
           variant='text'

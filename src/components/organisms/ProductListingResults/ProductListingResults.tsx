@@ -12,7 +12,7 @@ export interface IProductListingResultsProps {
 }
 
 const Grid = ({ children }: { children: Children }) => (
-  <div className='grid grid-cols-3 mt-responsive gap-responsive'>
+  <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-responsive gap-responsive'>
     {children}
   </div>
 )
@@ -20,6 +20,8 @@ const Grid = ({ children }: { children: Children }) => (
 const ProductListingResults = () => {
   const limit = useAppSelector((state) => state.search.queryArgs.limit) || 0
   const products = useAppSelector(selectProductsWithWishlist)
+
+  console.log('products ', products)
 
   if (products.fetching)
     return (
@@ -60,7 +62,7 @@ const ProductListingResults = () => {
           reviews={item.reviews}
           // Todo: Fix this problem. We made wishlist available in the item.
           // @ts-ignore
-          wishlisted={item.wishlisted}
+          userProducts={item.userProducts}
         />
       ))}
     </Grid>

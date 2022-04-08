@@ -40,13 +40,10 @@ const SidebarFilter = ({
   setOpen: Dispatch<SetStateAction<boolean>>
 }) => {
   const {
-    watch,
     control,
-    formState: { dirtyFields, isDirty },
+    formState: { dirtyFields },
     reset,
   } = useFormContext()
-
-  const formData = watch()
 
   return (
     <Sidebar overlayBlur={false} open={open} setOpen={setOpen}>

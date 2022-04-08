@@ -35,7 +35,7 @@ const WishlistPage: NextPage = () => {
               src='https://res.cloudinary.com/thankyou/image/upload/v1648670456/IKEA/katrin-hauf-gdUxNykbuZc-unsplash_da0eol.jpg'
               rating={item.product.rating}
               reviews={item.product.reviews}
-              wishlisted={item.type}
+              userProducts={{ status: item.type }}
             />
           </div>
         ))}
