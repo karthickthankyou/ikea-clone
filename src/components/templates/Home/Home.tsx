@@ -389,40 +389,52 @@ const Home: NextPage = () => {
           </Heading>
           <div className='grid grid-cols-2 gap-responsive'>
             <ProductCard01
-              id={1}
-              tag='IKEA family price'
-              title='BOKKREMLA'
-              className='mb-6'
-              description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-              price={2.29}
+              product={{
+                id: 1,
+                name: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!!',
+                images: [
+                  'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+                ],
+                category: 'Office',
+                subCategory: 'Desk',
+                price: 2.29,
+              }}
             />
             <ProductCard01
-              id={2}
-              tag='IKEA family price'
-              title='BOKKREMLA'
-              description='Lunch bag'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-              price={2.29}
-              oldPrice={2.99}
-              rating={4.2}
-              reviews={12}
+              product={{
+                id: 2,
+                name: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!!',
+                images: [
+                  'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+                ],
+                category: 'Office',
+                subCategory: 'Desk',
+                price: 2.29,
+              }}
             />
             <ProductCard01
-              id={3}
-              tag='IKEA family price'
-              title='EKTORP'
-              description='Arm chair'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648662487/IKEA/andrea-davis-duXRC8vT5wQ-unsplash_uugrpn.jpg'
-              price={2.29}
+              product={{
+                id: 3,
+                name: 'EKTORP',
+                images: [
+                  'https://res.cloudinary.com/thankyou/image/upload/v1648662487/IKEA/andrea-davis-duXRC8vT5wQ-unsplash_uugrpn.jpg',
+                ],
+                category: 'Office',
+                subCategory: 'Arm chair',
+                price: 2.29,
+              }}
             />
             <ProductCard01
-              id={4}
-              tag='IKEA family price'
-              title='BOKKREMLA'
-              description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-              price={2.29}
+              product={{
+                id: 3,
+                name: 'BOKKREMLA',
+                images: [
+                  'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+                ],
+                category: 'Office',
+                subCategory: 'Arm chair',
+                price: 2.29,
+              }}
             />
           </div>
         </div>

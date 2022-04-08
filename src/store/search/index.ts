@@ -88,19 +88,19 @@ export type SimpleUserProducts = {
   error?: boolean
 }
 
-type ProductsWithWishlist = NonNullable<
-  SearchSlice['products']['data']
->['products'][number] & {
+export type ProductWithWishlist = FilterProductsQuery['products'][number] & {
   userProducts?: SimpleUserProducts
 }
 
-export type ProductsWishlisted = SearchSlice['products'] & {
-  data?:
-    | (Omit<SearchSlice['products']['data'], 'products'> & {
-        products: Array<ProductsWithWishlist>
-      })
-    | undefined
+type FilterProductsWithWishlistQuery = {
+  products_aggregate: FilterProductsQuery['products_aggregate']
+  products: Array<ProductWithWishlist>
 }
+
+export type ProductsWishlisted = UseQueryResponse<
+  FilterProductsWithWishlistQuery,
+  object
+>[0]
 
 export const selectProductsWithWishlist = createSelector(
   [selectSearchProducts, selectUserProducts],

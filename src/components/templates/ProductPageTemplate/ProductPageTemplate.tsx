@@ -80,13 +80,16 @@ const RelatedProducts = ({ title }: { title: string }) => {
           {items.map((item) => (
             <HScroll.Child className='relative mb-12 w-72' key={item.src}>
               <ProductCard01
-                id={1}
-                title='BOKKREMLA'
-                description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-                src={item.src}
-                price={2.29}
-                rating={4.5}
-                reviews={12}
+                product={{
+                  id: 3,
+                  name: 'BOKKREMLA',
+                  images: [
+                    'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+                  ],
+                  category: 'Office',
+                  subCategory: 'Arm chair',
+                  price: 2.29,
+                }}
               />
             </HScroll.Child>
           ))}

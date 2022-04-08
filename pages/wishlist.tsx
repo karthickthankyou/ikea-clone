@@ -27,16 +27,7 @@ const WishlistPage: NextPage = () => {
       <div className='grid grid-cols-4 gap-4'>
         {wishlistedProducts?.map((item) => (
           <div key={item.id}>
-            <ProductCard01
-              id={item.pid}
-              title={item.product.name}
-              price={item.product.price}
-              description={item.product.category}
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648670456/IKEA/katrin-hauf-gdUxNykbuZc-unsplash_da0eol.jpg'
-              rating={item.product.rating}
-              reviews={item.product.reviews}
-              userProducts={{ status: item.type }}
-            />
+            <ProductCard01 product={{ ...item.product, id: item.id }} />
           </div>
         ))}
       </div>

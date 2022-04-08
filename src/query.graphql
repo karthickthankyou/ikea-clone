@@ -59,12 +59,14 @@ query SearchProducts(
     subCategory
     outOfStock
     price
+    images
     rating
     reviews
     discount
     oldPrice
   }
 }
+
 query FilterProducts(
   $distinct_on: [products_select_column!]
   $limit: Int
@@ -94,6 +96,7 @@ query FilterProducts(
     subCategory
     outOfStock
     price
+    images
     rating
     reviews
     discount

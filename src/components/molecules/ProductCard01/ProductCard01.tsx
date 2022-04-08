@@ -8,7 +8,7 @@ import {
   User_Products_Type_Enum,
 } from 'src/generated/graphql'
 import { useAppSelector } from 'src/store'
-import { SimpleUserProducts } from 'src/store/search'
+import { ProductWithWishlist, SimpleUserProducts } from 'src/store/search'
 import { useRouter } from 'next/router'
 import OverlapSpace from '../OverlapSpace'
 import Rating from '../Rating/Rating'
@@ -16,17 +16,8 @@ import Price from '../Price/Price'
 import Skeleton from '../Skeleton/Skeleton'
 
 export interface IProductCard01Props {
-  id: number
-  tag?: string
-  title: string
-  description?: string
-  src: string
-  rating?: number
-  reviews?: number
-  price: number
-  oldPrice?: number
+  product: ProductWithWishlist
   className?: string
-  userProducts?: SimpleUserProducts
 }
 
 const HeartIconComponent = ({
@@ -50,20 +41,23 @@ const HeartIconComponent = ({
   return <HeartIcon className='w-6 h-6 text-red' />
 }
 
-const ProductCard01 = ({
-  id,
-  tag,
-  title,
-  description,
-  src,
-  rating,
-  reviews,
-  price,
-  oldPrice,
-  className,
-  userProducts,
-}: IProductCard01Props) => {
-  const [{ fetching, data, error }, wishlistProduct] =
+const ProductCard01 = ({ product, className }: IProductCard01Props) => {
+  const {
+    userProducts,
+    id,
+    name,
+    category,
+    subCategory,
+    rating,
+    reviews,
+    price,
+    oldPrice,
+    outOfStock,
+    images,
+  } = product
+
+  const src = images && images[0]
+  const [{ fetching, data }, wishlistProduct] =
     useInsertUserProductsOneMutation()
   const uid = useAppSelector((state) => state.user?.data.user?.uid)
 
@@ -100,10 +94,10 @@ const ProductCard01 = ({
           </Link>
         </OverlapSpace.Child>
       </OverlapSpace>
-      <div className='mt-4 font-semibold text-primary'>{tag}</div>
-      <div className='mt-1 font-bold line-clamp-1'>{title}</div>
+
+      <div className='mt-4 font-bold line-clamp-1'>{name}</div>
       <div className='mt-1 text-sm text-gray-600 line-clamp-2'>
-        {description}
+        {category} {subCategory}
       </div>
       <Price price={price} oldPrice={oldPrice} className='mt-3' />
       {rating && (

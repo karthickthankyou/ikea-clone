@@ -89,5 +89,5 @@ module.exports = {
       },
     },
   ],
-  ignorePatterns: ['**/generated/*'],
+  ignorePatterns: ['**/generated/*', '**/instrumented/*'],
 }

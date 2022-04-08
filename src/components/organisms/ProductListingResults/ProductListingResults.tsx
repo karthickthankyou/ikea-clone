@@ -50,20 +50,7 @@ const ProductListingResults = () => {
   return (
     <Grid>
       {productList.map((item) => (
-        <ProductCard01
-          id={item.id}
-          key={item.id}
-          title={item.name}
-          description={`${item.category} | ${item.subCategory}`}
-          src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-          rating={item.rating}
-          price={item.price}
-          oldPrice={item.oldPrice}
-          reviews={item.reviews}
-          // Todo: Fix this problem. We made wishlist available in the item.
-          // @ts-ignore
-          userProducts={item.userProducts}
-        />
+        <ProductCard01 key={item.id} product={item} />
       ))}
     </Grid>
   )
