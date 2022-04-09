@@ -113,18 +113,21 @@ const Login = () => (
             </Link>
           </div>
         </OverlapSpace.Child>
-        <OverlapSpace.Child className='relative shadow-inner -z-10 bg-primary-25/50 '>
-          <div className='absolute translate-x-1/2 -translate-y-1/2 top-full right-1/2'>
-            <BlurredCirle className='fill-yellow/30 ' radius={600} />
+        <OverlapSpace.Child className='relative -z-10 animate-spin-30'>
+          <div className='absolute animate-move-right-48'>
+            <BlurredCirle className='fill-primary/50 ' radius={800} />
           </div>
-          <div className='absolute translate-x-1/2 right-full'>
-            <BlurredCirle className='fill-red/10 ' radius={600} />
+          <div className='absolute -translate-y-1/2 top-full animate-move-right-60'>
+            <BlurredCirle className='fill-yellow/50 ' radius={600} />
           </div>
-          <div className='absolute right-0 translate-x-1/2 -translate-y-1/2'>
-            <BlurredCirle className='fill-green/30 ' radius={600} />
+          <div className='absolute top-1/2 animate-move-right-36'>
+            <BlurredCirle className='fill-red/50 ' radius={400} />
           </div>
-          <div className='absolute left-1/2'>
-            <BlurredCirle className='fill-white/30 ' radius={100} />
+          <div className='absolute -translate-y-1/2 animate-move-right-24'>
+            <BlurredCirle className='fill-green/50 ' radius={200} />
+          </div>
+          <div className='absolute animate-move-right-12'>
+            <BlurredCirle className='fill-white/50 ' radius={100} />
           </div>
         </OverlapSpace.Child>
       </OverlapSpace>
