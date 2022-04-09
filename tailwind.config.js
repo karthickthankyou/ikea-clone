@@ -1,6 +1,7 @@
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+// #0057a3
 const primaryPallete = {
   DEFAULT: 'hsl(208, 100%, 32%)',
   25: 'hsl(208, 100%, 98%)',
@@ -99,11 +100,19 @@ module.exports = {
       animation: {
         'spin-reverse': 'reverse-spin 1s linear infinite',
         'spin-slow': 'spin 3s linear infinite',
+        'spin-12': 'spin 12s linear infinite',
+        'spin-24': 'spin 24s linear infinite',
+        'spin-30': 'spin 30s linear infinite',
         wiggle: 'wiggle 1s ease-in-out infinite',
         slide: 'slide 1s ease-in-out infinite',
         'slide-left': 'slide-left 1s ease-in-out infinite',
         'slide-right': 'slide-right 1s linear infinite',
         breathe: 'breathe 6s ease-in-out infinite',
+        'move-right-12': 'move-right 12s ease-in-out infinite',
+        'move-right-24': 'move-right 24s ease-in-out infinite',
+        'move-right-36': 'move-right 36s ease-in-out infinite',
+        'move-right-48': 'move-right 48s ease-in-out infinite',
+        'move-right-60': 'move-right 60s ease-in-out infinite',
       },
       keyframes: {
         'reverse-spin': {
@@ -118,6 +127,19 @@ module.exports = {
         slide: {
           '0%': { opacity: 1 },
           '100%': { transform: 'translateX(25%)' },
+        },
+        'move-right': {
+          '0%': {
+            left: '20%',
+            opacity: 0,
+          },
+          '10%, 90%': {
+            opacity: 1,
+          },
+          '100%': {
+            left: '80%',
+            opacity: 0,
+          },
         },
         'slide-right': {
           '40%,60%': {

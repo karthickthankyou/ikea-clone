@@ -1,6 +1,7 @@
 import UserIcon from '@heroicons/react/outline/UserIcon'
 import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon'
 import ChevronRightIcon from '@heroicons/react/outline/ChevronRightIcon'
+import SearchIcon from '@heroicons/react/outline/SearchIcon'
 import MenuIcon from '@heroicons/react/outline/MenuIcon'
 import Link from 'src/components/atoms/Link/Link'
 import Sidebar from 'src/components/molecules/Sidebar/Sidebar'
@@ -86,17 +87,19 @@ const NavSidebarUser = ({
           ))}
           <div className='py-1' />
           {[
-            'Track & manage my order',
-            'Shopping list',
-            'Planners',
-            'Manage account',
+            { name: 'Track & manage my order', href: '/' },
+            { name: 'Wish list', href: '/wishlist' },
+            { name: 'Cart', href: '/cart' },
+            { name: 'Shopping list', href: '/purchased' },
+            { name: 'Planners', href: '/' },
+            { name: 'Manage account', href: '/' },
           ].map((item) => (
             <Link
-              key={item}
-              href='/'
+              key={item.name}
+              href={item.href}
               className='py-1.5 font-medium hover:underline text-gray-600 capitalize'
             >
-              {item}
+              {item.name}
             </Link>
           ))}
         </div>
@@ -204,13 +207,20 @@ const Navbar = () => {
   const [openUser, setOpenUser] = useState(false)
 
   return (
-    <nav className='z-50 bg-white/20 backdrop-blur backdrop-filter'>
+    <nav className='z-50 h-16 bg-white/20 backdrop-blur backdrop-filter'>
       <Container>
-        <div className='flex items-baseline justify-between py-2 '>
+        <div className='flex items-center justify-between py-2 '>
           <NavSidebar open={open} setOpen={setOpen} />
           <NavSidebarUser open={openUser} setOpen={setOpenUser} />
           <Logo />
           <div className='flex gap-3'>
+            <Link
+              className='p-2 '
+              href='/products'
+              aria-label='Go to search products page.'
+            >
+              <SearchIcon className='w-5 h-5' />
+            </Link>
             <button
               onClick={() => setOpenUser((state) => !state)}
               type='button'

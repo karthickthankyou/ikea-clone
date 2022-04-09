@@ -10,6 +10,7 @@ export interface IDeveloperCommentaryProps {
 const DeveloperCommentary = ({ children }: IDeveloperCommentaryProps) => (
   <Tooltip
     placement='bottom'
+    enterTouchDelay={0}
     arrow
     text='white'
     bg='black'

@@ -1,26 +1,42 @@
-import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
+/* eslint-disable react/jsx-props-no-spreading */
 import ProductFilter from 'src/components/organisms/ProductFilter'
+import HtmlInput from 'src/components/atoms/HtmlInput'
+import { useForm, FormProvider } from 'react-hook-form'
+import { useAppSelector } from 'src/store'
+import ProductListingResults from 'src/components/organisms/ProductListingResults/ProductListingResults'
+import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
+import { FilterProductsQuery } from 'src/generated/graphql'
+import { filterDefaultValues } from './data'
+import { useDispatchHomeFilter } from './filterUtils'
 
-export interface IProductListingProps {}
+export interface IProductListingProps {
+  products: UseQueryState<FilterProductsQuery, object>
+}
 
-const ProductListing = () => (
-  <div>
-    <ProductFilter />
-    <div className='grid grid-cols-3 mt-12 gap-responsive'>
-      {[1, 2, 3, 4, 5, 6].map((item) => (
-        <ProductCard01
-          key={item}
-          title='BOKKREMLA'
-          description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-          src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-          rating={4.2}
-          price={1.99}
-          oldPrice={2.49}
-          reviews={12}
-        />
-      ))}
+const ProductListing = () => {
+  const methods = useForm({ defaultValues: filterDefaultValues })
+  const {
+    watch,
+    formState: { dirtyFields },
+  } = methods
+  const filterData = watch()
+  useDispatchHomeFilter({ filterData, dirtyFields })
+
+  return (
+    <div>
+      <FormProvider {...methods}>
+        <div className='flex mt-responsive'>
+          <HtmlInput
+            {...methods.register('search')}
+            placeholder='Search product name'
+            className='inline-block px-2 py-1 border border-1/5'
+          />
+          <ProductFilter />
+        </div>
+      </FormProvider>
+      <ProductListingResults />
     </div>
-  </div>
-)
+  )
+}
 
 export default ProductListing

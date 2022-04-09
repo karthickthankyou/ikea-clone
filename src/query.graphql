@@ -7,3 +7,136 @@ query GetProducts {
     name
   }
 }
+
+query GetProduct($id: Int!) {
+  product: products_by_pk(id: $id) {
+    category
+    createdAt
+    discount
+    id
+    name
+    oldPrice
+    outOfStock
+    price
+    rating
+    reviews
+    subCategory
+    tags
+    updatedAt
+    url
+  }
+}
+
+query SearchProducts(
+  $args: search_products_args!
+  $distinct_on: [products_select_column!]
+  $limit: Int
+  $offset: Int
+  $order_by: [products_order_by!]
+  $where: products_bool_exp
+) {
+  products_aggregate: search_products_aggregate(
+    args: $args
+    distinct_on: $distinct_on
+    order_by: $order_by
+    where: $where
+  ) {
+    aggregate {
+      count
+    }
+  }
+  products: search_products(
+    args: $args
+    distinct_on: $distinct_on
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $where
+  ) {
+    name
+    id
+    category
+    subCategory
+    outOfStock
+    price
+    images
+    rating
+    reviews
+    discount
+    oldPrice
+  }
+}
+
+query FilterProducts(
+  $distinct_on: [products_select_column!]
+  $limit: Int
+  $offset: Int
+  $order_by: [products_order_by!]
+  $where: products_bool_exp
+) {
+  products_aggregate(
+    distinct_on: $distinct_on
+    order_by: $order_by
+    where: $where
+  ) {
+    aggregate {
+      count
+    }
+  }
+  products(
+    distinct_on: $distinct_on
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $where
+  ) {
+    name
+    id
+    category
+    subCategory
+    outOfStock
+    price
+    images
+    rating
+    reviews
+    discount
+    oldPrice
+  }
+}
+
+mutation InsertUserProductsOne($object: user_products_insert_input!) {
+  insert_user_products_one(
+    object: $object
+    on_conflict: {
+      constraint: user_products_pid_uid_key
+      update_columns: [pid, type]
+    }
+  ) {
+    createdAt
+    id
+    pid
+    type
+    uid
+    updatedAt
+  }
+}
+
+query GetUserProducts($uid: String!) {
+  user_products(where: { uid: { _eq: $uid } }) {
+    createdAt
+    id
+    pid
+    type
+    uid
+    updatedAt
+    product {
+      name
+      price
+      outOfStock
+      category
+      subCategory
+      rating
+      reviews
+    }
+  }
+}

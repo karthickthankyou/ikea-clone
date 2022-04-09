@@ -13,7 +13,6 @@ const HtmlLabel = React.forwardRef<
   <label ref={ref} className={`block text-sm ${className}`}>
     <div className='mb-2 ml-1 capitalize'>{title}</div>
     {children}
-    {/* {console.log('Error: ', error, title)} */}
     <FormError error={error} />
   </label>
 ))

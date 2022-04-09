@@ -1,33 +1,28 @@
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import Container from 'src/components/atoms/Container/Container'
+import Link from 'src/components/atoms/Link/Link'
+import TripGuide from 'src/components/organisms/TripGuide/TripGuide'
 
-import { useRedirectLoggedInUsers } from 'src/hooks'
-
-const NotFoundPage: NextPage = () => {
-  useRedirectLoggedInUsers()
-
-  return (
-    <div>
-      <NextSeo
-        title='NotFound page - Ikea clone | Karthick Ragavendran'
-        description='Create account with your email or google account.'
-      />
-      <div className='h-screen '>
-        <Container className='flex flex-col justify-center h-full'>
-          <div className='max-w-sm'>
-            <div className='text-lg font-semibold'>404 | Page not found.</div>
-            <div className='mt-4 text-gray-600'>
-              This page is either not found or yet to be implemented.{' '}
-            </div>
-            <div className='mt-2 text-gray-600'>
-              Meanwhile, below are the things you can do in this site right now.{' '}
-            </div>
+const NotFoundPage: NextPage = () => (
+  <div>
+    <NextSeo
+      title='NotFound page - Ikea clone | Karthick Ragavendran'
+      description='Create account with your email or google account.'
+    />
+    <div className='min-h-screen mt-12'>
+      <Container className='flex flex-col justify-center h-full'>
+        <div className='max-w-sm'>
+          <div className='text-lg font-semibold'>404 | Page not found.</div>
+          <div className='mt-8 mb-16 text-gray-600'>
+            Meanwhile, follow the <span className='text-red'>site map</span>{' '}
+            below for amazing things you can do in this site right now.
           </div>
-        </Container>
-      </div>
+        </div>
+        <TripGuide />
+      </Container>
     </div>
-  )
-}
+  </div>
+)
 
 export default NotFoundPage

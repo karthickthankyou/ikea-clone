@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import DeveloperCommentary from './DeveloperCommentary'
 
 export default {
-  title: 'src/components/molecules/DeveloperCommentary',
+  title: 'molecules/DeveloperCommentary',
   component: DeveloperCommentary,
 } as ComponentMeta<typeof DeveloperCommentary>
 

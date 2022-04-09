@@ -14,6 +14,15 @@ const Template: ComponentStory<typeof HtmlTextArea> = (args) => (
   </label>
 )
 
-export const Primary = Template.bind({})
-Primary.args = {}
-Primary.parameters = {}
+export const TwoRows = Template.bind({})
+TwoRows.args = {
+  rows: 2,
+  placeholder:
+    'This component gets all props that you can pass to a vanilla HTML text area component.',
+}
+
+export const FiveRows = Template.bind({})
+FiveRows.args = {
+  rows: 5,
+  placeholder: '5 rows...',
+}

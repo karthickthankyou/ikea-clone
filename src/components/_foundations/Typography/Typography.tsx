@@ -7,7 +7,7 @@ export interface ITypographyProps {}
 
 const NotOk = ({ className }: { className?: string }) => (
   <div
-    className={`items-center bg-red-200 text-red-900 inline-block p-1 text-xs mb-2 ${className}`}
+    className={`items-center bg-red-200 text-red-900 inline-block p-1 text-xs  ${className}`}
   >
     <XIcon className='w-4 h-4' />
   </div>
@@ -15,7 +15,7 @@ const NotOk = ({ className }: { className?: string }) => (
 
 const Ok = ({ className }: { className?: string }) => (
   <div
-    className={`inline-block items-center text-xs bg-primary-200 p-1 text-primary-900 mb-2 ${className}`}
+    className={`inline-block items-center text-xs bg-primary-200 p-1 text-primary-900  ${className}`}
   >
     <CheckIcon className='w-4 h-4' />
   </div>
@@ -35,7 +35,7 @@ const SampleText = ({
   children: Children
   className?: string
 }) => (
-  <div className={`p-6 bg-gray-100 shadow-inner ${className}`}>{children}</div>
+  <div className={`p-6 bg-gray-25 shadow-inner ${className}`}>{children}</div>
 )
 
 export const RenderScale = ({
@@ -79,7 +79,7 @@ const Typography = () => (
           Have wider letter spacing for smaller letters and tighter spacing for
           larger text sizes.
         </Description>
-        <SampleText className='space-y-6 divide-y'>
+        <SampleText className='space-y-6'>
           <div>
             <NotOk />
             <div className='text-sm tracking-tighter '>Hello World</div>

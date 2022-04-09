@@ -55,9 +55,9 @@ const newProductFormSchema = yup
 
 type NewProductFormSchema = yup.InferType<typeof newProductFormSchema>
 
-const publishedHome = {
+const publishedProduct = {
   data: {
-    insert_homes_one: {
+    insert_products_one: {
       id: null,
     },
   },
@@ -98,7 +98,7 @@ const PostProductTemplate = () => {
 
   const [showDialog, setshowDialog] = useState(true)
   useEffect(() => {
-    setshowDialog(Boolean(publishedHome.data?.insert_homes_one?.id))
+    setshowDialog(Boolean(publishedProduct.data?.insert_products_one?.id))
   }, [])
 
   useEffect(() => {
@@ -118,7 +118,7 @@ const PostProductTemplate = () => {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
           tempore laudantium consequuntur, adipisci quidem ex fugit quo et?
         </p>
-        <p>Home id: {publishedHome.data?.insert_homes_one?.id}</p>
+        <p>Home id: {publishedProduct.data?.insert_products_one?.id}</p>
         <div className='flex justify-end space-x-4'>
           <button
             type='button'
@@ -129,7 +129,7 @@ const PostProductTemplate = () => {
           </button>
           <Link
             className='inline-block px-4 py-2 mt-8 text-center text-white bg-primary-600'
-            href={`/home/${publishedHome.data?.insert_homes_one?.id}`}
+            href={`/home/${publishedProduct.data?.insert_products_one?.id}`}
           >
             Visit page
           </Link>

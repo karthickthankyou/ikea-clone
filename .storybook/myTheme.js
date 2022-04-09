@@ -1,50 +1,83 @@
 import { create } from '@storybook/theming'
 
-const gray50 = 'rgb(249, 250, 251)'
-const gray100 = 'rgb(243, 244, 246)'
-const gray200 = 'rgb(229, 231, 235)'
-const gray300 = 'rgb(209, 213, 219)'
-const gray400 = 'rgb(156, 163, 175)'
-const gray500 = 'rgb(107, 114, 128)'
-const gray600 = 'rgb(75, 85, 99)'
-const gray700 = 'rgb(55, 65, 81)'
-const gray800 = 'rgb(31, 41, 55)'
-const gray900 = 'rgb(17, 24, 39)'
+const primaryPallete = {
+  DEFAULT: 'hsl(208, 100%, 32%)',
+  25: 'hsl(208, 100%, 98%)',
+  50: 'hsl(208, 100%, 90%)',
+  100: 'hsl(208, 100%, 80%)',
+  200: 'hsl(208, 100%, 70%)',
+  300: 'hsl(208, 100%, 60%)',
+  400: 'hsl(208, 100%, 50%)',
+  500: 'hsl(208, 100%, 32%)',
+  600: 'hsl(208, 100%, 24%)',
+  700: 'hsl(208, 100%, 16%)',
+  800: 'hsl(208, 100%, 08%)',
+  900: 'hsl(208, 100%, 04%)',
+}
 
-const blue500 = 'rgb(59, 130, 246)'
-const blue600 = 'rgb(37, 99, 235)'
+const yellowPallete = {
+  DEFAULT: 'hsl(52, 100%, 50%)',
+  25: 'hsl(52, 100%, 98%)',
+  50: 'hsl(52, 100%, 92%)',
+  100: 'hsl(52, 100%, 84%)',
+  200: 'hsl(52, 100%, 75%)',
+  300: 'hsl(52, 100%, 66%)',
+  400: 'hsl(52, 100%, 58%)',
+  500: 'hsl(52, 100%, 50%)',
+  600: 'hsl(52, 100%, 38%)',
+  700: 'hsl(52, 100%, 24%)',
+  800: 'hsl(52, 100%, 10%)',
+  900: 'hsl(52, 100%, 04%)',
+}
+const grayPallete = {
+  DEFAULT: 'hsl(208, 10%, 32%)',
+  25: 'hsl(208, 10%, 98%)',
+  50: 'hsl(208, 10%, 90%)',
+  100: 'hsl(208, 10%, 80%)',
+  200: 'hsl(208, 10%, 70%)',
+  300: 'hsl(208, 10%, 60%)',
+  400: 'hsl(208, 10%, 50%)',
+  500: 'hsl(208, 10%, 32%)',
+  600: 'hsl(208, 10%, 24%)',
+  700: 'hsl(208, 10%, 16%)',
+  800: 'hsl(208, 10%, 08%)',
+  900: 'hsl(208, 10%, 04%)',
+}
+
+const white = '#fff'
 
 export default create({
-  base: 'light',
-  colorPrimary: blue500,
-  colorSecondary: blue600,
+  base: 'dark',
+  colorPrimary: yellowPallete.DEFAULT,
+  colorSecondary: primaryPallete.DEFAULT,
 
   // UI
-  appBg: gray50,
-  appContentBg: gray100,
-  appBorderColor: gray200,
-  appBorderRadius: 4,
+  appBg: yellowPallete[50],
+  appContentBg: white,
+  appBorderColor: grayPallete[100],
+  appBorderRadius: 0,
 
   // Typography
   fontBase: '"Open Sans", sans-serif',
   fontCode: 'monospace',
 
   // Text colors
-  textColor: gray900,
-  textInverseColor: gray50,
+  textColor: grayPallete[900],
+  textInverseColor: grayPallete[50],
 
   // Toolbar default and active colors
-  barTextColor: gray900,
-  barSelectedColor: gray800,
-  barBg: gray200,
+  barTextColor: primaryPallete[900],
+  barSelectedColor: primaryPallete[800],
+  barBg: primaryPallete[25],
 
   // Form colors
-  inputBg: gray200,
-  inputBorder: gray300,
-  inputTextColor: gray800,
-  inputBorderRadius: 4,
+  inputBg: primaryPallete[25],
+  inputBorder: primaryPallete[200],
+  inputTextColor: primaryPallete[800],
+  inputBorderRadius: 0,
 
-  brandTitle: 'Ikea clone',
-  brandUrl: 'https://iamkarthick.com',
-  //   brandImage: 'https://place-hold.it/350x150',
+  brandTitle: 'Ikea clone | Karthick Ragavendran',
+  brandUrl: 'https://ikea.iamkarthick.com',
+  brandImage:
+    'https://res.cloudinary.com/thankyou/image/upload/v1649351934/nike/ikea/ikea_qipy50.png',
 })

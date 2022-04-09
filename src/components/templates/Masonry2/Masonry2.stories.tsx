@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import Masonry2 from './Masonry2'
 
 export default {
-  title: 'src/components/templates/Masonry2',
+  title: 'templates/Masonry2',
   component: Masonry2,
 } as ComponentMeta<typeof Masonry2>
 
@@ -16,7 +16,7 @@ Primary.args = {
   gap: '6',
   columns: '5',
   shortOnes: [1, 2, 5, 6, 9],
-  childrenLimit: 7,
+  childrenLimit: 8,
   children: [
     <div className='h-full p-3 rounded-lg shadow-lg bg-red/30' key='1'>
       Hello

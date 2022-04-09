@@ -13,6 +13,13 @@ export const Primary = Template.bind({})
 Primary.args = {
   title: 'Hello World',
   arrow: true,
-  children: <div className='inline'>Hello children</div>,
+  children: <div className='inline'>Hover over me.</div>,
 }
-Primary.parameters = {}
+
+export const Right = Template.bind({})
+Right.args = {
+  title: 'Hello World',
+  arrow: true,
+  placement: 'right',
+  children: <div className='inline'>Hover over me.</div>,
+}

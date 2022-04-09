@@ -23,9 +23,26 @@ Primary.args = {
   text: 'See all storage solution systems.',
   align: 'items-end',
 }
-export const ContainerBanner = ContainerTemplate.bind({})
-ContainerBanner.args = {
+export const WithinContainer = ContainerTemplate.bind({})
+WithinContainer.args = {
+  src: 'https://res.cloudinary.com/thankyou/image/upload/v1648216310/nike/ikea/light-02_zjbzuh.jpg',
+  text: 'See all storage solution systems.',
+  align: 'items-start',
+  justify: 'justify-start',
+}
+export const CustomPosition = Template.bind({})
+CustomPosition.args = {
+  src: 'https://res.cloudinary.com/thankyou/image/upload/v1648216310/nike/ikea/light-02_zjbzuh.jpg',
+  text: 'See all storage solution systems.',
+  align: 'items-start',
+  justify: 'justify-end',
+}
+export const CustomColor = Template.bind({})
+CustomColor.args = {
   src: 'https://res.cloudinary.com/thankyou/image/upload/v1648216310/nike/ikea/light-02_zjbzuh.jpg',
   text: 'See all storage solution systems.',
   align: 'items-end',
+  justify: 'justify-start',
+  bg: 'yellow',
+  textColor: 'black',
 }

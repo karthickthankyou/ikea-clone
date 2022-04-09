@@ -14,3 +14,13 @@ export const White = Template.bind({})
 White.args = {
   color: 'white',
 }
+export const Yellow = Template.bind({})
+Yellow.args = {
+  bg: 'yellow',
+  color: 'primary',
+}
+export const YellowReverse = Template.bind({})
+YellowReverse.args = {
+  bg: 'primary',
+  color: 'yellow',
+}

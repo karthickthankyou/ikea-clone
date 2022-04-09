@@ -5,68 +5,17 @@ import FilterIcon from '@heroicons/react/solid/FilterIcon'
 import { Dispatch, SetStateAction, useState } from 'react'
 import Sidebar from 'src/components/molecules/Sidebar/Sidebar'
 
-import { Controller, useForm } from 'react-hook-form'
+import { Controller, useFormContext } from 'react-hook-form'
 
 import { RadioGroup } from '@headlessui/react'
+import {
+  filterDefaultValues,
+  PriceType,
+  sortOptionsList,
+} from 'src/components/templates/ProductListing/data'
+import RangeSlider from 'src/components/molecules/RangeSlider/RangeSlider'
 
 export interface IProductFilterProps {}
-
-type SortTypes =
-  | 'Best match'
-  | 'Price: low to high'
-  | 'Price: high to low'
-  | 'Newest'
-  | 'Customer rating'
-  | 'Name'
-  | 'Most popular'
-
-const categories = [
-  'Furniture',
-  'Kitchen & appliances',
-  'Beds & mattresses',
-  'Storage & organisation',
-  'Working from home',
-  'Textiles',
-  'Decoration',
-  'Bathroom products',
-  'Outdoor products',
-  'Lighting',
-  'Carpets, mats & flooring',
-  'Baby & children',
-  'Pots & plants',
-  'Kitchenware & tableware',
-  'Home electronics',
-  'Laundry & cleaning',
-  'Home smart',
-  'Vinter Collections',
-  'Home improvement',
-  'Food & beverages',
-].sort()
-
-type PriceType =
-  | '₹0 - 1,999'
-  | '₹2,000 - 3,999'
-  | '₹4,000 - 5,999'
-  | '₹6,000 - 7,999'
-  | '₹8,000+'
-
-const prices = [
-  '₹0 - 1,999',
-  '₹2,000 - 3,999',
-  '₹4,000 - 5,999',
-  '₹6,000 - 7,999',
-  '₹8,000+',
-].sort() as PriceType[]
-
-const ratings = ['★', '★★', '★★★', '★★★★', '★★★★★'].sort()
-
-export const filterDefaultValues = {
-  price: prices,
-  rating: ratings,
-  ratings: ratings[0],
-  categories,
-  sort: 'Best match',
-}
 
 const FilterHeading = ({
   title,
@@ -91,15 +40,10 @@ const SidebarFilter = ({
   setOpen: Dispatch<SetStateAction<boolean>>
 }) => {
   const {
-    watch,
     control,
-    formState: { dirtyFields, isDirty },
+    formState: { dirtyFields },
     reset,
-  } = useForm({
-    defaultValues: filterDefaultValues,
-  })
-
-  const formData = watch()
+  } = useFormContext()
 
   return (
     <Sidebar overlayBlur={false} open={open} setOpen={setOpen}>
@@ -115,15 +59,7 @@ const SidebarFilter = ({
             render={({ field: { onChange, value } }) => (
               <RadioGroup value={value} onChange={onChange}>
                 <div className='flex flex-col gap-4'>
-                  {[
-                    'Best match',
-                    'Price: low to high',
-                    'Price: high to low',
-                    'Newest',
-                    'Customer rating',
-                    'Name',
-                    'Most popular',
-                  ].map((item) => (
+                  {sortOptionsList.map((item) => (
                     <RadioGroup.Option key={item} value={`${item}`}>
                       {({ checked }) => (
                         <span
@@ -188,41 +124,28 @@ const SidebarFilter = ({
             name='price'
             control={control}
             render={({ field: { onChange, value } }) => (
-              <fieldset className='flex flex-col gap-4'>
-                {filterDefaultValues.price.map((c: PriceType) => (
-                  <label key={c} className='flex items-start whitespace-nowrap'>
-                    <input
-                      onChange={() => {
-                        const exists = value.includes(c)
-                        const newArr = exists
-                          ? value.filter((item: string) => item !== c)
-                          : [...value, c]
-                        onChange(newArr.sort())
-                      }}
-                      checked={value.includes(c)}
-                      type='checkbox'
-                      className='flex-shrink-0 w-4 h-4 mr-1'
-                      value={value[c as any]}
-                    />
-                    <div className='text-sm leading-tight select-none'>{c}</div>
-                  </label>
-                ))}
-              </fieldset>
+              <RangeSlider
+                step={1000}
+                marks
+                onChange={onChange}
+                value={value}
+                initialData={filterDefaultValues.price}
+                labelFormat={(sliderValue) =>
+                  `Rs.${sliderValue.toLocaleString()}`
+                }
+              />
             )}
           />
         </div>
 
         <div>
-          <FilterHeading
-            dirty={'categories' in dirtyFields}
-            title='Categories'
-          />
+          <FilterHeading dirty={'category' in dirtyFields} title='Category' />
           <Controller
-            name='categories'
+            name='category'
             control={control}
             render={({ field: { onChange, value } }) => (
               <fieldset className='flex flex-col gap-4'>
-                {filterDefaultValues.categories.map((c) => (
+                {filterDefaultValues.category.map((c) => (
                   <label key={c} className='flex items-start whitespace-nowrap'>
                     <input
                       onChange={() => {
@@ -245,13 +168,12 @@ const SidebarFilter = ({
           />
         </div>
       </Sidebar.Body>
-      {isDirty ? (
-        <Sidebar.Footer>
-          <Button color='white' onClick={() => reset()}>
-            Reset
-          </Button>
-        </Sidebar.Footer>
-      ) : null}
+
+      <Sidebar.Footer show={Object.keys(dirtyFields).length > 0}>
+        <Button color='white' onClick={() => reset()}>
+          Reset
+        </Button>
+      </Sidebar.Footer>
     </Sidebar>
   )
 }

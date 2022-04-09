@@ -11,7 +11,7 @@ export default {
 const Template: ComponentStory<typeof Popover> = () => (
   <div className='relative'>
     <Popover>
-      <Popover.Button>Menu button</Popover.Button>
+      <Popover.Button>Click me</Popover.Button>
       <Popover.Panel>
         <div className='max-w-sm'>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla
@@ -25,7 +25,7 @@ const WithOverlayTemplate: ComponentStory<typeof Popover> = () => (
   <div className='relative'>
     <Popover>
       <Popover.Overlay />
-      <Popover.Button>Menu button</Popover.Button>
+      <Popover.Button>Click me</Popover.Button>
       <Popover.Panel>
         <div className='max-w-sm'>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nulla

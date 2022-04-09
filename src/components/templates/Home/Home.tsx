@@ -8,7 +8,7 @@ import BannerCard01 from 'src/components/molecules/BannerCard01/BannerCard01'
 import CardCategory01 from 'src/components/molecules/CardCategory01/CardCategory01'
 import ColorCard from 'src/components/molecules/ColorCard/ColorCard'
 import HScroll from 'src/components/molecules/HScroll'
-import { sampleImages } from 'src/components/molecules/Masonry/data'
+import { sampleImages } from 'src/components/templates/Masonry2/data'
 import PriceMarker from 'src/components/molecules/PriceMarker/PriceMarker'
 import ProductCard01 from 'src/components/molecules/ProductCard01'
 import AdBanner from 'src/components/organisms/AdBanner/AdBanner'
@@ -277,57 +277,98 @@ const CategoryCards = [
   />,
 ]
 
-const Home: NextPage = () => {
-  const [data] = useGetProductsQuery()
+const Home: NextPage = () => (
+  <div>
+    <Head>
+      <title>IKEA Clone | Karthick Ragavendran</title>
+      <meta name='description' content='Home page of the IKEA clone.' />
+      <link rel='icon' href='/ikea.ico' />
+    </Head>
 
-  return (
-    <div>
-      <Head>
-        <title>IKEA Clone | Karthick Ragavendran</title>
-        <meta name='description' content='Home page of the IKEA clone.' />
-        <link rel='icon' href='/ikea.ico' />
-      </Head>
+    <HomeBanner />
+    <Container className='mt-24 space-y-24'>
+      <div>
+        <Heading className='flex items-center gap-1'>
+          <div>Highlights</div>
+          <DeveloperCommentary>
+            <div>
+              In the real IKEA, they use images along with the price cards
+              stamped over it.
+            </div>
+            <div>
+              Here, we can place the price cards dynamically. After all, any
+              image probably has some free spot to write on.
+            </div>
+          </DeveloperCommentary>
+        </Heading>
 
-      <HomeBanner />
-      <Container className='mt-24 space-y-24'>
-        <div>
-          <Heading className='flex items-center gap-1'>
-            <div>Highlights</div>
-            <DeveloperCommentary>
-              <div>
-                In the real IKEA, they use images along with the price cards
-                stamped over it.
-              </div>
-              <div>
-                Here, we can place the price cards dynamically. After all, any
-                image probably has some free spot to write on.
-              </div>
-            </DeveloperCommentary>
-          </Heading>
-
-          <ColorCardScroll />
+        <ColorCardScroll />
+      </div>
+      <div>
+        <Heading>Limited festive collection</Heading>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-responsive'>
+          <BannerCard01
+            title='AROMATISK'
+            description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maxime, molestiae ut magni aperiam tenetur beatae in repellendus quia possimus sit libero nihil laborum.'
+            src='https://res.cloudinary.com/thankyou/image/upload/v1648218044/nike/ikea/decor-01_rvj6tr.jpg'
+            href='/'
+          />
+          <BannerCard01
+            title='KORKEN'
+            description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maxime, molestiae ut magni aperiam tenetur beatae in repellendus quia possimus sit libero nihil laborum.'
+            src='https://res.cloudinary.com/thankyou/image/upload/v1648657783/IKEA/becca-tapert-dO3qTKxwik0-unsplash_hh5oap.jpg'
+            href='/'
+          />
         </div>
-        <div>
-          <Heading>Limited festive collection</Heading>
-          <div className='grid grid-cols-1 md:grid-cols-2 gap-responsive'>
-            <BannerCard01
-              title='AROMATISK'
-              description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maxime, molestiae ut magni aperiam tenetur beatae in repellendus quia possimus sit libero nihil laborum.'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218044/nike/ikea/decor-01_rvj6tr.jpg'
-              href='/'
-            />
-            <BannerCard01
-              title='KORKEN'
-              description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maxime, molestiae ut magni aperiam tenetur beatae in repellendus quia possimus sit libero nihil laborum.'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648657783/IKEA/becca-tapert-dO3qTKxwik0-unsplash_hh5oap.jpg'
-              href='/'
-            />
-          </div>
-        </div>
+      </div>
 
-        <div>
-          <Heading className='flex items-center gap-1'>
-            <div>Top categories</div>
+      <div>
+        <Heading className='flex items-center gap-1'>
+          <div>Top categories</div>
+          <DeveloperCommentary>
+            <div>
+              In the real IKEA, they use two rows of these cards. That&apos;ll
+              do but it is a bit plain and boring.
+            </div>
+            <div>We use css columns to create a masonry here!</div>
+            <div>
+              Also, it is completely responsive. Try resizing the window.
+            </div>
+          </DeveloperCommentary>
+        </Heading>
+        <Masonry2
+          columns='5'
+          gap='4'
+          shortOnes={[1, 2, 5, 6, 9]}
+          className='hidden lg:block'
+          heights={['h-64', 'h-80']}
+        >
+          {CategoryCards}
+        </Masonry2>
+        <Masonry2
+          childrenLimit={9}
+          columns='3'
+          gap='3'
+          shortOnes={[2, 3, 8]}
+          className='hidden md:block lg:hidden'
+          heights={['h-52', 'h-72']}
+        >
+          {CategoryCards}
+        </Masonry2>
+        <Masonry2
+          columns='2'
+          gap='2'
+          shortOnes={[4, 5]}
+          heights={['h-48', 'h-64']}
+          className='block md:hidden'
+        >
+          {CategoryCards}
+        </Masonry2>
+      </div>
+      <div>
+        <Heading className='flex items-center justify-between gap-4'>
+          <div className='flex items-center gap-1'>
+            <div className='break-words'>IKEA family products</div>
             <DeveloperCommentary>
               <div>
                 In the real IKEA, they use two rows of these cards. That&apos;ll
@@ -338,302 +379,279 @@ const Home: NextPage = () => {
                 Also, it is completely responsive. Try resizing the window.
               </div>
             </DeveloperCommentary>
-          </Heading>
-          <Masonry2
-            columns='5'
-            gap='4'
-            shortOnes={[1, 2, 5, 6, 9]}
-            className='hidden lg:block'
-            heights={['h-64', 'h-80']}
-          >
-            {CategoryCards}
-          </Masonry2>
-          <Masonry2
-            childrenLimit={9}
-            columns='3'
-            gap='3'
-            shortOnes={[2, 3, 8]}
-            className='hidden md:block lg:hidden'
-            heights={['h-52', 'h-72']}
-          >
-            {CategoryCards}
-          </Masonry2>
-          <Masonry2
-            columns='2'
-            gap='2'
-            shortOnes={[4, 5]}
-            heights={['h-48', 'h-64']}
-            className='block md:hidden'
-          >
-            {CategoryCards}
-          </Masonry2>
-        </div>
-        <div>
-          <Heading className='flex items-center justify-between gap-4'>
-            <div className='flex items-center gap-1'>
-              <div className='break-words'>IKEA family products</div>
-              <DeveloperCommentary>
-                <div>
-                  In the real IKEA, they use two rows of these cards.
-                  That&apos;ll do but it is a bit plain and boring.
-                </div>
-                <div>We use css columns to create a masonry here!</div>
-                <div>
-                  Also, it is completely responsive. Try resizing the window.
-                </div>
-              </DeveloperCommentary>
-            </div>
-            <Button className='mt-4' variant='outlined' color='black'>
-              Show all offers
-            </Button>
-          </Heading>
-          <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
-            <ProductCard01
-              tag='IKEA family price'
-              title='BOKKREMLA'
-              description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-              price={2.29}
-            />
-            <ProductCard01
-              tag='IKEA family price'
-              title='BOKKREMLA'
-              description='Lunch bag'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-              price={2.29}
-              oldPrice={2.99}
-              rating={4.2}
-              reviews={12}
-            />
-            <ProductCard01
-              tag='IKEA family price'
-              title='EKTORP'
-              description='Arm chair'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648662487/IKEA/andrea-davis-duXRC8vT5wQ-unsplash_uugrpn.jpg'
-              price={2.29}
-            />
-            <ProductCard01
-              tag='IKEA family price'
-              title='BOKKREMLA'
-              description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-              src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-              price={2.29}
-            />
           </div>
-        </div>
-        <div>
-          <Heading className='flex items-center gap-1'>
-            <div>Shop products for a more sustainable home</div>
-            <DeveloperCommentary>
-              <div>Notice the position of the arrows?</div>
-              <div>
-                In the Hightlights section, we placed these arrows{' '}
-                <strong className='text-primary-200'>absolutely</strong>.
-              </div>
-              <div>
-                This corousel is a custom made compount component. That allows
-                us to easily reuse it for multiple scenarios.
-              </div>
-            </DeveloperCommentary>
-          </Heading>
-          <HScroll>
-            <HScroll.Body className='gap-responsive pb-responsive'>
-              <HScroll.Child className='relative w-56 h-72'>
-                <CardCategory01
-                  text='Storage & organisation'
-                  key='Storage & organisation'
-                  href='/'
-                  src='https://res.cloudinary.com/thankyou/image/upload/v1648660778/IKEA/nathan-oakley-jSbBnR22cXc-unsplash_xakhbu.jpg'
-                />
-              </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
-                <CardCategory01
-                  text='Baby & children'
-                  key='Baby & children'
-                  href='/'
-                  src='https://res.cloudinary.com/thankyou/image/upload/v1648661196/IKEA/kids-me-germany-Zzgmde4_lYU-unsplash_tcx3xa.jpg'
-                />
-              </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
-                <CardCategory01
-                  text='Table and desks'
-                  key='Table and desks'
-                  href='/'
-                  src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
-                />
-              </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
-                <CardCategory01
-                  text='Beds'
-                  key='Beds'
-                  href='/'
-                  src='https://res.cloudinary.com/thankyou/image/upload/v1648661142/IKEA/chastity-cortijo-M8iGdeTSOkg-unsplash_htvvhi.jpg'
-                />
-              </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52 '>
-                <CardCategory01
-                  text='Chairs'
-                  key='Chairs'
-                  href='/'
-                  src='https://res.cloudinary.com/thankyou/image/upload/v1648660432/IKEA/thestandingdesk-_mpablfu5pM-unsplash_jzqojr.jpg'
-                />
-              </HScroll.Child>
-              <HScroll.Child className='relative h-72 w-52'>
-                <CardCategory01
-                  text='Shoe rack and clothes stand'
-                  key='Shoe rack and clothes stand'
-                  href='/'
-                  src='https://res.cloudinary.com/thankyou/image/upload/v1648661101/IKEA/jake-goossen-juhD3QGCv20-unsplash_jiwsem.jpg'
-                />
-              </HScroll.Child>
-            </HScroll.Body>
-            <div className='flex justify-end gap-2 mt-2'>
-              <HScroll.Arrow />
-              <HScroll.Arrow right />
-            </div>
-          </HScroll>
-        </div>
-        <div>
-          <Heading className='flex items-center gap-1'>
-            <div>More ideas and inspiration</div>
-            <DeveloperCommentary>
-              <div>
-                Product markers over the photographs is a cool feature of IKEA
-                site.
-              </div>
-              <div>
-                It is not yet implemented in this clone. The below is a
-                responsive masonry with plain images. Stay tuned for updates.
-              </div>
-            </DeveloperCommentary>
-          </Heading>
-          <Masonry2
-            columns='3'
-            gap='4'
-            shortOnes={[4, 5, 14]}
-            childrenLimit={15}
-            className='hidden lg:block'
-            heights={['h-72', 'h-112']}
-          >
-            {sampleImages.map((item) => (
-              <Image key={item} alt='' src={item} layout='fill' />
-            ))}
-          </Masonry2>
-          <Masonry2
-            childrenLimit={14}
-            columns='2'
-            gap='3'
-            shortOnes={[6, 7]}
-            className='hidden md:block lg:hidden'
-            heights={['h-52', 'h-72']}
-          >
-            {sampleImages.map((item) => (
-              <Image key={item} alt='' src={item} layout='fill' />
-            ))}
-          </Masonry2>
-          <Masonry2
-            childrenLimit={14}
-            columns='2'
-            gap='2'
-            shortOnes={[6, 7]}
-            heights={['h-48', 'h-64']}
-            className='block md:hidden'
-          >
-            {sampleImages.map((item) => (
-              <Image key={item} alt='' src={item} layout='fill' />
-            ))}
-          </Masonry2>
-        </div>
-
-        <AdBanner
-          src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-          title='Download the IKEA app'
-          description='Explore a wide range of affordable, well-designed and functional home furnishing solutions for every room in your home - at your fingertips.'
-          buttonText='Download now'
-          href='/'
-        />
+          <Button className='mt-4' variant='outlined' color='black'>
+            Show all offers
+          </Button>
+        </Heading>
         <div className='grid grid-cols-2 md:grid-cols-4 gap-responsive'>
-          <InfoCard
-            Icon={HeartIcon}
-            title='Returns policy'
-            description='Exceptions during COVID19'
-            href='/'
-            className='p-responsive'
+          <ProductCard01
+            product={{
+              id: 1,
+              name: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!!',
+              images: [
+                'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+              ],
+              category: 'Office',
+              subCategory: 'Desk',
+              price: 2.29,
+            }}
           />
-          <InfoCard
-            Icon={HeartIcon}
-            title='Click & collect'
-            description='Safe click and collect shopping at IKEA Stores!'
-            href='/'
-            className='p-responsive'
+          <ProductCard01
+            product={{
+              id: 2,
+              name: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!!',
+              images: [
+                'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+              ],
+              category: 'Office',
+              subCategory: 'Desk',
+              price: 2.29,
+            }}
           />
-          <InfoCard
-            Icon={HeartIcon}
-            title='Planning tools'
-            description='Our planning tools will help you give shape to your ideas'
-            href='/'
-            className='p-responsive'
+          <ProductCard01
+            product={{
+              id: 3,
+              name: 'EKTORP',
+              images: [
+                'https://res.cloudinary.com/thankyou/image/upload/v1648662487/IKEA/andrea-davis-duXRC8vT5wQ-unsplash_uugrpn.jpg',
+              ],
+              category: 'Office',
+              subCategory: 'Arm chair',
+              price: 2.29,
+            }}
           />
-          <InfoCard
-            Icon={HeartIcon}
-            title='Safety at IKEA store'
-            description='Safe shopping experience at IKEA'
-            href='/'
-            className='p-responsive'
+          <ProductCard01
+            product={{
+              id: 3,
+              name: 'BOKKREMLA',
+              images: [
+                'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+              ],
+              category: 'Office',
+              subCategory: 'Arm chair',
+              price: 2.29,
+            }}
           />
         </div>
-        <div>
-          <Heading>Explore our furniture & home furnishing range</Heading>
-          <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+      </div>
+      <div>
+        <Heading className='flex items-center gap-1'>
+          <div>Shop products for a more sustainable home</div>
+          <DeveloperCommentary>
+            <div>Notice the position of the arrows?</div>
             <div>
-              <div className='flex flex-wrap items-center justify-start gap-4'>
-                {tags.map((tag) => (
-                  <Link
-                    href='/'
-                    key={tag}
-                    className='inline-block px-3 py-1.5 transition-all border border-yellow-100 bg-yellow-25 hover:border-black hover:shadow-xl hover:-translate-y-0.5 hover:bg-white'
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </div>
+              In the Hightlights section, we placed these arrows{' '}
+              <strong className='text-primary-200'>absolutely</strong>.
             </div>
-            <div className='gap-8 mt-8 space-y-8 text-sm font-light text-gray-800 columns-2 md:mt-0'>
-              <p className='font-bold text-primary'>
-                IKEA is a global leader in life at home.
-              </p>
-              <p>
-                Whether you just moved into a new home or looking to revamp your
-                current one, we at IKEA are here to inspire you with affordable
-                home furniture solutions, there is a piece of furniture to every
-                corner of your home. Create a home that is perfect for you.
-              </p>
-              <p>
-                Shopping at IKEA is a bit different and exciting compared to
-                your shopping at an everyday retail. It is about experiencing
-                solutions first hand and getting to know ideas and inspirations
-                that can fit perfectly into your home. That’s why, we offer more
-                than 7500 products, solutions at our store along with home
-                furnishing ideas and services for you to explore.
-              </p>
-              <p>
-                When you visit IKEA store, make yourself at home in our many
-                room settings in the store. Squeeze the upholsteries, feel the
-                oriental rugs, try the sofa beds and open the cabinets to feel
-                the quality. On the price tag, you’ll find all you need to know
-                about a product, including where in the store you can pick it
-                up.
-              </p>
-              <p>
-                Since most IKEA furniture is flat-packed, they are quite easy to
-                bring home when you buy from the store.
-              </p>
+            <div>
+              This corousel is a custom made compount component. That allows us
+              to easily reuse it for multiple scenarios.
+            </div>
+          </DeveloperCommentary>
+        </Heading>
+        <HScroll>
+          <HScroll.Body className='gap-responsive'>
+            <HScroll.Child className='relative mb-responsive'>
+              <CardCategory01
+                text='Storage & organisation'
+                key='Storage & organisation'
+                href='/'
+                className='w-56 h-72'
+                src='https://res.cloudinary.com/thankyou/image/upload/v1648660778/IKEA/nathan-oakley-jSbBnR22cXc-unsplash_xakhbu.jpg'
+              />
+            </HScroll.Child>
+            <HScroll.Child className='relative mb-responsive'>
+              <CardCategory01
+                className='w-56 h-72'
+                text='Baby & children'
+                key='Baby & children'
+                href='/'
+                src='https://res.cloudinary.com/thankyou/image/upload/v1648661196/IKEA/kids-me-germany-Zzgmde4_lYU-unsplash_tcx3xa.jpg'
+              />
+            </HScroll.Child>
+            <HScroll.Child className='relative mb-responsive'>
+              <CardCategory01
+                className='w-56 h-72'
+                text='Table and desks'
+                key='Table and desks'
+                href='/'
+                src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
+              />
+            </HScroll.Child>
+            <HScroll.Child className='relative mb-responsive'>
+              <CardCategory01
+                className='w-56 h-72'
+                text='Beds'
+                key='Beds'
+                href='/'
+                src='https://res.cloudinary.com/thankyou/image/upload/v1648661142/IKEA/chastity-cortijo-M8iGdeTSOkg-unsplash_htvvhi.jpg'
+              />
+            </HScroll.Child>
+            <HScroll.Child className='relative mb-responsive'>
+              <CardCategory01
+                className='w-56 h-72'
+                text='Chairs'
+                key='Chairs'
+                href='/'
+                src='https://res.cloudinary.com/thankyou/image/upload/v1648660432/IKEA/thestandingdesk-_mpablfu5pM-unsplash_jzqojr.jpg'
+              />
+            </HScroll.Child>
+            <HScroll.Child className='relative mb-responsive'>
+              <CardCategory01
+                className='w-56 h-72'
+                text='Shoe rack and clothes stand'
+                key='Shoe rack and clothes stand'
+                href='/'
+                src='https://res.cloudinary.com/thankyou/image/upload/v1648661101/IKEA/jake-goossen-juhD3QGCv20-unsplash_jiwsem.jpg'
+              />
+            </HScroll.Child>
+          </HScroll.Body>
+          <div className='flex justify-end gap-2 mt-2'>
+            <HScroll.Arrow />
+            <HScroll.Arrow right />
+          </div>
+        </HScroll>
+      </div>
+      <div>
+        <Heading className='flex items-center gap-1'>
+          <div>More ideas and inspiration</div>
+          <DeveloperCommentary>
+            <div>
+              Product markers over the photographs is a cool feature of IKEA
+              site.
+            </div>
+            <div>
+              It is not yet implemented in this clone. The below is a responsive
+              masonry with plain images. Stay tuned for updates.
+            </div>
+          </DeveloperCommentary>
+        </Heading>
+        <Masonry2
+          columns='3'
+          gap='4'
+          shortOnes={[4, 5, 14]}
+          childrenLimit={15}
+          className='hidden lg:block'
+          heights={['h-72', 'h-112']}
+        >
+          {sampleImages.map((item) => (
+            <Image key={item} alt='' src={item} layout='fill' />
+          ))}
+        </Masonry2>
+        <Masonry2
+          childrenLimit={14}
+          columns='2'
+          gap='3'
+          shortOnes={[6, 7]}
+          className='hidden md:block lg:hidden'
+          heights={['h-52', 'h-72']}
+        >
+          {sampleImages.map((item) => (
+            <Image key={item} alt='' src={item} layout='fill' />
+          ))}
+        </Masonry2>
+        <Masonry2
+          childrenLimit={14}
+          columns='2'
+          gap='2'
+          shortOnes={[6, 7]}
+          heights={['h-48', 'h-64']}
+          className='block md:hidden'
+        >
+          {sampleImages.map((item) => (
+            <Image key={item} alt='' src={item} layout='fill' />
+          ))}
+        </Masonry2>
+      </div>
+
+      <AdBanner
+        src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
+        title='Download the IKEA app'
+        description='Explore a wide range of affordable, well-designed and functional home furnishing solutions for every room in your home - at your fingertips.'
+        buttonText='Download now'
+        href='/'
+      />
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-responsive'>
+        <InfoCard
+          Icon={HeartIcon}
+          title='Returns policy'
+          description='Exceptions during COVID19'
+          href='/'
+          className='p-responsive'
+        />
+        <InfoCard
+          Icon={HeartIcon}
+          title='Click & collect'
+          description='Safe click and collect shopping at IKEA Stores!'
+          href='/'
+          className='p-responsive'
+        />
+        <InfoCard
+          Icon={HeartIcon}
+          title='Planning tools'
+          description='Our planning tools will help you give shape to your ideas'
+          href='/'
+          className='p-responsive'
+        />
+        <InfoCard
+          Icon={HeartIcon}
+          title='Safety at IKEA store'
+          description='Safe shopping experience at IKEA'
+          href='/'
+          className='p-responsive'
+        />
+      </div>
+      <div>
+        <Heading>Explore our furniture & home furnishing range</Heading>
+        <div className='grid grid-cols-1 gap-responsive md:grid-cols-2'>
+          <div>
+            <div className='flex flex-wrap items-center justify-start gap-responsive'>
+              {tags.map((tag) => (
+                <Link
+                  href='/'
+                  key={tag}
+                  className='inline-block px-3 py-1.5 transition-all border border-yellow-100 bg-yellow-25 hover:border-black hover:shadow-xl hover:-translate-y-0.5 hover:bg-white'
+                >
+                  {tag}
+                </Link>
+              ))}
             </div>
           </div>
+          <div className='gap-8 mt-8 space-y-8 text-sm font-light text-gray-800 columns-2 md:mt-0'>
+            <p className='font-bold text-primary'>
+              IKEA is a global leader in life at home.
+            </p>
+            <p>
+              Whether you just moved into a new home or looking to revamp your
+              current one, we at IKEA are here to inspire you with affordable
+              home furniture solutions, there is a piece of furniture to every
+              corner of your home. Create a home that is perfect for you.
+            </p>
+            <p>
+              Shopping at IKEA is a bit different and exciting compared to your
+              shopping at an everyday retail. It is about experiencing solutions
+              first hand and getting to know ideas and inspirations that can fit
+              perfectly into your home. That’s why, we offer more than 7500
+              products, solutions at our store along with home furnishing ideas
+              and services for you to explore.
+            </p>
+            <p>
+              When you visit IKEA store, make yourself at home in our many room
+              settings in the store. Squeeze the upholsteries, feel the oriental
+              rugs, try the sofa beds and open the cabinets to feel the quality.
+              On the price tag, you’ll find all you need to know about a
+              product, including where in the store you can pick it up.
+            </p>
+            <p>
+              Since most IKEA furniture is flat-packed, they are quite easy to
+              bring home when you buy from the store.
+            </p>
+          </div>
         </div>
-      </Container>
-    </div>
-  )
-}
+      </div>
+    </Container>
+  </div>
+)
 
 export default Home

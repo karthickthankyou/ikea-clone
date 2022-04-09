@@ -6,6 +6,7 @@ export interface ISliderMuiProps {
   step: number
   onChange: (event: Event, value: number | number[]) => void
   className?: string
+  marks?: boolean
   labelFormat?: (value: number) => string
   value: number[]
 }
@@ -14,9 +15,10 @@ const RangeSlider = ({
   onChange,
   initialData,
   step,
-  className = 'px-4 mt-12',
+  className = 'px-4 mt-4',
   labelFormat,
   value,
+  marks = false,
 }: ISliderMuiProps) => (
   <div className={`${className}`}>
     <Slider
@@ -26,13 +28,14 @@ const RangeSlider = ({
       max={initialData[1]}
       step={step}
       value={value}
+      marks={marks}
       onChange={onChange}
       valueLabelDisplay='on'
       valueLabelFormat={labelFormat}
       classes={{
         root: `h-0.5 w-full border-0`,
         thumb:
-          'rounded-sm border-black border w-5 h-5 bg-white hover:shadow-none hover:border-primary-600 hover:bg-primary-50 focus:bg-primary-300 active:bg-primary-300',
+          'rounded-sm border-black border w-5 h-5 bg-white hover:shadow-none hover:border-black hover:bg-gray-50 focus:bg-gray-50',
         track: 'text-gray-800',
         rail: 'bg-gray-400',
         valueLabel:

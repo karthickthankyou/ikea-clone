@@ -99,21 +99,25 @@ const CreateAccount = () => (
             <BackToHome />
           </div>
         </OverlapSpace.Child>
-        <OverlapSpace.Child className='relative shadow-inner -z-10 bg-primary-25/50 '>
-          <div className='absolute right-0 translate-x-1/2 -translate-y-1/2 top-full'>
-            <BlurredCirle className='fill-red/30 ' radius={600} />
+        <OverlapSpace.Child className='relative animate-spin-30 -z-10 '>
+          <div className='absolute -translate-y-1/2 top-2/4 animate-move-right-60'>
+            <BlurredCirle className='fill-yellow/50 ' radius={800} />
           </div>
-          <div className='absolute translate-x-1/2 translate-y-1/2 right-full bottom-full'>
-            <BlurredCirle className='fill-yellow/10 ' radius={1000} />
+          <div className='absolute translate-y-1/2 top-2/4 animate-move-right-48'>
+            <BlurredCirle className='fill-red/50 ' radius={600} />
           </div>
-          <div className='absolute right-0 translate-x-1/2 top-1/2'>
-            <BlurredCirle className='fill-white/30 ' radius={400} />
+          <div className='absolute translate-y-1/2 top-full bottom-full animate-move-right-36'>
+            <BlurredCirle className='fill-primary/50 ' radius={400} />
           </div>
-          <div className='absolute -translate-x-1/2 translate-y-1/2 left-full bottom-full'>
-            <BlurredCirle className='fill-primary/10 ' radius={600} />
+          <div className='absolute -translate-y-1/2 top-full animate-move-right-24'>
+            <BlurredCirle className='fill-green/50 ' radius={200} />
           </div>
-          <div className='absolute -translate-x-1/2 -translate-y-1/2 left-1/2 top-full'>
-            <BlurredCirle className='fill-green/20 ' radius={400} />
+
+          <div className='absolute top-1/2 animate-move-right-12'>
+            <BlurredCirle className='fill-white/50 ' radius={100} />
+          </div>
+          <div className='absolute top-2/3 animate-move-right-24'>
+            <BlurredCirle className='fill-white/50 ' radius={60} />
           </div>
         </OverlapSpace.Child>
       </OverlapSpace>

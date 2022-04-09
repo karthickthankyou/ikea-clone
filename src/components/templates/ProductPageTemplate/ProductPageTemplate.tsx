@@ -1,6 +1,6 @@
 import Container from 'src/components/atoms/Container'
-import { sampleImagesForMasonry } from 'src/components/molecules/Masonry/data'
-import Masonry from 'src/components/molecules/Masonry/Masonry'
+import { sampleImagesForMasonry } from 'src/components/templates/Masonry2/data'
+
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 import PriceCard from 'src/components/molecules/PriceCard/PriceCard'
 
@@ -9,12 +9,19 @@ import Image from 'src/components/atoms/Image/Image'
 import HScroll from 'src/components/molecules/HScroll/HScroll'
 import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
 import DesignerThoughtsCard from 'src/components/molecules/DesignerThoughtsCard'
-import Footer from 'src/components/organisms/Footer/Footer'
+
 import { Dispatch, SetStateAction, useState } from 'react'
 
 import Sidebar from 'src/components/molecules/Sidebar'
+import { GetProductQuery, useGetProductQuery } from 'src/generated/graphql'
+import { getQueryParam } from 'src/util/functions'
+import { useRouter } from 'next/router'
+import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
+import Masonry2 from '../Masonry2'
 
-export interface IProductPageTemplateProps {}
+export interface IProductPageTemplateProps {
+  product: UseQueryState<GetProductQuery, object>
+}
 
 const InfoInSidebar = ({
   title,
@@ -73,12 +80,16 @@ const RelatedProducts = ({ title }: { title: string }) => {
           {items.map((item) => (
             <HScroll.Child className='relative mb-12 w-72' key={item.src}>
               <ProductCard01
-                title='BOKKREMLA'
-                description='Lorem ipsum dolor sit amet consectetur adipisicing elit. At enim perspiciatis pariatur!'
-                src={item.src}
-                price={2.29}
-                rating={4.5}
-                reviews={12}
+                product={{
+                  id: 3,
+                  name: 'BOKKREMLA',
+                  images: [
+                    'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+                  ],
+                  category: 'Office',
+                  subCategory: 'Arm chair',
+                  price: 2.29,
+                }}
               />
             </HScroll.Child>
           ))}
@@ -99,9 +110,12 @@ const RelatedProducts = ({ title }: { title: string }) => {
   )
 }
 
-const ProductPageTemplate = () => {
+const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
   const [openProductDetials, setOpenProductDetials] = useState(false)
   const [openMeasurements, setOpenMeasurements] = useState(false)
+
+  const data = product?.data?.product
+
   return (
     <>
       <Sidebar
@@ -111,7 +125,7 @@ const ProductPageTemplate = () => {
       >
         <Sidebar.Body>
           <div className='text-2xl font-semibold'>Product details</div>
-          <div className='mt-4'>MRP Rs.1,649 (incl. tax)</div>
+          <div className='mt-4'>MRP Rs.345 (incl. tax)</div>
           <div className='mt-2 text-gray-600'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
             ipsa perferendis expedita aspernatur! Autem modi nam exercitationem,
@@ -141,24 +155,31 @@ const ProductPageTemplate = () => {
       </Sidebar>
 
       <Container className='space-y-12'>
-        <div className='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-16'>
+        <div className='grid grid-cols-1 gap-8 mb-24 lg:grid-cols-3 lg:gap-16'>
           <div className='col-span-1'>
             <div className='sticky top-24'>
               <PriceCard
-                title='MICKE'
-                category='Desk, white'
-                price={7990}
-                oldPrice={9000}
+                id={data?.id || -900}
+                title={data?.name || ''}
+                category={data?.category || ''}
+                price={data?.price}
+                oldPrice={data?.oldPrice}
+                reviews={data?.reviews}
+                rating={data?.rating}
               />
             </div>
           </div>
           <div className='col-span-2 space-y-6 md:space-y-12'>
-            <Masonry
-              columns='2'
-              gap='4'
-              items={sampleImagesForMasonry.slice(0, 6)}
-              shortOnes={[3]}
-            />
+            <Masonry2 gap='6' columns='3' shortOnes={[1, 2, 5, 6, 9]}>
+              {sampleImagesForMasonry.slice(0, 6).map((item) => (
+                <div
+                  className='h-full rounded-lg shadow-lg bg-red/30'
+                  key={item.src}
+                >
+                  <Image alt='' src={item.src} layout='fill' />
+                </div>
+              ))}
+            </Masonry2>
             <div className='max-w-2xl text-xl font-light leading-relaxed text-gray-700'>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
               amet quasi temporibus facilis debitis rem provident necessitatibus
@@ -211,10 +232,10 @@ const ProductPageTemplate = () => {
             />
           </div>
         </div>
+
         <RelatedProducts title='Related products' />
         <RecentlyViewedProducts title='Recently viewed products' />
       </Container>
-      <Footer />
     </>
   )
 }

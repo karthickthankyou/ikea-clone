@@ -8,13 +8,16 @@ export default {
 } as ComponentMeta<typeof CardCategory01>
 
 const Template: ComponentStory<typeof CardCategory01> = (args) => (
-  <CardCategory01 {...args} />
+  <div className='relative max-w-xs'>
+    <CardCategory01 {...args} />
+  </div>
 )
 
 export const Primary = Template.bind({})
 Primary.args = {
   text: 'Sofas & armchair',
   href: '/',
+  className: 'h-96',
   src: 'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
 }
 Primary.parameters = {}

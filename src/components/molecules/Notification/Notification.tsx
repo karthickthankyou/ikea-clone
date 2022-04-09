@@ -26,6 +26,7 @@ const Notifications = () => {
   })
 
   const getTextcolor = (type: NotificationType['type']) => {
+    console.log(type, '...')
     switch (type) {
       case 'success':
         return 'text-green-800 bg-green-50/60'
@@ -36,22 +37,22 @@ const Notifications = () => {
       case 'info':
         return 'text-primary-800 bg-primary-50/60'
       default:
-        return 'black'
+        return 'text-black bg-white '
     }
   }
   return (
     <div
       data-chromatic='ignore'
-      className='fixed bottom-0 z-30 flex flex-col items-center w-full p-2 space-y-3'
+      className='fixed bottom-0 z-30 flex flex-col items-center w-full p-1 space-y-3'
     >
       {markersTransitions((style, marker) => (
         <animated.div
-          className='flex items-center shadow-xl'
+          className='flex items-center '
           key={marker.id}
           style={style}
         >
           <div
-            className={`pl-6 pr-12 py-4 border border-white rounded-full backdrop-blur-sm backdrop-filter ${getTextcolor(
+            className={`pl-6 pr-8 py-4  shadow-xl  ${getTextcolor(
               marker.type
             )}`}
           >
@@ -59,7 +60,7 @@ const Notifications = () => {
           </div>
           <button
             type='button'
-            className='z-40 -ml-9'
+            className='z-40 -ml-6'
             onClick={() => dispatch(removeNotification(marker.id))}
           >
             <XIcon className='w-5 h-5 text-black' />

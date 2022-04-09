@@ -5,6 +5,7 @@ import FormIKEAChat from './FormIKEAChat'
 export default {
   title: 'organisms/FormIKEAChat',
   component: FormIKEAChat,
+  decorators: [(story) => <div className='max-w-sm'>{story()}</div>],
 } as ComponentMeta<typeof FormIKEAChat>
 
 const Template: ComponentStory<typeof FormIKEAChat> = () => <FormIKEAChat />
