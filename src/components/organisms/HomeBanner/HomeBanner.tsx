@@ -2,11 +2,8 @@ import Button from 'src/components/atoms/Button/Button'
 import BlurredCirle from 'src/components/molecules/BlurredCirle/BlurredCirle'
 import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
 import ArrowDownIcon from '@heroicons/react/outline/ArrowDownIcon'
-import Tooltip from 'src/components/atoms/Tooltip/Tooltip'
-import InformationCircleIcon from '@heroicons/react/outline/InformationCircleIcon'
 import DeveloperCommentary from 'src/components/molecules/DeveloperCommentary/DeveloperCommentary'
 import { useRouter } from 'next/router'
-import Link from 'src/components/atoms/Link/Link'
 
 export interface IHomeBannerProps {}
 
@@ -67,19 +64,26 @@ const HomeBanner = () => {
           </div>
         </div>
       </OverlapSpace.Child>
-      <OverlapSpace.Child className='relative -z-20'>
-        <div className='absolute translate-x-1/2 -translate-y-1/2 top-full right-1/2'>
-          <BlurredCirle className='fill-yellow/20 ' radius={800} />
+      {/* animate-spin-60 */}
+      <OverlapSpace.Child className='relative -z-20 animate-spin-30'>
+        <div className='absolute animate-move-right-60 top-1/2 '>
+          <BlurredCirle className='fill-yellow/50 ' radius={800} />
         </div>
-        <div className='absolute translate-x-1/2 right-full'>
-          <BlurredCirle className='fill-red/10 ' radius={500} />
+
+        <div className='absolute -translate-y-1/2 top-1/2 animate-move-right-48'>
+          <BlurredCirle className='fill-primary/50 ' radius={600} />
         </div>
-        <div className='absolute right-0 translate-x-1/2 -translate-y-1/2'>
-          <BlurredCirle className='fill-green/20 ' radius={290} />
+        <div className='absolute -translate-y-1/2 animate-move-right-36'>
+          <BlurredCirle className='fill-red/50 ' radius={400} />
         </div>
-        <div className='absolute left-1/2'>
-          <BlurredCirle className='fill-primary/30 ' radius={200} />
+        <div className='absolute -translate-y-1/2 animate-move-right-24'>
+          <BlurredCirle className='fill-green/30 ' radius={200} />
         </div>
+        <div className='absolute -translate-y-1/2 animate-move-right-12'>
+          <BlurredCirle className='fill-black/50 ' radius={100} />
+        </div>
+      </OverlapSpace.Child>
+      <OverlapSpace.Child className='relative -z-20 '>
         <div className='absolute bottom-0 flex items-center justify-center translate-x-1/2 right-1/2'>
           <ArrowDownIcon className='w-8 h-8 rounded-full bg-white/10 right-1/2 animate-bounce' />
         </div>

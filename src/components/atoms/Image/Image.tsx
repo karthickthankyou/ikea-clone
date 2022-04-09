@@ -13,11 +13,14 @@ const Image = ({
 }: ImageProps) => {
   const imgWidth = layout === 'fill' ? undefined : width
   const imgHeight = layout === 'fill' ? undefined : height
+  const imgSrc =
+    src ||
+    'https://res.cloudinary.com/thankyou/image/upload/v1649431071/IKEA/empty_r6kit6.jpg'
 
   return (
     <NextImage
       className={`object-cover ${className}`}
-      src={src}
+      src={imgSrc}
       width={imgWidth}
       height={imgHeight}
       layout={layout}

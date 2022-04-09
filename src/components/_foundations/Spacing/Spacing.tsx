@@ -3,7 +3,7 @@ export interface ISpacingProps {}
 const Spacing = () => (
   <div className='container mx-auto'>
     <div className=' min-w-max'>
-      <h1 className='mb-3 text-3xl font-thin'>Spacing</h1>
+      <h1 className='mb-3 ml-4 text-3xl font-thin'>Spacing</h1>
       {[
         ['w-0', ' 0px'],
         ['w-px', '1px'],
@@ -48,12 +48,12 @@ const Spacing = () => (
         ['w-192', '48rem'],
         ['w-208', '52rem'],
       ].map(([size, text]) => (
-        <div key={size} className='flex items-center my-2 -ml-8 text-sm'>
+        <div key={size} className='flex items-center my-2 -ml-4 text-sm'>
           <div className='w-6 mr-2 text-right text-gray'>
             {size.split('-')[1]}
           </div>
-          <div className={`h-3  ${size} bg-primary rounded-sm`} />
-          <div className='w-6 px-3 text-gray-600'>{text}</div>
+          <div className={`h-3 ${size} bg-primary rounded-sm`} />
+          <div className='w-6 px-4 text-gray-600'>{text}</div>
         </div>
       ))}
     </div>

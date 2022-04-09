@@ -1,10 +1,10 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import { Provider } from 'react-redux'
 import userReducer, {
   initialState as userInitialState,
 } from 'src/store/user/userSlice'
+import { Provider } from 'react-redux'
 import { combineReducers, createStore } from '@reduxjs/toolkit'
 import Navbar from './Navbar'
 

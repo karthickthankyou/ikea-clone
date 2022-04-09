@@ -23,7 +23,8 @@
     "cypress:unit": "npm run gen-tailwind && cypress open-ct",
     "e2e": "start-server-and-test dev http://localhost:3000 cypress",
     "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "storycap": "storycap http://localhost:6006"
   },
   "dependencies": {
     "@emotion/react": "^11.8.2",
@@ -53,6 +54,8 @@
     "react-use": "^17.3.2",
     "rxjs": "^7.5.5",
     "start-server-and-test": "^1.14.0",
+    "storybook-addon-next-router": "^3.1.1",
+    "storycap": "^3.1.7",
     "stripe": "^8.215.0",
     "urql": "^2.2.0",
     "uuid": "^8.3.2",
