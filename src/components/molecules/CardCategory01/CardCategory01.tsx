@@ -18,7 +18,7 @@ const CardCategory01 = ({
 }: ICardCategory01Props) => {
   const router = useRouter()
   return (
-    <OverlapSpace className={`h-full mt-4 group ${className}`}>
+    <OverlapSpace className={`  group ${className}`}>
       <OverlapSpace.Child className=' -z-10'>
         <Image src={src} alt='' layout='fill' />
       </OverlapSpace.Child>

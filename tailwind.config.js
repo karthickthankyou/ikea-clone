@@ -1,6 +1,7 @@
 const colors = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
+// #0057a3
 const primaryPallete = {
   DEFAULT: 'hsl(208, 100%, 32%)',
   25: 'hsl(208, 100%, 98%)',

@@ -384,7 +384,7 @@ const Home: NextPage = () => (
             Show all offers
           </Button>
         </Heading>
-        <div className='grid grid-cols-2 gap-responsive'>
+        <div className='grid grid-cols-2 md:grid-cols-4 gap-responsive'>
           <ProductCard01
             product={{
               id: 1,

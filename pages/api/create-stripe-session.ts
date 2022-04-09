@@ -9,7 +9,7 @@ async function CreateStripeSession(
   const redirectURL =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000'
-      : 'https://stripe-checkout-next-js-demo.vercel.app'
+      : 'https://ikea.iamkarthick.com'
 
   const transformedItems = items.map(
     (item: { image: any; name: any; price: number; description: any }) => ({

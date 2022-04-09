@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Button from 'src/components/atoms/Button/Button'
 import Container from 'src/components/atoms/Container'
+import Link from 'src/components/atoms/Link'
 
 export interface IFooterProps {}
 
@@ -82,7 +83,16 @@ const menuItems = {
 
 const FooterFooter = () => (
   <div className='justify-between pt-8 mt-8 text-xs border-t sm:flex'>
-    <div>© Karthick Ragavendran 2022</div>
+    <a target='_blank' href='https://www.iamkarthick.com' rel='noreferrer'>
+      <span
+        // Brand color!
+        style={{ background: '#e63746' }}
+        className='font-medium text-white px-1 py-0.5'
+      >
+        Karthick Ragavendran
+      </span>{' '}
+      2022
+    </a>
     <div className='flex flex-wrap gap-2 mt-2 sm:mt-0'>
       <div>Privacy policy</div>
       <div>Cookie policy</div>
