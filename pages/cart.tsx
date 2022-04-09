@@ -17,6 +17,7 @@ import Button from 'src/components/atoms/Button/Button'
 
 const CartPage: NextPage = () => {
   const products = useAppSelector(selectUserProducts)
+  const uid = useAppSelector((state) => state.user.data.user?.uid)
   const router = useRouter()
   const { status } = router.query
 
@@ -29,6 +30,7 @@ const CartPage: NextPage = () => {
   )
 
   const transformedCart = cartProducts?.map((item) => ({
+    id: item.id,
     name: item.product.name,
     description: item.product.category + item.product.subCategory,
     image:
@@ -44,6 +46,7 @@ const CartPage: NextPage = () => {
     const stripe = await stripePromise
     const checkoutSession = await axios.post('/api/create-stripe-session', {
       items: transformedCart,
+      uid,
     })
     const result = await stripe?.redirectToCheckout({
       sessionId: checkoutSession.data.id,

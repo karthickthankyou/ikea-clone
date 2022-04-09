@@ -1,10 +1,10 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 async function CreateStripeSession(
-  req: { body: { items: any } },
+  req: { body: { items: any; uid: string } },
   res: { json: (arg0: { id: any }) => void }
 ) {
-  const { items } = req.body
+  const { items, uid } = req.body
 
   const redirectURL =
     process.env.NODE_ENV === 'development'
@@ -34,6 +34,8 @@ async function CreateStripeSession(
     cancel_url: `${redirectURL}/cart`,
     metadata: {
       images: items[0].image,
+      uid,
+      productIds: items.map((item: { id: any }) => item.id),
     },
   })
 
