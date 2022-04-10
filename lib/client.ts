@@ -5,7 +5,6 @@ export const urqlAdminClient = createClient({
   fetchOptions: {
     headers: {
       Authorization: `bearer ${process.env.HASURA_ADMIN}`,
-      Accept: 'application/vnd.github.packages-preview+json',
     },
   },
 })
