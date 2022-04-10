@@ -35,7 +35,7 @@ async function CreateStripeSession(
     metadata: {
       images: items[0].image,
       uid,
-      productIds: items.map((item: { id: any }) => item.id),
+      productIds: items.map((item: { id: any }) => item.id).join(','),
     },
   })
 
