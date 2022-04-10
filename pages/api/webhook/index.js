@@ -47,14 +47,15 @@ export default async function handler(req, res) {
         .mutation(CompleteOrderDocument, objects)
         .toPromise()
         .then((result) => {
-          console.log(result) // { data: ... }
+          console.log(result)
+          res.json({ received: true })
         })
+        .catch((err) => console.log('Oops. ', err))
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
     }
 
     // 3. Return a response to acknowledge receipt of the event.
-    res.json({ received: true })
   } else {
     res.setHeader('Allow', 'POST')
     res.status(405).end('Method Not Allowed')
