@@ -36,9 +36,12 @@ export default async function handler(req, res) {
 
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
-      console.log(`💰  Payment received! Metadata here:`, event.metadata)
+      console.log(
+        `💰  Payment received! Metadata here:`,
+        event.data.object.metadata
+      )
 
-      const { uid, productIds } = event.metadata
+      const { uid, productIds } = event.data.object.metadata
       const objects = productIds.split(',').map((item) => ({ pid: item, uid }))
       urqlAdminClient
         .mutation(CompleteOrderDocument, objects)
