@@ -33,6 +33,11 @@ export default async function handler(req, res) {
 
     // Successfully constructed event
     console.log('✅ Success:', event)
+    console.log(
+      'Checking event type:',
+      event.type,
+      event.type === 'checkout.session.completed'
+    )
 
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
