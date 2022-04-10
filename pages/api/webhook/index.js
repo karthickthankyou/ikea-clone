@@ -43,14 +43,17 @@ export default async function handler(req, res) {
 
       const { uid, productIds } = event.data.object.metadata
       const objects = productIds.split(',').map((item) => ({ pid: item, uid }))
+      await urqlAdminClient?.query(CompleteOrderDocument, objects).toPromise()
       urqlAdminClient
         .mutation(CompleteOrderDocument, objects)
         .toPromise()
         .then((result) => {
-          console.log(result)
+          console.log('After mutation: ', JSON.stringify(result))
           res.json({ received: true })
         })
-        .catch((err) => console.log('Oops. ', err))
+        .catch((err) =>
+          console.log('Oops after mutation. ', JSON.stringify(err))
+        )
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
     }
