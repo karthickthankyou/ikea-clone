@@ -11,7 +11,7 @@ const HtmlLabel = React.forwardRef<
   } & HTMLProps<HTMLLabelElement>
 >(({ children, title, error, className }, ref) => (
   <label ref={ref} className={`block text-sm ${className}`}>
-    <div className='mb-2 ml-1 capitalize'>{title}</div>
+    <div className='mb-2 ml-1 font-semibold capitalize'>{title}</div>
     {children}
     <FormError error={error} />
   </label>

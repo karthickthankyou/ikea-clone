@@ -10,30 +10,15 @@ import {
 } from 'src/generated/graphql'
 import { useAppSelector } from 'src/store'
 import Link from 'src/components/atoms/Link/Link'
+import { ProductWithWishlist } from 'src/store/search'
 import Price from '../Price/Price'
 import Rating from '../Rating'
 
 export interface IPriceCardProps {
-  id: number
-  title: string
-  category: string
-  price: number
-  oldPrice: number
-  rating: number
-  reviews: number
-  notInStock?: boolean
+  product: ProductWithWishlist | undefined | null
 }
 
-const PriceCard = ({
-  id,
-  title,
-  category,
-  price,
-  oldPrice,
-  notInStock,
-  rating,
-  reviews,
-}: IPriceCardProps) => {
+const PriceCard = ({ product }: IPriceCardProps) => {
   const [{ fetching, data, error }, AddProductToCart] =
     useInsertUserProductsOneMutation()
 
@@ -44,12 +29,24 @@ const PriceCard = ({
     (state) => state.userProducts.userProducts.data?.user_products
   )?.filter((item) => item.type === User_Products_Type_Enum.InCart)
 
+  if (!product) return <div>Loading....</div>
+  const {
+    rating,
+    reviews,
+    name,
+    category,
+    subCategory,
+    outOfStock,
+    price,
+    oldPrice,
+    id,
+  } = product
   const inCart = cartItems?.map((item) => item.pid).includes(id)
 
   return (
     <div className='max-w-lg'>
       <div>
-        <div className='text-3xl font-bold'>{title}</div>
+        <div className='text-3xl font-bold'>{name}</div>
         <div className='text-lg font-light'>{category}</div>
       </div>
       <Price
@@ -68,7 +65,7 @@ const PriceCard = ({
           reviews={reviews}
         />
       )}
-      {notInStock && (
+      {outOfStock && (
         <div className='mt-4 text-sm text-gray-600'>
           Product not in stock.
           <Tooltip
@@ -84,7 +81,7 @@ const PriceCard = ({
       )}
       <Button
         size='lg'
-        disabled={notInStock}
+        disabled={Boolean(outOfStock)}
         isLoading={fetching}
         className='flex items-center gap-2 mt-8'
         onClick={() =>

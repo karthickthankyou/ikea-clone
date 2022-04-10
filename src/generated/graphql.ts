@@ -1437,6 +1437,7 @@ export type Products = {
   __typename?: 'products';
   category: Scalars['String'];
   createdAt: Scalars['timestamptz'];
+  description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id: Scalars['Int'];
   images?: Maybe<Scalars['_text']>;
@@ -1446,6 +1447,7 @@ export type Products = {
   price: Scalars['numeric'];
   rating?: Maybe<Scalars['numeric']>;
   reviews?: Maybe<Scalars['smallint']>;
+  seller?: Maybe<Scalars['String']>;
   subCategory: Scalars['String'];
   tags?: Maybe<Scalars['jsonb']>;
   updatedAt: Scalars['timestamptz'];
@@ -1535,6 +1537,7 @@ export type Products_Bool_Exp = {
   _or?: InputMaybe<Array<Products_Bool_Exp>>;
   category?: InputMaybe<String_Comparison_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  description?: InputMaybe<String_Comparison_Exp>;
   discount?: InputMaybe<Smallint_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   images?: InputMaybe<_Text_Comparison_Exp>;
@@ -1544,6 +1547,7 @@ export type Products_Bool_Exp = {
   price?: InputMaybe<Numeric_Comparison_Exp>;
   rating?: InputMaybe<Numeric_Comparison_Exp>;
   reviews?: InputMaybe<Smallint_Comparison_Exp>;
+  seller?: InputMaybe<String_Comparison_Exp>;
   subCategory?: InputMaybe<String_Comparison_Exp>;
   tags?: InputMaybe<Jsonb_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -1586,6 +1590,7 @@ export type Products_Inc_Input = {
 export type Products_Insert_Input = {
   category?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['Int']>;
   images?: InputMaybe<Scalars['_text']>;
@@ -1595,6 +1600,7 @@ export type Products_Insert_Input = {
   price?: InputMaybe<Scalars['numeric']>;
   rating?: InputMaybe<Scalars['numeric']>;
   reviews?: InputMaybe<Scalars['smallint']>;
+  seller?: InputMaybe<Scalars['String']>;
   subCategory?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['jsonb']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -1607,6 +1613,7 @@ export type Products_Max_Fields = {
   __typename?: 'products_max_fields';
   category?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
@@ -1614,6 +1621,7 @@ export type Products_Max_Fields = {
   price?: Maybe<Scalars['numeric']>;
   rating?: Maybe<Scalars['numeric']>;
   reviews?: Maybe<Scalars['smallint']>;
+  seller?: Maybe<Scalars['String']>;
   subCategory?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   url?: Maybe<Scalars['String']>;
@@ -1624,6 +1632,7 @@ export type Products_Min_Fields = {
   __typename?: 'products_min_fields';
   category?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
@@ -1631,6 +1640,7 @@ export type Products_Min_Fields = {
   price?: Maybe<Scalars['numeric']>;
   rating?: Maybe<Scalars['numeric']>;
   reviews?: Maybe<Scalars['smallint']>;
+  seller?: Maybe<Scalars['String']>;
   subCategory?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
   url?: Maybe<Scalars['String']>;
@@ -1663,6 +1673,7 @@ export type Products_On_Conflict = {
 export type Products_Order_By = {
   category?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
   discount?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   images?: InputMaybe<Order_By>;
@@ -1672,6 +1683,7 @@ export type Products_Order_By = {
   price?: InputMaybe<Order_By>;
   rating?: InputMaybe<Order_By>;
   reviews?: InputMaybe<Order_By>;
+  seller?: InputMaybe<Order_By>;
   subCategory?: InputMaybe<Order_By>;
   tags?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
@@ -1696,6 +1708,8 @@ export enum Products_Select_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  Description = 'description',
+  /** column name */
   Discount = 'discount',
   /** column name */
   Id = 'id',
@@ -1714,6 +1728,8 @@ export enum Products_Select_Column {
   /** column name */
   Reviews = 'reviews',
   /** column name */
+  Seller = 'seller',
+  /** column name */
   SubCategory = 'subCategory',
   /** column name */
   Tags = 'tags',
@@ -1727,6 +1743,7 @@ export enum Products_Select_Column {
 export type Products_Set_Input = {
   category?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['Int']>;
   images?: InputMaybe<Scalars['_text']>;
@@ -1736,6 +1753,7 @@ export type Products_Set_Input = {
   price?: InputMaybe<Scalars['numeric']>;
   rating?: InputMaybe<Scalars['numeric']>;
   reviews?: InputMaybe<Scalars['smallint']>;
+  seller?: InputMaybe<Scalars['String']>;
   subCategory?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['jsonb']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -1793,6 +1811,8 @@ export enum Products_Update_Column {
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
+  Description = 'description',
+  /** column name */
   Discount = 'discount',
   /** column name */
   Id = 'id',
@@ -1810,6 +1830,8 @@ export enum Products_Update_Column {
   Rating = 'rating',
   /** column name */
   Reviews = 'reviews',
+  /** column name */
+  Seller = 'seller',
   /** column name */
   SubCategory = 'subCategory',
   /** column name */
@@ -3572,6 +3594,13 @@ export type GetViewedProductsQueryVariables = Exact<{
 
 export type GetViewedProductsQuery = { __typename?: 'query_root', views: Array<{ __typename?: 'views', id: number, pid: number, product: { __typename?: 'products', images?: any | null, name: string, price: any, oldPrice?: any | null } }> };
 
+export type PostNewProductMutationVariables = Exact<{
+  object: Products_Insert_Input;
+}>;
+
+
+export type PostNewProductMutation = { __typename?: 'mutation_root', insert_products_one?: { __typename?: 'products', category: string, createdAt: any, id: number, discount?: any | null, images?: any | null, name: string, price: any, oldPrice?: any | null, description?: string | null } | null };
+
 export const namedOperations = {
   Query: {
     GetProducts: 'GetProducts',
@@ -3585,7 +3614,8 @@ export const namedOperations = {
   Mutation: {
     InsertUserProductsOne: 'InsertUserProductsOne',
     CompleteOrder: 'CompleteOrder',
-    InsertProductView: 'InsertProductView'
+    InsertProductView: 'InsertProductView',
+    PostNewProduct: 'PostNewProduct'
   }
 }
 
@@ -3819,4 +3849,23 @@ export const GetViewedProductsDocument = /*#__PURE__*/ gql`
 
 export function useGetViewedProductsQuery(options?: Omit<Urql.UseQueryArgs<GetViewedProductsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetViewedProductsQuery>({ query: GetViewedProductsDocument, ...options });
+};
+export const PostNewProductDocument = /*#__PURE__*/ gql`
+    mutation PostNewProduct($object: products_insert_input!) {
+  insert_products_one(object: $object) {
+    category
+    createdAt
+    id
+    discount
+    images
+    name
+    price
+    oldPrice
+    description
+  }
+}
+    `;
+
+export function usePostNewProductMutation() {
+  return Urql.useMutation<PostNewProductMutation, PostNewProductMutationVariables>(PostNewProductDocument);
 };

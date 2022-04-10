@@ -3,11 +3,13 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import PurchasedCard from './PurchasedCard'
 
 export default {
-  title: 'src/components/organisms/PurchasedCard',
+  title: 'organisms/PurchasedCard',
   component: PurchasedCard,
 } as ComponentMeta<typeof PurchasedCard>
 
-const Template: ComponentStory<typeof PurchasedCard> = (args) => <PurchasedCard {...args} />
+const Template: ComponentStory<typeof PurchasedCard> = (args) => (
+  <PurchasedCard {...args} />
+)
 
 export const Primary = Template.bind({})
 Primary.args = {}

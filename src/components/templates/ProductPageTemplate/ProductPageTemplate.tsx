@@ -22,8 +22,8 @@ import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
 import Price from 'src/components/molecules/Price/Price'
 import Link from 'src/components/atoms/Link/Link'
 import Badge from 'src/components/atoms/Badge'
-import Masonry2 from '../Masonry2'
 import Skeleton from 'src/components/molecules/Skeleton/Skeleton'
+import Masonry2 from '../Masonry2'
 
 export interface IProductPageTemplateProps {
   product: UseQueryState<GetProductQuery, object>
@@ -172,7 +172,10 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         <Sidebar.Body>
           <div className='text-2xl font-semibold'>Product details</div>
           <Price price={data?.price} oldPrice={data?.oldPrice} />
-          <div className='mt-4'>MRP $.{data?.price} (incl. tax)</div>
+          <div>
+            {data?.outOfStock && <div className='text-red'>Out of stock</div>}
+          </div>
+          <div className='mt-4'>MRP Rs.{data?.price} (incl. tax)</div>
           <div className='mt-2 text-gray-600'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
             ipsa perferendis expedita aspernatur! Autem modi nam exercitationem,
@@ -205,15 +208,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         <div className='grid grid-cols-1 gap-8 mb-24 lg:grid-cols-3 lg:gap-16'>
           <div className='col-span-1'>
             <div className='sticky top-24'>
-              <PriceCard
-                id={data?.id || -900}
-                title={data?.name || ''}
-                category={data?.category || ''}
-                price={data?.price}
-                oldPrice={data?.oldPrice}
-                reviews={data?.reviews}
-                rating={data?.rating}
-              />
+              <PriceCard product={data} />
             </div>
           </div>
           <div className='col-span-2 space-y-6 md:space-y-12'>

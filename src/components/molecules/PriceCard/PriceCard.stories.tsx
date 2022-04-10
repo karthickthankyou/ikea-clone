@@ -28,10 +28,14 @@ const store = createStore(combineReducers(reducers), {
 
 export const Primary = Template.bind({})
 Primary.args = {
-  title: 'MICKE',
-  category: 'Desk, white',
-  price: 7990,
-  oldPrice: 9000,
+  product: {
+    id: 12,
+    subCategory: 'Bench',
+    name: 'MICKE',
+    category: 'Desk, white',
+    price: 7990,
+    oldPrice: 9000,
+  },
 }
 Primary.parameters = {}
 Primary.decorators = [(story) => <Provider store={store}>{story()}</Provider>]

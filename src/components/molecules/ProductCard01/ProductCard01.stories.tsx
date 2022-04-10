@@ -14,7 +14,7 @@ const store = createStore(combineReducers(reducers), {
 })
 
 export default {
-  name: 'organisms/ProductCard01',
+  title: 'organisms/ProductCard01',
   component: ProductCard01,
   decorators: [
     (story) => (

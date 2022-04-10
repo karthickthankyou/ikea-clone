@@ -11,7 +11,7 @@ import {
   googleSignin,
 } from './userActions'
 
-type Claims = {
+export type Claims = {
   'x-hasura-default-role': string
   'x-hasura-user-id': string
   'x-hasura-allowed-roles': string[]

@@ -15,7 +15,7 @@ const Image = ({
   const imgHeight = layout === 'fill' ? undefined : height
   const imgSrc =
     src ||
-    'https://res.cloudinary.com/thankyou/image/upload/v1649431071/IKEA/empty_r6kit6.jpg'
+    'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg'
 
   return (
     <NextImage

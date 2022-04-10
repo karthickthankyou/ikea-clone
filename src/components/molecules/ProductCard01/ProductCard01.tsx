@@ -89,7 +89,7 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
           </button>
         </OverlapSpace.Child>
         <OverlapSpace.Child>
-          <Link key={id} href={`products/${id}`}>
+          <Link key={id} href={`/products/${id}`}>
             <Image src={src} alt='' />
           </Link>
         </OverlapSpace.Child>
@@ -100,6 +100,7 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
         {category} {subCategory}
       </div>
       <Price price={price} oldPrice={oldPrice} className='mt-3' />
+      {outOfStock && <div className='text-red'>Out of stock</div>}
       {rating && (
         <Rating
           rating={rating}

@@ -256,8 +256,9 @@ export const useRedirectLoggedInUsers = () => {
 }
 
 export const useRedirectUnAuthenticatedUsers = () => {
-  const uid = useAppSelector(selectUid)
   const router = useRouter()
+  const uid = useAppSelector(selectUid)
+  console.log('UID', uid)
 
   if (!uid) {
     notify({ message: 'You are not logged in', type: 'warning' })

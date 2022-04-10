@@ -80,6 +80,7 @@ const CartTemplate = ({
           <Button
             fullWidth
             size='xl'
+            disabled={products?.length === 0}
             isLoading={creatingCheckoutSession}
             onClick={createCheckOutSession}
           >

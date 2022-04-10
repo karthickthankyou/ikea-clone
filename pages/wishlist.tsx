@@ -29,7 +29,7 @@ const WishlistPage: NextPage = () => {
       <div className='grid grid-cols-4 gap-4'>
         {wishlistedProducts?.map((item) => (
           <div key={item.id}>
-            <ProductCard01 product={{ ...item.product, id: item.id }} />
+            <ProductCard01 product={{ ...item.product, id: item.pid }} />
           </div>
         ))}
       </div>

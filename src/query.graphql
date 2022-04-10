@@ -204,3 +204,17 @@ query GetViewedProducts($uid: String) {
     }
   }
 }
+
+mutation PostNewProduct($object: products_insert_input!) {
+  insert_products_one(object: $object) {
+    category
+    createdAt
+    id
+    discount
+    images
+    name
+    price
+    oldPrice
+    description
+  }
+}

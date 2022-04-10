@@ -14,8 +14,8 @@ import Layout from 'src/components/templates/Layout/Layout'
 import { useGetWishlisted } from 'src/store/userProducts/userProductsHook'
 
 export const AppLevelHooks = () => {
-  useDebouncedDispatch()
   useUserListener()
+  useDebouncedDispatch()
   useGetWishlisted()
 
   return null
