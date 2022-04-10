@@ -50,7 +50,7 @@ export default async function handler(req, res) {
       const objects = productIds.split(',').map((item) => ({ pid: item, uid }))
       console.log('Objects: ', objects)
       urqlAdminClient
-        .mutation(CompleteOrderDocument, objects)
+        .mutation(CompleteOrderDocument, { objects })
         .toPromise()
         .then((result) => {
           console.log('Success after mutation: ', JSON.stringify(result))
