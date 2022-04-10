@@ -1,6 +1,6 @@
 import Container from 'src/components/atoms/Container'
 import { sampleImagesForMasonry } from 'src/components/templates/Masonry2/data'
-
+import { useAppSelector } from 'src/store'
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 import PriceCard from 'src/components/molecules/PriceCard/PriceCard'
 
@@ -13,10 +13,17 @@ import DesignerThoughtsCard from 'src/components/molecules/DesignerThoughtsCard'
 import { Dispatch, SetStateAction, useState } from 'react'
 
 import Sidebar from 'src/components/molecules/Sidebar'
-import { GetProductQuery } from 'src/generated/graphql'
+import {
+  GetProductQuery,
+  GetViewedProductsQuery,
+  useGetViewedProductsQuery,
+} from 'src/generated/graphql'
 import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
 import Price from 'src/components/molecules/Price/Price'
+import Link from 'src/components/atoms/Link/Link'
+import Badge from 'src/components/atoms/Badge'
 import Masonry2 from '../Masonry2'
+import Skeleton from 'src/components/molecules/Skeleton/Skeleton'
 
 export interface IProductPageTemplateProps {
   product: UseQueryState<GetProductQuery, object>
@@ -41,16 +48,56 @@ const InfoInSidebar = ({
   </button>
 )
 
-const RecentlyViewedProducts = ({ title }: { title: string }) => {
-  const items = sampleImagesForMasonry
+const RecentlyViewedProducts = ({
+  title,
+  currentProductId,
+}: {
+  title: string
+  currentProductId: number | undefined
+}) => {
+  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const [viewedItems] = useGetViewedProductsQuery({
+    variables: {
+      uid,
+    },
+    pause: !uid,
+  })
+  const { data, fetching } = viewedItems
+
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
+      <div className='flex gap-1'>
+        {fetching &&
+          [1, 2, 3, 4, 5, 6].map((item) => (
+            <Skeleton key={item} className='w-48 h-64' />
+          ))}
+      </div>
       <HScroll className='flex gap-responsive'>
         <HScroll.Body className='gap-1'>
-          {items.map((item) => (
-            <HScroll.Child className='relative mb-12 w-52' key={item.src}>
-              <Image src={item.src} alt='' />
+          {data?.views.map((item) => (
+            <HScroll.Child className='relative mb-12 w-52' key={item.id}>
+              <Link href={`/products/${item.pid}`}>
+                <Image
+                  src={item.product.images && item.product.images[0]}
+                  alt=''
+                />
+                <div className='mt-2 text-sm line-clamp-2'>
+                  {item.product.name}
+                </div>
+                <Price
+                  price={item.product.price}
+                  oldPrice={item.product.oldPrice}
+                  className='mt-2'
+                />
+                <div className='mt-1'>
+                  {currentProductId === item.pid && (
+                    <Badge size='sm' variant='red'>
+                      Current page
+                    </Badge>
+                  )}
+                </div>
+              </Link>
             </HScroll.Child>
           ))}
         </HScroll.Body>
@@ -234,7 +281,10 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         </div>
 
         <RelatedProducts title='Related products' />
-        <RecentlyViewedProducts title='Recently viewed products' />
+        <RecentlyViewedProducts
+          title='Recently viewed products'
+          currentProductId={data?.id}
+        />
       </Container>
     </>
   )

@@ -71,10 +71,10 @@ const HomeBanner = () => {
         </div>
 
         <div className='absolute -translate-y-1/2 top-full animate-move-right-48'>
-          <BlurredCirle className='fill-primary/50 ' radius={600} />
+          <BlurredCirle className='fill-red/50 ' radius={600} />
         </div>
         <div className='absolute -translate-y-1/2 top-1/4 animate-move-right-36'>
-          <BlurredCirle className='fill-red/50 ' radius={400} />
+          <BlurredCirle className='fill-primary/50 ' radius={400} />
         </div>
         <div className='absolute -translate-y-1/2 top-full animate-move-right-24'>
           <BlurredCirle className='fill-green/30 ' radius={200} />

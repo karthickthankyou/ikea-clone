@@ -132,6 +132,8 @@ query GetUserProducts($uid: String!) {
     product {
       name
       price
+      oldPrice
+      images
       outOfStock
       category
       subCategory
@@ -144,5 +146,61 @@ query GetUserProducts($uid: String!) {
 mutation CompleteOrder($objects: [orders_insert_input!]!) {
   insert_orders(objects: $objects) {
     affected_rows
+  }
+}
+
+query GetOrderedProducts(
+  $distinct_on: [orders_select_column!]
+  $limit: Int
+  $offset: Int
+  $order_by: [orders_order_by!]
+  $where: orders_bool_exp
+) {
+  orders(
+    distinct_on: $distinct_on
+    limit: $limit
+    offset: $offset
+    order_by: $order_by
+    where: $where
+  ) {
+    id
+    pid
+    product {
+      images
+      name
+    }
+    updatedAt
+  }
+  orders_aggregate(
+    distinct_on: $distinct_on
+    order_by: $order_by
+    where: $where
+  ) {
+    aggregate {
+      count
+    }
+  }
+}
+
+mutation InsertProductView($uid: String!, $pid: Int) {
+  insert_views_one(object: { uid: $uid, pid: $pid }) {
+    uid
+    pid
+    id
+    created_at
+    updated_at
+  }
+}
+
+query GetViewedProducts($uid: String) {
+  views(distinct_on: pid, limit: 12, where: { uid: { _eq: $uid } }) {
+    id
+    pid
+    product {
+      images
+      name
+      price
+      oldPrice
+    }
   }
 }

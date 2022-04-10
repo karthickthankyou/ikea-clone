@@ -14,7 +14,7 @@ async function CreateStripeSession(
   const transformedItems = items.map(
     (item: { image: any; name: any; price: number; description: any }) => ({
       price_data: {
-        currency: 'usd',
+        currency: 'inr',
         product_data: {
           images: [item.image],
           name: item.name,

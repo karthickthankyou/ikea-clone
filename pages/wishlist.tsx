@@ -21,7 +21,9 @@ const WishlistPage: NextPage = () => {
   return (
     <Container>
       <NextSeo
-        title={`${products.data?.user_products.length} - Ikea clone | Karthick Ragavendran`}
+        title={`${
+          products.data?.user_products.length || 'Loading...'
+        } - Ikea clone | Karthick Ragavendran`}
         description='Create account with your email or google account.'
       />
       <div className='grid grid-cols-4 gap-4'>

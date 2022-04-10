@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 
-import { useGetUserProductsQuery } from 'src/generated/graphql'
+import {
+  useGetUserProductsQuery,
+  useGetOrderedProductsQuery,
+} from 'src/generated/graphql'
 import { useAppDispatch, useAppSelector } from '..'
 import { selectUid } from '../user/userSlice'
 import { setUserProducts } from './userProductsSlice'
@@ -26,4 +29,19 @@ export const useGetWishlisted = () => {
       })
     )
   }, [data, dispatch, error, fetching, stale])
+}
+
+export const useGetOrderedItems = () => {
+  const uid = useAppSelector(selectUid)
+
+  const [{ data, fetching, stale, error }] = useGetOrderedProductsQuery({
+    variables: {
+      where: {
+        uid: { _eq: uid },
+      },
+    },
+    pause: !uid,
+  })
+
+  return { data, fetching, stale, error } as const
 }

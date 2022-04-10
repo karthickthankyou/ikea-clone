@@ -33,10 +33,21 @@ const Template: ComponentStory<typeof CartCard> = (args) => (
 
 export const Primary = Template.bind({})
 Primary.args = {
-  id: 1,
-  title: 'BOKKREMLA',
-  description: 'Desk, white',
-  price: 2.29,
-  buttonType: User_Products_Type_Enum.InCart,
-  src: 'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+  product: {
+    pid: 1,
+    createdAt: '',
+    id: 1,
+    type: User_Products_Type_Enum.Wishlisted,
+    uid: '',
+    updatedAt: '',
+    product: {
+      name: 'BOKKREMLA',
+      category: 'Office',
+      subCategory: 'Desk, white',
+      price: 2.29,
+      images: [
+        'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
+      ],
+    },
+  },
 }

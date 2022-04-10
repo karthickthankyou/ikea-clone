@@ -13,7 +13,7 @@ const Price = ({
 }: IPriceProps) => (
   <div>
     <div className={`flex gap-2 items-center flex-wrap ${className}`}>
-      {oldPrice && (
+      {oldPrice && oldPrice > price && (
         <s className='flex items-start leading-none'>
           Rs.{oldPrice?.toLocaleString('hi')}
         </s>

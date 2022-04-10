@@ -1,4 +1,5 @@
 import { createClient } from 'urql'
+import dateFormat from 'dateformat'
 
 const HASURA_ADMIN = process.env.HASURA_ADMIN || ''
 
@@ -10,3 +11,5 @@ export const urqlAdminClient = createClient({
     },
   },
 })
+
+export const formatDate = (date: string) => dateFormat(date, 'mmm d yyyy')

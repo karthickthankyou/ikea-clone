@@ -14,13 +14,10 @@ import ProductCard01 from 'src/components/molecules/ProductCard01'
 import AdBanner from 'src/components/organisms/AdBanner/AdBanner'
 import HomeBanner from 'src/components/organisms/HomeBanner'
 import Masonry2 from 'src/components/templates/Masonry2'
-import { useGetProductsQuery } from 'src/generated/graphql'
 import { Children } from 'src/types'
 import InfoCard from 'src/components/molecules/InfoCard'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import Link from 'src/components/atoms/Link'
-import InformationCircleIcon from '@heroicons/react/solid/InformationCircleIcon'
-import Tooltip from 'src/components/atoms/Tooltip/Tooltip'
 import DeveloperCommentary from 'src/components/molecules/DeveloperCommentary/DeveloperCommentary'
 
 const tags = [

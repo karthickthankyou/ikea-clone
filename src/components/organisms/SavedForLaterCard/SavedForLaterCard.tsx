@@ -10,11 +10,12 @@ import { useAppSelector } from 'src/store'
 import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
 
 type UserProductsData = Required<UserProductSliceType['userProducts']>['data']
-export interface ICartCardProps {
+
+export interface ISavedForLaterCardProps {
   product: UserProductsData['user_products'][number]
 }
 
-const CartCard = ({ product }: ICartCardProps) => {
+const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
   const {
     pid,
     product: {
@@ -27,7 +28,7 @@ const CartCard = ({ product }: ICartCardProps) => {
       images,
     },
   } = product
-  const [{ fetching: savingForLater, data, error }, removeProductFromCart] =
+  const [{ fetching: movingToCart, data, error }, insertUserProduct] =
     useInsertUserProductsOneMutation()
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   return (
@@ -35,34 +36,34 @@ const CartCard = ({ product }: ICartCardProps) => {
       <div className='flex-shrink-0 w-24 h-24 mr-2'>
         <Image src={images && images[0]} alt='' />
       </div>
-      <div className='flex-grow text-sm'>
-        <div className='max-w-md font-medium'>{name}</div>
-        <div className='text-gray-600'>
+      <div className='flex-grow'>
+        <div className='text-sm font-medium line-clamp-3'>{name}</div>
+        <div className='mt-1 text-sm text-gray-600'>
           {category} {subCategory}
         </div>
-      </div>
-      <div className='flex flex-col items-end justify-between '>
-        <Price price={price} oldPrice={oldPrice} />
-
-        <Button
-          variant='text'
-          className='hidden group-hover:block'
-          isLoading={savingForLater}
-          onClick={() =>
-            removeProductFromCart({
-              object: {
-                pid,
-                uid,
-                type: User_Products_Type_Enum.SavedForLater,
-              },
-            })
-          }
-        >
-          Save for later
-        </Button>
+        <Price price={price} oldPrice={oldPrice} className='mt-2' />
+        {outOfStock && <div className='text-red'>Out of stock</div>}
+        <div className='mt-2'>
+          <Button
+            variant='text'
+            className='hidden group-hover:block'
+            isLoading={movingToCart}
+            onClick={() =>
+              insertUserProduct({
+                object: {
+                  pid,
+                  uid,
+                  type: User_Products_Type_Enum.InCart,
+                },
+              })
+            }
+          >
+            Move to cart
+          </Button>
+        </div>
       </div>
     </div>
   )
 }
 
-export default CartCard
+export default SavedForLaterCard

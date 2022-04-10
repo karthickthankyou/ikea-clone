@@ -4,18 +4,31 @@ import { NextSeo } from 'next-seo'
 
 import { client, ssrCache } from 'src/config/urqlClientWonka'
 
-import { GetProductDocument, useGetProductQuery } from 'src/generated/graphql'
+import {
+  GetProductDocument,
+  useGetProductQuery,
+  useInsertProductViewMutation,
+  useGetViewedProductsQuery,
+} from 'src/generated/graphql'
 import ProductPageTemplate from 'src/components/templates/ProductPageTemplate'
 import { useRouter } from 'next/router'
 import { getQueryParam } from 'src/util/functions'
+import { useAppSelector } from 'src/store'
+import { useEffect } from 'react'
 
 const ProductPage: NextPage = () => {
   const id = parseInt(getQueryParam(useRouter().query.id), 10)
+  const uid = useAppSelector((state) => state.user?.data.user?.uid)
   const [data] = useGetProductQuery({
     variables: { id },
   })
 
   const title = data.data?.product?.name
+  const [, wishlistProduct] = useInsertProductViewMutation()
+
+  useEffect(() => {
+    if (uid) wishlistProduct({ uid, pid: id })
+  }, [id, uid, wishlistProduct])
 
   return (
     <div>

@@ -89,7 +89,7 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
           </button>
         </OverlapSpace.Child>
         <OverlapSpace.Child>
-          <Link key={id} href={`product/${id}`}>
+          <Link key={id} href={`products/${id}`}>
             <Image src={src} alt='' />
           </Link>
         </OverlapSpace.Child>

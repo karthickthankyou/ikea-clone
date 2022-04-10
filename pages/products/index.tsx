@@ -18,7 +18,7 @@ import {
 } from 'src/store/search'
 
 const Pagination = dynamic(
-  () => import('../src/components/molecules/Pagination/Pagination'),
+  () => import('../../src/components/molecules/Pagination/Pagination'),
   { ssr: false }
 )
 
@@ -47,7 +47,7 @@ const SearchProductsPage: NextPage = () => {
     <Container>
       <FormProvider {...methods}>
         <NextSeo
-          title={`${productsLength} Search page - Ikea clone | Karthick Ragavendran`}
+          title={`${productsLength} of ${totalCount} Search page - Ikea clone | Karthick Ragavendran`}
           description='Search products and actually buy.'
         />
         <ProductListing />
