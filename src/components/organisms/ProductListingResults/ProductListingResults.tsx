@@ -21,8 +21,6 @@ const ProductListingResults = () => {
   const limit = useAppSelector((state) => state.search.queryArgs.limit) || 0
   const products = useAppSelector(selectProductsWithWishlist)
 
-  console.log('products ', products)
-
   if (products.fetching)
     return (
       <Grid>

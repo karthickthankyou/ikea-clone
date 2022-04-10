@@ -36,7 +36,9 @@ const PriceCard = ({
 }: IPriceCardProps) => {
   const [{ fetching, data, error }, AddProductToCart] =
     useInsertUserProductsOneMutation()
-  console.log(fetching, data, error)
+
+  console.log('fetcing ', fetching)
+
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   const cartItems = useAppSelector(
     (state) => state.userProducts.userProducts.data?.user_products
@@ -83,6 +85,7 @@ const PriceCard = ({
       <Button
         size='lg'
         disabled={notInStock}
+        isLoading={fetching}
         className='flex items-center gap-2 mt-8'
         onClick={() =>
           AddProductToCart({

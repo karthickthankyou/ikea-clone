@@ -1,5 +1,7 @@
 import Stripe from 'stripe'
 import { buffer } from 'micro'
+import { urqlAdminClient } from 'lib/client'
+import { CompleteOrderDocument } from 'src/generated/graphql'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -34,7 +36,16 @@ export default async function handler(req, res) {
 
     // 2. Handle event type (add business logic here)
     if (event.type === 'checkout.session.completed') {
-      console.log(`💰  Payment received!`, event)
+      console.log(`💰  Payment received! Metadata here:`, event.metadata)
+
+      const { uid, productIds } = event.metadata
+      const objects = productIds.split(',').map((item) => ({ pid: item, uid }))
+      urqlAdminClient
+        .mutation(CompleteOrderDocument, objects)
+        .toPromise()
+        .then((result) => {
+          console.log(result) // { data: ... }
+        })
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
     }

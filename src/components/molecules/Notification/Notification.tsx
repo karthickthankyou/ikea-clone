@@ -26,7 +26,6 @@ const Notifications = () => {
   })
 
   const getTextcolor = (type: NotificationType['type']) => {
-    console.log(type, '...')
     switch (type) {
       case 'success':
         return 'text-green-800 bg-green-50/60'

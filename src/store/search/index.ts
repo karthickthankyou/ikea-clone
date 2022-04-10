@@ -107,7 +107,6 @@ export const selectProductsWithWishlist = createSelector(
   (products, userProducts): ProductsWishlisted => {
     const wishlistedProducts = userProducts.data?.user_products || []
 
-    console.log('userProducts ', userProducts)
     const productsUpdated = products.data?.products.map((product) => {
       if (userProducts.fetching)
         return {

@@ -22,10 +22,17 @@ const CartPage: NextPage = () => {
   const { status } = router.query
 
   const [loading, setLoading] = useState(false)
-  const cartProducts = products.data?.user_products.filter(
+
+  const {
+    data: productsData,
+    fetching: productsFetching,
+    error: productsError,
+  } = products
+
+  const cartProducts = productsData?.user_products.filter(
     (item) => item.type === User_Products_Type_Enum.InCart
   )
-  const savedForLater = products.data?.user_products.filter(
+  const savedForLater = productsData?.user_products.filter(
     (item) => item.type === User_Products_Type_Enum.SavedForLater
   )
 
@@ -65,6 +72,10 @@ const CartPage: NextPage = () => {
       />
       <div className='mt-2 mb-4 text-2xl'>Cart</div>
       <div className='flex flex-col gap-8 '>
+        {productsFetching &&
+          [1, 2, 3, 4].map((item) => (
+            <div className='w-full bg-gray-200 h-28 animate-pulse' key={item} />
+          ))}
         {cartProducts?.map((item) => (
           <CartCard
             buttonType={User_Products_Type_Enum.SavedForLater}
@@ -78,13 +89,19 @@ const CartPage: NextPage = () => {
         ))}
       </div>
 
-      <Button onClick={createCheckOutSession}>Checkout</Button>
+      <Button isLoading={loading} onClick={createCheckOutSession}>
+        Checkout
+      </Button>
 
       <Link href='/products' className='inline-block mt-4'>
         Shop more
       </Link>
       <div className='mt-2 mb-4 text-2xl'>Saved for later</div>
       <div className='flex flex-col gap-8 '>
+        {productsFetching &&
+          [1, 2, 3, 4].map((item) => (
+            <div className='w-full bg-gray-200 h-28 animate-pulse' key={item} />
+          ))}
         {savedForLater?.map((item) => (
           <CartCard
             buttonType={User_Products_Type_Enum.InCart}

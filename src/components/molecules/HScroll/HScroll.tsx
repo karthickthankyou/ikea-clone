@@ -73,9 +73,6 @@ export type HScrollBodyProps = {
 
 const HScrollBody = ({ children, className }: HScrollBodyProps) => {
   const { scrollEl, scrollListener } = useScrollContext()
-  // React.Children.forEach(children, (child) => {
-  //   console.log('name =', child)
-  // })
 
   return (
     <div

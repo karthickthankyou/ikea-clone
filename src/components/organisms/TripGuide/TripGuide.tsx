@@ -57,7 +57,7 @@ const Section = ({
 
 const TripGuide = () => {
   const uid = useAppSelector(selectUid)
-  console.log('UID ', uid)
+
   return (
     <div className='px-16 py-24 overflow-scroll bg-gray-25 no-scrollbar'>
       <div className='flex flex-col items-center justify-center w-full mt-2 space-y-2 '>

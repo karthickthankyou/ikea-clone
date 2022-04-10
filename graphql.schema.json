@@ -7234,22 +7234,6 @@
         "description": "Order information",
         "fields": [
           {
-            "name": "activities",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "_text",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "args": [],
@@ -7485,22 +7469,6 @@
               "ofType": {
                 "kind": "SCALAR",
                 "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
                 "ofType": null
               }
             },
@@ -7854,18 +7822,6 @@
             "deprecationReason": null
           },
           {
-            "name": "activities",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "_text_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -7907,18 +7863,6 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "Int_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8001,18 +7945,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "activities",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "_text",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -8054,18 +7986,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -8143,18 +8063,6 @@
             "deprecationReason": null
           },
           {
-            "name": "status",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "uid",
             "description": null,
             "args": [],
@@ -8220,18 +8128,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8427,18 +8323,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "activities",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": null,
             "type": {
@@ -8476,18 +8360,6 @@
           },
           {
             "name": "pid",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -8563,12 +8435,6 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "activities",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": "column name",
             "isDeprecated": false,
@@ -8582,12 +8448,6 @@
           },
           {
             "name": "pid",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -8613,18 +8473,6 @@
         "description": "input type for updating data in table \"orders\"",
         "fields": null,
         "inputFields": [
-          {
-            "name": "activities",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "_text",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
           {
             "name": "createdAt",
             "description": null,
@@ -8655,18 +8503,6 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
               "ofType": null
             },
             "defaultValue": null,
@@ -8803,12 +8639,6 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "activities",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "createdAt",
             "description": "column name",
             "isDeprecated": false,
@@ -8822,12 +8652,6 @@
           },
           {
             "name": "pid",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "status",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

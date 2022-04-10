@@ -15,7 +15,6 @@ const ProductPage: NextPage = () => {
     variables: { id },
   })
 
-  console.log('data ', data)
   const title = data.data?.product?.name
 
   return (

@@ -13,10 +13,9 @@ import DesignerThoughtsCard from 'src/components/molecules/DesignerThoughtsCard'
 import { Dispatch, SetStateAction, useState } from 'react'
 
 import Sidebar from 'src/components/molecules/Sidebar'
-import { GetProductQuery, useGetProductQuery } from 'src/generated/graphql'
-import { getQueryParam } from 'src/util/functions'
-import { useRouter } from 'next/router'
+import { GetProductQuery } from 'src/generated/graphql'
 import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
+import Price from 'src/components/molecules/Price/Price'
 import Masonry2 from '../Masonry2'
 
 export interface IProductPageTemplateProps {
@@ -125,7 +124,8 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
       >
         <Sidebar.Body>
           <div className='text-2xl font-semibold'>Product details</div>
-          <div className='mt-4'>MRP Rs.345 (incl. tax)</div>
+          <Price price={data?.price} oldPrice={data?.oldPrice} />
+          <div className='mt-4'>MRP $.{data?.price} (incl. tax)</div>
           <div className='mt-2 text-gray-600'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
             ipsa perferendis expedita aspernatur! Autem modi nam exercitationem,
