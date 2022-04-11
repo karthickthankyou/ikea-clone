@@ -13,7 +13,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  _text: any;
   jsonb: any;
   numeric: any;
   smallint: any;
@@ -78,19 +77,6 @@ export type String_Comparison_Exp = {
   _regex?: InputMaybe<Scalars['String']>;
   /** does the column match the given SQL regular expression */
   _similar?: InputMaybe<Scalars['String']>;
-};
-
-/** Boolean expression to compare columns of type "_text". All fields are combined with logical 'AND'. */
-export type _Text_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['_text']>;
-  _gt?: InputMaybe<Scalars['_text']>;
-  _gte?: InputMaybe<Scalars['_text']>;
-  _in?: InputMaybe<Array<Scalars['_text']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['_text']>;
-  _lte?: InputMaybe<Scalars['_text']>;
-  _neq?: InputMaybe<Scalars['_text']>;
-  _nin?: InputMaybe<Array<Scalars['_text']>>;
 };
 
 /** Categories of products */
@@ -1440,7 +1426,7 @@ export type Products = {
   description?: Maybe<Scalars['String']>;
   discount?: Maybe<Scalars['smallint']>;
   id: Scalars['Int'];
-  images?: Maybe<Scalars['_text']>;
+  images?: Maybe<Scalars['jsonb']>;
   name: Scalars['String'];
   oldPrice?: Maybe<Scalars['numeric']>;
   outOfStock?: Maybe<Scalars['Boolean']>;
@@ -1451,11 +1437,17 @@ export type Products = {
   subCategory: Scalars['String'];
   tags?: Maybe<Scalars['jsonb']>;
   updatedAt: Scalars['timestamptz'];
-  url: Scalars['String'];
+  url?: Maybe<Scalars['String']>;
   /** An array relationship */
   user_products: Array<User_Products>;
   /** An aggregate relationship */
   user_products_aggregate: User_Products_Aggregate;
+};
+
+
+/** Products */
+export type ProductsImagesArgs = {
+  path?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1516,6 +1508,7 @@ export type Products_Aggregate_FieldsCountArgs = {
 
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Products_Append_Input = {
+  images?: InputMaybe<Scalars['jsonb']>;
   tags?: InputMaybe<Scalars['jsonb']>;
 };
 
@@ -1540,7 +1533,7 @@ export type Products_Bool_Exp = {
   description?: InputMaybe<String_Comparison_Exp>;
   discount?: InputMaybe<Smallint_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
-  images?: InputMaybe<_Text_Comparison_Exp>;
+  images?: InputMaybe<Jsonb_Comparison_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
   oldPrice?: InputMaybe<Numeric_Comparison_Exp>;
   outOfStock?: InputMaybe<Boolean_Comparison_Exp>;
@@ -1563,16 +1556,19 @@ export enum Products_Constraint {
 
 /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
 export type Products_Delete_At_Path_Input = {
+  images?: InputMaybe<Array<Scalars['String']>>;
   tags?: InputMaybe<Array<Scalars['String']>>;
 };
 
 /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
 export type Products_Delete_Elem_Input = {
+  images?: InputMaybe<Scalars['Int']>;
   tags?: InputMaybe<Scalars['Int']>;
 };
 
 /** delete key/value pair or string element. key/value pairs are matched based on their key value */
 export type Products_Delete_Key_Input = {
+  images?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['String']>;
 };
 
@@ -1593,7 +1589,7 @@ export type Products_Insert_Input = {
   description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['Int']>;
-  images?: InputMaybe<Scalars['_text']>;
+  images?: InputMaybe<Scalars['jsonb']>;
   name?: InputMaybe<Scalars['String']>;
   oldPrice?: InputMaybe<Scalars['numeric']>;
   outOfStock?: InputMaybe<Scalars['Boolean']>;
@@ -1698,6 +1694,7 @@ export type Products_Pk_Columns_Input = {
 
 /** prepend existing jsonb value of filtered columns with new jsonb value */
 export type Products_Prepend_Input = {
+  images?: InputMaybe<Scalars['jsonb']>;
   tags?: InputMaybe<Scalars['jsonb']>;
 };
 
@@ -1746,7 +1743,7 @@ export type Products_Set_Input = {
   description?: InputMaybe<Scalars['String']>;
   discount?: InputMaybe<Scalars['smallint']>;
   id?: InputMaybe<Scalars['Int']>;
-  images?: InputMaybe<Scalars['_text']>;
+  images?: InputMaybe<Scalars['jsonb']>;
   name?: InputMaybe<Scalars['String']>;
   oldPrice?: InputMaybe<Scalars['numeric']>;
   outOfStock?: InputMaybe<Scalars['Boolean']>;
@@ -3522,7 +3519,7 @@ export type GetProductQueryVariables = Exact<{
 }>;
 
 
-export type GetProductQuery = { __typename?: 'query_root', product?: { __typename?: 'products', category: string, createdAt: any, discount?: any | null, id: number, name: string, oldPrice?: any | null, outOfStock?: boolean | null, price: any, rating?: any | null, reviews?: any | null, subCategory: string, tags?: any | null, updatedAt: any, url: string } | null };
+export type GetProductQuery = { __typename?: 'query_root', product?: { __typename?: 'products', category: string, createdAt: any, discount?: any | null, id: number, name: string, oldPrice?: any | null, outOfStock?: boolean | null, price: any, rating?: any | null, reviews?: any | null, subCategory: string, tags?: any | null, updatedAt: any, url?: string | null } | null };
 
 export type SearchProductsQueryVariables = Exact<{
   args: Search_Products_Args;

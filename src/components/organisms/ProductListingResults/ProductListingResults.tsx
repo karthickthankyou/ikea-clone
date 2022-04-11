@@ -40,8 +40,15 @@ const ProductListingResults = () => {
 
   if (productList.length === 0)
     return (
-      <div className='flex items-center justify-center h-screen50'>
-        Oops. No results found.
+      <div className='flex flex-col items-center justify-center h-screen50'>
+        <div className='text-left'>
+          <div className='text-xl font-semibold'>
+            No matching products found.
+          </div>
+          <div className='mt-1 text-sm text-gray'>
+            Try modifying the filters.
+          </div>
+        </div>
       </div>
     )
 

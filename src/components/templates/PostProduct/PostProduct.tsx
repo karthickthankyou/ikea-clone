@@ -101,6 +101,7 @@ const PostProductTemplate = () => {
         subCategory: data.subCategory,
         tags: data.tags,
         seller: uid,
+        images: data.images,
       },
     })
   })

@@ -215,7 +215,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
             <Masonry2 gap='6' columns='3' shortOnes={[1, 2, 5, 6, 9]}>
               {sampleImagesForMasonry.slice(0, 6).map((item) => (
                 <div
-                  className='h-full rounded-lg shadow-lg bg-red/30'
+                  className='h-full rounded-lg shadow-lg bg-yellow/30'
                   key={item.src}
                 >
                   <Image alt='' src={item.src} layout='fill' />

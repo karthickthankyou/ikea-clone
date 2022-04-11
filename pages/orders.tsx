@@ -24,6 +24,7 @@ const OrdersPage: NextPage = () => {
         title={`${count || 'Loading...'} - Ikea clone | Karthick Ragavendran`}
         description='Create account with your email or google account.'
       />
+      <div className='mb-2 text-lg font-semibold'>Purchased items</div>
       <div className='grid min-h-screen grid-cols-4 gap-4'>
         {fetching &&
           [1, 2, 3, 4, 5, 6].map((item) => (
