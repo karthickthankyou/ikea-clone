@@ -7,29 +7,6 @@ import { selectUid, setUser, resetUser, Claims } from './userSlice'
 
 const db = getDatabase()
 
-// export const useUserListener = () => {
-//   const dispatch = useAppDispatch()
-//   useEffect(() => {
-//     onAuthStateChanged(auth, async (user) => {
-//       console.log('User: ', user)
-//       if (!user) {
-//         dispatch(resetUser())
-//       } else {
-//         const displayName = user?.displayName || null
-//         const uid = user?.uid || null
-//         const email = user?.email || null
-
-//         dispatch(
-//           setUser({
-//             user: { displayName, uid, email },
-//             claims: null,
-//           })
-//         )
-//       }
-//     })
-//   }, [dispatch])
-// }
-
 export const useGetToken = () => {
   const [token, settoken] = useState<string | null | undefined>(null)
   const uid = useAppSelector(selectUid)
@@ -54,54 +31,57 @@ export const useMetadataChange = () => {
   const user = auth.currentUser
   const dispatch = useAppDispatch()
 
-  if (user) {
-    const metadataRef = ref(db, `metadata/${user.uid}/refreshTime`)
-    onValue(metadataRef, async (data) => {
-      if (!data.exists) return
-      // Force refresh to pick up the latest custom claims changes.
-      const token = await user.getIdToken(true)
-      const idTokenResult = await user.getIdTokenResult()
-      const hasuraClaim = idTokenResult.claims[
-        'https://hasura.io/jwt/claims'
-      ] as Claims
-      console.log('hasuraClaim ', hasuraClaim)
-
-      dispatch(
-        setUser({
-          user: {
-            displayName: user.displayName,
-            uid: user.uid,
-            email: user.email,
-          },
-          claims: hasuraClaim,
-        })
-      )
-    })
-  }
-}
-
-export const useUserListener = () => {
-  const dispatch = useAppDispatch()
-
-  useMetadataChange()
-
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (!user) {
-        dispatch(resetUser())
-      } else {
+    if (user) {
+      const metadataRef = ref(db, `metadata/${user.uid}/refreshTime`)
+      onValue(metadataRef, async (data) => {
+        console.log('metadataRef changed', data)
+        if (!data.exists) return
+
         const token = await user.getIdToken(true)
         const idTokenResult = await user.getIdTokenResult()
         const hasuraClaim = idTokenResult.claims[
           'https://hasura.io/jwt/claims'
         ] as Claims
-        console.log('hasuraClaim ', hasuraClaim)
 
-        const displayName = user?.displayName || null
-        const uid = user?.uid || null
-        const email = user?.email || null
+        console.log('useMetadataChange ', idTokenResult)
+
+        dispatch(
+          setUser({
+            user: {
+              displayName: user.displayName,
+              uid: user.uid,
+              email: user.email,
+            },
+            claims: hasuraClaim,
+          })
+        )
+      })
+    }
+  }, [dispatch, user])
+}
+
+export const useUserListener = () => {
+  const dispatch = useAppDispatch()
+
+  useEffect(
+    () =>
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) {
+          dispatch(resetUser())
+          return
+        }
+
+        const token = await user.getIdToken(true)
+        const idTokenResult = await user.getIdTokenResult()
+        const hasuraClaim = idTokenResult.claims[
+          'https://hasura.io/jwt/claims'
+        ] as Claims
 
         if (hasuraClaim) {
+          const displayName = user?.displayName || null
+          const uid = user?.uid || null
+          const email = user?.email || null
           dispatch(
             setUser({
               user: { displayName, uid, email },
@@ -109,7 +89,7 @@ export const useUserListener = () => {
             })
           )
         }
-      }
-    })
-  }, [dispatch])
+      }),
+    [dispatch]
+  )
 }

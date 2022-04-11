@@ -104,13 +104,15 @@ const Login = () => (
             </div>
 
             <LoginForm className='p-6 sm:hidden' />
-            <Link
-              href='/'
-              className='flex items-center justify-start w-full gap-1 mt-8 group'
-            >
-              <ArrowLeftIcon className='w-4 h-4 group-hover:animate-slide-left' />{' '}
-              Back to home
-            </Link>
+            <div className='w-full max-w-sm'>
+              <Link
+                href='/'
+                className='flex items-center justify-start w-full gap-1 mt-8 group'
+              >
+                <ArrowLeftIcon className='w-4 h-4 group-hover:animate-slide-left' />{' '}
+                Back to home
+              </Link>
+            </div>
           </div>
         </OverlapSpace.Child>
         <OverlapSpace.Child className='relative -z-10 animate-spin-30'>
@@ -132,7 +134,7 @@ const Login = () => (
         </OverlapSpace.Child>
       </OverlapSpace>
       <div className='items-center justify-center hidden sm:flex'>
-        <LoginForm className='max-w-md p-12 ' />
+        <LoginForm className='p-12 ' />
       </div>
     </div>
   </Container>

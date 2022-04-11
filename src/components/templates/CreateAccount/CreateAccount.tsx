@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import Button from 'src/components/atoms/Button/Button'
 import Link from 'src/components/atoms/Link/Link'
-import { useAppDispatch } from 'src/store'
+import { useAppDispatch, useAppSelector } from 'src/store'
 import { signup } from 'src/store/user/userActions'
 import { useAuthPageResponses } from 'src/hooks'
 import { BackToHome } from '../Login/Login'
@@ -38,6 +38,8 @@ const CreateAccountForm = ({ className }: { className?: string }) => {
     },
   })
 
+  const { loading } = useAppSelector((state) => state.user)
+
   useAuthPageResponses()
 
   const dispatch = useAppDispatch()
@@ -63,7 +65,7 @@ const CreateAccountForm = ({ className }: { className?: string }) => {
       <Label title='Display name' error={errors.displayName}>
         <Input placeholder='Enter your name.' {...register('displayName')} />
       </Label>
-      <Button type='submit' fullWidth>
+      <Button isLoading={loading} type='submit' fullWidth>
         Create account
       </Button>
       <div className='mt-12 text-sm'>
@@ -96,7 +98,9 @@ const CreateAccount = () => (
             </div>
 
             <CreateAccountForm className='p-6 sm:hidden' />
-            <BackToHome />
+            <div className='w-full max-w-sm'>
+              <BackToHome />
+            </div>
           </div>
         </OverlapSpace.Child>
         <OverlapSpace.Child className='relative animate-spin-30 -z-10 '>

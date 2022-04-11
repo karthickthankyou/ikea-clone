@@ -12,11 +12,13 @@ import { useDebouncedDispatch } from 'src/hooks'
 import { useUserListener } from 'src/store/user'
 import Layout from 'src/components/templates/Layout/Layout'
 import { useGetWishlisted } from 'src/store/userProducts/userProductsHook'
+import { useMetadataChange } from 'src/store/user/userHooks'
 
 export const AppLevelHooks = () => {
   useUserListener()
   useDebouncedDispatch()
   useGetWishlisted()
+  useMetadataChange()
 
   return null
 }

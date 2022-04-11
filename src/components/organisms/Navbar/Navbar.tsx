@@ -87,12 +87,12 @@ const NavSidebarUser = ({
           ))}
           <div className='py-1' />
           {[
-            { name: 'Track & manage my order', href: '/' },
+            { name: 'My account', href: '/user' },
             { name: 'Wish list', href: '/wishlist' },
             { name: 'Cart', href: '/cart' },
-            { name: 'Shopping list', href: '/purchased' },
+            { name: 'Shopping list', href: '/orders' },
             { name: 'Planners', href: '/' },
-            { name: 'Manage account', href: '/' },
+            { name: 'Track & manage my order', href: '/' },
           ].map((item) => (
             <Link
               key={item.name}
