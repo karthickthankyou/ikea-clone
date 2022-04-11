@@ -11,12 +11,12 @@ const PurchasedCard = ({ product }: IPurchasedCardProps) => {
     updatedAt,
     product: { images, name },
   } = product
-  console.log()
+
   return (
     <div>
       <Image src={images && images[0]} />
       <div className='mt-2 font-semibold'>{name}</div>
-      <div className='mt-2 text-sm'>{formatDate(updatedAt)}</div>
+      <div className='mt-2 text-sm'>{formatDate(updatedAt || '')}</div>
     </div>
   )
 }

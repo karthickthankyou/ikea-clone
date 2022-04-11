@@ -35,7 +35,6 @@ export const useMetadataChange = () => {
     if (user) {
       const metadataRef = ref(db, `metadata/${user.uid}/refreshTime`)
       onValue(metadataRef, async (data) => {
-        console.log('metadataRef changed', data)
         if (!data.exists) return
 
         const token = await user.getIdToken(true)
@@ -43,8 +42,6 @@ export const useMetadataChange = () => {
         const hasuraClaim = idTokenResult.claims[
           'https://hasura.io/jwt/claims'
         ] as Claims
-
-        console.log('useMetadataChange ', idTokenResult)
 
         dispatch(
           setUser({

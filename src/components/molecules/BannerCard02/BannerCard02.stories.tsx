@@ -6,6 +6,7 @@ import BannerCard02 from './BannerCard02'
 export default {
   title: 'molecules/BannerCard02',
   component: BannerCard02,
+  decorators: [(story) => <div className='max-w-xl '>{story()}</div>],
 } as ComponentMeta<typeof BannerCard02>
 
 const Template: ComponentStory<typeof BannerCard02> = (args) => (

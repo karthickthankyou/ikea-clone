@@ -2,7 +2,7 @@
 import ProductFilter from 'src/components/organisms/ProductFilter'
 import HtmlInput from 'src/components/atoms/HtmlInput'
 import { useForm, FormProvider } from 'react-hook-form'
-import { useAppSelector } from 'src/store'
+
 import ProductListingResults from 'src/components/organisms/ProductListingResults/ProductListingResults'
 import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
 import { FilterProductsQuery } from 'src/generated/graphql'
@@ -13,7 +13,7 @@ export interface IProductListingProps {
   products: UseQueryState<FilterProductsQuery, object>
 }
 
-const ProductListing = () => {
+const ProductListing = ({ filterOpen }: { filterOpen?: boolean }) => {
   const methods = useForm({ defaultValues: filterDefaultValues })
   const {
     watch,
@@ -31,7 +31,7 @@ const ProductListing = () => {
             placeholder='Search product name'
             className='inline-block px-2 py-1 border border-1/5'
           />
-          <ProductFilter />
+          <ProductFilter defaultOpen={filterOpen} />
         </div>
       </FormProvider>
       <ProductListingResults />

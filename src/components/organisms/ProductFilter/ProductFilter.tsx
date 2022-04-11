@@ -196,8 +196,8 @@ const FilterButton = ({
   </Button>
 )
 
-const ProductFilter = () => {
-  const [open, setOpen] = useState(false)
+const ProductFilter = ({ defaultOpen = false }: { defaultOpen?: boolean }) => {
+  const [open, setOpen] = useState(defaultOpen)
 
   return (
     <div>

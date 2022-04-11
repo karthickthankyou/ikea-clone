@@ -9,16 +9,17 @@ export default {
   component: ProductFilter,
 } as ComponentMeta<typeof ProductFilter>
 
-const Template: ComponentStory<typeof ProductFilter> = () => {
+const Template: ComponentStory<typeof ProductFilter> = (args) => {
   const methods = useForm({ defaultValues: filterDefaultValues })
 
   return (
     <FormProvider {...methods}>
-      <ProductFilter />
+      <ProductFilter {...args} />
     </FormProvider>
   )
 }
 
 export const Primary = Template.bind({})
-Primary.args = {}
-Primary.parameters = {}
+Primary.args = {
+  defaultOpen: true,
+}

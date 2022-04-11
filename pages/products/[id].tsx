@@ -59,7 +59,6 @@ export const getStaticProps: GetStaticProps<{}, Params> = async (context) => {
   // will receive `posts` as a prop at build time
 
   const id = context.params?.id || -90
-  console.log('id ', id)
   await client?.query(GetProductDocument, { id }).toPromise()
 
   const props = {

@@ -15,7 +15,6 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import Sidebar from 'src/components/molecules/Sidebar'
 import {
   GetProductQuery,
-  GetViewedProductsQuery,
   useGetViewedProductsQuery,
 } from 'src/generated/graphql'
 import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
@@ -202,7 +201,27 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
             </div>
           </div>
           <div className='col-span-2 space-y-6 md:space-y-12'>
-            <Masonry2 gap='6' columns='3' shortOnes={[1, 2, 5, 6, 9]}>
+            <Masonry2
+              gap='6'
+              columns='2'
+              shortOnes={[2, 3]}
+              className='block md:hidden'
+            >
+              {sampleImagesForMasonry.slice(0, 6).map((item) => (
+                <div
+                  className='h-full rounded-lg shadow-lg bg-yellow/30'
+                  key={item.src}
+                >
+                  <Image alt='' src={item.src} layout='fill' />
+                </div>
+              ))}
+            </Masonry2>
+            <Masonry2
+              gap='6'
+              columns='3'
+              shortOnes={[1, 2, 5, 6, 9]}
+              className='hidden md:block'
+            >
               {sampleImagesForMasonry.slice(0, 6).map((item) => (
                 <div
                   className='h-full rounded-lg shadow-lg bg-yellow/30'

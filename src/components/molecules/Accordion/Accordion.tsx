@@ -6,10 +6,16 @@ export interface IAccordionProps {
   title: string
   children: ReactElement | ReactElement[]
   className?: string
+  defaultOpen?: boolean
 }
 
-const Accordion = ({ title, children, className }: IAccordionProps) => (
-  <Disclosure>
+const Accordion = ({
+  title,
+  children,
+  className,
+  defaultOpen,
+}: IAccordionProps) => (
+  <Disclosure defaultOpen={defaultOpen}>
     {({ open }) => (
       <>
         <Disclosure.Button

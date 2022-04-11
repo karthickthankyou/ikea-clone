@@ -12,5 +12,11 @@ const Template: ComponentStory<typeof DeveloperCommentary> = (args) => (
 )
 
 export const Primary = Template.bind({})
-Primary.args = {}
+Primary.args = {
+  children: (
+    <div>
+      Hey, I use this component to sprinkle commentary all over the product.
+    </div>
+  ),
+}
 Primary.parameters = {}

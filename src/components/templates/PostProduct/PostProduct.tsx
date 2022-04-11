@@ -86,8 +86,6 @@ const PostProductTemplate = () => {
   const formData = watch()
   const [{ fetching, error, data: postedData }, postNewProduct] =
     usePostNewProductMutation()
-  console.log('formData ', formData)
-  console.log('Error: ', error, postedData, fetching)
 
   const onSubmit = handleSubmit(async (data) => {
     postNewProduct({
@@ -144,9 +142,9 @@ const PostProductTemplate = () => {
           </Link>
         </div>
       </Dialog>
-      <div className='mt-4 text-2xl '>Add new product</div>
-      <div className='grid gap-6 mt-8 lg:grid-cols-2'>
-        <div className='space-y-6'>
+      <div className='grid gap-6 mt-8'>
+        <div className='w-full max-w-xl p-4 mx-auto space-y-6 shadow-xl'>
+          <div className='mt-4 text-2xl '>Add new product</div>
           <Label title='Product name' error={errors.name}>
             <Input
               type='string'
@@ -276,8 +274,7 @@ const PostProductTemplate = () => {
               </div>
             )}
           </Label>
-        </div>
-        <div className='space-y-6'>
+
           <Label title='Description' error={errors.description}>
             <TextArea
               placeholder='Describe about the product.'

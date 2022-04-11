@@ -9,6 +9,7 @@ import userProductsReducer, {
 } from 'src/store/userProducts/userProductsSlice'
 import { Provider } from 'react-redux'
 import { combineReducers, createStore } from '@reduxjs/toolkit'
+import { sampleProductPageData } from 'src/store/sampleData'
 import ProductPageTemplate from './ProductPageTemplate'
 
 const reducers = { user: userReducer, userProducts: userProductsReducer }
@@ -24,12 +25,13 @@ export default {
   decorators: [(story) => <Provider store={store}>{story()}</Provider>],
 } as ComponentMeta<typeof ProductPageTemplate>
 
-const Template: ComponentStory<typeof ProductPageTemplate> = () => (
+const Template: ComponentStory<typeof ProductPageTemplate> = (args) => (
   <div className='mt-24'>
-    <ProductPageTemplate product={{ fetching: false, stale: false }} />
+    <ProductPageTemplate {...args} />
   </div>
 )
 
 export const Primary = Template.bind({})
-Primary.args = {}
-Primary.parameters = {}
+Primary.args = {
+  product: sampleProductPageData,
+}

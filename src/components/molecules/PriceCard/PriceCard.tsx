@@ -22,8 +22,6 @@ const PriceCard = ({ product }: IPriceCardProps) => {
   const [{ fetching, data, error }, AddProductToCart] =
     useInsertUserProductsOneMutation()
 
-  console.log('fetcing ', fetching)
-
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   const cartItems = useAppSelector(
     (state) => state.userProducts.userProducts.data?.user_products

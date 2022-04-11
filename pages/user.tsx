@@ -40,7 +40,6 @@ const UserPage: NextPage = () => {
       /** @type {any} */
       const { data } = result
       // eslint-disable-next-line no-console
-      console.log('Data: ', data, result)
       setBecoming(false)
     })
   }

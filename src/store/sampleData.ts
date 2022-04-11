@@ -1,6 +1,26 @@
 /* eslint-disable camelcase */
 import { User_Products_Type_Enum } from 'src/generated/graphql'
 
+export const sampleSavedForLater = {
+  createdAt: '2022-04-11T07:32:20.193527+00:00',
+  id: 166,
+  pid: 71,
+  type: User_Products_Type_Enum.SavedForLater,
+  uid: 'TplGjrHDQDY7IB6kjT4Ft0xYgHC2',
+  updatedAt: '2022-04-11T09:14:55.847828+00:00',
+  product: {
+    name: 'EKET Suspension rail 13 3/4 "',
+    price: 5,
+    oldPrice: null,
+    images: null,
+    outOfStock: null,
+    category: 'Storage & organization',
+    subCategory: 'Shelving units, bookcases & storage options',
+    rating: 3.8,
+    reviews: 16,
+  },
+}
+
 export const sampleSearchData = {
   data: {
     products_aggregate: {
@@ -421,3 +441,73 @@ export const sampleUserProducts = [
     },
   },
 ]
+
+export const sampleCartData = [
+  {
+    createdAt: '2022-04-11T07:40:51.034966+00:00',
+    id: 169,
+    pid: 77,
+    type: User_Products_Type_Enum.InCart,
+    uid: 'TplGjrHDQDY7IB6kjT4Ft0xYgHC2',
+    updatedAt: '2022-04-11T07:41:30.513783+00:00',
+    product: {
+      name: 'LOBERGET / BLYSKÄR Swivel chair with pad - white/blue',
+      price: 34.99,
+      oldPrice: null,
+      images: null,
+      outOfStock: null,
+      category: 'Furniture',
+      subCategory: 'Chairs',
+      rating: 4.8,
+      reviews: 12,
+    },
+  },
+  {
+    createdAt: '2022-04-11T07:49:14.700855+00:00',
+    id: 174,
+    pid: 169,
+    type: User_Products_Type_Enum.InCart,
+    uid: 'TplGjrHDQDY7IB6kjT4Ft0xYgHC2',
+    updatedAt: '2022-04-11T07:49:14.700855+00:00',
+    product: {
+      name: 'UPPLYST LED wall lamp - flower lilac',
+      price: 14.99,
+      oldPrice: null,
+      images: null,
+      outOfStock: null,
+      category: 'Lighting',
+      subCategory: 'Lamps & light fixtures',
+      rating: 4.9,
+      reviews: 11,
+    },
+  },
+]
+
+export const sampleProductPageData = {
+  fetching: false,
+  stale: false,
+  data: {
+    product: {
+      category: 'Furniture',
+      createdAt: '2022-03-24T16:07:32.302936+00:00',
+      discount: null,
+      id: 68,
+      name: 'JÄRVFJÄLLET Office chair with armrests',
+      oldPrice: null,
+      outOfStock: null,
+      price: 279,
+      rating: null,
+      reviews: null,
+      subCategory: 'Chairs',
+      tags: [
+        'Furniture',
+        'Chairs',
+        'Desk chairs',
+        'Desk chairs for home',
+        'JÄRVFJÄLLET Office chair with armrests',
+      ],
+      updatedAt: '2022-03-24T16:07:32.302936+00:00',
+      url: 'https://www.ikea.com/us/en/p/jaervfjaellet-office-chair-with-armrests-60510640/',
+    },
+  },
+}

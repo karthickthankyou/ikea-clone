@@ -32,7 +32,7 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
     useInsertUserProductsOneMutation()
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   return (
-    <div className='md:flex group'>
+    <div className='flex group'>
       <div className='flex-shrink-0 w-24 h-24 mr-2'>
         <Image src={images && images[0]} alt='' />
       </div>

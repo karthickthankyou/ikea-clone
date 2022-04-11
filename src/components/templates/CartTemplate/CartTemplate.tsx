@@ -1,12 +1,12 @@
 import { loadStripe } from '@stripe/stripe-js'
 import { useState } from 'react'
 import Button from 'src/components/atoms/Button/Button'
-import Link from 'src/components/atoms/Link/Link'
 import Price from 'src/components/molecules/Price/Price'
 import CartCard from 'src/components/organisms/CartCard/CartCard'
 import { useAppSelector } from 'src/store'
 import axios from 'axios'
 import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
+import Link from 'src/components/atoms/Link/Link'
 
 export interface ICartTemplateProps {
   products:
@@ -59,9 +59,22 @@ const CartTemplate = ({
     (total, item) => total + (item.product.oldPrice || item.product.price),
     0
   )
+
+  if (products?.length === 0) {
+    return (
+      <div>
+        <div className='text-lg font-bold'>Cart is empty.</div>
+        <Link href='/products' className='mt-2 text-primary'>
+          Go to store
+        </Link>
+      </div>
+    )
+  }
   return (
-    <div className={`grid grid-cols-3 gap-8 ${className}`}>
-      <div className='col-span-2 space-y-8'>
+    <div
+      className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 ${className}`}
+    >
+      <div className='col-span-1 space-y-8 md:col-span-2'>
         {fetching &&
           [1, 2, 3, 4].map((item) => (
             <div className='w-full bg-gray-200 h-28 animate-pulse' key={item} />

@@ -1,15 +1,11 @@
 import ProductCard01, {
   ProductCard01Skeleton,
 } from 'src/components/molecules/ProductCard01/ProductCard01'
-import { FilterProductsQuery } from 'src/generated/graphql'
 import { useAppSelector } from 'src/store'
 import { selectProductsWithWishlist } from 'src/store/search'
 import { Children } from 'src/types'
-import { UseQueryState } from 'urql'
 
-export interface IProductListingResultsProps {
-  products: UseQueryState<FilterProductsQuery, object>
-}
+export interface IProductListingResultsProps {}
 
 const Grid = ({ children }: { children: Children }) => (
   <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-responsive gap-responsive'>
@@ -17,7 +13,8 @@ const Grid = ({ children }: { children: Children }) => (
   </div>
 )
 
-const ProductListingResults = () => {
+// eslint-disable-next-line no-empty-pattern
+const ProductListingResults = ({}: IProductListingResultsProps) => {
   const limit = useAppSelector((state) => state.search.queryArgs.limit) || 0
   const products = useAppSelector(selectProductsWithWishlist)
 
