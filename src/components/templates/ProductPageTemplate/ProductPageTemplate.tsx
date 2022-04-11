@@ -23,6 +23,7 @@ import Price from 'src/components/molecules/Price/Price'
 import Link from 'src/components/atoms/Link/Link'
 import Badge from 'src/components/atoms/Badge'
 import Skeleton from 'src/components/molecules/Skeleton/Skeleton'
+import { sampleSearchData } from 'src/store/sampleData'
 import Masonry2 from '../Masonry2'
 
 export interface IProductPageTemplateProps {
@@ -117,26 +118,15 @@ const RecentlyViewedProducts = ({
   )
 }
 const RelatedProducts = ({ title }: { title: string }) => {
-  const items = sampleImagesForMasonry
+  const { products } = sampleSearchData.data
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
       <HScroll className='flex gap-responsive'>
         <HScroll.Body className='gap-1'>
-          {items.map((item) => (
-            <HScroll.Child className='relative mb-12 w-72' key={item.src}>
-              <ProductCard01
-                product={{
-                  id: 3,
-                  name: 'BOKKREMLA',
-                  images: [
-                    'https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg',
-                  ],
-                  category: 'Office',
-                  subCategory: 'Arm chair',
-                  price: 2.29,
-                }}
-              />
+          {products.map((item) => (
+            <HScroll.Child className='relative mb-12 w-72' key={item.id}>
+              <ProductCard01 product={item} />
             </HScroll.Child>
           ))}
         </HScroll.Body>

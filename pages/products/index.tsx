@@ -40,6 +40,7 @@ const SearchProductsPage: NextPage = () => {
   useWhenFilterChangesFetchProducts()
 
   const products = useAppSelector((state) => state.search.products)
+
   const searchProducts = useAppSelector(selectProductsWithWishlist)
 
   const productsLength = products.data?.products.length
