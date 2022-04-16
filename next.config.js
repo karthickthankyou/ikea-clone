@@ -20,9 +20,6 @@ const nextConfig = withPWA({
     domains: ['via.placeholder.com', 'res.cloudinary.com'],
   },
   reactStrictMode: true,
-  future: {
-    webpack5: true,
-  },
   i18n: {
     locales: ['en'],
     defaultLocale: 'en',
