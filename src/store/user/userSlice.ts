@@ -54,8 +54,17 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserSliceType['data']>) => {
-      state.data = action.payload
+    setUser: (state, action: PayloadAction<UserSliceType['data']['user']>) => {
+      state.data.user = action.payload
+      state.fulfilled = true
+      state.loading = false
+      state.error = false
+    },
+    setClaims: (
+      state,
+      action: PayloadAction<UserSliceType['data']['claims']>
+    ) => {
+      state.data.claims = action.payload
       state.fulfilled = true
       state.loading = false
       state.error = false
@@ -103,7 +112,7 @@ export const userSlice = createSlice({
     // ),
   },
 })
-export const { setUser, resetUser } = userSlice.actions
+export const { setUser, setClaims, resetUser } = userSlice.actions
 
 export const selectUid = (state: RootState) => state.user.data.user?.uid
 export const selectDisplayName = (state: RootState) =>

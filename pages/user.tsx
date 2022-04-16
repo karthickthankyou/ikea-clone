@@ -8,6 +8,7 @@ import { useAppSelector } from 'src/store'
 import Container from 'src/components/atoms/Container'
 import Link from 'src/components/atoms/Link/Link'
 import Badge from 'src/components/atoms/Badge/Badge'
+import { NIL } from 'uuid'
 
 const GetBadge = ({
   isSeller,
@@ -51,7 +52,7 @@ const UserPage: NextPage = () => {
   const isUser = roles?.includes('user')
 
   return (
-    <Container>
+    <Container className='min-h-screen'>
       <NextSeo
         title='User page - Ikea clone | Karthick Ragavendran'
         description='Create account with your email or google account.'
@@ -59,14 +60,12 @@ const UserPage: NextPage = () => {
       <div className='flex items-center gap-2 text-lg font-semibold'>
         <div>My Account</div> <GetBadge isSeller={isSeller} isUser={isUser} />{' '}
       </div>
-      <div className='font-bold'>ID: {uid}</div>
+
+      <div className='font-bold'>ID: {uid || 'Not logged in.'}</div>
       <div className='mt-8 mb-12'>
         <div className='mb-2 font-semibold'>Roles</div>
-        {roles?.length === 0 ? (
-          <>
-            <div>No roles assigned.</div>
-            <Link href='/login'>Login</Link>
-          </>
+        {!uid || roles?.length === 0 ? (
+          <div>No roles assigned.</div>
         ) : (
           <div className='flex gap-2 mb-2'>
             {roles?.map((item) => (
@@ -100,6 +99,13 @@ const UserPage: NextPage = () => {
             Post a product
           </Link>
         )}
+      </div>
+      <div className='py-2 mt-6 mb-2'>
+        {!isUser ? (
+          <Link href='/login' className='px-4 py-2 text-white bg-primary'>
+            Go to login page
+          </Link>
+        ) : null}
       </div>
     </Container>
   )

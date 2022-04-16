@@ -18,7 +18,6 @@ export const AppLevelHooks = () => {
   useUserListener()
   useDebouncedDispatch()
   useGetWishlisted()
-  useMetadataChange()
 
   return null
 }
