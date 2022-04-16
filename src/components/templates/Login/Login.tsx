@@ -28,7 +28,10 @@ export const BackToHome = () => (
 const ikeaLoginSchema = yup
   .object({
     email: yup.string().email().required('A valid email is required.'),
-    password: yup.string().required('Enter the password.'),
+    password: yup
+      .string()
+      .required('Enter the password.')
+      .min(6, 'Password should be 6 characters minimum.'),
   })
   .required()
 
@@ -134,7 +137,7 @@ const Login = () => (
         </OverlapSpace.Child>
       </OverlapSpace>
       <div className='items-center justify-center hidden sm:flex'>
-        <LoginForm className='p-12 ' />
+        <LoginForm className='max-w-md p-12 ' />
       </div>
     </div>
   </Container>

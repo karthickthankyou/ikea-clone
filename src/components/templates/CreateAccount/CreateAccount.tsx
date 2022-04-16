@@ -19,7 +19,10 @@ const ikeaCreateAccountSchema = yup
   .object({
     email: yup.string().email().required('A valid email is required.'),
     displayName: yup.string().required('Enter your name.'),
-    password: yup.string().required('Enter the password.'),
+    password: yup
+      .string()
+      .required('Enter the password.')
+      .min(6, 'Password should be 6 characters minimum.'),
   })
   .required()
 
