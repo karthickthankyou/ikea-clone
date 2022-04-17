@@ -21,6 +21,7 @@ query GetProduct($id: Int!) {
     rating
     reviews
     description
+    measurements
     subCategory
     tags
     updatedAt

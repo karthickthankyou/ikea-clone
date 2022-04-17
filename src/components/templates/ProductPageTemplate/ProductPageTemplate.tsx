@@ -47,12 +47,12 @@ const InfoInSidebar = ({
 )
 
 const dummyImages = [
-  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
-  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
-  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
-  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
-  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
-  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no1.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no2.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no3.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no4.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no5.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no6.jpg',
 ]
 
 const RecentlyViewedProducts = ({
@@ -179,7 +179,9 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
   if (fetching) return <Loading />
   if (!data?.product) return <Container>Product not found</Container>
 
-  const images = [...data.product.images, ...dummyImages].slice(0, 6)
+  const productImages = data.product?.images || []
+
+  const images = [...productImages, ...dummyImages].slice(0, 6)
 
   return (
     <>
@@ -213,15 +215,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         <Sidebar.Body>
           <div className='text-2xl font-semibold'>Measurements</div>
           <div className='mt-4 space-y-2 text-gray-600'>
-            <p>
-              We do not store that information for this demo project right now.
-            </p>
-            <p>
-              But hey, here is some more Lorem Ipsum instead. Lorem ipsum, dolor
-              sit amet consectetur adipisicing elit. Voluptate veniam
-              reprehenderit quo, eveniet modi nesciunt asperiores doloremque
-              ipsa natus animi exercitationem cum vero aut.
-            </p>
+            <p>{data.product.measurements}</p>
           </div>
         </Sidebar.Body>
       </Sidebar>
@@ -241,12 +235,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               className='block md:hidden'
             >
               {images.slice(0, 6).map((item) => (
-                <div
-                  className='h-full rounded-lg shadow-lg bg-yellow/30'
-                  key={item}
-                >
-                  <Image alt='' src={item} layout='fill' />
-                </div>
+                <Image alt='' key={item} src={item} layout='fill' />
               ))}
             </Masonry2>
             <Masonry2
@@ -256,16 +245,18 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               className='hidden md:block'
             >
               {images.slice(0, 6).map((item) => (
-                <div
-                  className='h-full rounded-lg shadow-lg bg-yellow/30'
-                  key={item}
-                >
-                  <Image alt='' src={item} layout='fill' />
-                </div>
+                <Image key={item} alt='' src={item} layout='fill' />
               ))}
             </Masonry2>
             <div className='max-w-2xl text-xl font-light leading-relaxed text-gray-700'>
               {data.product.description}
+            </div>
+            <div className='flex flex-wrap gap-3'>
+              {data.product?.tags?.map((item: string) => (
+                <Badge variant='yellow' key={item}>
+                  {item}
+                </Badge>
+              ))}
             </div>
             <div>
               <div className='text-sm text-gray-600'>Article number</div>

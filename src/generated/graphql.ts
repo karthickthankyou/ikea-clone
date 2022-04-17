@@ -1367,6 +1367,7 @@ export type Products = {
   discount?: Maybe<Scalars['smallint']>
   id: Scalars['Int']
   images?: Maybe<Scalars['jsonb']>
+  measurements?: Maybe<Scalars['String']>
   name: Scalars['String']
   oldPrice?: Maybe<Scalars['numeric']>
   outOfStock?: Maybe<Scalars['Boolean']>
@@ -1469,6 +1470,7 @@ export type Products_Bool_Exp = {
   discount?: InputMaybe<Smallint_Comparison_Exp>
   id?: InputMaybe<Int_Comparison_Exp>
   images?: InputMaybe<Jsonb_Comparison_Exp>
+  measurements?: InputMaybe<String_Comparison_Exp>
   name?: InputMaybe<String_Comparison_Exp>
   oldPrice?: InputMaybe<Numeric_Comparison_Exp>
   outOfStock?: InputMaybe<Boolean_Comparison_Exp>
@@ -1525,6 +1527,7 @@ export type Products_Insert_Input = {
   discount?: InputMaybe<Scalars['smallint']>
   id?: InputMaybe<Scalars['Int']>
   images?: InputMaybe<Scalars['jsonb']>
+  measurements?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   oldPrice?: InputMaybe<Scalars['numeric']>
   outOfStock?: InputMaybe<Scalars['Boolean']>
@@ -1547,6 +1550,7 @@ export type Products_Max_Fields = {
   description?: Maybe<Scalars['String']>
   discount?: Maybe<Scalars['smallint']>
   id?: Maybe<Scalars['Int']>
+  measurements?: Maybe<Scalars['String']>
   name?: Maybe<Scalars['String']>
   oldPrice?: Maybe<Scalars['numeric']>
   price?: Maybe<Scalars['numeric']>
@@ -1566,6 +1570,7 @@ export type Products_Min_Fields = {
   description?: Maybe<Scalars['String']>
   discount?: Maybe<Scalars['smallint']>
   id?: Maybe<Scalars['Int']>
+  measurements?: Maybe<Scalars['String']>
   name?: Maybe<Scalars['String']>
   oldPrice?: Maybe<Scalars['numeric']>
   price?: Maybe<Scalars['numeric']>
@@ -1608,6 +1613,7 @@ export type Products_Order_By = {
   discount?: InputMaybe<Order_By>
   id?: InputMaybe<Order_By>
   images?: InputMaybe<Order_By>
+  measurements?: InputMaybe<Order_By>
   name?: InputMaybe<Order_By>
   oldPrice?: InputMaybe<Order_By>
   outOfStock?: InputMaybe<Order_By>
@@ -1648,6 +1654,8 @@ export enum Products_Select_Column {
   /** column name */
   Images = 'images',
   /** column name */
+  Measurements = 'measurements',
+  /** column name */
   Name = 'name',
   /** column name */
   OldPrice = 'oldPrice',
@@ -1679,6 +1687,7 @@ export type Products_Set_Input = {
   discount?: InputMaybe<Scalars['smallint']>
   id?: InputMaybe<Scalars['Int']>
   images?: InputMaybe<Scalars['jsonb']>
+  measurements?: InputMaybe<Scalars['String']>
   name?: InputMaybe<Scalars['String']>
   oldPrice?: InputMaybe<Scalars['numeric']>
   outOfStock?: InputMaybe<Scalars['Boolean']>
@@ -1750,6 +1759,8 @@ export enum Products_Update_Column {
   Id = 'id',
   /** column name */
   Images = 'images',
+  /** column name */
+  Measurements = 'measurements',
   /** column name */
   Name = 'name',
   /** column name */
@@ -3406,6 +3417,7 @@ export type GetProductQuery = {
     rating?: any | null
     reviews?: any | null
     description?: string | null
+    measurements?: string | null
     subCategory: string
     tags?: any | null
     updatedAt: any
@@ -3675,6 +3687,7 @@ export const GetProductDocument = /*#__PURE__*/ gql`
       rating
       reviews
       description
+      measurements
       subCategory
       tags
       updatedAt

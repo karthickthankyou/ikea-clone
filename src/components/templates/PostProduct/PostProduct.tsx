@@ -18,6 +18,7 @@ import Image from 'src/components/atoms/Image'
 import { usePostNewProductMutation } from 'src/generated/graphql'
 import Button from 'src/components/atoms/Button'
 import { useAppSelector } from 'src/store'
+import Price from 'src/components/molecules/Price/Price'
 
 export interface IPostProductTemplateProps {}
 
@@ -35,6 +36,7 @@ const newProductFormSchema = yup.object({
   discount: yup
     .number()
     .min(0, 'Discount can not be negative')
+    .max(100, 'Discount can not be greater than 100')
     .transform((value) => (value === '' ? null : value))
     .typeError('It is not a valid numeric number.'),
   category: yup.string().required('Pick a product category'),
@@ -105,13 +107,14 @@ const PostProductTemplate = () => {
         description: data.description,
         discount: data.discount,
         oldPrice: data.price,
-        price: newPrice,
+        price: newPrice.toFixed(2),
         name: data.name,
         outOfStock: data.outOfStock,
         subCategory: data.subCategory,
-        tags: data.tags,
+        tags: data.tags?.split('|'),
         seller: uid,
         images: data.images,
+        measurements: data.measurements,
       },
     })
   })
@@ -128,16 +131,33 @@ const PostProductTemplate = () => {
 
   return (
     <form onSubmit={onSubmit} className='container min-h-screen p-6 mx-auto'>
-      <Dialog open={showDialog} setOpen={setshowDialog} className='max-w-md'>
+      <Dialog
+        open={showDialog}
+        setOpen={setshowDialog}
+        className='max-w-md space-y-2'
+      >
         <div className='text-xl font-semibold'>Product posted!</div>
-        <p className='mt-4 text-sm text-gray-600'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus
-          tempore laudantium consequuntur, adipisci quidem ex fugit quo et?
-        </p>
-        <p>Product id: {postedData?.insert_products_one?.id}</p>
-        <p>{postedData?.insert_products_one?.name}</p>
-        <p>{postedData?.insert_products_one?.category}</p>
-        <p>{postedData?.insert_products_one?.price}</p>
+
+        <div>
+          <p className='font-semibold'>Product id</p>
+          <p> {postedData?.insert_products_one?.id}</p>
+        </div>
+        <div>
+          <p className='font-semibold'>Name</p>
+          <p>{postedData?.insert_products_one?.name}</p>
+        </div>
+        <div>
+          <p className='font-semibold'>Category</p>
+          <p>{postedData?.insert_products_one?.category}</p>
+        </div>
+        <div>
+          <p className='font-semibold'>Price</p>
+          <Price
+            price={postedData?.insert_products_one?.price}
+            oldPrice={postedData?.insert_products_one?.oldPrice}
+          />
+        </div>
+
         <div className='flex justify-end space-x-4'>
           <button
             type='button'
@@ -192,7 +212,7 @@ const PostProductTemplate = () => {
             <Label title='Price' error={errors.price}>
               <Input type='number' placeholder='Rs. ' {...register('price')} />
             </Label>
-            <Label title='Discount (Optional)' error={errors.discount}>
+            <Label title='Discount % (Optional)' error={errors.discount}>
               <Input
                 type='number'
                 placeholder='Enter the discount of the product.'
