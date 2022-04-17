@@ -93,7 +93,7 @@ const UserPage: NextPage = () => {
       <div>
         {isSeller && (
           <Link
-            className='px-4 py-2 text-white shadow-lg hover:shadow-xl bg-primary'
+            className='px-4 py-2 text-white rounded-full shadow-lg hover:shadow-xl bg-primary'
             href='/products/new'
           >
             Post a product

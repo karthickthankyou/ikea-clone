@@ -8,7 +8,9 @@ export default {
   decorators: [(story) => <div className='max-w-sm'>{story()}</div>],
 } as ComponentMeta<typeof FormIKEAChat>
 
-const Template: ComponentStory<typeof FormIKEAChat> = () => <FormIKEAChat />
+const Template: ComponentStory<typeof FormIKEAChat> = (args) => (
+  <FormIKEAChat {...args} />
+)
 
 export const Primary = Template.bind({})
 Primary.args = {}

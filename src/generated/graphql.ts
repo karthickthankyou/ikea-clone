@@ -236,6 +236,10 @@ export type Mutation_Root = {
   delete_rooms?: Maybe<Rooms_Mutation_Response>
   /** delete single row from the table: "rooms" */
   delete_rooms_by_pk?: Maybe<Rooms>
+  /** delete data from the table: "support" */
+  delete_support?: Maybe<Support_Mutation_Response>
+  /** delete single row from the table: "support" */
+  delete_support_by_pk?: Maybe<Support>
   /** delete data from the table: "user_products" */
   delete_user_products?: Maybe<User_Products_Mutation_Response>
   /** delete single row from the table: "user_products" */
@@ -276,6 +280,10 @@ export type Mutation_Root = {
   insert_rooms?: Maybe<Rooms_Mutation_Response>
   /** insert a single row into the table: "rooms" */
   insert_rooms_one?: Maybe<Rooms>
+  /** insert data into the table: "support" */
+  insert_support?: Maybe<Support_Mutation_Response>
+  /** insert a single row into the table: "support" */
+  insert_support_one?: Maybe<Support>
   /** insert data into the table: "user_products" */
   insert_user_products?: Maybe<User_Products_Mutation_Response>
   /** insert a single row into the table: "user_products" */
@@ -316,6 +324,10 @@ export type Mutation_Root = {
   update_rooms?: Maybe<Rooms_Mutation_Response>
   /** update single row of the table: "rooms" */
   update_rooms_by_pk?: Maybe<Rooms>
+  /** update data of the table: "support" */
+  update_support?: Maybe<Support_Mutation_Response>
+  /** update single row of the table: "support" */
+  update_support_by_pk?: Maybe<Support>
   /** update data of the table: "user_products" */
   update_user_products?: Maybe<User_Products_Mutation_Response>
   /** update single row of the table: "user_products" */
@@ -392,6 +404,16 @@ export type Mutation_RootDelete_RoomsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Rooms_By_PkArgs = {
   name: Scalars['String']
+}
+
+/** mutation root */
+export type Mutation_RootDelete_SupportArgs = {
+  where: Support_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootDelete_Support_By_PkArgs = {
+  id: Scalars['Int']
 }
 
 /** mutation root */
@@ -504,6 +526,18 @@ export type Mutation_RootInsert_RoomsArgs = {
 export type Mutation_RootInsert_Rooms_OneArgs = {
   object: Rooms_Insert_Input
   on_conflict?: InputMaybe<Rooms_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_SupportArgs = {
+  objects: Array<Support_Insert_Input>
+  on_conflict?: InputMaybe<Support_On_Conflict>
+}
+
+/** mutation root */
+export type Mutation_RootInsert_Support_OneArgs = {
+  object: Support_Insert_Input
+  on_conflict?: InputMaybe<Support_On_Conflict>
 }
 
 /** mutation root */
@@ -640,6 +674,20 @@ export type Mutation_RootUpdate_RoomsArgs = {
 export type Mutation_RootUpdate_Rooms_By_PkArgs = {
   _set?: InputMaybe<Rooms_Set_Input>
   pk_columns: Rooms_Pk_Columns_Input
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_SupportArgs = {
+  _inc?: InputMaybe<Support_Inc_Input>
+  _set?: InputMaybe<Support_Set_Input>
+  where: Support_Bool_Exp
+}
+
+/** mutation root */
+export type Mutation_RootUpdate_Support_By_PkArgs = {
+  _inc?: InputMaybe<Support_Inc_Input>
+  _set?: InputMaybe<Support_Set_Input>
+  pk_columns: Support_Pk_Columns_Input
 }
 
 /** mutation root */
@@ -1860,6 +1908,12 @@ export type Query_Root = {
   search_products: Array<Products>
   /** execute function "search_products" and query aggregates on result of table type "products" */
   search_products_aggregate: Products_Aggregate
+  /** fetch data from the table: "support" */
+  support: Array<Support>
+  /** fetch aggregated fields from the table: "support" */
+  support_aggregate: Support_Aggregate
+  /** fetch data from the table: "support" using primary key columns */
+  support_by_pk?: Maybe<Support>
   /** An array relationship */
   user_products: Array<User_Products>
   /** An aggregate relationship */
@@ -2022,6 +2076,26 @@ export type Query_RootSearch_Products_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>
   order_by?: InputMaybe<Array<Products_Order_By>>
   where?: InputMaybe<Products_Bool_Exp>
+}
+
+export type Query_RootSupportArgs = {
+  distinct_on?: InputMaybe<Array<Support_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Support_Order_By>>
+  where?: InputMaybe<Support_Bool_Exp>
+}
+
+export type Query_RootSupport_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Support_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Support_Order_By>>
+  where?: InputMaybe<Support_Bool_Exp>
+}
+
+export type Query_RootSupport_By_PkArgs = {
+  id: Scalars['Int']
 }
 
 export type Query_RootUser_ProductsArgs = {
@@ -2264,6 +2338,12 @@ export type Subscription_Root = {
   search_products: Array<Products>
   /** execute function "search_products" and query aggregates on result of table type "products" */
   search_products_aggregate: Products_Aggregate
+  /** fetch data from the table: "support" */
+  support: Array<Support>
+  /** fetch aggregated fields from the table: "support" */
+  support_aggregate: Support_Aggregate
+  /** fetch data from the table: "support" using primary key columns */
+  support_by_pk?: Maybe<Support>
   /** An array relationship */
   user_products: Array<User_Products>
   /** An aggregate relationship */
@@ -2428,6 +2508,26 @@ export type Subscription_RootSearch_Products_AggregateArgs = {
   where?: InputMaybe<Products_Bool_Exp>
 }
 
+export type Subscription_RootSupportArgs = {
+  distinct_on?: InputMaybe<Array<Support_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Support_Order_By>>
+  where?: InputMaybe<Support_Bool_Exp>
+}
+
+export type Subscription_RootSupport_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Support_Select_Column>>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Support_Order_By>>
+  where?: InputMaybe<Support_Bool_Exp>
+}
+
+export type Subscription_RootSupport_By_PkArgs = {
+  id: Scalars['Int']
+}
+
 export type Subscription_RootUser_ProductsArgs = {
   distinct_on?: InputMaybe<Array<User_Products_Select_Column>>
   limit?: InputMaybe<Scalars['Int']>
@@ -2506,6 +2606,267 @@ export type Subscription_RootViews_AggregateArgs = {
 
 export type Subscription_RootViews_By_PkArgs = {
   id: Scalars['Int']
+}
+
+/** Support messages get saved here */
+export type Support = {
+  __typename?: 'support'
+  category: Scalars['String']
+  created_at: Scalars['timestamptz']
+  email: Scalars['String']
+  id: Scalars['Int']
+  location: Scalars['String']
+  message: Scalars['String']
+  name: Scalars['String']
+  phone: Scalars['String']
+  uid: Scalars['String']
+  updated_at: Scalars['timestamptz']
+}
+
+/** aggregated selection of "support" */
+export type Support_Aggregate = {
+  __typename?: 'support_aggregate'
+  aggregate?: Maybe<Support_Aggregate_Fields>
+  nodes: Array<Support>
+}
+
+/** aggregate fields of "support" */
+export type Support_Aggregate_Fields = {
+  __typename?: 'support_aggregate_fields'
+  avg?: Maybe<Support_Avg_Fields>
+  count: Scalars['Int']
+  max?: Maybe<Support_Max_Fields>
+  min?: Maybe<Support_Min_Fields>
+  stddev?: Maybe<Support_Stddev_Fields>
+  stddev_pop?: Maybe<Support_Stddev_Pop_Fields>
+  stddev_samp?: Maybe<Support_Stddev_Samp_Fields>
+  sum?: Maybe<Support_Sum_Fields>
+  var_pop?: Maybe<Support_Var_Pop_Fields>
+  var_samp?: Maybe<Support_Var_Samp_Fields>
+  variance?: Maybe<Support_Variance_Fields>
+}
+
+/** aggregate fields of "support" */
+export type Support_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Support_Select_Column>>
+  distinct?: InputMaybe<Scalars['Boolean']>
+}
+
+/** aggregate avg on columns */
+export type Support_Avg_Fields = {
+  __typename?: 'support_avg_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** Boolean expression to filter rows from the table "support". All fields are combined with a logical 'AND'. */
+export type Support_Bool_Exp = {
+  _and?: InputMaybe<Array<Support_Bool_Exp>>
+  _not?: InputMaybe<Support_Bool_Exp>
+  _or?: InputMaybe<Array<Support_Bool_Exp>>
+  category?: InputMaybe<String_Comparison_Exp>
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>
+  email?: InputMaybe<String_Comparison_Exp>
+  id?: InputMaybe<Int_Comparison_Exp>
+  location?: InputMaybe<String_Comparison_Exp>
+  message?: InputMaybe<String_Comparison_Exp>
+  name?: InputMaybe<String_Comparison_Exp>
+  phone?: InputMaybe<String_Comparison_Exp>
+  uid?: InputMaybe<String_Comparison_Exp>
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>
+}
+
+/** unique or primary key constraints on table "support" */
+export enum Support_Constraint {
+  /** unique or primary key constraint */
+  SupportPkey = 'support_pkey',
+}
+
+/** input type for incrementing numeric columns in table "support" */
+export type Support_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>
+}
+
+/** input type for inserting data into table "support" */
+export type Support_Insert_Input = {
+  category?: InputMaybe<Scalars['String']>
+  created_at?: InputMaybe<Scalars['timestamptz']>
+  email?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
+  location?: InputMaybe<Scalars['String']>
+  message?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  uid?: InputMaybe<Scalars['String']>
+  updated_at?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate max on columns */
+export type Support_Max_Fields = {
+  __typename?: 'support_max_fields'
+  category?: Maybe<Scalars['String']>
+  created_at?: Maybe<Scalars['timestamptz']>
+  email?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['Int']>
+  location?: Maybe<Scalars['String']>
+  message?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  phone?: Maybe<Scalars['String']>
+  uid?: Maybe<Scalars['String']>
+  updated_at?: Maybe<Scalars['timestamptz']>
+}
+
+/** aggregate min on columns */
+export type Support_Min_Fields = {
+  __typename?: 'support_min_fields'
+  category?: Maybe<Scalars['String']>
+  created_at?: Maybe<Scalars['timestamptz']>
+  email?: Maybe<Scalars['String']>
+  id?: Maybe<Scalars['Int']>
+  location?: Maybe<Scalars['String']>
+  message?: Maybe<Scalars['String']>
+  name?: Maybe<Scalars['String']>
+  phone?: Maybe<Scalars['String']>
+  uid?: Maybe<Scalars['String']>
+  updated_at?: Maybe<Scalars['timestamptz']>
+}
+
+/** response of any mutation on the table "support" */
+export type Support_Mutation_Response = {
+  __typename?: 'support_mutation_response'
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int']
+  /** data from the rows affected by the mutation */
+  returning: Array<Support>
+}
+
+/** on_conflict condition type for table "support" */
+export type Support_On_Conflict = {
+  constraint: Support_Constraint
+  update_columns?: Array<Support_Update_Column>
+  where?: InputMaybe<Support_Bool_Exp>
+}
+
+/** Ordering options when selecting data from "support". */
+export type Support_Order_By = {
+  category?: InputMaybe<Order_By>
+  created_at?: InputMaybe<Order_By>
+  email?: InputMaybe<Order_By>
+  id?: InputMaybe<Order_By>
+  location?: InputMaybe<Order_By>
+  message?: InputMaybe<Order_By>
+  name?: InputMaybe<Order_By>
+  phone?: InputMaybe<Order_By>
+  uid?: InputMaybe<Order_By>
+  updated_at?: InputMaybe<Order_By>
+}
+
+/** primary key columns input for table: support */
+export type Support_Pk_Columns_Input = {
+  id: Scalars['Int']
+}
+
+/** select columns of table "support" */
+export enum Support_Select_Column {
+  /** column name */
+  Category = 'category',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Message = 'message',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Phone = 'phone',
+  /** column name */
+  Uid = 'uid',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** input type for updating data in table "support" */
+export type Support_Set_Input = {
+  category?: InputMaybe<Scalars['String']>
+  created_at?: InputMaybe<Scalars['timestamptz']>
+  email?: InputMaybe<Scalars['String']>
+  id?: InputMaybe<Scalars['Int']>
+  location?: InputMaybe<Scalars['String']>
+  message?: InputMaybe<Scalars['String']>
+  name?: InputMaybe<Scalars['String']>
+  phone?: InputMaybe<Scalars['String']>
+  uid?: InputMaybe<Scalars['String']>
+  updated_at?: InputMaybe<Scalars['timestamptz']>
+}
+
+/** aggregate stddev on columns */
+export type Support_Stddev_Fields = {
+  __typename?: 'support_stddev_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_pop on columns */
+export type Support_Stddev_Pop_Fields = {
+  __typename?: 'support_stddev_pop_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate stddev_samp on columns */
+export type Support_Stddev_Samp_Fields = {
+  __typename?: 'support_stddev_samp_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate sum on columns */
+export type Support_Sum_Fields = {
+  __typename?: 'support_sum_fields'
+  id?: Maybe<Scalars['Int']>
+}
+
+/** update columns of table "support" */
+export enum Support_Update_Column {
+  /** column name */
+  Category = 'category',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Location = 'location',
+  /** column name */
+  Message = 'message',
+  /** column name */
+  Name = 'name',
+  /** column name */
+  Phone = 'phone',
+  /** column name */
+  Uid = 'uid',
+  /** column name */
+  UpdatedAt = 'updated_at',
+}
+
+/** aggregate var_pop on columns */
+export type Support_Var_Pop_Fields = {
+  __typename?: 'support_var_pop_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate var_samp on columns */
+export type Support_Var_Samp_Fields = {
+  __typename?: 'support_var_samp_fields'
+  id?: Maybe<Scalars['Float']>
+}
+
+/** aggregate variance on columns */
+export type Support_Variance_Fields = {
+  __typename?: 'support_variance_fields'
+  id?: Maybe<Scalars['Float']>
 }
 
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
@@ -3648,6 +4009,53 @@ export type DeleteCartItemsMutation = {
   } | null
 }
 
+export type InsertSupportMutationVariables = Exact<{
+  object: Support_Insert_Input
+}>
+
+export type InsertSupportMutation = {
+  __typename?: 'mutation_root'
+  insert_support_one?: {
+    __typename?: 'support'
+    updated_at: any
+    uid: string
+    phone: string
+    name: string
+    location: string
+    message: string
+    id: number
+    email: string
+    created_at: any
+    category: string
+  } | null
+}
+
+export type GetSupportMessagesQueryVariables = Exact<{
+  distinct_on?: InputMaybe<Array<Support_Select_Column> | Support_Select_Column>
+  limit?: InputMaybe<Scalars['Int']>
+  offset?: InputMaybe<Scalars['Int']>
+  order_by?: InputMaybe<Array<Support_Order_By> | Support_Order_By>
+  where?: InputMaybe<Support_Bool_Exp>
+}>
+
+export type GetSupportMessagesQuery = {
+  __typename?: 'query_root'
+  support_aggregate: {
+    __typename?: 'support_aggregate'
+    aggregate?: {
+      __typename?: 'support_aggregate_fields'
+      count: number
+    } | null
+  }
+  support: Array<{
+    __typename?: 'support'
+    category: string
+    message: string
+    id: number
+    updated_at: any
+  }>
+}
+
 export const namedOperations = {
   Query: {
     GetProducts: 'GetProducts',
@@ -3657,6 +4065,7 @@ export const namedOperations = {
     GetUserProducts: 'GetUserProducts',
     GetOrderedProducts: 'GetOrderedProducts',
     GetViewedProducts: 'GetViewedProducts',
+    GetSupportMessages: 'GetSupportMessages',
   },
   Mutation: {
     InsertUserProductsOne: 'InsertUserProductsOne',
@@ -3664,6 +4073,7 @@ export const namedOperations = {
     InsertProductView: 'InsertProductView',
     PostNewProduct: 'PostNewProduct',
     DeleteCartItems: 'DeleteCartItems',
+    InsertSupport: 'InsertSupport',
   },
 }
 
@@ -4006,4 +4416,67 @@ export function useDeleteCartItemsMutation() {
     DeleteCartItemsMutation,
     DeleteCartItemsMutationVariables
   >(DeleteCartItemsDocument)
+}
+export const InsertSupportDocument = /*#__PURE__*/ gql`
+  mutation InsertSupport($object: support_insert_input!) {
+    insert_support_one(object: $object) {
+      updated_at
+      uid
+      phone
+      name
+      location
+      message
+      id
+      email
+      created_at
+      category
+    }
+  }
+`
+
+export function useInsertSupportMutation() {
+  return Urql.useMutation<
+    InsertSupportMutation,
+    InsertSupportMutationVariables
+  >(InsertSupportDocument)
+}
+export const GetSupportMessagesDocument = /*#__PURE__*/ gql`
+  query GetSupportMessages(
+    $distinct_on: [support_select_column!]
+    $limit: Int
+    $offset: Int
+    $order_by: [support_order_by!]
+    $where: support_bool_exp
+  ) {
+    support_aggregate(
+      distinct_on: $distinct_on
+      order_by: $order_by
+      where: $where
+    ) {
+      aggregate {
+        count
+      }
+    }
+    support(
+      distinct_on: $distinct_on
+      limit: $limit
+      offset: $offset
+      order_by: $order_by
+      where: $where
+    ) {
+      category
+      message
+      id
+      updated_at
+    }
+  }
+`
+
+export function useGetSupportMessagesQuery(
+  options?: Omit<Urql.UseQueryArgs<GetSupportMessagesQueryVariables>, 'query'>
+) {
+  return Urql.useQuery<GetSupportMessagesQuery>({
+    query: GetSupportMessagesDocument,
+    ...options,
+  })
 }

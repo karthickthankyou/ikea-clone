@@ -5,6 +5,7 @@ import LocationMarkerIcon from '@heroicons/react/solid/LocationMarkerIcon'
 import HomeIcon from '@heroicons/react/solid/HomeIcon'
 import HeartIcon from '@heroicons/react/solid/HeartIcon'
 import SearchIcon from '@heroicons/react/solid/SearchIcon'
+import SupportIcon from '@heroicons/react/solid/SupportIcon'
 import LockClosedIcon from '@heroicons/react/solid/LockClosedIcon'
 import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import PhotographIcon from '@heroicons/react/solid/PhotographIcon'
@@ -27,10 +28,11 @@ export type PageNames =
   | 'Authentication'
   | 'Wishlist'
   | 'Cart'
-  | 'Purchased'
+  | 'Orders'
   | 'User'
   | 'Post new product'
   | '404'
+  | 'Support'
 
 const Section = ({
   title,
@@ -39,6 +41,7 @@ const Section = ({
   position,
   Icon = LocationMarkerIcon,
   enabled = true,
+  current = false,
 }: {
   title: string
   href: string
@@ -46,6 +49,7 @@ const Section = ({
   position?: { top?: string; left?: string; right?: string; bottom?: string }
   Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   enabled?: boolean
+  current?: boolean
 }) => (
   <div
     style={position}
@@ -53,8 +57,13 @@ const Section = ({
   >
     <div className='relative inline-flex items-center -skew-x-12 -skew-y-12 rotate-12'>
       {/* <div className='w-2 h-2 skew-y-12 rounded-full bg-red animate-ping' /> */}
-      <div className='absolute z-10 ml-1 transition-all opacity-0 whitespace-nowrap translate-y-1/3 left-full group-hover:translate-y-0 group-hover:opacity-100'>
-        {title}
+      <div
+        className={`absolute z-10 ml-1 whitespace-nowrap left-full ${
+          !current &&
+          'opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100 translate-y-1/3'
+        }`}
+      >
+        {title} {current && '(You are here)'}
       </div>
       <Link href={href}>
         <Icon
@@ -87,80 +96,85 @@ const TripGuide = ({ currentPageName }: { currentPageName: PageNames }) => {
           </div>
           <Section
             position={{ bottom: '2%', left: '2%' }}
-            title={`Home ${currentPageName === 'Home' ? '(You are here)' : ''}`}
+            title='Home'
             href='/'
             Icon={HomeIcon}
+            current={currentPageName === 'Home'}
           />
           <Section
-            title={`Products ${
-              currentPageName === 'Products' ? '(You are here)' : ''
-            }`}
+            title='Products'
             position={{ top: '80%', right: '40%' }}
             href='/products'
             Icon={SearchIcon}
+            current={currentPageName === 'Products'}
           />
           <Section
-            title={`Product page ${
-              currentPageName === 'Product page' ? '(You are here)' : ''
-            }`}
+            title='Product page'
             position={{ top: '92%', right: '32%' }}
-            href='/products/68'
+            href='/products/5084'
             Icon={PhotographIcon}
+            current={currentPageName === 'Product page'}
           />
           <Section
-            title={`Authentication ${
-              currentPageName === 'Authentication' ? '(You are here)' : ''
-            }`}
+            title='Authentication'
             position={{ top: '64%', left: '24%' }}
             href='/createAccount'
             Icon={LockClosedIcon}
+            current={currentPageName === 'Authentication'}
           />
           <Section
-            title={`Wishlist ${
-              currentPageName === 'Wishlist' ? '(You are here)' : ''
-            }`}
+            title='Wishlist'
             position={{ top: '8%', right: '76%' }}
             href='/wishlist'
             Icon={HeartIcon}
+            current={currentPageName === 'Wishlist'}
             enabled={!!uid}
           />
           <Section
-            title={`Cart ${currentPageName === 'Cart' ? '(You are here)' : ''}`}
+            title='Cart'
             position={{ top: '16%', right: '84%' }}
             href='/cart'
             Icon={ShoppingCartIcon}
+            current={currentPageName === 'Cart'}
             enabled={!!uid}
           />
           <Section
-            title={`Purchased ${
-              currentPageName === 'Purchased' ? '(You are here)' : ''
-            }`}
+            title='Orders'
             position={{ top: '0%', right: '92%' }}
-            href='/purchased'
+            href='/orders'
             Icon={BriefcaseIcon}
+            current={currentPageName === 'Orders'}
             enabled={!!uid}
           />
           <Section
-            title={`User ${currentPageName === 'User' ? '(You are here)' : ''}`}
+            title='User'
             position={{ top: '16%', right: '12%' }}
             href='/user'
             Icon={UserCircleIcon}
+            current={currentPageName === 'User'}
             enabled={!!uid}
           />
           <Section
-            title={`Post new product ${
-              currentPageName === 'Post new product' ? '(You are here)' : ''
-            }`}
+            title='Post new product'
             position={{ top: '8%', right: '2%' }}
             href='/products/new'
             Icon={PlusCircleIcon}
+            current={currentPageName === 'Post new product'}
             enabled={!!uid}
           />
           <Section
-            title={`404 ${currentPageName === '404' ? '(You are here)' : ''}`}
+            title='404'
             position={{ top: '58%', right: '2%' }}
             href='/404'
             Icon={InformationCircleIcon}
+            current={currentPageName === '404'}
+          />
+          <Section
+            title='Support'
+            position={{ top: '6%', right: '56%' }}
+            href='/support'
+            Icon={SupportIcon}
+            current={currentPageName === 'Support'}
           />
         </div>
       </div>

@@ -12,6 +12,7 @@ import { useDebouncedDispatch } from 'src/hooks'
 import { useUserListener } from 'src/store/user'
 import Layout from 'src/components/templates/Layout/Layout'
 import { useGetWishlisted } from 'src/store/userProducts/userProductsHook'
+import ChatWindow from 'src/components/organisms/ChatWindow/ChatWindow'
 
 export const AppLevelHooks = () => {
   useUserListener()
@@ -29,6 +30,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ReduxProvider store={store}>
       <UrqlProvider>
+        <ChatWindow />
         <Layout>
           <Notifications />
           <AppLevelHooks />

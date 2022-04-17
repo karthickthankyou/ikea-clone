@@ -1,8 +1,11 @@
+/* eslint-disable camelcase */
 import { useEffect } from 'react'
 
 import {
   useGetUserProductsQuery,
   useGetOrderedProductsQuery,
+  useGetSupportMessagesQuery,
+  Order_By,
 } from 'src/generated/graphql'
 import { useAppDispatch, useAppSelector } from '..'
 import { selectUid } from '../user/userSlice'
@@ -43,7 +46,22 @@ export const useGetOrderedItems = () => {
     pause: !uid,
   })
 
-  console.log('ordered ', data)
+  return { data, fetching, stale, error } as const
+}
+export const useGetSupport = () => {
+  const uid = useAppSelector(selectUid)
+
+  const [{ data, fetching, stale, error }] = useGetSupportMessagesQuery({
+    variables: {
+      where: {
+        uid: { _eq: uid },
+      },
+      order_by: {
+        created_at: Order_By.DescNullsLast,
+      },
+    },
+    pause: !uid,
+  })
 
   return { data, fetching, stale, error } as const
 }
