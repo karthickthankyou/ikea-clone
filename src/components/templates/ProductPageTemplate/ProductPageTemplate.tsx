@@ -181,7 +181,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
 
   const productImages = data.product?.images || []
 
-  const images = [...productImages, ...dummyImages].slice(0, 6)
+  const images = productImages.slice(0, 6)
 
   return (
     <>
@@ -234,8 +234,11 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               shortOnes={[2, 3]}
               className='block md:hidden'
             >
-              {images.slice(0, 6).map((item) => (
+              {images.map((item: string) => (
                 <Image alt='' key={item} src={item} layout='fill' />
+              ))}
+              {Array.from(Array(6 - images.length), (x, i) => i).map((item) => (
+                <Image alt='' key={item} src='' layout='fill' />
               ))}
             </Masonry2>
             <Masonry2
@@ -244,8 +247,11 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               shortOnes={[1, 2, 5, 6, 9]}
               className='hidden md:block'
             >
-              {images.slice(0, 6).map((item) => (
+              {images.map((item: string) => (
                 <Image key={item} alt='' src={item} layout='fill' />
+              ))}
+              {Array.from(Array(6 - images.length), (x, i) => i).map((item) => (
+                <Image alt='' key={item} src='' layout='fill' />
               ))}
             </Masonry2>
             <div className='max-w-2xl text-xl font-light leading-relaxed text-gray-700'>
