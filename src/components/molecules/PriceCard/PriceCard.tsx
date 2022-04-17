@@ -14,6 +14,7 @@ import Link from 'src/components/atoms/Link/Link'
 import { ProductWithWishlist } from 'src/store/search'
 import Price from '../Price/Price'
 import Rating from '../Rating'
+import Loading from '../Loading/Loading'
 
 export interface IPriceCardProps {
   product: ProductWithWishlist | undefined | null
@@ -29,7 +30,7 @@ const PriceCard = ({ product }: IPriceCardProps) => {
     (state) => state.userProducts.userProducts.data?.user_products
   )?.filter((item) => item.type === User_Products_Type_Enum.InCart)
 
-  if (fetching) return <div>Loading....</div>
+  if (fetching) return <Loading />
   if (!product) return <div>Product not found.</div>
   const {
     rating,

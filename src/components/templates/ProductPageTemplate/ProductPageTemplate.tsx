@@ -9,14 +9,13 @@ import Image from 'src/components/atoms/Image/Image'
 import HScroll from 'src/components/molecules/HScroll/HScroll'
 import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
 import DesignerThoughtsCard from 'src/components/molecules/DesignerThoughtsCard'
-
 import { Dispatch, SetStateAction, useState } from 'react'
-
 import Sidebar from 'src/components/molecules/Sidebar'
 import {
   GetProductQuery,
   useGetViewedProductsQuery,
 } from 'src/generated/graphql'
+import Loading from 'src/components/molecules/Loading/Loading'
 import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
 import Price from 'src/components/molecules/Price/Price'
 import Link from 'src/components/atoms/Link/Link'
@@ -161,8 +160,6 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         </Container>
       )
 
-    console.log('Error ', error.message.includes('unexpected null value'))
-
     if (error.message.includes('unexpected null value'))
       return (
         <Container>Invalid URL. The product id provided is invalid.</Container>
@@ -171,7 +168,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
     return <Container>Something went wrong.</Container>
   }
 
-  if (fetching) return <Container>Fetching...</Container>
+  if (fetching) return <Loading />
   if (!data?.product) return <Container>Product not found</Container>
 
   return (

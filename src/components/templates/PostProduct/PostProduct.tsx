@@ -121,8 +121,6 @@ const PostProductTemplate = () => {
     scrollToTop()
   }, [])
 
-  console.log('Errors: ', errors)
-
   return (
     <form onSubmit={onSubmit} className='container min-h-screen p-6 mx-auto'>
       <Dialog open={showDialog} setOpen={setshowDialog} className='max-w-md'>

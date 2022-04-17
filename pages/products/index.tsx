@@ -60,6 +60,8 @@ const SearchProductsPage: NextPage = () => {
           count={totalCount}
           page={offset / limit}
           rowsPerPage={limit || 0}
+          showLastButton
+          showFirstButton
           rowsPerPageOptions={[12, 24, 36, 48]}
           onPageChange={(v, c) => dispatch(setProductsOffset(c * limit))}
           onRowsPerPageChange={(v) => {
