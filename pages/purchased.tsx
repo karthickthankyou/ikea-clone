@@ -14,9 +14,11 @@ import { selectUserProducts } from 'src/store/userProducts/userProductsSlice'
 
 const WishlistPage: NextPage = () => {
   const products = useAppSelector(selectUserProducts)
-  const wishlistedProducts = products.data?.user_products.filter(
-    (item) => item.type === User_Products_Type_Enum.Wishlisted
+  const orderedProducts = products.data?.user_products.filter(
+    (item) => item.type === User_Products_Type_Enum.Purchased
   )
+
+  console.log('orderedProducts ', orderedProducts)
 
   return (
     <Container>
@@ -26,7 +28,7 @@ const WishlistPage: NextPage = () => {
       />
       <div className='mt-2 mb-4 text-xl font-semibold'>Purchased items</div>
       <div className='grid grid-cols-4 gap-4'>
-        {wishlistedProducts?.map((item) => (
+        {orderedProducts?.map((item) => (
           <div key={item.id}>
             <ProductCard01 product={{ ...item.product, id: item.id }} />
           </div>

@@ -1,7 +1,12 @@
+/* eslint-disable camelcase */
 import Stripe from 'stripe'
 import { buffer } from 'micro'
 import { urqlAdminClient } from 'lib/client'
-import { CompleteOrderDocument } from 'src/generated/graphql'
+import {
+  CompleteOrderDocument,
+  DeleteCartItemsDocument,
+  User_Products_Type_Enum,
+} from 'src/generated/graphql'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -54,7 +59,16 @@ export default async function handler(req, res) {
         .toPromise()
         .then((result) => {
           console.log('Success after mutation: ', JSON.stringify(result))
-          res.json({ received: true })
+          urqlAdminClient
+            .mutation(DeleteCartItemsDocument, {
+              uid,
+              type: 'IN_CART',
+            })
+            .toPromise()
+            .then(() => {
+              res.json({ received: true })
+            })
+            .catch((err) => console.error('Error deleting cart items. ', err))
         })
         .catch((err) =>
           console.log('Error after mutation. ', JSON.stringify(err))

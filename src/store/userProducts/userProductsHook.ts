@@ -43,5 +43,7 @@ export const useGetOrderedItems = () => {
     pause: !uid,
   })
 
+  console.log('ordered ', data)
+
   return { data, fetching, stale, error } as const
 }

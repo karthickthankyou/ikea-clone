@@ -18,6 +18,8 @@ const OrdersPage: NextPage = () => {
   const orders = data?.orders
   const count = data?.orders_aggregate.aggregate?.count
 
+  console.log(' ordered products', products)
+
   return (
     <Container>
       <NextSeo

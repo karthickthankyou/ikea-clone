@@ -3635,6 +3635,19 @@ export type PostNewProductMutation = {
   } | null
 }
 
+export type DeleteCartItemsMutationVariables = Exact<{
+  uid: Scalars['String']
+  type: User_Products_Type_Enum
+}>
+
+export type DeleteCartItemsMutation = {
+  __typename?: 'mutation_root'
+  delete_user_products?: {
+    __typename?: 'user_products_mutation_response'
+    affected_rows: number
+  } | null
+}
+
 export const namedOperations = {
   Query: {
     GetProducts: 'GetProducts',
@@ -3650,6 +3663,7 @@ export const namedOperations = {
     CompleteOrder: 'CompleteOrder',
     InsertProductView: 'InsertProductView',
     PostNewProduct: 'PostNewProduct',
+    DeleteCartItems: 'DeleteCartItems',
   },
 }
 
@@ -3978,4 +3992,18 @@ export function usePostNewProductMutation() {
     PostNewProductMutation,
     PostNewProductMutationVariables
   >(PostNewProductDocument)
+}
+export const DeleteCartItemsDocument = /*#__PURE__*/ gql`
+  mutation DeleteCartItems($uid: String!, $type: user_products_type_enum!) {
+    delete_user_products(where: { uid: { _eq: $uid }, type: { _eq: $type } }) {
+      affected_rows
+    }
+  }
+`
+
+export function useDeleteCartItemsMutation() {
+  return Urql.useMutation<
+    DeleteCartItemsMutation,
+    DeleteCartItemsMutationVariables
+  >(DeleteCartItemsDocument)
 }

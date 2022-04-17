@@ -7,6 +7,8 @@ import { useAppSelector } from 'src/store'
 import axios from 'axios'
 import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
 import Link from 'src/components/atoms/Link/Link'
+import { notify } from 'src/hooks'
+import { MINIMUM_TOTAL } from 'src/store/static'
 
 export interface ICartTemplateProps {
   products:
@@ -25,11 +27,12 @@ const CartTemplate = ({
   const uid = useAppSelector((state) => state.user.data.user?.uid)
 
   const transformedCart = products?.map((item) => ({
-    id: item.id,
+    id: item.pid,
     name: item.product.name,
     description: item.product.category + item.product.subCategory,
     image:
-      'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1400&q=80',
+      (item.product.images && item.product.images[0]) ||
+      'https://res.cloudinary.com/thankyou/image/upload/v1648563867/zillow-clone/ul7h0tcrtl3bycfd8za1.jpg',
     price: Math.round(item.product.price * 100),
   }))
 
@@ -46,8 +49,14 @@ const CartTemplate = ({
     const result = await stripe?.redirectToCheckout({
       sessionId: checkoutSession.data.id,
     })
+
+    console.log('result: ', result)
     if (result?.error) {
-      alert(result.error.message)
+      notify({
+        message:
+          result.error.message || 'Something went wrong. Please try again.',
+        type: 'error',
+      })
     }
     setCreatingCheckoutSession(false)
   }
@@ -93,12 +102,19 @@ const CartTemplate = ({
           <Button
             fullWidth
             size='xl'
-            disabled={products?.length === 0}
+            disabled={products?.length === 0 || totalPrice < MINIMUM_TOTAL}
             isLoading={creatingCheckoutSession}
             onClick={createCheckOutSession}
+            className='disabled:bg-gray'
           >
             Checkout
           </Button>
+          {(products?.length || 0) > 0 && totalPrice < MINIMUM_TOTAL && (
+            <div className='flex items-center gap-2 mt-2 text-sm text-red-700'>
+              Minimum checkout price:{' '}
+              <Price price={MINIMUM_TOTAL} className='inline' />
+            </div>
+          )}
         </div>
       </div>
     </div>

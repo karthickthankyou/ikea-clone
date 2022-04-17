@@ -221,3 +221,9 @@ mutation PostNewProduct($object: products_insert_input!) {
     description
   }
 }
+
+mutation DeleteCartItems($uid: String!, $type: user_products_type_enum!) {
+  delete_user_products(where: { uid: { _eq: $uid }, type: { _eq: $type } }) {
+    affected_rows
+  }
+}
