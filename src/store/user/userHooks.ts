@@ -39,11 +39,6 @@ export const useUserListener = () => {
           return
         }
 
-        notify({
-          message: `Welcome. ${user.displayName || ''}`,
-          type: 'success',
-        })
-
         dispatch(
           setUser({
             displayName: user?.displayName || null,

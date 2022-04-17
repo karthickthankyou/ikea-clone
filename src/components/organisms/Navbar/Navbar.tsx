@@ -77,7 +77,7 @@ const NavSidebarUser = ({
               className='flex items-center justify-between w-full text-primary'
             >
               <Link
-                href='/help'
+                href='/user'
                 className='py-1.5 block hover:underline font-bold text-xl capitalize'
               >
                 {item}

@@ -38,7 +38,7 @@ const CartPage: NextPage = () => {
         title={`${products.data?.user_products.length} - Ikea clone | Karthick Ragavendran`}
         description='Create account with your email or google account.'
       />
-      <div className='mt-2 mb-4 text-2xl'>Cart</div>
+      <div className='mt-2 mb-4 text-xl font-semibold'>Cart</div>
       <CartTemplate
         className='mb-12'
         products={cartProducts}
@@ -47,7 +47,9 @@ const CartPage: NextPage = () => {
       <div>
         {savedForLater && savedForLater?.length > 0 ? (
           <>
-            <div className='mt-2 mb-4 text-xl'>Saved for later</div>
+            <div className='mt-2 mb-4 text-xl font-semibold'>
+              Saved for later
+            </div>
             <div className='grid grid-cols-2 gap-8 lg:grid-cols-3 '>
               {productsFetching &&
                 [1, 2, 3, 4].map((item) => (

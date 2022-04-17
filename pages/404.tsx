@@ -13,7 +13,7 @@ const NotFoundPage: NextPage = () => (
     <div className='min-h-screen mt-12'>
       <Container className='flex flex-col justify-center h-full'>
         <div className='max-w-sm'>
-          <div className='text-lg font-semibold'>404 | Page not found.</div>
+          <div className='text-lg font-semibold'>404 | Page not found</div>
           <div className='mt-8 mb-16 text-gray-600'>
             Meanwhile, follow the <span className='text-red'>site map</span>{' '}
             below for amazing things you can do in this site right now.
