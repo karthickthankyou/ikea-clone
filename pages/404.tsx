@@ -19,7 +19,7 @@ const NotFoundPage: NextPage = () => (
             below for amazing things you can do in this site right now.
           </div>
         </div>
-        <TripGuide />
+        <TripGuide currentPageName='404' />
       </Container>
     </div>
   </div>

@@ -3,6 +3,6 @@ import TripGuide from './TripGuide'
 
 describe('TripGuide Component', () => {
   it('TripGuide renders', () => {
-    mount(<TripGuide />)
+    mount(<TripGuide currentPageName='404' />)
   })
 })

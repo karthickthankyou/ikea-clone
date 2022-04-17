@@ -27,15 +27,21 @@ export default {
   component: TripGuide,
 } as ComponentMeta<typeof TripGuide>
 
-const Template: ComponentStory<typeof TripGuide> = () => <TripGuide />
+const Template: ComponentStory<typeof TripGuide> = (args) => (
+  <TripGuide {...args} />
+)
 
 export const UnAuthenticated = Template.bind({})
-UnAuthenticated.args = {}
+UnAuthenticated.args = {
+  currentPageName: 'Home',
+}
 UnAuthenticated.decorators = [
   (story) => <Provider store={store}>{story()}</Provider>,
 ]
 export const Authenticated = Template.bind({})
-Authenticated.args = {}
+Authenticated.args = {
+  currentPageName: '404',
+}
 Authenticated.decorators = [
   (story) => <Provider store={storeWithUid}>{story()}</Provider>,
 ]

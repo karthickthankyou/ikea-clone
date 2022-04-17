@@ -11,6 +11,7 @@ import PhotographIcon from '@heroicons/react/solid/PhotographIcon'
 import BriefcaseIcon from '@heroicons/react/solid/BriefcaseIcon'
 import UserCircleIcon from '@heroicons/react/solid/UserCircleIcon'
 import PlusCircleIcon from '@heroicons/react/solid/PlusCircleIcon'
+import InformationCircleIcon from '@heroicons/react/solid/InformationCircleIcon'
 import { selectUid } from 'src/store/user/userSlice'
 
 import styles from 'src/util/Topography.module.css'
@@ -18,6 +19,18 @@ import React from 'react'
 import { useAppSelector } from 'src/store'
 
 export interface ITripGuideProps {}
+
+export type PageNames =
+  | 'Home'
+  | 'Products'
+  | 'Product page'
+  | 'Authentication'
+  | 'Wishlist'
+  | 'Cart'
+  | 'Purchased'
+  | 'User'
+  | 'Post new product'
+  | '404'
 
 const Section = ({
   title,
@@ -56,7 +69,7 @@ const Section = ({
   </div>
 )
 
-const TripGuide = () => {
+const TripGuide = ({ currentPageName }: { currentPageName: PageNames }) => {
   const uid = useAppSelector(selectUid)
 
   return (
@@ -74,62 +87,80 @@ const TripGuide = () => {
           </div>
           <Section
             position={{ bottom: '2%', left: '2%' }}
-            title='Home'
+            title={`Home ${currentPageName === 'Home' ? '(You are here)' : ''}`}
             href='/'
             Icon={HomeIcon}
           />
           <Section
-            title='Products'
+            title={`Products ${
+              currentPageName === 'Products' ? '(You are here)' : ''
+            }`}
             position={{ top: '80%', right: '40%' }}
             href='/products'
             Icon={SearchIcon}
           />
           <Section
-            title='Product page'
+            title={`Product page ${
+              currentPageName === 'Product page' ? '(You are here)' : ''
+            }`}
             position={{ top: '92%', right: '32%' }}
             href='/products/68'
             Icon={PhotographIcon}
           />
           <Section
-            title='Authentication'
+            title={`Authentication ${
+              currentPageName === 'Authentication' ? '(You are here)' : ''
+            }`}
             position={{ top: '64%', left: '24%' }}
             href='/createAccount'
             Icon={LockClosedIcon}
           />
           <Section
-            title='Wishlist'
+            title={`Wishlist ${
+              currentPageName === 'Wishlist' ? '(You are here)' : ''
+            }`}
             position={{ top: '8%', right: '76%' }}
             href='/wishlist'
             Icon={HeartIcon}
             enabled={!!uid}
           />
           <Section
-            title='Cart'
+            title={`Cart ${currentPageName === 'Cart' ? '(You are here)' : ''}`}
             position={{ top: '16%', right: '84%' }}
             href='/cart'
             Icon={ShoppingCartIcon}
             enabled={!!uid}
           />
           <Section
-            title='Purchased'
+            title={`Purchased ${
+              currentPageName === 'Purchased' ? '(You are here)' : ''
+            }`}
             position={{ top: '0%', right: '92%' }}
             href='/purchased'
             Icon={BriefcaseIcon}
             enabled={!!uid}
           />
           <Section
-            title='User'
+            title={`User ${currentPageName === 'User' ? '(You are here)' : ''}`}
             position={{ top: '16%', right: '12%' }}
             href='/user'
             Icon={UserCircleIcon}
             enabled={!!uid}
           />
           <Section
-            title='Post new product'
+            title={`Post new product ${
+              currentPageName === 'Post new product' ? '(You are here)' : ''
+            }`}
             position={{ top: '8%', right: '2%' }}
             href='/products/new'
             Icon={PlusCircleIcon}
             enabled={!!uid}
+          />
+          <Section
+            title={`404 ${currentPageName === '404' ? '(You are here)' : ''}`}
+            position={{ top: '58%', right: '2%' }}
+            href='/404'
+            Icon={InformationCircleIcon}
           />
         </div>
       </div>

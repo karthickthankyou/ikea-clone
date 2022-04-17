@@ -653,7 +653,7 @@ const Home: NextPage = () => (
       <Container>
         <div className='text-xl font-semibold'>Trip guide</div>
         <div className='mt-2'>Working parts of the application.</div>
-        <TripGuide />
+        <TripGuide currentPageName='Home' />
       </Container>
     </div>
   </div>
