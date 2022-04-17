@@ -90,9 +90,9 @@ const NavSidebarUser = ({
             { name: 'My account', href: '/user' },
             { name: 'Wish list', href: '/wishlist' },
             { name: 'Cart', href: '/cart' },
-            { name: 'Shopping list', href: '/orders' },
-            { name: 'Planners', href: '/' },
-            { name: 'Track & manage my order', href: '/' },
+            { name: 'Orders', href: '/orders' },
+            { name: 'Planners', href: '/notimplemented' },
+            { name: 'Track & manage my order', href: '/notimplemented' },
           ].map((item) => (
             <Link
               key={item.name}
@@ -148,7 +148,7 @@ export const NavSidebar = ({
           {mainmenu.menu1.map((item) => (
             <Link
               key={item}
-              href='/advertise'
+              href='/products'
               className='py-1.5 hover:underline  font-bold text-3xl capitalize'
             >
               {item}
@@ -158,7 +158,7 @@ export const NavSidebar = ({
           {mainmenu.menu2.map((item) => (
             <Link
               key={item}
-              href='/advertise'
+              href='/notimplemented'
               className='py-1.5 hover:underline  font-bold text-xl capitalize'
             >
               {item}
@@ -168,7 +168,7 @@ export const NavSidebar = ({
           {mainmenu.menu3.map((item) => (
             <Link
               key={item}
-              href='/advertise'
+              href='/notimplemented'
               className='py-1.5 hover:underline  capitalize'
             >
               {item}
@@ -221,6 +221,13 @@ const Navbar = () => {
             >
               <SearchIcon className='w-5 h-5' />
             </Link>
+            <Link
+              className='p-2 '
+              href='/cart'
+              aria-label='Go to shopping cart'
+            >
+              <ShoppingCartIcon className='w-5 h-5' />
+            </Link>
             <button
               onClick={() => setOpenUser((state) => !state)}
               type='button'
@@ -229,13 +236,7 @@ const Navbar = () => {
             >
               <UserIcon className='w-5 h-5' />
             </button>
-            <Link
-              className='p-2 '
-              href='/cart'
-              aria-label='Go to shopping cart'
-            >
-              <ShoppingCartIcon className='w-5 h-5' />
-            </Link>
+
             <button
               type='button'
               onClick={() => setOpen((state) => !state)}

@@ -30,6 +30,15 @@ const OrdersPage: NextPage = () => {
           [1, 2, 3, 4, 5, 6].map((item) => (
             <Skeleton key={item} className='w-full h-full' />
           ))}
+        {!orders ||
+          (orders?.length === 0 && (
+            <div>
+              <div>No results.</div>
+              <Link href='/products' className='underline underline-offset-4'>
+                Go to store.
+              </Link>
+            </div>
+          ))}
         {orders?.map((item) => (
           <Link href={`/products/${item.pid}`} key={item.id}>
             <PurchasedCard product={item} />
