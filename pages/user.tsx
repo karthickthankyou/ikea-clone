@@ -86,7 +86,7 @@ const UserPage: NextPage = () => {
             type='button'
             onClick={becomeSellerForIkeaClick}
           >
-            Become Agent
+            Become Seller
           </Button>
         )}
       </div>

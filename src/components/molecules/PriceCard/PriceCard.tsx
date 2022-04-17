@@ -27,7 +27,8 @@ const PriceCard = ({ product }: IPriceCardProps) => {
     (state) => state.userProducts.userProducts.data?.user_products
   )?.filter((item) => item.type === User_Products_Type_Enum.InCart)
 
-  if (!product) return <div>Loading....</div>
+  if (fetching) return <div>Loading....</div>
+  if (!product) return <div>Product not found.</div>
   const {
     rating,
     reviews,

@@ -149,7 +149,30 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
   const [openProductDetials, setOpenProductDetials] = useState(false)
   const [openMeasurements, setOpenMeasurements] = useState(false)
 
-  const data = product?.data?.product
+  const { error, data, fetching } = product
+
+  console.log(product)
+
+  if (error) {
+    if (error.networkError)
+      return (
+        <Container>
+          Network error. Please check your connection and try again.
+        </Container>
+      )
+
+    console.log('Error ', error.message.includes('unexpected null value'))
+
+    if (error.message.includes('unexpected null value'))
+      return (
+        <Container>Invalid URL. The product id provided is invalid.</Container>
+      )
+
+    return <Container>Something went wrong.</Container>
+  }
+
+  if (fetching) return <Container>Fetching...</Container>
+  if (!data?.product) return <Container>Product not found</Container>
 
   return (
     <>
@@ -160,11 +183,16 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
       >
         <Sidebar.Body>
           <div className='text-2xl font-semibold'>Product details</div>
-          <Price price={data?.price} oldPrice={data?.oldPrice} />
+          <Price
+            price={data?.product?.price}
+            oldPrice={data?.product?.oldPrice}
+          />
           <div>
-            {data?.outOfStock && <div className='text-red'>Out of stock</div>}
+            {data?.product?.outOfStock && (
+              <div className='text-red'>Out of stock</div>
+            )}
           </div>
-          <div className='mt-4'>MRP Rs.{data?.price} (incl. tax)</div>
+          <div className='mt-4'>MRP Rs.{data?.product?.price} (incl. tax)</div>
           <div className='mt-2 text-gray-600'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
             ipsa perferendis expedita aspernatur! Autem modi nam exercitationem,
@@ -197,7 +225,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         <div className='grid grid-cols-1 gap-8 mb-24 lg:grid-cols-3 lg:gap-16'>
           <div className='col-span-1'>
             <div className='sticky top-24'>
-              <PriceCard product={data} />
+              <PriceCard product={data?.product} />
             </div>
           </div>
           <div className='col-span-2 space-y-6 md:space-y-12'>
@@ -287,7 +315,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         <RelatedProducts title='Related products' />
         <RecentlyViewedProducts
           title='Recently viewed products'
-          currentProductId={data?.id}
+          currentProductId={data?.product?.id}
         />
       </Container>
     </>

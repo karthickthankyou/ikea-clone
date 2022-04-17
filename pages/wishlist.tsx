@@ -26,6 +26,7 @@ const WishlistPage: NextPage = () => {
         } - Ikea clone | Karthick Ragavendran`}
         description='Create account with your email or google account.'
       />
+      <div className='mt-2 mb-4 text-xl font-semibold'>Wishlist</div>
       <div className='grid grid-cols-4 gap-4'>
         {wishlistedProducts?.map((item) => (
           <div key={item.id}>

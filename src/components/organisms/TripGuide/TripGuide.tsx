@@ -10,6 +10,7 @@ import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import PhotographIcon from '@heroicons/react/solid/PhotographIcon'
 import BriefcaseIcon from '@heroicons/react/solid/BriefcaseIcon'
 import UserCircleIcon from '@heroicons/react/solid/UserCircleIcon'
+import PlusCircleIcon from '@heroicons/react/solid/PlusCircleIcon'
 import { selectUid } from 'src/store/user/userSlice'
 
 import styles from 'src/util/Topography.module.css'
@@ -112,15 +113,22 @@ const TripGuide = () => {
           <Section
             title='Purchased'
             position={{ top: '0%', right: '92%' }}
-            href='/cart'
+            href='/purchased'
             Icon={BriefcaseIcon}
             enabled={!!uid}
           />
           <Section
-            title='Agent'
-            position={{ top: '8%', right: '2%' }}
-            href='/cart'
+            title='User'
+            position={{ top: '16%', right: '12%' }}
+            href='/user'
             Icon={UserCircleIcon}
+            enabled={!!uid}
+          />
+          <Section
+            title='Post new product'
+            position={{ top: '8%', right: '2%' }}
+            href='/products/new'
+            Icon={PlusCircleIcon}
             enabled={!!uid}
           />
         </div>

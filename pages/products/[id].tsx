@@ -30,6 +30,8 @@ const ProductPage: NextPage = () => {
     if (uid) wishlistProduct({ uid, pid: id })
   }, [id, uid, wishlistProduct])
 
+  console.log('Data, ', data)
+
   return (
     <div>
       <NextSeo

@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
-import { useForm } from 'react-hook-form'
+import { FieldError, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import HtmlSelect from 'src/components/atoms/HtmlSelect'
@@ -21,34 +21,41 @@ import { useAppSelector } from 'src/store'
 
 export interface IPostProductTemplateProps {}
 
-const newProductFormSchema = yup
-  .object({
-    name: yup.string().required('Product name is required'),
-    description: yup.string().required('Product description is required'),
-    measurements: yup.string().required('Product measurements is required'),
-    tags: yup.string(),
-    price: yup
-      .number()
-      .transform((value) => (value === '' ? null : value))
-      .typeError('A valid numeric value is required.')
-      .required('Product price is required'),
-    discount: yup
-      .number()
-      .transform((value) => (value === '' ? null : value))
-      .typeError('It is not a valid numeric number.'),
-    category: yup.string().required('Pick a product category'),
-    subCategory: yup.string().required("Pick the product's sub category"),
-    outOfStock: yup.boolean(),
-    images: yup
-      .array()
-      .of(yup.string())
-      .test(
-        'required',
-        'select 1 to 8 images',
-        (arr: any) => arr && arr.length > 0 && arr.length <= 8
-      ),
-  })
-  .required()
+const newProductFormSchema = yup.object({
+  name: yup.string().required('Product name is required'),
+  description: yup.string().required('Product description is required'),
+  measurements: yup.string().required('Product measurements is required'),
+  tags: yup.string(),
+  price: yup
+    .number()
+    .min(0, 'Price can not be negative')
+    .transform((value) => (value === '' ? null : value))
+    .typeError('A valid numeric value is required.')
+    .required('Product price is required'),
+  discount: yup
+    .number()
+    .min(0, 'Discount can not be negative')
+    .transform((value) => (value === '' ? null : value))
+    .typeError('It is not a valid numeric number.'),
+  category: yup.string().required('Pick a product category'),
+  subCategory: yup.string().required("Pick the product's sub category"),
+  outOfStock: yup.boolean(),
+  images: yup
+    .array()
+    .of(yup.string())
+    .required('select 1 to 8 images')
+    .min(1, 'select 1 to 8 images')
+    .max(8, 'select 1 to 8 images'),
+})
+// .required()
+//     images: yup
+//     .array()
+//     .of(yup.string())
+//     .test(
+//       'required',
+//       'select 1 to 8 images',
+//       (arr: any) => arr && arr.length > 0 && arr.length <= 8
+//     ),
 
 /** Todo: How to make any one of phone or email to be required? */
 
@@ -113,6 +120,8 @@ const PostProductTemplate = () => {
   useEffect(() => {
     scrollToTop()
   }, [])
+
+  console.log('Errors: ', errors)
 
   return (
     <form onSubmit={onSubmit} className='container min-h-screen p-6 mx-auto'>
@@ -188,7 +197,7 @@ const PostProductTemplate = () => {
               />
             </Label>
           </div>
-          <Label title='Out of stock' error={errors.name}>
+          <Label title='Out of stock' error={errors.outOfStock}>
             <div className='flex items-center'>
               <input {...register('outOfStock')} type='checkbox' />
               <span className='ml-2 text-sm text-gray'>
@@ -199,7 +208,7 @@ const PostProductTemplate = () => {
           <Label
             title='Images'
             className='grid-cols-2'
-            error={errors.images && errors.images[0]}
+            error={errors.images && (errors.images as unknown as FieldError)}
           >
             <Input
               type='file'

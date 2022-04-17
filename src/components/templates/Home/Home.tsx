@@ -19,6 +19,7 @@ import InfoCard from 'src/components/molecules/InfoCard'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import Link from 'src/components/atoms/Link'
 import DeveloperCommentary from 'src/components/molecules/DeveloperCommentary/DeveloperCommentary'
+import TripGuide from 'src/components/organisms/TripGuide/TripGuide'
 
 const tags = [
   'Sofas',
@@ -648,6 +649,13 @@ const Home: NextPage = () => (
         </div>
       </div>
     </Container>
+    <div className='py-6 my-12 bg-gray-25'>
+      <Container>
+        <div className='text-xl font-semibold'>Trip guide</div>
+        <div className='mt-2'>Working parts of the application.</div>
+        <TripGuide />
+      </Container>
+    </div>
   </div>
 )
 

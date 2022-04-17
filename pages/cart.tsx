@@ -44,16 +44,24 @@ const CartPage: NextPage = () => {
         products={cartProducts}
         fetching={productsFetching}
       />
-
-      <div className='mt-2 mb-4 text-2xl'>Saved for later</div>
-      <div className='grid grid-cols-2 gap-8 lg:grid-cols-3 '>
-        {productsFetching &&
-          [1, 2, 3, 4].map((item) => (
-            <div className='w-full bg-gray-200 h-28 animate-pulse' key={item} />
-          ))}
-        {savedForLater?.map((item) => (
-          <SavedForLaterCard key={item.id} product={item} />
-        ))}
+      <div>
+        {savedForLater && savedForLater?.length > 0 ? (
+          <>
+            <div className='mt-2 mb-4 text-xl'>Saved for later</div>
+            <div className='grid grid-cols-2 gap-8 lg:grid-cols-3 '>
+              {productsFetching &&
+                [1, 2, 3, 4].map((item) => (
+                  <div
+                    className='w-full bg-gray-200 h-28 animate-pulse'
+                    key={item}
+                  />
+                ))}
+              {savedForLater?.map((item) => (
+                <SavedForLaterCard key={item.id} product={item} />
+              ))}
+            </div>
+          </>
+        ) : null}
       </div>
     </Container>
   )
