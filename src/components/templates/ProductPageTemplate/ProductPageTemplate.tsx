@@ -110,13 +110,13 @@ const RecentlyViewedProducts = ({
         </HScroll.Body>
         <HScroll.Arrow
           distance={200}
-          className='absolute left-0 z-10 h-full -translate-x-1/2'
+          className='absolute left-0 z-10 hidden h-full -translate-x-1/2 md:block'
           arrowClassName='shadow-md'
         />
         <HScroll.Arrow
           distance={200}
           right
-          className='absolute right-0 z-10 h-full translate-x-1/2'
+          className='absolute right-0 z-10 hidden h-full translate-x-1/2 md:block'
           arrowClassName='shadow-md'
         />
       </HScroll>
@@ -138,13 +138,13 @@ const RelatedProducts = ({ title }: { title: string }) => {
         </HScroll.Body>
         <HScroll.Arrow
           distance={200}
-          className='absolute left-0 z-10 h-full -translate-x-1/2'
+          className='absolute left-0 z-10 hidden h-full -translate-x-1/2 md:block'
           arrowClassName='shadow-md'
         />
         <HScroll.Arrow
           distance={200}
           right
-          className='absolute right-0 z-10 h-full translate-x-1/2'
+          className='absolute right-0 z-10 hidden h-full translate-x-1/2 md:block'
           arrowClassName='shadow-md'
         />
       </HScroll>
@@ -229,7 +229,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
           </div>
           <div className='col-span-2 space-y-6 md:space-y-12'>
             <Masonry2
-              gap='6'
+              gap='2'
               columns='2'
               shortOnes={[2, 3]}
               className='block md:hidden'
