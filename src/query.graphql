@@ -20,10 +20,12 @@ query GetProduct($id: Int!) {
     price
     rating
     reviews
+    description
     subCategory
     tags
     updatedAt
     url
+    images
   }
 }
 

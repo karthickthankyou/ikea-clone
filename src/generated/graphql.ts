@@ -3405,10 +3405,12 @@ export type GetProductQuery = {
     price: any
     rating?: any | null
     reviews?: any | null
+    description?: string | null
     subCategory: string
     tags?: any | null
     updatedAt: any
     url?: string | null
+    images?: any | null
   } | null
 }
 
@@ -3672,10 +3674,12 @@ export const GetProductDocument = /*#__PURE__*/ gql`
       price
       rating
       reviews
+      description
       subCategory
       tags
       updatedAt
       url
+      images
     }
   }
 `

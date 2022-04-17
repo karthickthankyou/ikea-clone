@@ -95,12 +95,17 @@ const PostProductTemplate = () => {
     usePostNewProductMutation()
 
   const onSubmit = handleSubmit(async (data) => {
+    const newPrice = data.discount
+      ? data.price * ((100 - data.discount) / 100)
+      : data.price
+
     postNewProduct({
       object: {
         category: data.category,
-        description: data.category,
+        description: data.description,
         discount: data.discount,
-        price: data.price,
+        oldPrice: data.price,
+        price: newPrice,
         name: data.name,
         outOfStock: data.outOfStock,
         subCategory: data.subCategory,

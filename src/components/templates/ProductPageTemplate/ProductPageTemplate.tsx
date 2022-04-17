@@ -1,5 +1,4 @@
 import Container from 'src/components/atoms/Container'
-import { sampleImagesForMasonry } from 'src/components/templates/Masonry2/data'
 import { useAppSelector } from 'src/store'
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
 import PriceCard from 'src/components/molecules/PriceCard/PriceCard'
@@ -46,6 +45,15 @@ const InfoInSidebar = ({
     <ArrowRightIcon className='w-8 h-8 p-1 group-hover:animate-slide-right' />
   </button>
 )
+
+const dummyImages = [
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+  'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg',
+]
 
 const RecentlyViewedProducts = ({
   title,
@@ -171,6 +179,8 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
   if (fetching) return <Loading />
   if (!data?.product) return <Container>Product not found</Container>
 
+  const images = [...data.product.images, ...dummyImages].slice(0, 6)
+
   return (
     <>
       <Sidebar
@@ -192,11 +202,7 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
             )}
           </div>
           {/* <div className='mt-4'>MRP Rs.{data?.product?.price} (incl. tax)</div> */}
-          <div className='mt-2 text-gray-600'>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
-            ipsa perferendis expedita aspernatur! Autem modi nam exercitationem,
-            nisi commodi esse? Eaque voluptatum odit itaque?
-          </div>
+          <div className='mt-2 text-gray-600'>{data.product.description}</div>
         </Sidebar.Body>
       </Sidebar>
       <Sidebar
@@ -234,12 +240,12 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               shortOnes={[2, 3]}
               className='block md:hidden'
             >
-              {sampleImagesForMasonry.slice(0, 6).map((item) => (
+              {images.slice(0, 6).map((item) => (
                 <div
                   className='h-full rounded-lg shadow-lg bg-yellow/30'
-                  key={item.src}
+                  key={item}
                 >
-                  <Image alt='' src={item.src} layout='fill' />
+                  <Image alt='' src={item} layout='fill' />
                 </div>
               ))}
             </Masonry2>
@@ -249,23 +255,17 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               shortOnes={[1, 2, 5, 6, 9]}
               className='hidden md:block'
             >
-              {sampleImagesForMasonry.slice(0, 6).map((item) => (
+              {images.slice(0, 6).map((item) => (
                 <div
                   className='h-full rounded-lg shadow-lg bg-yellow/30'
-                  key={item.src}
+                  key={item}
                 >
-                  <Image alt='' src={item.src} layout='fill' />
+                  <Image alt='' src={item} layout='fill' />
                 </div>
               ))}
             </Masonry2>
             <div className='max-w-2xl text-xl font-light leading-relaxed text-gray-700'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate
-              amet quasi temporibus facilis debitis rem provident necessitatibus
-              dicta reiciendis tempora ex nesciunt dolorum eligendi accusantium
-              porro, quod repellat totam. Voluptate quis laudantium neque sequi
-              facere eaque id debitis modi ullam voluptatum omnis similique
-              quisquam corrupti voluptas, exercitationem aspernatur ab et quos
-              dicta
+              {data.product.description}
             </div>
             <div>
               <div className='text-sm text-gray-600'>Article number</div>
