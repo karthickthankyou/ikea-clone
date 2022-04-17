@@ -44,11 +44,14 @@ const SearchProductsPage: NextPage = () => {
   const searchProducts = useAppSelector(selectProductsWithWishlist)
 
   const productsLength = products.data?.products.length
+  const title = productsLength
+    ? `${productsLength} of ${totalCount} Search page - Ikea clone | Karthick Ragavendran`
+    : 'Loading... Ikea clone | Karthick Ragavendran'
   return (
     <Container>
       <FormProvider {...methods}>
         <NextSeo
-          title={`${productsLength} of ${totalCount} Search page - Ikea clone | Karthick Ragavendran`}
+          title={title}
           description='Search products and actually buy.'
         />
         <ProductListing />

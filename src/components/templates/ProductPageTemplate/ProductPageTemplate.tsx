@@ -146,6 +146,8 @@ const RelatedProducts = ({ title }: { title: string }) => {
 }
 
 const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
+  const uid = useAppSelector((state) => state.user.data.user?.uid)
+
   const [openProductDetials, setOpenProductDetials] = useState(false)
   const [openMeasurements, setOpenMeasurements] = useState(false)
 
@@ -184,13 +186,15 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
           <Price
             price={data?.product?.price}
             oldPrice={data?.product?.oldPrice}
+            showTaxComment
+            className='mt-4'
           />
           <div>
             {data?.product?.outOfStock && (
               <div className='text-red'>Out of stock</div>
             )}
           </div>
-          <div className='mt-4'>MRP Rs.{data?.product?.price} (incl. tax)</div>
+          {/* <div className='mt-4'>MRP Rs.{data?.product?.price} (incl. tax)</div> */}
           <div className='mt-2 text-gray-600'>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore
             ipsa perferendis expedita aspernatur! Autem modi nam exercitationem,
@@ -311,10 +315,19 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
         </div>
 
         <RelatedProducts title='Related products' />
-        <RecentlyViewedProducts
-          title='Recently viewed products'
-          currentProductId={data?.product?.id}
-        />
+        {uid ? (
+          <RecentlyViewedProducts
+            title='Recently viewed products'
+            currentProductId={data?.product?.id}
+          />
+        ) : (
+          <div>
+            <Link href='/login' className='underline underline-offset-4'>
+              Login
+            </Link>{' '}
+            to see viewed products.
+          </div>
+        )}
       </Container>
     </>
   )

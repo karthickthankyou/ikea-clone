@@ -3,6 +3,7 @@ import InformationCircleIcon from '@heroicons/react/outline/InformationCircleIco
 import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import Tooltip from 'src/components/atoms/Tooltip'
 import Button from 'src/components/atoms/Button/Button'
+import { useRouter } from 'next/router'
 
 import {
   useInsertUserProductsOneMutation,
@@ -21,6 +22,7 @@ export interface IPriceCardProps {
 const PriceCard = ({ product }: IPriceCardProps) => {
   const [{ fetching, data, error }, AddProductToCart] =
     useInsertUserProductsOneMutation()
+  const router = useRouter()
 
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   const cartItems = useAppSelector(
@@ -80,10 +82,15 @@ const PriceCard = ({ product }: IPriceCardProps) => {
       )}
       <Button
         size='lg'
-        disabled={Boolean(outOfStock)}
+        disabled={Boolean(outOfStock) || inCart}
         isLoading={fetching}
         className='flex items-center gap-2 mt-8'
-        onClick={() =>
+        onClick={() => {
+          if (!uid) {
+            router.push('/login')
+            return
+          }
+
           AddProductToCart({
             object: {
               pid: id,
@@ -91,7 +98,7 @@ const PriceCard = ({ product }: IPriceCardProps) => {
               type: User_Products_Type_Enum.InCart,
             },
           })
-        }
+        }}
       >
         <ShoppingCartIcon className='w-5 h-5 text-white' />
         {inCart ? 'In cart' : 'Add to shopping cart'}
