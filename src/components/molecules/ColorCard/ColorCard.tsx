@@ -1,6 +1,7 @@
 import ArrowRightIcon from '@heroicons/react/solid/ArrowRightIcon'
 
 import Image from 'src/components/atoms/Image'
+import Link from 'src/components/atoms/Link'
 import { Children } from 'src/types'
 import OverlapSpace from '../OverlapSpace/OverlapSpace'
 
@@ -133,14 +134,14 @@ const ColorCard = ({
         >
           {title}
         </div>
-        <button
-          type='button'
+        <Link
+          href='/products'
           className={`inline p-3 mt-auto font-semibold transition-all ${contrastBgCls} rounded-full cursor-pointer group-hover:-translate-y-2 group-hover:shadow-xl shadow-black/40`}
         >
           <ArrowRightIcon
             className={`w-6 h-6 ${textCls} group-hover:animate-slide`}
           />
-        </button>
+        </Link>
       </div>
     </div>
   )

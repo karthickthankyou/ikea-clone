@@ -25,7 +25,7 @@ const Card01Home = ({
   detailsBgColor,
   detailsTextColor,
 }: ICard01Home) => (
-  <Card01 href='/'>
+  <Card01 href='/products'>
     <Card01.ImageBlock src={src}>
       <Card01.ImageBlockChild className='p-8 bg-white/20'>
         <PriceMarker

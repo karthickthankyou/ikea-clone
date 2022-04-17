@@ -108,13 +108,7 @@ const Login = () => (
 
             <LoginForm className='p-6 sm:hidden' />
             <div className='w-full max-w-sm'>
-              <Link
-                href='/'
-                className='flex items-center justify-start w-full gap-1 mt-8 group'
-              >
-                <ArrowLeftIcon className='w-4 h-4 group-hover:animate-slide-left' />{' '}
-                Back to home
-              </Link>
+              <BackToHome />
             </div>
           </div>
         </OverlapSpace.Child>

@@ -216,61 +216,61 @@ const CategoryCards = [
   <CardCategory01
     text='Sofas & armchair'
     key='Sofas & armchair'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648657901/IKEA/inside-weather-Uxqlfigh6oE-unsplash_m5ot2w.jpg'
   />,
   <CardCategory01
     text='Cookware & tableware'
     key='Cookware & tableware'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648657852/IKEA/sarah-dorweiler-0QmzQZndkOQ-unsplash_e5tys0.jpg'
   />,
   <CardCategory01
     text='Smart home'
     key='Smart home'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648657752/IKEA/samantha-gades-BlIhVfXbi9s-unsplash_gvzqkh.jpg'
   />,
   <CardCategory01
     text='Mirrors'
     key='Mirrors'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648661059/IKEA/giorgio-trovato-CgXnJ4Z5KFI-unsplash_moggxx.jpg'
   />,
   <CardCategory01
     text='Shoe rack and clothes stand'
     key='Shoe rack and clothes stand'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648661101/IKEA/jake-goossen-juhD3QGCv20-unsplash_jiwsem.jpg'
   />,
   <CardCategory01
     text='Beds'
     key='Beds'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648661142/IKEA/chastity-cortijo-M8iGdeTSOkg-unsplash_htvvhi.jpg'
   />,
   <CardCategory01
     text='Chairs'
     key='Chairs'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648660432/IKEA/thestandingdesk-_mpablfu5pM-unsplash_jzqojr.jpg'
   />,
   <CardCategory01
     text='Table and desks'
     key='Table and desks'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
   />,
   <CardCategory01
     text='Baby & children'
     key='Baby & children'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648661196/IKEA/kids-me-germany-Zzgmde4_lYU-unsplash_tcx3xa.jpg'
   />,
   <CardCategory01
     text='Storage & organisation'
     key='Storage & organisation'
-    href='/'
+    href='/products'
     src='https://res.cloudinary.com/thankyou/image/upload/v1648660778/IKEA/nathan-oakley-jSbBnR22cXc-unsplash_xakhbu.jpg'
   />,
 ]
@@ -309,13 +309,13 @@ const Home: NextPage = () => (
             title='AROMATISK'
             description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maxime, molestiae ut magni aperiam tenetur beatae in repellendus quia possimus sit libero nihil laborum.'
             src='https://res.cloudinary.com/thankyou/image/upload/v1648218044/nike/ikea/decor-01_rvj6tr.jpg'
-            href='/'
+            href='/products'
           />
           <BannerCard01
             title='KORKEN'
             description='Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis maxime, molestiae ut magni aperiam tenetur beatae in repellendus quia possimus sit libero nihil laborum.'
             src='https://res.cloudinary.com/thankyou/image/upload/v1648657783/IKEA/becca-tapert-dO3qTKxwik0-unsplash_hh5oap.jpg'
-            href='/'
+            href='/products'
           />
         </div>
       </div>
@@ -454,7 +454,7 @@ const Home: NextPage = () => (
               <CardCategory01
                 text='Storage & organisation'
                 key='Storage & organisation'
-                href='/'
+                href='/products'
                 className='w-56 h-72'
                 src='https://res.cloudinary.com/thankyou/image/upload/v1648660778/IKEA/nathan-oakley-jSbBnR22cXc-unsplash_xakhbu.jpg'
               />
@@ -464,7 +464,7 @@ const Home: NextPage = () => (
                 className='w-56 h-72'
                 text='Baby & children'
                 key='Baby & children'
-                href='/'
+                href='/products'
                 src='https://res.cloudinary.com/thankyou/image/upload/v1648661196/IKEA/kids-me-germany-Zzgmde4_lYU-unsplash_tcx3xa.jpg'
               />
             </HScroll.Child>
@@ -473,7 +473,7 @@ const Home: NextPage = () => (
                 className='w-56 h-72'
                 text='Table and desks'
                 key='Table and desks'
-                href='/'
+                href='/products'
                 src='https://res.cloudinary.com/thankyou/image/upload/v1648660259/IKEA/nathan-oakley-gj1dnc7yRG0-unsplash_cxdhhr.jpg'
               />
             </HScroll.Child>
@@ -482,7 +482,7 @@ const Home: NextPage = () => (
                 className='w-56 h-72'
                 text='Beds'
                 key='Beds'
-                href='/'
+                href='/products'
                 src='https://res.cloudinary.com/thankyou/image/upload/v1648661142/IKEA/chastity-cortijo-M8iGdeTSOkg-unsplash_htvvhi.jpg'
               />
             </HScroll.Child>
@@ -491,7 +491,7 @@ const Home: NextPage = () => (
                 className='w-56 h-72'
                 text='Chairs'
                 key='Chairs'
-                href='/'
+                href='/products'
                 src='https://res.cloudinary.com/thankyou/image/upload/v1648660432/IKEA/thestandingdesk-_mpablfu5pM-unsplash_jzqojr.jpg'
               />
             </HScroll.Child>
@@ -500,7 +500,7 @@ const Home: NextPage = () => (
                 className='w-56 h-72'
                 text='Shoe rack and clothes stand'
                 key='Shoe rack and clothes stand'
-                href='/'
+                href='/products'
                 src='https://res.cloudinary.com/thankyou/image/upload/v1648661101/IKEA/jake-goossen-juhD3QGCv20-unsplash_jiwsem.jpg'
               />
             </HScroll.Child>
@@ -568,35 +568,35 @@ const Home: NextPage = () => (
         title='Download the IKEA app'
         description='Explore a wide range of affordable, well-designed and functional home furnishing solutions for every room in your home - at your fingertips.'
         buttonText='Download now'
-        href='/'
+        href='/appstore'
       />
       <div className='grid grid-cols-2 md:grid-cols-4 gap-responsive'>
         <InfoCard
           Icon={HeartIcon}
           title='Returns policy'
           description='Exceptions during COVID19'
-          href='/'
+          href='/learnmore'
           className='p-responsive'
         />
         <InfoCard
           Icon={HeartIcon}
           title='Click & collect'
           description='Safe click and collect shopping at IKEA Stores!'
-          href='/'
+          href='/learnmore'
           className='p-responsive'
         />
         <InfoCard
           Icon={HeartIcon}
           title='Planning tools'
           description='Our planning tools will help you give shape to your ideas'
-          href='/'
+          href='/learnmore'
           className='p-responsive'
         />
         <InfoCard
           Icon={HeartIcon}
           title='Safety at IKEA store'
           description='Safe shopping experience at IKEA'
-          href='/'
+          href='/learnmore'
           className='p-responsive'
         />
       </div>
@@ -607,7 +607,7 @@ const Home: NextPage = () => (
             <div className='flex flex-wrap items-center justify-start gap-responsive'>
               {tags.map((tag) => (
                 <Link
-                  href='/'
+                  href='/products'
                   key={tag}
                   className='inline-block px-3 py-1.5 transition-all border border-yellow-100 bg-yellow-25 hover:border-black hover:shadow-xl hover:-translate-y-0.5 hover:bg-white'
                 >

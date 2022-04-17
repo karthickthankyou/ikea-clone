@@ -151,8 +151,6 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
 
   const { error, data, fetching } = product
 
-  console.log(product)
-
   if (error) {
     if (error.networkError)
       return (
