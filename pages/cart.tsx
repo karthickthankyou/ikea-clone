@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
-import { useRouter } from 'next/router'
+import { useTransition, animated, config } from 'react-spring'
 import Container from 'src/components/atoms/Container'
 import { User_Products_Type_Enum } from 'src/generated/graphql'
 import { loadStripe } from '@stripe/stripe-js'
@@ -27,9 +27,19 @@ const CartPage: NextPage = () => {
   const cartProducts = productsData?.user_products.filter(
     (item) => item.type === User_Products_Type_Enum.InCart
   )
+
   const savedForLater = productsData?.user_products.filter(
     (item) => item.type === User_Products_Type_Enum.SavedForLater
   )
+
+  const savedForLaterTransitions = useTransition(savedForLater || [], {
+    keys: (item) => item.id,
+    from: { opacity: 0, transform: 'translateY(-24px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(-24px)' },
+    trail: 200,
+    config: config.gentle,
+  })
 
   if (products.fetching) return <Loading />
 
@@ -66,8 +76,10 @@ const CartPage: NextPage = () => {
                     key={item}
                   />
                 ))}
-              {savedForLater?.map((item) => (
-                <SavedForLaterCard key={item.id} product={item} />
+              {savedForLaterTransitions((style, item) => (
+                <animated.div style={style} key={item.id}>
+                  <SavedForLaterCard product={item} />
+                </animated.div>
               ))}
             </div>
           </>

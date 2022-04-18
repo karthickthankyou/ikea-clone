@@ -4,6 +4,7 @@ import { NextSeo } from 'next-seo'
 import Container from 'src/components/atoms/Container'
 import Link from 'src/components/atoms/Link/Link'
 import Skeleton from 'src/components/molecules/Skeleton'
+import { useTransition, animated, config } from 'react-spring'
 import PurchasedCard from 'src/components/organisms/PurchasedCard'
 
 import { useGetOrderedItems } from 'src/store/userProducts/userProductsHook'
@@ -13,6 +14,16 @@ const OrdersPage: NextPage = () => {
   const products = useGetOrderedItems()
   const { fetching, data } = products
   const orders = data?.orders
+
+  const ordersTransitions = useTransition(orders || [], {
+    keys: (item) => item.id,
+    from: { opacity: 0, transform: 'translateY(-24px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(-24px)' },
+    trail: 200,
+    config: config.gentle,
+  })
+
   const count = data?.orders_aggregate.aggregate?.count
 
   return (
@@ -40,10 +51,12 @@ const OrdersPage: NextPage = () => {
               </Link>
             </div>
           ))}
-        {orders?.map((item) => (
-          <Link href={`/products/${item.pid}`} key={item.id}>
-            <PurchasedCard product={item} />
-          </Link>
+        {ordersTransitions((style, item) => (
+          <animated.div style={style}>
+            <Link href={`/products/${item.pid}`} key={item.id}>
+              <PurchasedCard product={item} />
+            </Link>
+          </animated.div>
         ))}
       </div>
     </Container>

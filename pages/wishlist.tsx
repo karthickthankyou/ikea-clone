@@ -5,6 +5,7 @@ import Container from 'src/components/atoms/Container'
 import Link from 'src/components/atoms/Link/Link'
 import Loading from 'src/components/molecules/Loading/Loading'
 import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
+import { useTransition, animated, config } from 'react-spring'
 import WishlistCard from 'src/components/organisms/WishlistCard'
 import { User_Products_Type_Enum } from 'src/generated/graphql'
 
@@ -32,6 +33,15 @@ const WishlistPage: NextPage = () => {
     (item) => item.type === User_Products_Type_Enum.Wishlisted
   )
 
+  const wishlistItemsTransitions = useTransition(wishlistedProducts || [], {
+    keys: (item) => item.id,
+    from: { opacity: 0, transform: 'translateY(24px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(12px)' },
+    trail: 200,
+    config: config.gentle,
+  })
+
   if (products.fetching) return <Loading />
   if (wishlistedProducts?.length === 0)
     return (
@@ -48,6 +58,7 @@ const WishlistPage: NextPage = () => {
         </Container>
       </div>
     )
+
   return (
     <Container>
       <NextSeo
@@ -63,10 +74,10 @@ const WishlistPage: NextPage = () => {
           linkhref='/cart'
         />
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-          {wishlistedProducts?.map((item) => (
-            <div key={item.id}>
+          {wishlistItemsTransitions((style, item) => (
+            <animated.div style={style} key={item.id}>
               <WishlistCard product={item} />
-            </div>
+            </animated.div>
           ))}
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useAppSelector } from 'src/store'
 import SupportIcon from '@heroicons/react/solid/SupportIcon'
 
 import Sidebar from 'src/components/molecules/Sidebar/Sidebar'
+import Link from 'src/components/atoms/Link'
 import FormIKEAChat from '../FormIKEAChat'
 
 export interface IChatWindowProps {}
@@ -11,7 +12,6 @@ const ChatWindow = () => {
   const [open, setOpen] = useState(false)
 
   const uid = useAppSelector((state) => state.user.data.user?.uid)
-  if (!uid) return null
 
   return (
     <div className='fixed bottom-0 right-0 z-50 p-3 md:p-6 '>
@@ -22,7 +22,15 @@ const ChatWindow = () => {
           </div>
         </Sidebar.Header>
         <Sidebar.Body>
-          <FormIKEAChat />
+          {uid ? (
+            <FormIKEAChat />
+          ) : (
+            <div className='flex items-center justify-center h-full'>
+              <Link href='/login' className='underline underline-offset-4'>
+                Login to contact support.
+              </Link>
+            </div>
+          )}
         </Sidebar.Body>
       </Sidebar>
 

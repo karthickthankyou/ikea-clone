@@ -1,23 +1,12 @@
 import Link from 'src/components/atoms/Link/Link'
-import Tooltip from 'src/components/atoms/Tooltip/Tooltip'
-import { Children } from 'src/types'
 import LocationMarkerIcon from '@heroicons/react/solid/LocationMarkerIcon'
-import HomeIcon from '@heroicons/react/solid/HomeIcon'
-import HeartIcon from '@heroicons/react/solid/HeartIcon'
-import SearchIcon from '@heroicons/react/solid/SearchIcon'
-import SupportIcon from '@heroicons/react/solid/SupportIcon'
-import LockClosedIcon from '@heroicons/react/solid/LockClosedIcon'
-import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
-import PhotographIcon from '@heroicons/react/solid/PhotographIcon'
-import BriefcaseIcon from '@heroicons/react/solid/BriefcaseIcon'
-import UserCircleIcon from '@heroicons/react/solid/UserCircleIcon'
-import PlusCircleIcon from '@heroicons/react/solid/PlusCircleIcon'
-import InformationCircleIcon from '@heroicons/react/solid/InformationCircleIcon'
 import { selectUid } from 'src/store/user/userSlice'
+import { useTransition, animated, config } from 'react-spring'
 
 import styles from 'src/util/Topography.module.css'
 import React from 'react'
 import { useAppSelector } from 'src/store'
+import { sections } from './dummy'
 
 export interface ITripGuideProps {}
 
@@ -38,7 +27,7 @@ const Section = ({
   title,
   href,
   className,
-  position,
+
   Icon = LocationMarkerIcon,
   enabled = true,
   current = false,
@@ -46,15 +35,11 @@ const Section = ({
   title: string
   href: string
   className?: string
-  position?: { top?: string; left?: string; right?: string; bottom?: string }
   Icon?: React.ComponentType<React.SVGProps<SVGSVGElement>>
   enabled?: boolean
   current?: boolean
 }) => (
-  <div
-    style={position}
-    className={`absolute ${className}  group translate-x-1/2 -translate-y-1/2`}
-  >
+  <div className={`${className}  group translate-x-1/2 -translate-y-1/2`}>
     <div className='relative inline-flex items-center -skew-x-12 -skew-y-12 rotate-12'>
       {/* <div className='w-2 h-2 skew-y-12 rounded-full bg-red animate-ping' /> */}
       <div
@@ -81,6 +66,15 @@ const Section = ({
 const TripGuide = ({ currentPageName }: { currentPageName: PageNames }) => {
   const uid = useAppSelector(selectUid)
 
+  const sectionsTransitions = useTransition(sections || [], {
+    keys: (item) => item.title,
+    from: { opacity: 0, transform: 'translateY(-12px) scale(0.6)' },
+    enter: { opacity: 1, transform: 'translateY(0px) scale(1)' },
+    leave: { opacity: 0, transform: 'translateY(-12px) scale(0)' },
+    trail: 200,
+    config: config.gentle,
+  })
+
   return (
     <div className='px-16 py-24 overflow-scroll bg-gray-25 no-scrollbar'>
       <div className='flex flex-col items-center justify-center w-full mt-2 space-y-2 '>
@@ -94,14 +88,21 @@ const TripGuide = ({ currentPageName }: { currentPageName: PageNames }) => {
           >
             Site map
           </div>
-          <Section
-            position={{ bottom: '2%', left: '2%' }}
-            title='Home'
-            href='/'
-            Icon={HomeIcon}
-            current={currentPageName === 'Home'}
-          />
-          <Section
+          {sectionsTransitions((style, item) => (
+            <animated.div
+              style={{ ...style, ...item.position }}
+              className='absolute'
+            >
+              <Section
+                title={item.title}
+                href={item.href}
+                Icon={item.Icon}
+                current={currentPageName === item.title}
+                enabled={item.enableCheck ? !!uid : true}
+              />
+            </animated.div>
+          ))}
+          {/* <Section
             title='Products'
             position={{ top: '80%', right: '40%' }}
             href='/products'
@@ -175,7 +176,7 @@ const TripGuide = ({ currentPageName }: { currentPageName: PageNames }) => {
             href='/support'
             Icon={SupportIcon}
             current={currentPageName === 'Support'}
-          />
+          /> */}
         </div>
       </div>
     </div>

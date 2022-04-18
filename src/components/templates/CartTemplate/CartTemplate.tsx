@@ -3,10 +3,11 @@ import { useState } from 'react'
 import Button from 'src/components/atoms/Button/Button'
 import Price from 'src/components/molecules/Price/Price'
 import CartCard from 'src/components/organisms/CartCard/CartCard'
+import { useTransition, animated, config } from 'react-spring'
 import { useAppSelector } from 'src/store'
 import axios from 'axios'
 import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
-import Link from 'src/components/atoms/Link/Link'
+
 import { notify } from 'src/hooks'
 import { MINIMUM_TOTAL } from 'src/store/static'
 
@@ -25,6 +26,15 @@ const CartTemplate = ({
 }: ICartTemplateProps) => {
   const [creatingCheckoutSession, setCreatingCheckoutSession] = useState(false)
   const uid = useAppSelector((state) => state.user.data.user?.uid)
+
+  const cartItemsTransitions = useTransition(products || [], {
+    keys: (item) => item.id,
+    from: { opacity: 0, height: 80, transform: 'translateX(-24px)' },
+    leave: { opacity: 0, height: 0, transform: 'translateX(24px)' },
+    enter: { opacity: 1, transform: 'translateX(0px)' },
+    trail: 200,
+    config: config.gentle,
+  })
 
   const transformedCart = products?.map((item) => ({
     id: item.pid,
@@ -84,8 +94,10 @@ const CartTemplate = ({
           [1, 2, 3, 4].map((item) => (
             <div className='w-full bg-gray-200 h-28 animate-pulse' key={item} />
           ))}
-        {products?.map((item) => (
-          <CartCard product={item} key={item.id} />
+        {cartItemsTransitions((style, item) => (
+          <animated.div style={style}>
+            <CartCard product={item} />
+          </animated.div>
         ))}
       </div>
       <div>
