@@ -3,6 +3,7 @@ import Image from 'src/components/atoms/Image'
 import Link from 'src/components/atoms/Link/Link'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import HeartIconSolid from '@heroicons/react/solid/HeartIcon'
+import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import {
   useInsertUserProductsOneMutation,
   User_Products_Type_Enum,
@@ -31,6 +32,8 @@ const HeartIconComponent = ({
 }) => {
   if (fetching)
     return <HeartIconSolid className='w-6 h-6 fill-gray-200 animate-pulse' />
+  if (status === User_Products_Type_Enum.InCart)
+    return <ShoppingCartIcon className='w-6 h-6 fill-red' />
 
   if (
     status === User_Products_Type_Enum.Wishlisted ||
@@ -66,11 +69,16 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
   return (
     <div className={`group ${className}`}>
       <OverlapSpace>
-        <OverlapSpace.Child className='flex items-start justify-end p-2'>
+        <OverlapSpace.Child className='flex items-start justify-end gap-2 p-2'>
           <button
             type='button'
             onClick={() => {
               if (!uid) router.push('/login')
+              if (userProducts?.status === User_Products_Type_Enum.InCart) {
+                router.push('/cart')
+                return
+              }
+
               const targetState =
                 userProducts?.status === User_Products_Type_Enum.Wishlisted
                   ? User_Products_Type_Enum.RemovedFromWishlist

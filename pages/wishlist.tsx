@@ -2,11 +2,29 @@
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import Container from 'src/components/atoms/Container'
+import Link from 'src/components/atoms/Link/Link'
+import Loading from 'src/components/molecules/Loading/Loading'
 import ProductCard01 from 'src/components/molecules/ProductCard01/ProductCard01'
+import WishlistCard from 'src/components/organisms/WishlistCard'
 import { User_Products_Type_Enum } from 'src/generated/graphql'
 
 import { useAppSelector } from 'src/store'
 import { selectUserProducts } from 'src/store/userProducts/userProductsSlice'
+
+export const HeadingWithLink = ({
+  title,
+  linkText,
+  linkhref,
+}: {
+  title: string
+  linkText?: string
+  linkhref?: string
+}) => (
+  <div className='flex items-center justify-between mt-2 mb-6'>
+    <div className='text-xl font-semibold '>{title}</div>
+    {linkText && <Link href={linkhref || '/'}>{linkText}</Link>}
+  </div>
+)
 
 const WishlistPage: NextPage = () => {
   const products = useAppSelector(selectUserProducts)
@@ -14,6 +32,22 @@ const WishlistPage: NextPage = () => {
     (item) => item.type === User_Products_Type_Enum.Wishlisted
   )
 
+  if (products.fetching) return <Loading />
+  if (wishlistedProducts?.length === 0)
+    return (
+      <div>
+        <Container>
+          <HeadingWithLink
+            title='Wishlist'
+            linkText='Go to cart'
+            linkhref='/cart'
+          />
+          <div className='flex items-center justify-center h-screen80'>
+            No items wishlisted
+          </div>
+        </Container>
+      </div>
+    )
   return (
     <Container>
       <NextSeo
@@ -22,13 +56,19 @@ const WishlistPage: NextPage = () => {
         } - Ikea clone | Karthick Ragavendran`}
         description='Create account with your email or google account.'
       />
-      <div className='mt-2 mb-4 text-xl font-semibold'>Wishlist</div>
-      <div className='grid grid-cols-4 gap-4'>
-        {wishlistedProducts?.map((item) => (
-          <div key={item.id}>
-            <ProductCard01 product={{ ...item.product, id: item.pid }} />
-          </div>
-        ))}
+      <div className='h-screen'>
+        <HeadingWithLink
+          title='Wishlist'
+          linkText='Go to cart'
+          linkhref='/cart'
+        />
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+          {wishlistedProducts?.map((item) => (
+            <div key={item.id}>
+              <WishlistCard product={item} />
+            </div>
+          ))}
+        </div>
       </div>
     </Container>
   )

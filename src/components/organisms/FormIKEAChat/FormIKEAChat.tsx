@@ -29,7 +29,7 @@ const ikeaContactFormSchema = yup
 
 type IkeaContactFormSchema = yup.InferType<typeof ikeaContactFormSchema>
 
-const FormIKEAChat = ({ close }: { close: () => void }) => {
+const FormIKEAChat = () => {
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   const displayName = useAppSelector(
     (state) => state.user.data.user?.displayName
@@ -67,13 +67,7 @@ const FormIKEAChat = ({ close }: { close: () => void }) => {
 
   return (
     <div className='w-full max-w-sm '>
-      <div className='flex items-center justify-between p-4 bg-yellow-50'>
-        <div className='text-xl font-semibold '>Get support!</div>
-        <button type='button' onClick={() => close()}>
-          <XIcon className='w-6 h-6 ' />
-        </button>
-      </div>
-      <form onSubmit={onSubmit} className='p-4 space-y-3'>
+      <form onSubmit={onSubmit} className='space-y-3'>
         <Label title='Name' error={errors.name}>
           <Input placeholder='Enter the name.' {...register('name')} />
         </Label>
@@ -150,12 +144,12 @@ const FormIKEAChat = ({ close }: { close: () => void }) => {
             <option value='Select location' disabled>
               Select location
             </option>
+            <option value='Chennai'>Chennai</option>
             <option value='Mumbai'>Mumbai</option>
             <option value='Delhi'>Delhi</option>
             <option value='Bengaluru'>Bengaluru</option>
             <option value='Hyderabad'>Hyderabad</option>
             <option value='Ahmedabad'>Ahmedabad</option>
-            <option value='Chennai'>Chennai</option>
             <option value='Kolkata'>Kolkata</option>
             <option value='Surat'>Surat</option>
             <option value='Pune'>Pune</option>
@@ -169,7 +163,7 @@ const FormIKEAChat = ({ close }: { close: () => void }) => {
             {...register('message')}
           />
         </Label>
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between mt-6'>
           <Link
             href='/support'
             className='text-sm hover:underline underline-offset-4'

@@ -12,4 +12,4 @@ export const urqlAdminClient = createClient({
   },
 })
 
-export const formatDate = (date: string) => dateFormat(date, 'mmm d yyyy')
+export const formatDate = (date: string) => dateFormat(date, 'mmm d yyyy HH:MM')

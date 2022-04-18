@@ -91,8 +91,7 @@ const NavSidebarUser = ({
             { name: 'Wish list', href: '/wishlist' },
             { name: 'Cart', href: '/cart' },
             { name: 'Orders', href: '/orders' },
-            { name: 'Planners', href: '/notimplemented' },
-            { name: 'Track & manage my order', href: '/notimplemented' },
+            { name: 'Support', href: '/support' },
           ].map((item) => (
             <Link
               key={item.name}

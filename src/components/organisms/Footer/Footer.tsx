@@ -15,7 +15,7 @@ const JoinFamily = () => {
         ideas to life. All for free.
       </div>
       <Button
-        color='black'
+        color='primary'
         size='lg'
         className='mt-8'
         onClick={() => router.push('createAccount')}

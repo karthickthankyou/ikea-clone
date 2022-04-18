@@ -7,6 +7,7 @@ import Skeleton from 'src/components/molecules/Skeleton'
 import PurchasedCard from 'src/components/organisms/PurchasedCard'
 
 import { useGetOrderedItems } from 'src/store/userProducts/userProductsHook'
+import { HeadingWithLink } from './wishlist'
 
 const OrdersPage: NextPage = () => {
   const products = useGetOrderedItems()
@@ -20,8 +21,12 @@ const OrdersPage: NextPage = () => {
         title={`${count || 'Loading...'} - Ikea clone | Karthick Ragavendran`}
         description='Create account with your email or google account.'
       />
-      <div className='mb-2 text-lg font-semibold'>Purchased items</div>
-      <div className='grid min-h-screen grid-cols-4 gap-4'>
+      <HeadingWithLink
+        title='Purchased items'
+        linkText='Go to store'
+        linkhref='/products'
+      />
+      <div className='grid min-h-screen grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4'>
         {fetching &&
           [1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
             <Skeleton key={item} className='w-full h-full' />

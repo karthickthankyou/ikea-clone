@@ -3,6 +3,6 @@ import FormIKEAChat from './FormIKEAChat'
 
 describe('FormIKEAChat Component', () => {
   it('FormIKEAChat renders', () => {
-    mount(<FormIKEAChat close={() => {}} />)
+    mount(<FormIKEAChat />)
   })
 })

@@ -50,7 +50,6 @@ const CartTemplate = ({
       sessionId: checkoutSession.data.id,
     })
 
-    console.log('result: ', result)
     if (result?.error) {
       notify({
         message:
@@ -71,17 +70,14 @@ const CartTemplate = ({
 
   if (products?.length === 0) {
     return (
-      <div>
+      <div className='flex flex-col items-center justify-center h-screen50'>
         <div className='text-lg font-bold'>Cart is empty.</div>
-        <Link href='/products' className='mt-2 text-primary'>
-          Go to store
-        </Link>
       </div>
     )
   }
   return (
     <div
-      className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 ${className}`}
+      className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-h-screen50 gap-8 ${className}`}
     >
       <div className='col-span-1 space-y-8 md:col-span-2'>
         {fetching &&
@@ -105,7 +101,7 @@ const CartTemplate = ({
             disabled={products?.length === 0 || totalPrice < MINIMUM_TOTAL}
             isLoading={creatingCheckoutSession}
             onClick={createCheckOutSession}
-            className='disabled:bg-gray'
+            className='mt-4 disabled:bg-gray'
           >
             Checkout
           </Button>
