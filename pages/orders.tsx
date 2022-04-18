@@ -17,8 +17,8 @@ const OrdersPage: NextPage = () => {
 
   const ordersTransitions = useTransition(orders || [], {
     keys: (item) => item.id,
-    from: { opacity: 0, transform: 'translateY(-24px)' },
-    enter: { opacity: 1, transform: 'translateY(0px)' },
+    from: { opacity: 0, transform: 'translateY(-24px) skewY(3deg)' },
+    enter: { opacity: 1, transform: 'translateY(0px) skewY(0deg)' },
     leave: { opacity: 0, transform: 'translateY(-24px)' },
     trail: 200,
     config: config.gentle,

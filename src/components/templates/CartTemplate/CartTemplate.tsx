@@ -29,9 +29,13 @@ const CartTemplate = ({
 
   const cartItemsTransitions = useTransition(products || [], {
     keys: (item) => item.id,
-    from: { opacity: 0, height: 80, transform: 'translateX(-24px)' },
-    leave: { opacity: 0, height: 0, transform: 'translateX(24px)' },
-    enter: { opacity: 1, transform: 'translateX(0px)' },
+    from: {
+      opacity: 0,
+      height: 80,
+      transform: 'translateX(-24px) skewX(6deg)',
+    },
+    enter: { opacity: 1, transform: 'translateX(0px) skewX(0deg)' },
+    leave: { opacity: 0, transform: 'translateX(24px) skewX(-6deg)' },
     trail: 200,
     config: config.gentle,
   })

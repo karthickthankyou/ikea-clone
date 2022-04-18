@@ -34,9 +34,15 @@ const CartPage: NextPage = () => {
 
   const savedForLaterTransitions = useTransition(savedForLater || [], {
     keys: (item) => item.id,
-    from: { opacity: 0, transform: 'translateY(-24px)' },
-    enter: { opacity: 1, transform: 'translateY(0px)' },
-    leave: { opacity: 0, transform: 'translateY(-24px)' },
+    from: {
+      opacity: 0,
+      transform: 'translateY(-24px) skewY(-6deg)',
+    },
+    enter: {
+      opacity: 1,
+      transform: 'translateY(0px) skewY(0deg)',
+    },
+    leave: { opacity: 0, transform: 'translateY(-24px) skewY(6deg)' },
     trail: 200,
     config: config.gentle,
   })

@@ -28,8 +28,11 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
       images,
     },
   } = product
-  const [{ fetching: movingToCart, data, error }, insertUserProduct] =
+  const [{ fetching: movingToCart }, insertUserProduct] =
     useInsertUserProductsOneMutation()
+  const [{ fetching: removingItem }, removeUserProduct] =
+    useInsertUserProductsOneMutation()
+
   const uid = useAppSelector((state) => state.user.data.user?.uid)
   return (
     <div className='flex group'>
@@ -43,27 +46,45 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
         </div>
         <Price price={price} oldPrice={oldPrice} className='mt-2' />
         {outOfStock && <div className='text-red'>Out of stock</div>}
-        {!outOfStock && (
-          <div className='mt-2'>
-            <Button
-              variant='text'
-              className='hidden group-hover:block'
-              isLoading={movingToCart}
-              disabled={Boolean(outOfStock)}
-              onClick={() =>
-                insertUserProduct({
-                  object: {
-                    pid,
-                    uid,
-                    type: User_Products_Type_Enum.InCart,
-                  },
-                })
-              }
-            >
-              Move to cart
-            </Button>
-          </div>
-        )}
+        <div className='flex items-center justify-between'>
+          <Button
+            variant='text'
+            color='white'
+            isLoading={removingItem}
+            disabled={Boolean(outOfStock)}
+            onClick={() =>
+              removeUserProduct({
+                object: {
+                  pid,
+                  uid,
+                  type: User_Products_Type_Enum.RemovedFromWishlist,
+                },
+              })
+            }
+          >
+            Remove
+          </Button>
+          {!outOfStock && (
+            <div className='mt-2'>
+              <Button
+                variant='text'
+                isLoading={movingToCart}
+                disabled={Boolean(outOfStock)}
+                onClick={() =>
+                  insertUserProduct({
+                    object: {
+                      pid,
+                      uid,
+                      type: User_Products_Type_Enum.InCart,
+                    },
+                  })
+                }
+              >
+                Move to cart
+              </Button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )

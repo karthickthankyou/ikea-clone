@@ -35,9 +35,9 @@ const WishlistPage: NextPage = () => {
 
   const wishlistItemsTransitions = useTransition(wishlistedProducts || [], {
     keys: (item) => item.id,
-    from: { opacity: 0, transform: 'translateY(24px)' },
-    enter: { opacity: 1, transform: 'translateY(0px)' },
-    leave: { opacity: 0, transform: 'translateY(12px)' },
+    from: { opacity: 0, transform: 'translateY(24px) skew(6deg)' },
+    enter: { opacity: 1, transform: 'translateY(0px) skew(0deg)' },
+    leave: { opacity: 0, transform: 'translateY(12px) skew(6deg)' },
     trail: 200,
     config: config.gentle,
   })
