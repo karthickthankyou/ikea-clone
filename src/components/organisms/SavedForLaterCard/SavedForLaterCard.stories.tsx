@@ -28,8 +28,3 @@ export const Primary = Template.bind({})
 Primary.args = {
   product: sampleSavedForLater,
 }
-export const Hovered = Template.bind({})
-Hovered.args = {
-  product: sampleSavedForLater,
-}
-Hovered.parameters = { pseudo: { hover: true } }
