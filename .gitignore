@@ -40,3 +40,6 @@ yarn-error.log*
 instrumented
 
 storybook-static
+
+**/.env
+**/.env.*

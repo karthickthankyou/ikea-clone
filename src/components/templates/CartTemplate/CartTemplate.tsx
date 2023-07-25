@@ -47,7 +47,7 @@ const CartTemplate = ({ className }: ICartTemplateProps) => {
     config: config.gentle,
   })
 
-  const transformedCart = data?.myUserProducts?.map((item) => ({
+  const transformedCartItems = data?.myUserProducts?.map((item) => ({
     id: item.pid,
     name: item.product.name,
     description: item.product.category + item.product.subCategory,
@@ -62,22 +62,7 @@ const CartTemplate = ({ className }: ICartTemplateProps) => {
   const stripePromise = loadStripe(publishableKey || '')
   const createCheckOutSession = async () => {
     setCreatingCheckoutSession(true)
-    const stripe = await stripePromise
-    const checkoutSession = await axios.post('/api/create-stripe-session', {
-      items: transformedCart,
-      uid,
-    })
-    const result = await stripe?.redirectToCheckout({
-      sessionId: checkoutSession.data.id,
-    })
-
-    if (result?.error) {
-      notify({
-        message:
-          result.error.message || 'Something went wrong. Please try again.',
-        type: 'error',
-      })
-    }
+    const res = await createBookingSession(uid!, transformedCartItems || [])
     setCreatingCheckoutSession(false)
   }
 
@@ -147,3 +132,31 @@ const CartTemplate = ({ className }: ICartTemplateProps) => {
 }
 
 export default CartTemplate
+
+type CartItems = {
+  id: number
+  name: string
+  description: string
+  image: string
+  price: number
+}[]
+
+export const createBookingSession = async (uid: string, items: CartItems) => {
+  const checkoutSession = await axios.post(
+    process.env.NEXT_PUBLIC_API_URL + '/stripe',
+    {
+      items,
+      uid,
+    }
+  )
+
+  const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+
+  const stripePromise = loadStripe(publishableKey || '')
+  const stripe = await stripePromise
+  const result = await stripe?.redirectToCheckout({
+    sessionId: checkoutSession.data.sessionId,
+  })
+
+  return result
+}
