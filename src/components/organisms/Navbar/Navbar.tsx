@@ -3,14 +3,16 @@ import ShoppingCartIcon from '@heroicons/react/outline/ShoppingCartIcon'
 import ChevronRightIcon from '@heroicons/react/outline/ChevronRightIcon'
 import SearchIcon from '@heroicons/react/outline/SearchIcon'
 import MenuIcon from '@heroicons/react/outline/MenuIcon'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import Sidebar from 'src/components/molecules/Sidebar/Sidebar'
 import { Dispatch, SetStateAction, useState } from 'react'
 import Button from 'src/components/atoms/Button/Button'
 import Logo from 'src/components/atoms/Logo/Logo'
-import { signout } from 'src/store/user/userActions'
+
 import { useAppDispatch, useAppSelector } from 'src/store'
 import Container from 'src/components/atoms/Container/Container'
+import { selectUser } from 'src/store/user'
+import { signOut } from '../../../config/auth'
 
 export interface INavbarProps {}
 
@@ -35,13 +37,7 @@ const NavSidebarUser = ({
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-  const { uid, displayName } = useAppSelector(
-    (state) => state.user.data.user
-  ) || {
-    uid: null,
-    displayName: null,
-  }
-  const { loading } = useAppSelector((state) => state.user)
+  const { loaded, displayName, uid } = useAppSelector((state) => state.user)
 
   const dispatch = useAppDispatch()
   return (
@@ -61,8 +57,9 @@ const NavSidebarUser = ({
           {uid && (
             <Button
               color='white'
-              isLoading={loading}
-              onClick={() => dispatch(signout())}
+              onClick={async () => {
+                await signOut()
+              }}
             >
               Log out
             </Button>
@@ -136,7 +133,7 @@ export const NavSidebar = ({
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-  const user = useAppSelector((state) => state.user.data.user)
+  const user = useAppSelector(selectUser)
   return (
     <Sidebar open={open} setOpen={setOpen}>
       <Sidebar.Header>

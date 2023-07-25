@@ -1,19 +1,9 @@
 /* eslint-disable camelcase */
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import userReducer, {
-  initialState as userInitialState,
-} from 'src/store/user/userSlice'
-import { combineReducers, createStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
-import { User_Products_Type_Enum } from 'src/generated/graphql'
+import { UserProductStatus } from 'src/generated'
 import CartCard from './CartCard'
-
-const reducers = { user: userReducer }
-
-const store = createStore(combineReducers(reducers), {
-  user: userInitialState,
-})
+import { ReduxAddUid } from 'src/store/Provider'
 
 export default {
   title: 'molecules/CartCard',
@@ -21,7 +11,7 @@ export default {
   decorators: [
     (story) => (
       <div className='max-w-sm'>
-        <Provider store={store}>{story()}</Provider>
+        <ReduxAddUid>{story()}</ReduxAddUid>
       </div>
     ),
   ],
@@ -37,7 +27,7 @@ Primary.args = {
     pid: 1,
     createdAt: '',
     id: 1,
-    type: User_Products_Type_Enum.Wishlisted,
+    status: UserProductStatus.Wishlisted,
     uid: '',
     updatedAt: '',
     product: {

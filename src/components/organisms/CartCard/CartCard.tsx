@@ -3,15 +3,16 @@ import Button from 'src/components/atoms/Button/Button'
 import Image from 'src/components/atoms/Image'
 import Price from 'src/components/molecules/Price/Price'
 import {
+  MyUserProductsQuery,
   useInsertUserProductsOneMutation,
-  User_Products_Type_Enum,
-} from 'src/generated/graphql'
+  UserProductStatus,
+} from 'src/generated'
+import { notify } from 'src/hooks'
 import { useAppSelector } from 'src/store'
-import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
+import { selectUid } from 'src/store/user'
 
-type UserProductsData = Required<UserProductSliceType['userProducts']>['data']
 export interface ICartCardProps {
-  product: UserProductsData['user_products'][number]
+  product: MyUserProductsQuery['myUserProducts'][0]
 }
 
 const CartCard = ({ product }: ICartCardProps) => {
@@ -27,9 +28,9 @@ const CartCard = ({ product }: ICartCardProps) => {
       images,
     },
   } = product
-  const [{ fetching: savingForLater, data, error }, removeProductFromCart] =
+  const [removeProductFromCart, { loading: savingForLater, data, error }] =
     useInsertUserProductsOneMutation()
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const uid = useAppSelector(selectUid)
   return (
     <div className='flex group'>
       <div className='flex-shrink-0 w-24 h-24 mr-2'>
@@ -48,15 +49,21 @@ const CartCard = ({ product }: ICartCardProps) => {
           variant='text'
           className='hidden group-hover:block'
           isLoading={savingForLater}
-          onClick={() =>
-            removeProductFromCart({
-              object: {
-                pid,
-                uid,
-                type: User_Products_Type_Enum.SavedForLater,
+          onClick={async () => {
+            if (!uid) {
+              notify({ message: 'You are not logged in.' })
+              return
+            }
+            await removeProductFromCart({
+              variables: {
+                createUserProductInput: {
+                  pid,
+                  uid,
+                  status: UserProductStatus.SavedForLater,
+                },
               },
             })
-          }
+          }}
         >
           Save for later
         </Button>

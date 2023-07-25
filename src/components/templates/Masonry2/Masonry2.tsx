@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { Children } from 'src/types'
 
 export type ColumnsType = '1' | '2' | '3' | '4' | '5'
@@ -6,7 +6,7 @@ export type GapType = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8'
 export interface IMasonryProps {
   className?: string
   childClassName?: string
-  children: Children
+  children: ReactNode
   gap?: GapType
   columns?: ColumnsType
   shortOnes?: number[]

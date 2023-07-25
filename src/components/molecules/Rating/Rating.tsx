@@ -3,7 +3,7 @@ import Tooltip from 'src/components/atoms/Tooltip/Tooltip'
 
 export type IRatingProps = {
   rating: number
-  reviews?: number
+  reviews?: number | null
   color?: 'primary' | 'black' | 'red' | 'green' | 'yellow'
   className?: string
 } & RatingProps

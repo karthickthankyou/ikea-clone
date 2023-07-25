@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import InformationCircleIcon from '@heroicons/react/outline/InformationCircleIcon'
 import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import Tooltip from 'src/components/atoms/Tooltip'
@@ -6,31 +5,31 @@ import Button from 'src/components/atoms/Button/Button'
 import { useRouter } from 'next/router'
 
 import {
+  MyUserProductsQuery,
+  ProductQuery,
   useInsertUserProductsOneMutation,
-  User_Products_Type_Enum,
-} from 'src/generated/graphql'
+  UserProductStatus,
+} from 'src/generated'
 import { useAppSelector } from 'src/store'
-import Link from 'src/components/atoms/Link/Link'
-import { ProductWithWishlist } from 'src/store/search'
+import Link from 'next/link'
+
 import Price from '../Price/Price'
 import Rating from '../Rating'
 import Loading from '../Loading/Loading'
+import { selectUid } from 'src/store/user'
 
 export interface IPriceCardProps {
-  product: ProductWithWishlist | undefined | null
+  product: ProductQuery['product']
 }
 
 const PriceCard = ({ product }: IPriceCardProps) => {
-  const [{ fetching, data, error }, AddProductToCart] =
+  const [AddProductToCart, { loading, data, error }] =
     useInsertUserProductsOneMutation()
   const router = useRouter()
 
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
-  const cartItems = useAppSelector(
-    (state) => state.userProducts.userProducts.data?.user_products
-  )?.filter((item) => item.type === User_Products_Type_Enum.InCart)
+  const uid = useAppSelector(selectUid)
 
-  if (fetching) return <Loading />
+  if (loading) return <Loading />
   if (!product) return <div>Product not found.</div>
   const {
     rating,
@@ -43,7 +42,8 @@ const PriceCard = ({ product }: IPriceCardProps) => {
     oldPrice,
     id,
   } = product
-  const inCart = cartItems?.map((item) => item.pid).includes(id)
+
+  const inCart = product.userProduct?.status === UserProductStatus.InCart
 
   return (
     <div className='max-w-lg'>
@@ -84,7 +84,7 @@ const PriceCard = ({ product }: IPriceCardProps) => {
       <Button
         size='lg'
         disabled={Boolean(outOfStock) || inCart}
-        isLoading={fetching}
+        isLoading={loading}
         className='flex items-center gap-2 mt-8'
         onClick={() => {
           if (!uid) {
@@ -93,10 +93,12 @@ const PriceCard = ({ product }: IPriceCardProps) => {
           }
 
           AddProductToCart({
-            object: {
-              pid: id,
-              uid,
-              type: User_Products_Type_Enum.InCart,
+            variables: {
+              createUserProductInput: {
+                pid: id,
+                uid,
+                status: UserProductStatus.InCart,
+              },
             },
           })
         }}

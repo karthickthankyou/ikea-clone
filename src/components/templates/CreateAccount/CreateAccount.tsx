@@ -1,58 +1,50 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import Container from 'src/components/atoms/Container/Container'
 import BlurredCirle from 'src/components/molecules/BlurredCirle/BlurredCirle'
 import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
-import * as yup from 'yup'
 import Input from 'src/components/atoms/HtmlInput'
 import Label from 'src/components/atoms/HtmlLabel'
 import { useForm } from 'react-hook-form'
 
-import { yupResolver } from '@hookform/resolvers/yup'
 import Button from 'src/components/atoms/Button/Button'
-import Link from 'src/components/atoms/Link/Link'
-import { useAppDispatch, useAppSelector } from 'src/store'
-import { signup } from 'src/store/user/userActions'
-import { useAuthPageResponses } from 'src/hooks'
+import Link from 'next/link'
+
+import { FormTypeCreateAccount, formSchemaCreateAccount } from 'src/forms'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { register as registerUser } from 'src/config/auth'
 import { BackToHome } from '../Login/Login'
-
-const ikeaCreateAccountSchema = yup
-  .object({
-    email: yup.string().email().required('A valid email is required.'),
-    displayName: yup.string().required('Enter your name.'),
-    password: yup
-      .string()
-      .required('Enter the password.')
-      .min(6, 'Password should be 6 characters minimum.'),
-  })
-  .required()
-
-type IkeaCreateAccountSchema = yup.InferType<typeof ikeaCreateAccountSchema>
+import { useAsync } from 'src/hooks/async'
 
 const CreateAccountForm = ({ className }: { className?: string }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IkeaCreateAccountSchema>({
-    resolver: yupResolver(ikeaCreateAccountSchema),
+  } = useForm<FormTypeCreateAccount>({
+    resolver: zodResolver(formSchemaCreateAccount),
     defaultValues: {
       email: '',
       password: '',
     },
   })
 
-  const { loading } = useAppSelector((state) => state.user)
+  const { loading, error, success, callAsyncFn } = useAsync(
+    (data: FormTypeCreateAccount) => registerUser(data),
+    (err: any) => {
+      if (err.code === 'auth/user-not-found') {
+        return 'Invalid email.'
+      } else if (err.code === 'auth/wrong-password') {
+        return 'Invalid password.'
+      }
+      return 'Something went wrong. Please try again.'
+    }
+  )
 
-  useAuthPageResponses()
-
-  const dispatch = useAppDispatch()
-
-  const onSubmit = handleSubmit((data) => {
-    dispatch(signup(data))
-  })
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit(async (data) => {
+        const { email, password, displayName } = data
+        const user = await callAsyncFn({ email, password, displayName })
+      })}
       className={`w-full mt-12 space-y-6 border border-white rounded-lg bg-white/30 backdrop-blur backdrop-filter ${className}`}
     >
       <Label title='Email' error={errors.email}>

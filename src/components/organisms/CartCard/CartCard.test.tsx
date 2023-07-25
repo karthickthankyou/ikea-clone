@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 import { mount } from '@cypress/react'
-import { User_Products_Type_Enum } from 'src/generated/graphql'
+import { UserProductStatus } from 'src/generated'
 import CartCard from './CartCard'
 
 describe('CartCard Component', () => {
@@ -11,7 +11,7 @@ describe('CartCard Component', () => {
           pid: 1,
           createdAt: '',
           id: 1,
-          type: User_Products_Type_Enum.Wishlisted,
+          status: UserProductStatus.Wishlisted,
           uid: '',
           updatedAt: '',
           product: {

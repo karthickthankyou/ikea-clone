@@ -3,7 +3,8 @@ import { useAppSelector } from 'src/store'
 import SupportIcon from '@heroicons/react/solid/SupportIcon'
 
 import Sidebar from 'src/components/molecules/Sidebar/Sidebar'
-import Link from 'src/components/atoms/Link'
+import Link from 'next/link'
+import { selectUid } from 'src/store/user'
 import FormIKEAChat from '../FormIKEAChat'
 
 export interface IChatWindowProps {}
@@ -11,7 +12,7 @@ export interface IChatWindowProps {}
 const ChatWindow = () => {
   const [open, setOpen] = useState(false)
 
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const uid = useAppSelector(selectUid)
 
   return (
     <div className='fixed bottom-0 right-0 z-50 p-3 md:p-6 '>

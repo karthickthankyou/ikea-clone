@@ -1,27 +1,37 @@
-import userReducer from './userSlice'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from '..'
 
-/**
- * Actions: All possible actions we can do in this domain.
- */
+export type Role = 'admin' | 'seller' | 'user'
+export type UserSliceType = {
+  uid?: string
+  displayName?: string
+  email?: string
+  roles?: Role[]
+  token?: string
+  loaded: boolean
+}
 
-// Asynchronous
-export {
-  signin,
-  signout,
-  signup,
-  googleSignin,
-  forgotPassword,
-} from './userActions'
+export const userInitialState: UserSliceType = {
+  loaded: false,
+}
+export const userSlice = createSlice({
+  name: 'user',
+  initialState: userInitialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<Partial<UserSliceType>>) => ({
+      ...state,
+      ...action.payload,
+      loaded: true,
+    }),
+    resetUser: () => ({ loaded: true }),
+  },
+})
 
-// Synchronous
-export { setUser } from './userSlice'
+export const { setUser, resetUser } = userSlice.actions
 
-/**
- * Hooks: This hook attaches and detaches auth listener.
- */
-export { useUserListener } from './userHooks'
+export const selectUser = (state: RootState) => state.user
+export const selectUid = (state: RootState) => state.user.uid
+export const selectDisplayName = (state: RootState) => state.user.displayName
+export const selectUserRoles = (state: RootState) => state.user.roles
 
-/**
- * Reducer: The reducer to plug in to the global store.
- */
-export default userReducer
+export const userReducer = userSlice.reducer

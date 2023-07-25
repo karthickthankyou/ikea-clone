@@ -2,18 +2,16 @@
 import { NextPage } from 'next'
 import { NextSeo } from 'next-seo'
 import Container from 'src/components/atoms/Container'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import Skeleton from 'src/components/molecules/Skeleton'
 import { useTransition, animated, config } from 'react-spring'
-import { useGetSupport } from 'src/store/userProducts/userProductsHook'
 import TripGuide from 'src/components/organisms/TripGuide/TripGuide'
 import { formatDate } from 'lib/client'
+import { useMySupportsQuery } from 'src/generated'
 
 const SupportPage: NextPage = () => {
-  const products = useGetSupport()
-  const { fetching, data } = products
-  const messages = data?.support
-  const messagesTransitions = useTransition(messages || [], {
+  const { data, loading } = useMySupportsQuery()
+  const messagesTransitions = useTransition(data?.mySupports || [], {
     keys: (item) => item.id,
     from: { opacity: 0, transform: 'translateY(24px) skew(12deg)' },
     enter: { opacity: 1, transform: 'translateY(0px) skew(0deg)' },
@@ -21,13 +19,15 @@ const SupportPage: NextPage = () => {
     trail: 200,
     config: config.gentle,
   })
-  const count = data?.support_aggregate.aggregate?.count
+  const count = data?.supportAggregate.count
 
-  if (messages?.length === 0)
+  if (data?.mySupports?.length === 0)
     return (
-      <div className='items-center justify-center h-screen80'>
-        No messages found.
-      </div>
+      <Container>
+        <div className='items-center justify-center h-screen80'>
+          No messages found.
+        </div>
+      </Container>
     )
 
   return (
@@ -39,12 +39,12 @@ const SupportPage: NextPage = () => {
         />
         <div className='mb-4 text-lg font-semibold'>Support messages</div>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-          {fetching &&
+          {loading &&
             [1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
               <Skeleton key={item} className='w-full h-36' />
             ))}
-          {!messages ||
-            (messages?.length === 0 && (
+          {!data?.mySupports ||
+            (data?.mySupports?.length === 0 && (
               <div>
                 <div>No results.</div>
                 <Link href='/products' className='underline underline-offset-4'>
@@ -58,7 +58,7 @@ const SupportPage: NextPage = () => {
               className='flex flex-col overflow-hidden'
             >
               <div className='mt-1 text-xs text-gray'>
-                {formatDate(item.updated_at)}
+                {formatDate(item.updatedAt)}
               </div>
               <div className='mt-1 text-lg font-medium line-clamp-3'>
                 {item.message}

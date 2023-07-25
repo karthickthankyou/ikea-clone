@@ -1,7 +1,7 @@
 import ArrowRightIcon from '@heroicons/react/solid/ArrowRightIcon'
 
 import Image from 'src/components/atoms/Image'
-import Link from 'src/components/atoms/Link'
+import Link from 'next/link'
 import { Children } from 'src/types'
 import OverlapSpace from '../OverlapSpace/OverlapSpace'
 

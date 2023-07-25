@@ -1,6 +1,6 @@
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import LocationMarkerIcon from '@heroicons/react/solid/LocationMarkerIcon'
-import { selectUid } from 'src/store/user/userSlice'
+import { selectUid } from 'src/store/user'
 import { useTransition, animated, config } from 'react-spring'
 
 import styles from 'src/util/Topography.module.css'

@@ -1,12 +1,10 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import TablePagination, {
   TablePaginationProps,
-} from '@mui/material/TablePagination/TablePagination'
+} from '@mui/material/TablePagination'
 
 export interface IPaginationProps {}
 
-const Pagination = ({
+export const Pagination = ({
   count,
   page,
   onPageChange,
@@ -15,19 +13,17 @@ const Pagination = ({
   ...props
 }: TablePaginationProps) => (
   <TablePagination
-    component='div'
     count={count}
     page={page}
     onPageChange={onPageChange}
     rowsPerPage={rowsPerPage}
     onRowsPerPageChange={onRowsPerPageChange}
     classes={{
-      root: 'mt-4',
+      root: 'mt-4 border-0',
       displayedRows: 'font-sans',
       selectLabel: 'font-sans',
+      toolbar: 'p-0',
     }}
     {...props}
   />
 )
-
-export default Pagination

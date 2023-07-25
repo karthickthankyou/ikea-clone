@@ -2,7 +2,7 @@ import Image from 'src/components/atoms/Image'
 import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
 import { Children } from 'src/types'
 import ArrowRightIcon from '@heroicons/react/outline/ArrowRightIcon'
-import Link from 'src/components/atoms/Link'
+import Link from 'next/link'
 import { ReactElement } from 'react'
 
 export interface ICard01Props {

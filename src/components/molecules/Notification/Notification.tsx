@@ -1,11 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 import { useAppSelector, useAppDispatch } from 'src/store'
 import XIcon from '@heroicons/react/outline/XIcon'
-import {
-  selectNotifications,
-  removeNotification,
-} from 'src/store/utils/utilsStore'
+import { selectNotifications, removeNotification } from 'src/store/utils'
 import { useTransition, animated, config } from 'react-spring'
 import { NotificationType } from 'src/types'
 import { useNotification } from 'src/hooks'

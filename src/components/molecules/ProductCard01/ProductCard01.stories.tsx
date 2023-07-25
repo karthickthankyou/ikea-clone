@@ -1,17 +1,8 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import userReducer, {
-  initialState as userInitialState,
-} from 'src/store/user/userSlice'
-import { combineReducers, createStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
+
 import ProductCard01 from './ProductCard01'
-
-const reducers = { user: userReducer }
-
-const store = createStore(combineReducers(reducers), {
-  user: userInitialState,
-})
+import { ReduxAddUid } from 'src/store/Provider'
 
 export default {
   title: 'organisms/ProductCard01',
@@ -19,7 +10,7 @@ export default {
   decorators: [
     (story) => (
       <div className='max-w-xs'>
-        <Provider store={store}>{story()}</Provider>
+        <ReduxAddUid>{story()}</ReduxAddUid>
       </div>
     ),
   ],

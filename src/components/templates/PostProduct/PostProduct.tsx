@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { FieldError, useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
+import { zodResolver } from '@hookform/resolvers/zod'
 import * as yup from 'yup'
 import HtmlSelect from 'src/components/atoms/HtmlSelect'
 import Input from 'src/components/atoms/HtmlInput'
@@ -10,58 +9,19 @@ import Label from 'src/components/atoms/HtmlLabel'
 import TextArea from 'src/components/atoms/HtmlTextArea'
 import BadgeCheckIcon from '@heroicons/react/outline/BadgeCheckIcon'
 
-import { scrollToTop } from 'src/hooks'
+import { notify, scrollToTop } from 'src/hooks'
 import { categories } from 'src/types'
-import Link from 'src/components/atoms/Link'
+import Link from 'next/link'
 import Dialog from 'src/components/molecules/Dialog'
 import Image from 'src/components/atoms/Image'
-import { usePostNewProductMutation } from 'src/generated/graphql'
+import { usePostNewProductMutation } from 'src/generated'
 import Button from 'src/components/atoms/Button'
 import { useAppSelector } from 'src/store'
 import Price from 'src/components/molecules/Price/Price'
+import { FormTypeNewProduct, formSchemaNewProduct } from 'src/forms'
+import { selectUid } from 'src/store/user'
 
 export interface IPostProductTemplateProps {}
-
-const newProductFormSchema = yup.object({
-  name: yup.string().required('Product name is required'),
-  description: yup.string().required('Product description is required'),
-  measurements: yup.string().required('Product measurements is required'),
-  tags: yup.string(),
-  price: yup
-    .number()
-    .min(0, 'Price can not be negative')
-    .transform((value) => (value === '' ? null : value))
-    .typeError('A valid numeric value is required.')
-    .required('Product price is required'),
-  discount: yup
-    .number()
-    .min(0, 'Discount can not be negative')
-    .max(100, 'Discount can not be greater than 100')
-    .transform((value) => (value === '' ? null : value))
-    .typeError('It is not a valid numeric number.'),
-  category: yup.string().required('Pick a product category'),
-  subCategory: yup.string().required("Pick the product's sub category"),
-  outOfStock: yup.boolean(),
-  images: yup
-    .array()
-    .of(yup.string())
-    .required('select 1 to 8 images')
-    .min(1, 'select 1 to 8 images')
-    .max(8, 'select 1 to 8 images'),
-})
-// .required()
-//     images: yup
-//     .array()
-//     .of(yup.string())
-//     .test(
-//       'required',
-//       'select 1 to 8 images',
-//       (arr: any) => arr && arr.length > 0 && arr.length <= 8
-//     ),
-
-/** Todo: How to make any one of phone or email to be required? */
-
-type NewProductFormSchema = yup.InferType<typeof newProductFormSchema>
 
 const PostProductTemplate = () => {
   // const [publishedHome, addNewHome] = useInsertHomeMutation()
@@ -74,8 +34,8 @@ const PostProductTemplate = () => {
     clearErrors,
     watch,
     formState: { errors },
-  } = useForm<NewProductFormSchema>({
-    resolver: yupResolver(newProductFormSchema),
+  } = useForm<FormTypeNewProduct>({
+    resolver: zodResolver(formSchemaNewProduct),
     defaultValues: {
       name: '',
       description: '',
@@ -88,12 +48,12 @@ const PostProductTemplate = () => {
     },
   })
 
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const uid = useAppSelector(selectUid)
 
   const [isUploading, setIsUploading] = useState(false)
 
   const formData = watch()
-  const [{ fetching, error, data: postedData }, postNewProduct] =
+  const [postNewProduct, { loading, error, data: postedData }] =
     usePostNewProductMutation()
 
   const onSubmit = handleSubmit(async (data) => {
@@ -101,20 +61,27 @@ const PostProductTemplate = () => {
       ? data.price * ((100 - data.discount) / 100)
       : data.price
 
-    postNewProduct({
-      object: {
-        category: data.category,
-        description: data.description,
-        discount: data.discount,
-        oldPrice: data.price,
-        price: newPrice.toFixed(2),
-        name: data.name,
-        outOfStock: data.outOfStock,
-        subCategory: data.subCategory,
-        tags: data.tags?.split('|'),
-        seller: uid,
-        images: data.images,
-        measurements: data.measurements,
+    if (!uid) {
+      notify({ message: 'You are not logged in.' })
+      return
+    }
+
+    await postNewProduct({
+      variables: {
+        createProductInput: {
+          category: data.category,
+          description: data.description,
+          discount: data.discount,
+          oldPrice: data.price,
+          price: +newPrice.toFixed(2),
+          name: data.name,
+          outOfStock: data.outOfStock,
+          subCategory: data.subCategory,
+          tags: data.tags?.split('|') || [],
+          sellerId: uid,
+          images: data.images || [],
+          measurements: data.measurements,
+        },
       },
     })
   })
@@ -122,8 +89,8 @@ const PostProductTemplate = () => {
   const [showDialog, setshowDialog] = useState(false)
 
   useEffect(() => {
-    setshowDialog(Boolean(postedData?.insert_products_one?.id))
-  }, [postedData?.insert_products_one?.id])
+    setshowDialog(Boolean(postedData?.createProduct?.id))
+  }, [postedData?.createProduct?.id])
 
   useEffect(() => {
     scrollToTop()
@@ -140,21 +107,21 @@ const PostProductTemplate = () => {
 
         <div>
           <p className='font-semibold'>Product id</p>
-          <p> {postedData?.insert_products_one?.id}</p>
+          <p> {postedData?.createProduct?.id}</p>
         </div>
         <div>
           <p className='font-semibold'>Name</p>
-          <p>{postedData?.insert_products_one?.name}</p>
+          <p>{postedData?.createProduct?.name}</p>
         </div>
         <div>
           <p className='font-semibold'>Category</p>
-          <p>{postedData?.insert_products_one?.category}</p>
+          <p>{postedData?.createProduct?.category}</p>
         </div>
         <div>
           <p className='font-semibold'>Price</p>
           <Price
-            price={postedData?.insert_products_one?.price}
-            oldPrice={postedData?.insert_products_one?.oldPrice}
+            price={postedData?.createProduct?.price || 0}
+            oldPrice={postedData?.createProduct?.oldPrice}
           />
         </div>
 
@@ -168,7 +135,7 @@ const PostProductTemplate = () => {
           </button>
           <Link
             className='inline-block px-4 py-2 mt-8 text-center text-white bg-primary-600'
-            href={`/products/${postedData?.insert_products_one?.id}`}
+            href={`/products/${postedData?.createProduct?.id}`}
           >
             Visit page
           </Link>
@@ -331,7 +298,7 @@ const PostProductTemplate = () => {
 
           <div className='flex justify-end space-x-4'>
             <Button
-              isLoading={fetching}
+              isLoading={loading}
               className='px-20 py-2 text-white rounded bg-primary-500'
               type='submit'
             >

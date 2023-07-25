@@ -10,10 +10,11 @@ import { Controller, useFormContext } from 'react-hook-form'
 import { RadioGroup } from '@headlessui/react'
 import {
   filterDefaultValues,
-  PriceType,
+  ratings,
   sortOptionsList,
 } from 'src/components/templates/ProductListing/data'
 import RangeSlider from 'src/components/molecules/RangeSlider/RangeSlider'
+import { FormTypeFilter } from 'src/forms'
 
 export interface IProductFilterProps {}
 
@@ -43,7 +44,7 @@ const SidebarFilter = ({
     control,
     formState: { dirtyFields },
     reset,
-  } = useFormContext()
+  } = useFormContext<FormTypeFilter>()
 
   return (
     <Sidebar overlayBlur={false} open={open} setOpen={setOpen}>
@@ -60,7 +61,7 @@ const SidebarFilter = ({
               <RadioGroup value={value} onChange={onChange}>
                 <div className='flex flex-col gap-4'>
                   {sortOptionsList.map((item) => (
-                    <RadioGroup.Option key={item} value={`${item}`}>
+                    <RadioGroup.Option key={item} value={item}>
                       {({ checked }) => (
                         <span
                           className={`flex select-none items-center bg-white  ${
@@ -85,16 +86,19 @@ const SidebarFilter = ({
         <div>
           <FilterHeading dirty={'ratings' in dirtyFields} title='Rating' />
           <Controller
-            name='ratings'
+            name='rating'
             control={control}
             render={({ field: { onChange, value } }) => (
               <RadioGroup
                 value={value}
-                onChange={onChange}
+                onChange={(e) => {
+                  console.log('selected raing ', e)
+                  onChange(e)
+                }}
                 className='space-y-2 '
               >
                 <div className='flex flex-col gap-4'>
-                  {['★', '★★', '★★★', '★★★★', '★★★★★'].map((item) => (
+                  {ratings.map((item) => (
                     <RadioGroup.Option key={item} value={`${item}`}>
                       {({ checked }) => (
                         <span
@@ -155,10 +159,10 @@ const SidebarFilter = ({
                           : [...value, c]
                         onChange(newArr.sort())
                       }}
-                      checked={value.includes(c)}
+                      checked={value?.includes(c)}
                       type='checkbox'
                       className='flex-shrink-0 w-4 h-4 mr-1'
-                      value={value[c as any]}
+                      value={c}
                     />
                     <div className='text-sm leading-tight select-none'>{c}</div>
                   </label>

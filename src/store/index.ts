@@ -3,17 +3,13 @@ import { from } from 'rxjs'
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import userReducer from './user'
-import utilReducer from './utils/utilsStore'
-import searchReducer from './search'
-import userProductsReducer from './userProducts/userProductsSlice'
+import { userReducer } from './user'
+import { utilsReducer } from './utils'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    utils: utilReducer,
-    search: searchReducer,
-    userProducts: userProductsReducer,
+    utils: utilsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { InputHTMLAttributes } from 'react'
 
 export interface IHtmlInputProps {}

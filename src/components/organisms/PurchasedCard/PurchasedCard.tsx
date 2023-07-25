@@ -1,9 +1,9 @@
 import { formatDate } from 'lib/client'
 import Image from 'src/components/atoms/Image'
-import { GetOrderedProductsQuery } from 'src/generated/graphql'
+import { MyOrdersQuery } from 'src/generated'
 
 export interface IPurchasedCardProps {
-  product: GetOrderedProductsQuery['orders'][number]
+  product: MyOrdersQuery['myOrders'][number]
 }
 
 const PurchasedCard = ({ product }: IPurchasedCardProps) => {
@@ -14,7 +14,7 @@ const PurchasedCard = ({ product }: IPurchasedCardProps) => {
 
   return (
     <div>
-      <Image src={images && images[0]} />
+      <Image alt='' src={images && images[0]} />
       <div className='mt-2 font-semibold'>{name}</div>
       <div className='mt-2 text-sm'>{formatDate(updatedAt || '')}</div>
     </div>

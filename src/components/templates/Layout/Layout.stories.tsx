@@ -1,23 +1,13 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import userReducer, {
-  initialState as userInitialState,
-} from 'src/store/user/userSlice'
 
-import { combineReducers, createStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
+import { ReduxAddUid } from 'src/store/Provider'
 import Layout from './Layout'
-
-const reducers = { user: userReducer }
-
-const store = createStore(combineReducers(reducers), {
-  user: userInitialState,
-})
 
 export default {
   title: 'templates/Layout',
   component: Layout,
-  decorators: [(story) => <Provider store={store}>{story()}</Provider>],
+  decorators: [(story) => <ReduxAddUid>{story()}</ReduxAddUid>],
 } as ComponentMeta<typeof Layout>
 
 const Template: ComponentStory<typeof Layout> = (args) => <Layout {...args} />

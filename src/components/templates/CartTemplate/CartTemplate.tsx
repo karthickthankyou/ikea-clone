@@ -1,33 +1,40 @@
 import { loadStripe } from '@stripe/stripe-js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from 'src/components/atoms/Button/Button'
 import Price from 'src/components/molecules/Price/Price'
 import CartCard from 'src/components/organisms/CartCard/CartCard'
 import { useTransition, animated, config } from 'react-spring'
 import { useAppSelector } from 'src/store'
 import axios from 'axios'
-import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
 
 import { notify } from 'src/hooks'
 import { MINIMUM_TOTAL } from 'src/store/static'
+import { selectUid } from 'src/store/user'
+import { UserProductStatus, useMyUserProductsLazyQuery } from 'src/generated'
 
 export interface ICartTemplateProps {
-  products:
-    | Required<UserProductSliceType['userProducts']>['data']['user_products']
-    | undefined
-  fetching?: boolean
   className?: string
 }
 
-const CartTemplate = ({
-  products,
-  fetching = false,
-  className,
-}: ICartTemplateProps) => {
-  const [creatingCheckoutSession, setCreatingCheckoutSession] = useState(false)
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+const CartTemplate = ({ className }: ICartTemplateProps) => {
+  const [getCartitems, { data, loading }] = useMyUserProductsLazyQuery()
+  const uid = useAppSelector(selectUid)
 
-  const cartItemsTransitions = useTransition(products || [], {
+  useEffect(() => {
+    if (uid) {
+      getCartitems({
+        variables: {
+          where: {
+            status: { equals: UserProductStatus.InCart },
+            uid: { equals: uid },
+          },
+        },
+      })
+    }
+  }, [getCartitems, uid])
+  const [creatingCheckoutSession, setCreatingCheckoutSession] = useState(false)
+
+  const cartItemsTransitions = useTransition(data?.myUserProducts || [], {
     keys: (item) => item.id,
     from: {
       opacity: 0,
@@ -40,7 +47,7 @@ const CartTemplate = ({
     config: config.gentle,
   })
 
-  const transformedCart = products?.map((item) => ({
+  const transformedCart = data?.myUserProducts?.map((item) => ({
     id: item.pid,
     name: item.product.name,
     description: item.product.category + item.product.subCategory,
@@ -75,14 +82,17 @@ const CartTemplate = ({
   }
 
   const totalPrice =
-    products?.reduce((total, item) => total + item.product.price, 0) || 0
+    data?.myUserProducts?.reduce(
+      (total, item) => total + item.product.price,
+      0
+    ) || 0
 
-  const totalOldPrice = products?.reduce(
+  const totalOldPrice = data?.myUserProducts?.reduce(
     (total, item) => total + (item.product.oldPrice || item.product.price),
     0
   )
 
-  if (products?.length === 0) {
+  if (data?.myUserProducts?.length === 0) {
     return (
       <div className='flex flex-col items-center justify-center h-screen50'>
         <div className='text-lg font-bold'>Cart is empty.</div>
@@ -94,7 +104,7 @@ const CartTemplate = ({
       className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-h-screen50 gap-8 ${className}`}
     >
       <div className='col-span-1 space-y-8 md:col-span-2'>
-        {fetching &&
+        {loading &&
           [1, 2, 3, 4].map((item) => (
             <div className='w-full bg-gray-200 h-28 animate-pulse' key={item} />
           ))}
@@ -114,19 +124,22 @@ const CartTemplate = ({
           <Button
             fullWidth
             size='xl'
-            disabled={products?.length === 0 || totalPrice < MINIMUM_TOTAL}
+            disabled={
+              data?.myUserProducts?.length === 0 || totalPrice < MINIMUM_TOTAL
+            }
             isLoading={creatingCheckoutSession}
             onClick={createCheckOutSession}
             className='mt-4 disabled:bg-gray'
           >
             Checkout
           </Button>
-          {(products?.length || 0) > 0 && totalPrice < MINIMUM_TOTAL && (
-            <div className='flex items-center gap-2 mt-2 text-sm text-red-700'>
-              Minimum checkout price:{' '}
-              <Price price={MINIMUM_TOTAL} className='inline' />
-            </div>
-          )}
+          {(data?.myUserProducts?.length || 0) > 0 &&
+            totalPrice < MINIMUM_TOTAL && (
+              <div className='flex items-center gap-2 mt-2 text-sm text-red-700'>
+                Minimum checkout price:{' '}
+                <Price price={MINIMUM_TOTAL} className='inline' />
+              </div>
+            )}
         </div>
       </div>
     </div>

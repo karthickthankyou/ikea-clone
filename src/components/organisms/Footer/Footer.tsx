@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Button from 'src/components/atoms/Button/Button'
 import Container from 'src/components/atoms/Container'
-import Link from 'src/components/atoms/Link'
+import Link from 'next/link'
 
 export interface IFooterProps {}
 

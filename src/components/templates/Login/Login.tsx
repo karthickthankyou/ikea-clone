@@ -1,19 +1,20 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import Container from 'src/components/atoms/Container/Container'
 import BlurredCirle from 'src/components/molecules/BlurredCirle/BlurredCirle'
 import OverlapSpace from 'src/components/molecules/OverlapSpace/OverlapSpace'
-import * as yup from 'yup'
 import Input from 'src/components/atoms/HtmlInput'
 import Label from 'src/components/atoms/HtmlLabel'
 import { useForm } from 'react-hook-form'
 
-import { yupResolver } from '@hookform/resolvers/yup'
 import Button from 'src/components/atoms/Button/Button'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import { useAppDispatch, useAppSelector } from 'src/store'
-import { signin } from 'src/store/user'
-import { useAuthPageResponses } from 'src/hooks'
+
 import ArrowLeftIcon from '@heroicons/react/outline/ArrowLeftIcon'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormTypeLogin, formSchemaLogin } from 'src/forms'
+import { login } from 'src/config/auth'
+import { useAsync } from 'src/hooks/async'
+import FormError from 'src/components/atoms/FormError'
 
 export const BackToHome = () => (
   <Link
@@ -25,43 +26,37 @@ export const BackToHome = () => (
   </Link>
 )
 
-const ikeaLoginSchema = yup
-  .object({
-    email: yup.string().email().required('A valid email is required.'),
-    password: yup
-      .string()
-      .required('Enter the password.')
-      .min(6, 'Password should be 6 characters minimum.'),
-  })
-  .required()
-
-type IkeaLoginSchema = yup.InferType<typeof ikeaLoginSchema>
-
 const LoginForm = ({ className }: { className?: string }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IkeaLoginSchema>({
-    resolver: yupResolver(ikeaLoginSchema),
+  } = useForm<FormTypeLogin>({
+    resolver: zodResolver(formSchemaLogin),
     defaultValues: {
       email: '',
       password: '',
     },
   })
 
-  const { loading } = useAppSelector((state) => state.user)
+  const { loading, error, success, callAsyncFn } = useAsync(
+    (data: FormTypeLogin) => login(data),
+    (err: any) => {
+      if (err.code === 'auth/user-not-found') {
+        return 'Invalid email.'
+      } else if (err.code === 'auth/wrong-password') {
+        return 'Invalid password.'
+      }
+      return 'Something went wrong. Please try again.'
+    }
+  )
 
-  useAuthPageResponses()
-
-  const dispatch = useAppDispatch()
-
-  const onSubmit = handleSubmit((data) => {
-    dispatch(signin(data))
-  })
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit(async (data) => {
+        const { email, password } = data
+        await callAsyncFn({ email, password })
+      })}
       className={`w-full mt-12 space-y-6 border border-white rounded-lg bg-white/30 backdrop-blur backdrop-filter ${className}`}
     >
       <Label title='Email' error={errors.email}>
@@ -77,6 +72,8 @@ const LoginForm = ({ className }: { className?: string }) => {
       <Button isLoading={loading} type='submit' fullWidth>
         Login
       </Button>
+      {error ? <FormError error={error.message} /> : null}
+
       <div className='mt-12 text-sm'>
         Do not have an IKEA account?
         <br />

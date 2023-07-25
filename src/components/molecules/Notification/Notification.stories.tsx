@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from '@reduxjs/toolkit'
-import utilsReducer from 'src/store/utils/utilsStore'
+import { utilsReducer } from 'src/store/utils'
 import Notification from './Notification'
 
 export default {

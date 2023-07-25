@@ -1,7 +1,7 @@
 export interface IPriceProps {
   price: number
   showTaxComment?: boolean
-  oldPrice?: number
+  oldPrice?: number | null
   className?: string
 }
 

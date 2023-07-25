@@ -1,3 +1,5 @@
+import { ProductOrderByWithRelationInput, SortOrder } from 'src/generated'
+
 export type SortTypes =
   | 'Best match'
   | 'Price: low to high'
@@ -17,14 +19,16 @@ export const sortOptionsList: SortTypes[] = [
   'Name',
 ]
 
-export const sortOptions: { [key in SortTypes]: any } = {
-  'Best match': {},
-  'Price: low to high': { price: 'asc' },
-  'Price: high to low': { price: 'desc' },
-  Newest: { createdAt: 'asc' },
-  'Customer rating': { rating: 'desc_nulls_last', reviews: 'desc_nulls_last' },
-  'Most popular': { reviews: 'desc_nulls_last' },
-  Name: { name: 'asc' },
+export const sortOptions: {
+  [key in SortTypes]: ProductOrderByWithRelationInput[] | null
+} = {
+  'Best match': null,
+  'Price: low to high': [{ price: SortOrder.Asc }],
+  'Price: high to low': [{ price: SortOrder.Desc }],
+  Newest: [{ createdAt: SortOrder.Asc }],
+  'Customer rating': [{ rating: SortOrder.Desc }, { reviews: SortOrder.Desc }],
+  'Most popular': [{ reviews: SortOrder.Desc }],
+  Name: [{ name: SortOrder.Asc }],
 }
 
 export const categories = [
@@ -65,12 +69,20 @@ export const prices = [
   '₹8,000+',
 ].sort() as PriceType[]
 
-export const rating = ['★', '★★', '★★★', '★★★★', '★★★★★'].sort()
+export type RatingTypes = '*' | '**' | '***' | '****' | '*****'
+
+export const ratings: RatingTypes[] = [
+  '★',
+  '★★',
+  '★★★',
+  '★★★★',
+  '★★★★★',
+].sort() as RatingTypes[]
 
 export const filterDefaultValues = {
   search: '',
   price: [0, 20000] as [number, number],
-  rating: rating[0],
+  rating: ratings[0],
   category: categories,
   sort: 'Best match' as SortTypes,
 }

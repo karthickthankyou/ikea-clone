@@ -14,6 +14,10 @@ describe('PriceCard Component', () => {
           oldPrice: 9000,
           rating: 4.4,
           reviews: 34,
+          images: [],
+          createdAt: new Date(),
+          tags: [],
+          updatedAt: new Date(),
         }}
       />
     )

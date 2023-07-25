@@ -6,9 +6,10 @@ import Button from 'src/components/atoms/Button/Button'
 import { useState } from 'react'
 import { useAppSelector } from 'src/store'
 import Container from 'src/components/atoms/Container'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import Badge from 'src/components/atoms/Badge/Badge'
-import { NIL } from 'uuid'
+
+import { selectUid, selectUser } from 'src/store/user'
 
 const GetBadge = ({
   isSeller,
@@ -29,7 +30,7 @@ const GetBadge = ({
 }
 
 const UserPage: NextPage = () => {
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const { uid, roles } = useAppSelector(selectUser)
 
   const [becoming, setBecoming] = useState(false)
   const becomeSellerForIkeaClick = () => {
@@ -44,9 +45,6 @@ const UserPage: NextPage = () => {
       setBecoming(false)
     })
   }
-
-  const claims = useAppSelector((state) => state.user.data.claims)
-  const roles = claims?.['x-hasura-allowed-roles']
 
   const isSeller = roles?.includes('seller')
   const isUser = roles?.includes('user')

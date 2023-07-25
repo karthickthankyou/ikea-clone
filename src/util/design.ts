@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // yellow #ffdb00 hsl(52, 100%, 50%)
 // green #0a8a00 	hsl(116, 100%, 27%)
 // red #e00751 	hsl(340, 94%, 45%)

@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { HTMLProps } from 'react'
 
 const HtmlTextArea = React.forwardRef<

@@ -1,8 +1,6 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { useForm } from 'react-hook-form'
-import Link from 'src/components/atoms/Link'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+import Link from 'next/link'
+
 import Input from 'src/components/atoms/HtmlInput'
 import Label from 'src/components/atoms/HtmlLabel'
 import Select from 'src/components/atoms/HtmlSelect'
@@ -10,38 +8,23 @@ import TextArea from 'src/components/atoms/HtmlTextArea'
 import Button from 'src/components/atoms/Button/Button'
 import XIcon from '@heroicons/react/outline/XIcon'
 import CheckCircleIcon from '@heroicons/react/outline/CheckCircleIcon'
-import { useInsertSupportMutation } from 'src/generated/graphql'
+import { useInsertSupportMutation } from 'src/generated'
 import { useAppSelector } from 'src/store'
+import { FormTypeContact, formSchemaContact } from 'src/forms'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { selectUser } from 'src/store/user'
 
 export interface IFormIKEAChatProps {}
-const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
-
-const ikeaContactFormSchema = yup
-  .object({
-    name: yup.string().required('Name is required'),
-    email: yup.string().email().required('A valid email is required'),
-    phone: yup.string().matches(phoneRegex, 'A valid phone number is required'),
-    location: yup.string().required('Location is required'),
-    category: yup.string().required('Category is required'),
-    message: yup.string().required('Message is required'),
-  })
-  .required()
-
-type IkeaContactFormSchema = yup.InferType<typeof ikeaContactFormSchema>
 
 const FormIKEAChat = () => {
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
-  const displayName = useAppSelector(
-    (state) => state.user.data.user?.displayName
-  )
-  const email = useAppSelector((state) => state.user.data.user?.email)
+  const { uid, displayName, email } = useAppSelector(selectUser)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IkeaContactFormSchema>({
-    resolver: yupResolver(ikeaContactFormSchema),
+  } = useForm<FormTypeContact>({
+    resolver: zodResolver(formSchemaContact),
     defaultValues: {
       name: displayName || '',
       email: email || '',
@@ -52,15 +35,18 @@ const FormIKEAChat = () => {
     },
   })
 
-  const [{ fetching, error, data: completedData }, getSupport] =
+  const [getSupport, { loading, error, data: completedData }] =
     useInsertSupportMutation()
 
   const onSubmit = handleSubmit((formData) => {
     if (uid)
       getSupport({
-        object: {
-          uid,
-          ...formData,
+        variables: {
+          createSupportInput: {
+            uid,
+            ...formData,
+            title: '',
+          },
         },
       })
   })
@@ -170,7 +156,7 @@ const FormIKEAChat = () => {
           >
             Go to support page
           </Link>
-          <Button isLoading={fetching} type='submit'>
+          <Button isLoading={loading} type='submit'>
             {completedData ? (
               <div className='flex items-center gap-2'>
                 <CheckCircleIcon className='w-4 h-4' /> Message sent

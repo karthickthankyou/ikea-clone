@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import RefreshIcon from '@heroicons/react/outline/RefreshIcon'
 
 type ButtonSizes = 'none' | 'sm' | 'md' | 'lg' | 'xl'

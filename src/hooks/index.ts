@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from 'react'
+import { RefObject, useCallback, useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import {
   catchError,
@@ -18,17 +18,12 @@ import { useAppDispatch, useAppSelector } from 'src/store'
 import { NotificationType } from 'src/types'
 import { useRouter } from 'next/router'
 
-import { selectUid } from 'src/store/user/userSlice'
+import { selectUid } from 'src/store/user'
 import {
   addNotification,
   removeNotification,
   resetNotification,
-} from 'src/store/utils/utilsStore'
-import {
-  useFilterProductsQuery,
-  useSearchProductsQuery,
-} from 'src/generated/graphql'
-import { setProducts } from 'src/store/search'
+} from 'src/store/utils'
 
 export const scrollToTop = () => {
   window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -38,7 +33,7 @@ export const useScroll = (): [
   [number, number],
   RefObject<HTMLDivElement>,
   () => void,
-  (distance: number) => void
+  (distance: number) => void,
 ] => {
   const [scrollPos, setScrollPos] = useState<[number, number]>([0, 0])
   const scrollEl = useRef<HTMLDivElement>(null)
@@ -265,55 +260,37 @@ export const useRedirectUnAuthenticatedUsers = () => {
   }
 }
 
-export const useAuthPageResponses = () => {
-  const {
-    error,
-    data: { user },
-  } = useAppSelector((state) => state.user)
-
-  const router = useRouter()
-
+export const useDebounce = (delay: number = 1000) => {
+  const [debouncedSet$] = useState(() => new Subject<() => void>())
   useEffect(() => {
-    if (error)
-      notify({
-        type: 'error',
-        message: 'Authentication failed. Please try again.',
-      })
-  }, [error])
+    const subscription = debouncedSet$
+      .pipe(
+        debounceTime(delay),
+        tap((func) => func()),
+        catchError(() => EMPTY)
+      )
+      .subscribe()
+    return () => subscription.unsubscribe()
+  }, [delay, debouncedSet$])
 
-  useEffect(() => {
-    if (user?.uid) {
-      notify({
-        type: 'success',
-        message: 'Authentication success. Welcome.',
-      })
-      router.push('/')
-    }
-  }, [user, router])
+  return debouncedSet$
 }
 
-export const useWhenFilterChangesFetchProducts = () => {
-  const dispatch = useAppDispatch()
-  const { args, ...queryArgs } = useAppSelector(
-    (state) => state.search.queryArgs
-  )
-
-  const [searchData] = useSearchProductsQuery({
-    variables: { args, ...queryArgs },
-    pause: Boolean(!args.search),
-  })
-  const [filterData] = useFilterProductsQuery({
-    variables: queryArgs,
-    pause: Boolean(args.search),
-  })
+export const useDebouncedValue = <T>(value: T, delay: number = 1000) => {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+  const debouncedSet$ = useDebounce(delay)
 
   useEffect(() => {
-    if (args.search) {
-      const { data, error, fetching, stale } = searchData
-      dispatch(setProducts({ data, error, fetching, stale }))
-    } else {
-      const { data, error, fetching, stale } = filterData
-      dispatch(setProducts({ data, error, fetching, stale }))
-    }
-  }, [args.search, dispatch, filterData, searchData])
+    debouncedSet$.next(() => setDebouncedValue(value))
+  }, [debouncedSet$, value])
+
+  return debouncedValue
+}
+
+export const TAKE_COUNT = 12
+export const useTakeSkip = (initialSkip = 0, initialTake = TAKE_COUNT) => {
+  const [skip, setSkip] = useState(() => initialSkip)
+  const [take, setTake] = useState(() => initialTake)
+
+  return { take, skip, setTake, setSkip }
 }

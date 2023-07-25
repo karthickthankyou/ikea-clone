@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 export type IBlurredCirleProps = {
   radius?: number
 } & React.SVGProps<SVGSVGElement>

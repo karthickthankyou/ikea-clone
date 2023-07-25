@@ -1,15 +1,31 @@
-query GetProducts {
-  products(limit: 10, order_by: { discount: desc_nulls_last }) {
+query Products(
+  $distinct: [ProductScalarFieldEnum!]
+  $skip: Int
+  $take: Int
+  $orderBy: [ProductOrderByWithRelationInput!]
+  $where: ProductWhereInput
+) {
+  products(
+    distinct: $distinct
+    skip: $skip
+    take: $take
+    orderBy: $orderBy
+    where: $where
+  ) {
     category
     createdAt
     discount
     id
     name
   }
+
+  productAggregate(ProductWhereInput: $where) {
+    count
+  }
 }
 
-query GetProduct($id: Int!) {
-  product: products_by_pk(id: $id) {
+query product($id: Int!) {
+  product: product(where: { id: $id }) {
     category
     createdAt
     discount
@@ -27,34 +43,28 @@ query GetProduct($id: Int!) {
     updatedAt
     url
     images
+    userProduct {
+      id
+      status
+    }
   }
 }
 
 query SearchProducts(
-  $args: search_products_args!
-  $distinct_on: [products_select_column!]
-  $limit: Int
-  $offset: Int
-  $order_by: [products_order_by!]
-  $where: products_bool_exp
+  $distinct: [ProductScalarFieldEnum!]
+  $skip: Int
+  $take: Int
+  $cursor: WhereUniqueInputNumber
+  $orderBy: [ProductOrderByWithRelationInput!]
+  $where: ProductWhereInput
 ) {
-  products_aggregate: search_products_aggregate(
-    args: $args
-    distinct_on: $distinct_on
-    order_by: $order_by
+  products(
+    distinct: $distinct
+    skip: $skip
+    take: $take
     where: $where
-  ) {
-    aggregate {
-      count
-    }
-  }
-  products: search_products(
-    args: $args
-    distinct_on: $distinct_on
-    limit: $limit
-    offset: $offset
-    order_by: $order_by
-    where: $where
+    cursor: $cursor
+    orderBy: $orderBy
   ) {
     name
     id
@@ -67,31 +77,34 @@ query SearchProducts(
     reviews
     discount
     oldPrice
+    userProduct {
+      id
+      status
+    }
+  }
+  productAggregate(ProductWhereInput: $where) {
+    count
   }
 }
 
 query FilterProducts(
-  $distinct_on: [products_select_column!]
-  $limit: Int
-  $offset: Int
-  $order_by: [products_order_by!]
-  $where: products_bool_exp
+  $distinct: [ProductScalarFieldEnum!]
+  $skip: Int
+  $take: Int
+  $cursor: WhereUniqueInputNumber
+  $orderBy: [ProductOrderByWithRelationInput!]
+  $where: ProductWhereInput
 ) {
-  products_aggregate(
-    distinct_on: $distinct_on
-    order_by: $order_by
-    where: $where
-  ) {
-    aggregate {
-      count
-    }
+  productAggregate(ProductWhereInput: $where) {
+    count
   }
   products(
-    distinct_on: $distinct_on
-    limit: $limit
-    offset: $offset
-    order_by: $order_by
+    distinct: $distinct
+    skip: $skip
+    take: $take
     where: $where
+    cursor: $cursor
+    orderBy: $orderBy
   ) {
     name
     id
@@ -107,31 +120,26 @@ query FilterProducts(
   }
 }
 
-mutation InsertUserProductsOne($object: user_products_insert_input!) {
-  insert_user_products_one(
-    object: $object
-    on_conflict: {
-      constraint: user_products_pid_uid_key
-      update_columns: [pid, type]
-    }
+query myUserProducts(
+  $skip: Int
+  $take: Int
+  $distinct: [UserProductScalarFieldEnum!]
+  $orderBy: [UserProductOrderByWithRelationInput!]
+  $where: UserProductWhereInput
+) {
+  myUserProducts(
+    skip: $skip
+    take: $take
+    distinct: $distinct
+    orderBy: $orderBy
+    where: $where
   ) {
     createdAt
     id
     pid
-    type
     uid
     updatedAt
-  }
-}
-
-query GetUserProducts($uid: String!) {
-  user_products(where: { uid: { _eq: $uid } }) {
-    createdAt
-    id
-    pid
-    type
-    uid
-    updatedAt
+    status
     product {
       name
       price
@@ -146,24 +154,20 @@ query GetUserProducts($uid: String!) {
   }
 }
 
-mutation CompleteOrder($objects: [orders_insert_input!]!) {
-  insert_orders(objects: $objects) {
-    affected_rows
-  }
-}
-
-query GetOrderedProducts(
-  $distinct_on: [orders_select_column!]
-  $limit: Int
-  $offset: Int
-  $order_by: [orders_order_by!]
-  $where: orders_bool_exp
+query myOrders(
+  $distinct: [OrderScalarFieldEnum!]
+  $skip: Int
+  $take: Int
+  $cursor: WhereUniqueInputNumber
+  $orderBy: [OrderOrderByWithRelationInput!]
+  $where: OrderWhereInput
 ) {
-  orders(
-    distinct_on: $distinct_on
-    limit: $limit
-    offset: $offset
-    order_by: $order_by
+  myOrders(
+    distinct: $distinct
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
     where: $where
   ) {
     id
@@ -174,29 +178,13 @@ query GetOrderedProducts(
     }
     updatedAt
   }
-  orders_aggregate(
-    distinct_on: $distinct_on
-    order_by: $order_by
-    where: $where
-  ) {
-    aggregate {
-      count
-    }
-  }
-}
-
-mutation InsertProductView($uid: String!, $pid: Int) {
-  insert_views_one(object: { uid: $uid, pid: $pid }) {
-    uid
-    pid
-    id
-    created_at
-    updated_at
+  orderAggregate(OrderWhereInput: $where) {
+    count
   }
 }
 
 query GetViewedProducts($uid: String) {
-  views(distinct_on: pid, limit: 12, where: { uid: { _eq: $uid } }) {
+  views(distinct: [pid], take: 12, where: { uid: { equals: $uid } }) {
     id
     pid
     product {
@@ -208,8 +196,74 @@ query GetViewedProducts($uid: String) {
   }
 }
 
-mutation PostNewProduct($object: products_insert_input!) {
-  insert_products_one(object: $object) {
+query Supports(
+  $distinct: [SupportScalarFieldEnum!]
+  $skip: Int
+  $take: Int
+  $cursor: WhereUniqueInputNumber
+  $orderBy: [SupportOrderByWithRelationInput!]
+  $where: SupportWhereInput
+) {
+  supports(
+    distinct: $distinct
+    skip: $skip
+    take: $take
+    cursor: $cursor
+    orderBy: $orderBy
+    where: $where
+  ) {
+    category
+    message
+    id
+    updatedAt
+  }
+  supportAggregate(SupportWhereInput: $where) {
+    count
+  }
+}
+
+query MySupports(
+  $skip: Int
+  $take: Int
+  $orderBy: [SupportOrderByWithRelationInput!]
+  $where: SupportWhereInput
+) {
+  mySupports(skip: $skip, take: $take, orderBy: $orderBy, where: $where) {
+    category
+    message
+    id
+    updatedAt
+  }
+  supportAggregate(SupportWhereInput: $where) {
+    count
+  }
+}
+
+mutation InsertUserProductsOne(
+  $createUserProductInput: CreateUserProductInput!
+) {
+  createUserProduct(createUserProductInput: $createUserProductInput) {
+    createdAt
+    id
+    pid
+    status
+    uid
+    updatedAt
+  }
+}
+
+mutation InsertProductView($uid: String!, $pid: Int!) {
+  createView(createViewInput: { pid: $pid, uid: $uid }) {
+    pid
+    uid
+    createdAt
+    updatedAt
+    id
+  }
+}
+
+mutation PostNewProduct($createProductInput: CreateProductInput!) {
+  createProduct(createProductInput: $createProductInput) {
     category
     createdAt
     id
@@ -222,53 +276,26 @@ mutation PostNewProduct($object: products_insert_input!) {
   }
 }
 
-mutation DeleteCartItems($uid: String!, $type: user_products_type_enum!) {
-  delete_user_products(where: { uid: { _eq: $uid }, type: { _eq: $type } }) {
-    affected_rows
-  }
-}
-
-mutation InsertSupport($object: support_insert_input!) {
-  insert_support_one(object: $object) {
-    updated_at
+mutation InsertSupport($createSupportInput: CreateSupportInput!) {
+  createSupport(createSupportInput: $createSupportInput) {
+    updatedAt
     uid
-    phone
-    name
     location
     message
     id
-    email
-    created_at
+    createdAt
     category
   }
 }
 
-query GetSupportMessages(
-  $distinct_on: [support_select_column!]
-  $limit: Int
-  $offset: Int
-  $order_by: [support_order_by!]
-  $where: support_bool_exp
-) {
-  support_aggregate(
-    distinct_on: $distinct_on
-    order_by: $order_by
-    where: $where
-  ) {
-    aggregate {
-      count
-    }
-  }
-  support(
-    distinct_on: $distinct_on
-    limit: $limit
-    offset: $offset
-    order_by: $order_by
-    where: $where
-  ) {
-    category
-    message
-    id
-    updated_at
-  }
-}
+# mutation CompleteOrder($objects: [orders_insert_input!]!) {
+#   insert_orders(objects: $objects) {
+#     affected_rows
+#   }
+# }
+
+# mutation DeleteCartItems($uid: String!, $type: user_products_type_enum!) {
+#   delete_user_products(where: { uid: { _eq: $uid }, type: { _eq: $type } }) {
+#     affected_rows
+#   }
+# }

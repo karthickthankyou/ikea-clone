@@ -1,4 +1,4 @@
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 
 export interface IInfoCardProps {
   Icon: (props: React.ComponentProps<'svg'>) => JSX.Element

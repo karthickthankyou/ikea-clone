@@ -3,18 +3,18 @@ import Button from 'src/components/atoms/Button/Button'
 import Image from 'src/components/atoms/Image'
 import Price from 'src/components/molecules/Price/Price'
 import {
+  MyUserProductsQuery,
   useInsertUserProductsOneMutation,
-  User_Products_Type_Enum,
-} from 'src/generated/graphql'
+  UserProductStatus,
+} from 'src/generated'
 import { useAppSelector } from 'src/store'
-import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import { formatDate } from 'lib/client'
-
-type UserProductsData = Required<UserProductSliceType['userProducts']>['data']
+import { notify } from 'src/hooks'
+import { selectUid } from 'src/store/user'
 
 export interface IWishlistCardProps {
-  product: UserProductsData['user_products'][number]
+  product: MyUserProductsQuery['myUserProducts'][0]
 }
 
 const WishlistCard = ({ product }: IWishlistCardProps) => {
@@ -31,9 +31,9 @@ const WishlistCard = ({ product }: IWishlistCardProps) => {
       images,
     },
   } = product
-  const [{ fetching: movingToCart, data, error }, insertUserProduct] =
+  const [insertUserProduct, { loading: movingToCart, data, error }] =
     useInsertUserProductsOneMutation()
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const uid = useAppSelector(selectUid)
   return (
     <div className='flex'>
       <Link
@@ -61,15 +61,21 @@ const WishlistCard = ({ product }: IWishlistCardProps) => {
               className='hover:underline underline-offset-4'
               isLoading={movingToCart}
               disabled={Boolean(outOfStock)}
-              onClick={() =>
-                insertUserProduct({
-                  object: {
-                    pid,
-                    uid,
-                    type: User_Products_Type_Enum.InCart,
+              onClick={async () => {
+                if (!uid) {
+                  notify({ message: 'You are not logged in.' })
+                  return
+                }
+                await insertUserProduct({
+                  variables: {
+                    createUserProductInput: {
+                      pid,
+                      uid,
+                      status: UserProductStatus.InCart,
+                    },
                   },
                 })
-              }
+              }}
             >
               Move to cart
             </Button>

@@ -11,20 +11,22 @@ import DesignerThoughtsCard from 'src/components/molecules/DesignerThoughtsCard'
 import { Dispatch, SetStateAction, useState } from 'react'
 import Sidebar from 'src/components/molecules/Sidebar'
 import {
-  GetProductQuery,
+  ProductQuery,
   useGetViewedProductsQuery,
-} from 'src/generated/graphql'
+  useProductQuery,
+} from 'src/generated'
 import Loading from 'src/components/molecules/Loading/Loading'
-import { UseQueryState } from 'urql/dist/types/hooks/useQuery'
 import Price from 'src/components/molecules/Price/Price'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import Badge from 'src/components/atoms/Badge'
 import Skeleton from 'src/components/molecules/Skeleton/Skeleton'
 import { sampleSearchData } from 'src/store/sampleData'
+import { selectUid } from 'src/store/user'
 import Masonry2 from '../Masonry2'
+import { NextSeo } from 'next-seo'
 
 export interface IProductPageTemplateProps {
-  product: UseQueryState<GetProductQuery, object>
+  productId: ProductQuery['product']['id']
 }
 
 const InfoInSidebar = ({
@@ -62,20 +64,18 @@ const RecentlyViewedProducts = ({
   title: string
   currentProductId: number | undefined
 }) => {
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
-  const [viewedItems] = useGetViewedProductsQuery({
+  const uid = useAppSelector(selectUid)
+  const { data, loading } = useGetViewedProductsQuery({
     variables: {
       uid,
     },
-    pause: !uid,
   })
-  const { data, fetching } = viewedItems
 
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
       <div className='flex gap-1'>
-        {fetching &&
+        {loading &&
           [1, 2, 3, 4, 5, 6].map((item) => (
             <Skeleton key={item} className='w-48 h-64' />
           ))}
@@ -124,7 +124,7 @@ const RecentlyViewedProducts = ({
   )
 }
 const RelatedProducts = ({ title }: { title: string }) => {
-  const { products } = sampleSearchData.data
+  const { products } = sampleSearchData
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
@@ -152,13 +152,14 @@ const RelatedProducts = ({ title }: { title: string }) => {
   )
 }
 
-const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+const ProductPageTemplate = ({ productId }: IProductPageTemplateProps) => {
+  const uid = useAppSelector(selectUid)
+  const { data, loading, error } = useProductQuery({
+    variables: { id: productId },
+  })
 
   const [openProductDetials, setOpenProductDetials] = useState(false)
   const [openMeasurements, setOpenMeasurements] = useState(false)
-
-  const { error, data, fetching } = product
 
   if (error) {
     if (error.networkError)
@@ -176,15 +177,23 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
     return <Container>Something went wrong.</Container>
   }
 
-  if (fetching) return <Loading />
+  if (loading) return <Loading />
   if (!data?.product) return <Container>Product not found</Container>
 
   const productImages = data.product?.images || []
 
   const images = productImages.slice(0, 6)
 
+  const title = data.product.name
+
   return (
     <>
+      <NextSeo
+        title={`${
+          title || 'Product page loading...'
+        } - Ikea clone | Karthick Ragavendran`}
+        description='Create account with your email or google account.'
+      />
       <Sidebar
         overlayBlur={false}
         open={openProductDetials}
@@ -235,10 +244,10 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               className='block md:hidden'
             >
               {images.map((item: string) => (
-                <Image alt='' key={item} src={item} layout='fill' />
+                <Image alt='' key={item} src={item} />
               ))}
               {Array.from(Array(6 - images.length), (x, i) => i).map((item) => (
-                <Image alt='' key={item} src='' layout='fill' />
+                <Image alt='' key={item} src='' />
               ))}
             </Masonry2>
             <Masonry2
@@ -248,10 +257,10 @@ const ProductPageTemplate = ({ product }: IProductPageTemplateProps) => {
               className='hidden md:block'
             >
               {images.map((item: string) => (
-                <Image key={item} alt='' src={item} layout='fill' />
+                <Image key={item} alt='' src={item} />
               ))}
               {Array.from(Array(6 - images.length), (x, i) => i).map((item) => (
-                <Image alt='' key={item} src='' layout='fill' />
+                <Image alt='' key={item} src='' />
               ))}
             </Masonry2>
             <div className='max-w-2xl text-xl font-light leading-relaxed text-gray-700'>

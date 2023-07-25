@@ -3,16 +3,16 @@ import Button from 'src/components/atoms/Button/Button'
 import Image from 'src/components/atoms/Image'
 import Price from 'src/components/molecules/Price/Price'
 import {
+  MyUserProductsQuery,
   useInsertUserProductsOneMutation,
-  User_Products_Type_Enum,
-} from 'src/generated/graphql'
+  UserProductStatus,
+} from 'src/generated'
+import { notify } from 'src/hooks'
 import { useAppSelector } from 'src/store'
-import { UserProductSliceType } from 'src/store/userProducts/userProductsSlice'
-
-type UserProductsData = Required<UserProductSliceType['userProducts']>['data']
+import { selectUid } from 'src/store/user'
 
 export interface ISavedForLaterCardProps {
-  product: UserProductsData['user_products'][number]
+  product: MyUserProductsQuery['myUserProducts'][0]
 }
 
 const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
@@ -28,12 +28,12 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
       images,
     },
   } = product
-  const [{ fetching: movingToCart }, insertUserProduct] =
+  const [insertUserProduct, { loading: movingToCart }] =
     useInsertUserProductsOneMutation()
-  const [{ fetching: removingItem }, removeUserProduct] =
+  const [removeUserProduct, { loading: removingItem }] =
     useInsertUserProductsOneMutation()
 
-  const uid = useAppSelector((state) => state.user.data.user?.uid)
+  const uid = useAppSelector(selectUid)
   return (
     <div className='flex group'>
       <div className='flex-shrink-0 w-24 h-24 mr-2'>
@@ -52,15 +52,21 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
             color='white'
             isLoading={removingItem}
             disabled={Boolean(outOfStock)}
-            onClick={() =>
-              removeUserProduct({
-                object: {
-                  pid,
-                  uid,
-                  type: User_Products_Type_Enum.RemovedFromWishlist,
+            onClick={async () => {
+              if (!uid) {
+                notify({ message: 'You are not loggedin.' })
+                return
+              }
+              await removeUserProduct({
+                variables: {
+                  createUserProductInput: {
+                    pid,
+                    uid,
+                    status: UserProductStatus.RemovedFromWishlist,
+                  },
                 },
               })
-            }
+            }}
           >
             Remove
           </Button>
@@ -70,15 +76,21 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
                 variant='text'
                 isLoading={movingToCart}
                 disabled={Boolean(outOfStock)}
-                onClick={() =>
-                  insertUserProduct({
-                    object: {
-                      pid,
-                      uid,
-                      type: User_Products_Type_Enum.InCart,
+                onClick={async () => {
+                  if (!uid) {
+                    notify({ message: 'You are not loggedin.' })
+                    return
+                  }
+                  await insertUserProduct({
+                    variables: {
+                      createUserProductInput: {
+                        pid,
+                        uid,
+                        status: UserProductStatus.InCart,
+                      },
                     },
                   })
-                }
+                }}
               >
                 Move to cart
               </Button>

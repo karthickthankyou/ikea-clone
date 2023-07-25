@@ -17,7 +17,7 @@ import Masonry2 from 'src/components/templates/Masonry2'
 import { Children } from 'src/types'
 import InfoCard from 'src/components/molecules/InfoCard'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
-import Link from 'src/components/atoms/Link'
+import Link from 'next/link'
 import DeveloperCommentary from 'src/components/molecules/DeveloperCommentary/DeveloperCommentary'
 import TripGuide from 'src/components/organisms/TripGuide/TripGuide'
 

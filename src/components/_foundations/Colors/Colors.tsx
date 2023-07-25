@@ -79,7 +79,7 @@ const ColorsLayout = ({ color }: { color: string }) => (
 
         // For making the text visible over differect lightnesses.
         const buttonClasses =
-          shade > 400 || DEFAULT
+          (typeof shade === 'number' && shade > 400) || DEFAULT
             ? `text-white border-white/10`
             : 'text-black border-black/10'
 
@@ -203,82 +203,5 @@ const Colors = () => {
     </ColorContext.Provider>
   )
 }
-
-// For purgecss.
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const colors = [
-  {
-    primary: [
-      'bg-primary',
-      'bg-primary-25',
-      'bg-primary-50',
-      'bg-primary-100',
-      'bg-primary-200',
-      'bg-primary-300',
-      'bg-primary-400',
-      'bg-primary-500',
-      'bg-primary-600',
-      'bg-primary-700',
-      'bg-primary-800',
-      'bg-primary-900',
-    ],
-    gray: [
-      'bg-gray',
-      'bg-gray-25',
-      'bg-gray-50',
-      'bg-gray-100',
-      'bg-gray-200',
-      'bg-gray-300',
-      'bg-gray-400',
-      'bg-gray-500',
-      'bg-gray-600',
-      'bg-gray-700',
-      'bg-gray-800',
-      'bg-gray-900',
-    ],
-    red: [
-      'bg-red',
-      'bg-red-25',
-      'bg-red-50',
-      'bg-red-100',
-      'bg-red-200',
-      'bg-red-300',
-      'bg-red-400',
-      'bg-red-500',
-      'bg-red-600',
-      'bg-red-700',
-      'bg-red-800',
-      'bg-red-900',
-    ],
-    green: [
-      'bg-green',
-      'bg-green-25',
-      'bg-green-50',
-      'bg-green-100',
-      'bg-green-200',
-      'bg-green-300',
-      'bg-green-400',
-      'bg-green-500',
-      'bg-green-600',
-      'bg-green-700',
-      'bg-green-800',
-      'bg-green-900',
-    ],
-    yellow: [
-      'bg-yellow',
-      'bg-yellow-25',
-      'bg-yellow-50',
-      'bg-yellow-100',
-      'bg-yellow-200',
-      'bg-yellow-300',
-      'bg-yellow-400',
-      'bg-yellow-500',
-      'bg-yellow-600',
-      'bg-yellow-700',
-      'bg-yellow-800',
-      'bg-yellow-900',
-    ],
-  },
-]
 
 export default Colors

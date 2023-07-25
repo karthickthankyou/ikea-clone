@@ -1,23 +1,24 @@
 /* eslint-disable camelcase */
 import Image from 'src/components/atoms/Image'
-import Link from 'src/components/atoms/Link/Link'
+import Link from 'next/link'
 import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import HeartIconSolid from '@heroicons/react/solid/HeartIcon'
 import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import {
+  SearchProductsQuery,
   useInsertUserProductsOneMutation,
-  User_Products_Type_Enum,
-} from 'src/generated/graphql'
+  UserProductStatus,
+} from 'src/generated'
 import { useAppSelector } from 'src/store'
-import { ProductWithWishlist, SimpleUserProducts } from 'src/store/search'
 import { useRouter } from 'next/router'
+import { selectUid } from 'src/store/user'
 import OverlapSpace from '../OverlapSpace'
 import Rating from '../Rating/Rating'
 import Price from '../Price/Price'
 import Skeleton from '../Skeleton/Skeleton'
 
 export interface IProductCard01Props {
-  product: ProductWithWishlist
+  product: SearchProductsQuery['products'][0]
   className?: string
 }
 
@@ -27,17 +28,17 @@ const HeartIconComponent = ({
   status,
 }: {
   fetching: boolean
-  mutationStatus: User_Products_Type_Enum | undefined
-  status: User_Products_Type_Enum | undefined
+  mutationStatus: UserProductStatus | undefined
+  status: UserProductStatus | undefined
 }) => {
   if (fetching)
     return <HeartIconSolid className='w-6 h-6 fill-gray-200 animate-pulse' />
-  if (status === User_Products_Type_Enum.InCart)
+  if (status === UserProductStatus.InCart)
     return <ShoppingCartIcon className='w-6 h-6 fill-red' />
 
   if (
-    status === User_Products_Type_Enum.Wishlisted ||
-    mutationStatus === User_Products_Type_Enum.Wishlisted
+    status === UserProductStatus.Wishlisted ||
+    mutationStatus === UserProductStatus.Wishlisted
   )
     return <HeartIconSolid className='w-6 h-6 fill-red' />
 
@@ -46,7 +47,7 @@ const HeartIconComponent = ({
 
 const ProductCard01 = ({ product, className }: IProductCard01Props) => {
   const {
-    userProducts,
+    userProduct,
     id,
     name,
     category,
@@ -60,9 +61,9 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
   } = product
 
   const src = images && images[0]
-  const [{ fetching, data }, wishlistProduct] =
+  const [wishlistProduct, { loading, data }] =
     useInsertUserProductsOneMutation()
-  const uid = useAppSelector((state) => state.user?.data.user?.uid)
+  const uid = useAppSelector(selectUid)
 
   const router = useRouter()
 
@@ -72,27 +73,36 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
         <OverlapSpace.Child className='flex items-start justify-end gap-2 p-2'>
           <button
             type='button'
-            onClick={() => {
-              if (!uid) router.push('/login')
-              if (userProducts?.status === User_Products_Type_Enum.InCart) {
+            onClick={async () => {
+              if (!uid) {
+                router.push('/login')
+                return
+              }
+              if (userProduct?.status === UserProductStatus.InCart) {
                 router.push('/cart')
                 return
               }
 
               const targetState =
-                userProducts?.status === User_Products_Type_Enum.Wishlisted
-                  ? User_Products_Type_Enum.RemovedFromWishlist
-                  : User_Products_Type_Enum.Wishlisted
-              wishlistProduct({
-                object: { pid: id, uid, type: targetState },
+                userProduct?.status === UserProductStatus.Wishlisted
+                  ? UserProductStatus.RemovedFromWishlist
+                  : UserProductStatus.Wishlisted
+              await wishlistProduct({
+                variables: {
+                  createUserProductInput: {
+                    pid: id,
+                    uid,
+                    status: targetState,
+                  },
+                },
               })
             }}
             className='z-10 p-2 transition-all rounded-full group-hover:bg-white hover:shadow-lg hover:bg-white bg-white/50 shadow-black/20'
           >
             <HeartIconComponent
-              fetching={userProducts?.fetching || fetching}
-              mutationStatus={data?.insert_user_products_one?.type}
-              status={userProducts?.status}
+              fetching={loading}
+              mutationStatus={data?.createUserProduct?.status}
+              status={userProduct?.status}
             />
           </button>
         </OverlapSpace.Child>
