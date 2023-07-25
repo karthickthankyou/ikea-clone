@@ -183,8 +183,20 @@ query myOrders(
   }
 }
 
-query GetViewedProducts($uid: String) {
-  views(distinct: [pid], take: 12, where: { uid: { equals: $uid } }) {
+query myViews(
+  $skip: Int
+  $take: Int
+  $orderBy: [ViewOrderByWithRelationInput!]
+  $distinct: [ViewScalarFieldEnum!]
+  $where: ViewWhereInput
+) {
+  myViews(
+    skip: $skip
+    take: $take
+    orderBy: $orderBy
+    distinct: $distinct
+    where: $where
+  ) {
     id
     pid
     product {

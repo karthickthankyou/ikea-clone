@@ -23,9 +23,11 @@ export interface IShowDataProps {
   className?: string
 }
 export const NoResults = () => (
-  <div className='flex flex-col items-center justify-center gap-2 h-60 bg-gray-25'>
-    <IconBox className='w-10 h-10' />
-    <div className='text-sm'>No results</div>
+  <div className='flex flex-col items-center justify-center h-screen50'>
+    <div className='text-left'>
+      <div className='text-xl font-semibold'>No matching products found.</div>
+      <div className='mt-1 text-sm text-gray'>Try modifying the filters.</div>
+    </div>
   </div>
 )
 
@@ -55,7 +57,7 @@ export const ShowData = ({
   return (
     <div className='min-h-[calc(100vh-4rem)]'>
       {loading && (
-        <div>
+        <div className={`${className} mt-2`}>
           {Array.from(Array(take).keys()).map((item) => (
             <ProductCard01Skeleton key={item} />
           ))}

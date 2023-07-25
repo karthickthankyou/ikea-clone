@@ -5,24 +5,20 @@ const Image = ({
   src,
   width = 240,
   height = 240,
-  layout = 'responsive',
   alt = '',
   quality = 75,
   ...props
 }: ImageProps) => {
-  const imgWidth = layout === 'fill' ? undefined : width
-  const imgHeight = layout === 'fill' ? undefined : height
   const imgSrc =
     src ||
     'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/nopicture_fi31cv.jpg'
 
   return (
     <NextImage
-      className={`object-cover ${className}`}
+      className={`object-cover w-full h-full ${className}`}
       src={imgSrc}
-      width={imgWidth}
-      height={imgHeight}
-      layout={layout}
+      width={300}
+      height={300}
       alt={alt}
       quality={quality}
       placeholder='blur'

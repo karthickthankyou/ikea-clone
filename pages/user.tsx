@@ -47,7 +47,7 @@ const UserPage: NextPage = () => {
   }
 
   const isSeller = roles?.includes('seller')
-  const isUser = roles?.includes('user')
+  const isUser = Boolean(uid)
 
   return (
     <Container className='min-h-screen'>

@@ -5,6 +5,7 @@ import HeartIcon from '@heroicons/react/outline/HeartIcon'
 import HeartIconSolid from '@heroicons/react/solid/HeartIcon'
 import ShoppingCartIcon from '@heroicons/react/solid/ShoppingCartIcon'
 import {
+  namedOperations,
   SearchProductsQuery,
   useInsertUserProductsOneMutation,
   UserProductStatus,
@@ -24,22 +25,17 @@ export interface IProductCard01Props {
 
 const HeartIconComponent = ({
   fetching,
-  mutationStatus,
   status,
 }: {
   fetching: boolean
-  mutationStatus: UserProductStatus | undefined
   status: UserProductStatus | undefined
 }) => {
   if (fetching)
     return <HeartIconSolid className='w-6 h-6 fill-gray-200 animate-pulse' />
   if (status === UserProductStatus.InCart)
-    return <ShoppingCartIcon className='w-6 h-6 fill-red' />
+    return <ShoppingCartIcon className='w-6 h-6 ' />
 
-  if (
-    status === UserProductStatus.Wishlisted ||
-    mutationStatus === UserProductStatus.Wishlisted
-  )
+  if (status === UserProductStatus.Wishlisted)
     return <HeartIconSolid className='w-6 h-6 fill-red' />
 
   return <HeartIcon className='w-6 h-6 text-red' />
@@ -82,7 +78,7 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
                 router.push('/cart')
                 return
               }
-
+              console.log('userProduct?.status', userProduct?.status)
               const targetState =
                 userProduct?.status === UserProductStatus.Wishlisted
                   ? UserProductStatus.RemovedFromWishlist
@@ -95,20 +91,21 @@ const ProductCard01 = ({ product, className }: IProductCard01Props) => {
                     status: targetState,
                   },
                 },
+                awaitRefetchQueries: true,
+                refetchQueries: [namedOperations.Query.SearchProducts],
               })
             }}
             className='z-10 p-2 transition-all rounded-full group-hover:bg-white hover:shadow-lg hover:bg-white bg-white/50 shadow-black/20'
           >
             <HeartIconComponent
               fetching={loading}
-              mutationStatus={data?.createUserProduct?.status}
               status={userProduct?.status}
             />
           </button>
         </OverlapSpace.Child>
         <OverlapSpace.Child>
           <Link key={id} href={`/products/${id}`}>
-            <Image src={src} alt='' />
+            <Image src={src} alt='' className='w-full aspect-square' />
           </Link>
         </OverlapSpace.Child>
       </OverlapSpace>

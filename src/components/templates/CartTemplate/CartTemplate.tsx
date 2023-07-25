@@ -50,7 +50,6 @@ const CartTemplate = ({ className }: ICartTemplateProps) => {
   const transformedCartItems = data?.myUserProducts?.map((item) => ({
     id: item.pid,
     name: item.product.name,
-    description: item.product.category + item.product.subCategory,
     image:
       (item.product.images && item.product.images[0]) ||
       'https://res.cloudinary.com/thankyou/image/upload/v1648563867/zillow-clone/ul7h0tcrtl3bycfd8za1.jpg',
@@ -136,7 +135,6 @@ export default CartTemplate
 type CartItems = {
   id: number
   name: string
-  description: string
   image: string
   price: number
 }[]

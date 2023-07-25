@@ -13,6 +13,7 @@ import { ShowData } from 'src/components/organisms/ShowData'
 import { SortTypes, sortOptions } from './data'
 import { useEffect, useState } from 'react'
 import { FormTypeFilter } from 'src/forms'
+import ProductCard01 from 'src/components/molecules/ProductCard01'
 
 export const useConvertSearchFormToVariables = () => {
   const [variables, setVariables] =
@@ -83,7 +84,7 @@ const ProductListing = ({ filterOpen }: { filterOpen?: boolean }) => {
 
 export const ProductListingResults = () => {
   const { variables } = useConvertSearchFormToVariables()
-  const debouncedVariables = useDebouncedValue(variables)
+  const debouncedVariables = useDebouncedValue(variables, 400)
   const { setSkip, setTake, skip, take } = useTakeSkip()
 
   const { loading, data, error } = useSearchProductsQuery({
@@ -91,23 +92,11 @@ export const ProductListingResults = () => {
   })
   return (
     <div>
-      {data?.products.length === 0 && (
-        <div className='flex flex-col items-center justify-center h-screen50'>
-          <div className='text-left'>
-            <div className='text-xl font-semibold'>
-              No matching products found.
-            </div>
-            <div className='mt-1 text-sm text-gray'>
-              Try modifying the filters.
-            </div>
-          </div>
-        </div>
-      )}
       <ShowData
         loading={loading}
         pagination={{
-          resultCount: undefined,
-          totalCount: undefined,
+          resultCount: data?.products.length,
+          totalCount: data?.productAggregate.count,
           setSkip,
           setTake,
           skip,
@@ -116,7 +105,7 @@ export const ProductListingResults = () => {
         title={undefined}
       >
         {data?.products.map((product) => (
-          <div key={product.id}>{product.id}</div>
+          <ProductCard01 product={product} key={product.id} />
         ))}
       </ShowData>
     </div>

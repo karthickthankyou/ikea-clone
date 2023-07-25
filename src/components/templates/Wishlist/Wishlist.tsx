@@ -5,6 +5,7 @@ import { useAppSelector } from 'src/store'
 
 import { selectUid } from 'src/store/user'
 import { UserProductStatus, useMyUserProductsLazyQuery } from 'src/generated'
+import WishlistCard from 'src/components/organisms/WishlistCard'
 
 export interface IWishlistProps {
   className?: string
@@ -58,7 +59,7 @@ const Wishlist = ({ className }: IWishlistProps) => {
           ))}
         {wishlistTransitions((style, item) => (
           <animated.div style={style}>
-            <CartCard product={item} />
+            <WishlistCard product={item} />
           </animated.div>
         ))}
       </div>

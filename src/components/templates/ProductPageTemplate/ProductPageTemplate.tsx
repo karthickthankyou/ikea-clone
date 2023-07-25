@@ -12,8 +12,10 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import Sidebar from 'src/components/molecules/Sidebar'
 import {
   ProductQuery,
-  useGetViewedProductsQuery,
+  useMyViewsQuery,
   useProductQuery,
+  useProductsQuery,
+  useSearchProductsQuery,
 } from 'src/generated'
 import Loading from 'src/components/molecules/Loading/Loading'
 import Price from 'src/components/molecules/Price/Price'
@@ -57,80 +59,80 @@ const dummyImages = [
   'https://res.cloudinary.com/thankyou/image/upload/v1649599416/IKEA/no6.jpg',
 ]
 
-const RecentlyViewedProducts = ({
-  title,
-  currentProductId,
-}: {
-  title: string
-  currentProductId: number | undefined
-}) => {
-  const uid = useAppSelector(selectUid)
-  const { data, loading } = useGetViewedProductsQuery({
-    variables: {
-      uid,
-    },
-  })
+// const RecentlyViewedProducts = ({
+//   title,
+//   currentProductId,
+// }: {
+//   title: string
+//   currentProductId: number | undefined
+// }) => {
 
-  return (
-    <div>
-      <div className='mb-4 text-xl font-semibold'>{title}</div>
-      <div className='flex gap-1'>
-        {loading &&
-          [1, 2, 3, 4, 5, 6].map((item) => (
-            <Skeleton key={item} className='w-48 h-64' />
-          ))}
-      </div>
-      <HScroll className='flex gap-responsive'>
-        <HScroll.Body className='gap-1'>
-          {data?.views.map((item) => (
-            <HScroll.Child className='relative mb-12 w-52' key={item.id}>
-              <Link href={`/products/${item.pid}`}>
-                <Image
-                  src={item.product.images && item.product.images[0]}
-                  alt=''
-                />
-                <div className='mt-2 text-sm line-clamp-2'>
-                  {item.product.name}
-                </div>
-                <Price
-                  price={item.product.price}
-                  oldPrice={item.product.oldPrice}
-                  className='mt-2'
-                />
-                <div className='mt-1'>
-                  {currentProductId === item.pid && (
-                    <Badge size='sm' variant='red'>
-                      Current page
-                    </Badge>
-                  )}
-                </div>
-              </Link>
-            </HScroll.Child>
-          ))}
-        </HScroll.Body>
-        <HScroll.Arrow
-          distance={200}
-          className='absolute left-0 z-10 hidden h-full -translate-x-1/2 md:block'
-          arrowClassName='shadow-md'
-        />
-        <HScroll.Arrow
-          distance={200}
-          right
-          className='absolute right-0 z-10 hidden h-full translate-x-1/2 md:block'
-          arrowClassName='shadow-md'
-        />
-      </HScroll>
-    </div>
-  )
-}
+//   const { data, loading } = useMyViewsQuery({
+//     variables: {},
+//   })
+
+//   return (
+//     <div>
+//       <div className='mb-4 text-xl font-semibold'>{title}</div>
+//       <div className='flex gap-1'>
+//         {loading &&
+//           [1, 2, 3, 4, 5, 6].map((item) => (
+//             <Skeleton key={item} className='w-48 h-64' />
+//           ))}
+//       </div>
+//       <HScroll className='flex gap-responsive'>
+//         <HScroll.Body className='gap-1'>
+//           {data?.myViews.map((item) => (
+//             <HScroll.Child className='relative mb-12 w-52' key={item.id}>
+//               <Link href={`/products/${item.pid}`}>
+//                 <Image
+//                   src={item.product.images && item.product.images[0]}
+//                   alt=''
+//                 />
+//                 <div className='mt-2 text-sm line-clamp-2'>
+//                   {item.product.name}
+//                 </div>
+//                 <Price
+//                   price={item.product.price}
+//                   oldPrice={item.product.oldPrice}
+//                   className='mt-2'
+//                 />
+//                 <div className='mt-1'>
+//                   {currentProductId === item.pid && (
+//                     <Badge size='sm' variant='red'>
+//                       Current page
+//                     </Badge>
+//                   )}
+//                 </div>
+//               </Link>
+//             </HScroll.Child>
+//           ))}
+//         </HScroll.Body>
+//         <HScroll.Arrow
+//           distance={200}
+//           className='absolute left-0 z-10 hidden h-full -translate-x-1/2 md:block'
+//           arrowClassName='shadow-md'
+//         />
+//         <HScroll.Arrow
+//           distance={200}
+//           right
+//           className='absolute right-0 z-10 hidden h-full translate-x-1/2 md:block'
+//           arrowClassName='shadow-md'
+//         />
+//       </HScroll>
+//     </div>
+//   )
+// }
 const RelatedProducts = ({ title }: { title: string }) => {
-  const { products } = sampleSearchData
+  const { data, loading } = useSearchProductsQuery({
+    variables: { take: 12, skip: 0 },
+  })
   return (
     <div>
       <div className='mb-4 text-xl font-semibold'>{title}</div>
       <HScroll className='flex gap-responsive'>
         <HScroll.Body className='gap-1'>
-          {products.map((item) => (
+          {data?.products.map((item) => (
             <HScroll.Child className='relative mb-12 w-72' key={item.id}>
               <ProductCard01 product={item} />
             </HScroll.Child>
@@ -318,7 +320,7 @@ const ProductPageTemplate = ({ productId }: IProductPageTemplateProps) => {
         </div>
 
         <RelatedProducts title='Related products' />
-        {uid ? (
+        {/* {uid ? (
           <RecentlyViewedProducts
             title='Recently viewed products'
             currentProductId={data?.product?.id}
@@ -330,7 +332,7 @@ const ProductPageTemplate = ({ productId }: IProductPageTemplateProps) => {
             </Link>{' '}
             to see viewed products.
           </div>
-        )}
+        )} */}
       </Container>
     </>
   )

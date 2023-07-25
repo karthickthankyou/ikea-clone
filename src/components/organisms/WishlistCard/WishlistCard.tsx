@@ -4,6 +4,7 @@ import Image from 'src/components/atoms/Image'
 import Price from 'src/components/molecules/Price/Price'
 import {
   MyUserProductsQuery,
+  namedOperations,
   useInsertUserProductsOneMutation,
   UserProductStatus,
 } from 'src/generated'
@@ -43,7 +44,6 @@ const WishlistCard = ({ product }: IWishlistCardProps) => {
         <Image
           src={images && images[0]}
           alt=''
-          layout='fill'
           className='transition-transform hover:scale-105'
         />
       </Link>
@@ -74,6 +74,8 @@ const WishlistCard = ({ product }: IWishlistCardProps) => {
                       status: UserProductStatus.InCart,
                     },
                   },
+                  awaitRefetchQueries: true,
+                  refetchQueries: [namedOperations.Query.myUserProducts],
                 })
               }}
             >

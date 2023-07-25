@@ -4,6 +4,7 @@ import Image from 'src/components/atoms/Image'
 import Price from 'src/components/molecules/Price/Price'
 import {
   MyUserProductsQuery,
+  namedOperations,
   useInsertUserProductsOneMutation,
   UserProductStatus,
 } from 'src/generated'
@@ -62,6 +63,8 @@ const CartCard = ({ product }: ICartCardProps) => {
                   status: UserProductStatus.SavedForLater,
                 },
               },
+              awaitRefetchQueries: true,
+              refetchQueries: [namedOperations.Query.myUserProducts],
             })
           }}
         >

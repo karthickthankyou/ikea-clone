@@ -20,7 +20,6 @@ const ImageTemplate: ComponentStory<typeof OverlapSpace> = (args) => (
       <Image
         alt='text over image demo'
         src='https://res.cloudinary.com/thankyou/image/upload/v1648218985/nike/ikea/sofa-01_fgsi8y.jpg'
-        layout='fill'
       />
     </OverlapSpace.Child>
     <OverlapSpace.Child className='z-10'>

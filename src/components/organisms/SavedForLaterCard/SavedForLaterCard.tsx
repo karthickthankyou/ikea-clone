@@ -4,6 +4,7 @@ import Image from 'src/components/atoms/Image'
 import Price from 'src/components/molecules/Price/Price'
 import {
   MyUserProductsQuery,
+  namedOperations,
   useInsertUserProductsOneMutation,
   UserProductStatus,
 } from 'src/generated'
@@ -65,6 +66,8 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
                     status: UserProductStatus.RemovedFromWishlist,
                   },
                 },
+                awaitRefetchQueries: true,
+                refetchQueries: [namedOperations.Query.myUserProducts],
               })
             }}
           >
@@ -89,6 +92,8 @@ const SavedForLaterCard = ({ product }: ISavedForLaterCardProps) => {
                         status: UserProductStatus.InCart,
                       },
                     },
+                    awaitRefetchQueries: true,
+                    refetchQueries: [namedOperations.Query.myUserProducts],
                   })
                 }}
               >

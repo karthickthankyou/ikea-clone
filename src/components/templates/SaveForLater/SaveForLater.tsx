@@ -5,6 +5,7 @@ import { useAppSelector } from 'src/store'
 
 import { selectUid } from 'src/store/user'
 import { UserProductStatus, useMyUserProductsLazyQuery } from 'src/generated'
+import SavedForLaterCard from 'src/components/organisms/SavedForLaterCard'
 
 export interface ISaveForLaterProps {
   className?: string
@@ -54,7 +55,7 @@ const SaveForLater = ({ className }: ISaveForLaterProps) => {
           ))}
         {saveForLaterTransitions((style, item) => (
           <animated.div style={style}>
-            <CartCard product={item} />
+            <SavedForLaterCard product={item} />
           </animated.div>
         ))}
       </div>

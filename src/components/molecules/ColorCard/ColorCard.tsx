@@ -120,7 +120,7 @@ const ColorCard = ({
     <div className={`h-full ${bgTransparentCls}`}>
       <OverlapSpace>
         <OverlapSpace.Child className='-z-10'>
-          <Image src={src} alt='' />
+          <Image src={src} alt='' className='w-full aspect-square' />
         </OverlapSpace.Child>
         <OverlapSpace.Child className='p-responsive'>
           {children}

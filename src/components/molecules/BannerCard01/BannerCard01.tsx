@@ -23,8 +23,8 @@ const BannerCard01 = ({
         {title}
       </h2>
       <p className='max-w-md mt-2 text-sm text-gray-600'>{description}</p>
-      <OverlapSpace className='mt-4'>
-        <OverlapSpace.Child className='-z-20'>
+      <OverlapSpace className='w-full mt-4 aspect-square'>
+        <OverlapSpace.Child className=' -z-20'>
           <Image src={src} alt='' />
         </OverlapSpace.Child>
         <OverlapSpace.Child className='flex items-end justify-end p-4'>

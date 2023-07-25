@@ -534,7 +534,7 @@ const Home: NextPage = () => (
           heights={['h-72', 'h-112']}
         >
           {sampleImages.map((item) => (
-            <Image key={item} alt='' src={item} layout='fill' />
+            <Image key={item} alt='' src={item} />
           ))}
         </Masonry2>
         <Masonry2
@@ -546,7 +546,7 @@ const Home: NextPage = () => (
           heights={['h-52', 'h-72']}
         >
           {sampleImages.map((item) => (
-            <Image key={item} alt='' src={item} layout='fill' />
+            <Image key={item} alt='' src={item} />
           ))}
         </Masonry2>
         <Masonry2
@@ -558,7 +558,7 @@ const Home: NextPage = () => (
           className='block md:hidden'
         >
           {sampleImages.map((item) => (
-            <Image key={item} alt='' src={item} layout='fill' />
+            <Image key={item} alt='' src={item} />
           ))}
         </Masonry2>
       </div>

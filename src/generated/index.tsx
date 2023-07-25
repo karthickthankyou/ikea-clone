@@ -54,10 +54,10 @@ export type CreateProductInput = {
   images: Array<Scalars['String']['input']>
   measurements?: InputMaybe<Scalars['String']['input']>
   name: Scalars['String']['input']
-  oldPrice?: InputMaybe<Scalars['Int']['input']>
+  oldPrice?: InputMaybe<Scalars['Float']['input']>
   outOfStock?: InputMaybe<Scalars['Boolean']['input']>
   price: Scalars['Float']['input']
-  rating?: InputMaybe<Scalars['Int']['input']>
+  rating?: InputMaybe<Scalars['Float']['input']>
   reviews?: InputMaybe<Scalars['Int']['input']>
   sellerId: Scalars['String']['input']
   subCategory?: InputMaybe<Scalars['String']['input']>
@@ -432,11 +432,11 @@ export type Product = {
   images: Array<Scalars['String']['output']>
   measurements?: Maybe<Scalars['String']['output']>
   name: Scalars['String']['output']
-  oldPrice?: Maybe<Scalars['Int']['output']>
+  oldPrice?: Maybe<Scalars['Float']['output']>
   orders: Array<Order>
   outOfStock?: Maybe<Scalars['Boolean']['output']>
   price: Scalars['Float']['output']
-  rating?: Maybe<Scalars['Int']['output']>
+  rating?: Maybe<Scalars['Float']['output']>
   reviews?: Maybe<Scalars['Int']['output']>
   seller?: Maybe<Seller>
   sellerId: Scalars['String']['output']
@@ -922,10 +922,10 @@ export type UpdateProductInput = {
   images?: InputMaybe<Array<Scalars['String']['input']>>
   measurements?: InputMaybe<Scalars['String']['input']>
   name?: InputMaybe<Scalars['String']['input']>
-  oldPrice?: InputMaybe<Scalars['Int']['input']>
+  oldPrice?: InputMaybe<Scalars['Float']['input']>
   outOfStock?: InputMaybe<Scalars['Boolean']['input']>
   price?: InputMaybe<Scalars['Float']['input']>
-  rating?: InputMaybe<Scalars['Int']['input']>
+  rating?: InputMaybe<Scalars['Float']['input']>
   reviews?: InputMaybe<Scalars['Int']['input']>
   sellerId?: InputMaybe<Scalars['String']['input']>
   subCategory?: InputMaybe<Scalars['String']['input']>
@@ -1346,13 +1346,19 @@ export type MyOrdersQuery = {
   orderAggregate: { __typename?: 'ProductCountOutput'; count: number }
 }
 
-export type GetViewedProductsQueryVariables = Exact<{
-  uid?: InputMaybe<Scalars['String']['input']>
+export type MyViewsQueryVariables = Exact<{
+  skip?: InputMaybe<Scalars['Int']['input']>
+  take?: InputMaybe<Scalars['Int']['input']>
+  orderBy?: InputMaybe<
+    Array<ViewOrderByWithRelationInput> | ViewOrderByWithRelationInput
+  >
+  distinct?: InputMaybe<Array<ViewScalarFieldEnum> | ViewScalarFieldEnum>
+  where?: InputMaybe<ViewWhereInput>
 }>
 
-export type GetViewedProductsQuery = {
+export type MyViewsQuery = {
   __typename?: 'Query'
-  views: Array<{
+  myViews: Array<{
     __typename?: 'View'
     id: number
     pid: number
@@ -1490,7 +1496,7 @@ export const namedOperations = {
     FilterProducts: 'FilterProducts',
     myUserProducts: 'myUserProducts',
     myOrders: 'myOrders',
-    GetViewedProducts: 'GetViewedProducts',
+    myViews: 'myViews',
     Supports: 'Supports',
     MySupports: 'MySupports',
   },
@@ -2001,9 +2007,21 @@ export type MyOrdersQueryResult = Apollo.QueryResult<
   MyOrdersQuery,
   MyOrdersQueryVariables
 >
-export const GetViewedProductsDocument = /*#__PURE__*/ gql`
-  query GetViewedProducts($uid: String) {
-    views(distinct: [pid], take: 12, where: { uid: { equals: $uid } }) {
+export const MyViewsDocument = /*#__PURE__*/ gql`
+  query myViews(
+    $skip: Int
+    $take: Int
+    $orderBy: [ViewOrderByWithRelationInput!]
+    $distinct: [ViewScalarFieldEnum!]
+    $where: ViewWhereInput
+  ) {
+    myViews(
+      skip: $skip
+      take: $take
+      orderBy: $orderBy
+      distinct: $distinct
+      where: $where
+    ) {
       id
       pid
       product {
@@ -2017,54 +2035,48 @@ export const GetViewedProductsDocument = /*#__PURE__*/ gql`
 `
 
 /**
- * __useGetViewedProductsQuery__
+ * __useMyViewsQuery__
  *
- * To run a query within a React component, call `useGetViewedProductsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetViewedProductsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMyViewsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyViewsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetViewedProductsQuery({
+ * const { data, loading, error } = useMyViewsQuery({
  *   variables: {
- *      uid: // value for 'uid'
+ *      skip: // value for 'skip'
+ *      take: // value for 'take'
+ *      orderBy: // value for 'orderBy'
+ *      distinct: // value for 'distinct'
+ *      where: // value for 'where'
  *   },
  * });
  */
-export function useGetViewedProductsQuery(
-  baseOptions?: Apollo.QueryHookOptions<
-    GetViewedProductsQuery,
-    GetViewedProductsQueryVariables
-  >
+export function useMyViewsQuery(
+  baseOptions?: Apollo.QueryHookOptions<MyViewsQuery, MyViewsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useQuery<
-    GetViewedProductsQuery,
-    GetViewedProductsQueryVariables
-  >(GetViewedProductsDocument, options)
+  return Apollo.useQuery<MyViewsQuery, MyViewsQueryVariables>(
+    MyViewsDocument,
+    options
+  )
 }
-export function useGetViewedProductsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    GetViewedProductsQuery,
-    GetViewedProductsQueryVariables
-  >
+export function useMyViewsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<MyViewsQuery, MyViewsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions }
-  return Apollo.useLazyQuery<
-    GetViewedProductsQuery,
-    GetViewedProductsQueryVariables
-  >(GetViewedProductsDocument, options)
+  return Apollo.useLazyQuery<MyViewsQuery, MyViewsQueryVariables>(
+    MyViewsDocument,
+    options
+  )
 }
-export type GetViewedProductsQueryHookResult = ReturnType<
-  typeof useGetViewedProductsQuery
->
-export type GetViewedProductsLazyQueryHookResult = ReturnType<
-  typeof useGetViewedProductsLazyQuery
->
-export type GetViewedProductsQueryResult = Apollo.QueryResult<
-  GetViewedProductsQuery,
-  GetViewedProductsQueryVariables
+export type MyViewsQueryHookResult = ReturnType<typeof useMyViewsQuery>
+export type MyViewsLazyQueryHookResult = ReturnType<typeof useMyViewsLazyQuery>
+export type MyViewsQueryResult = Apollo.QueryResult<
+  MyViewsQuery,
+  MyViewsQueryVariables
 >
 export const SupportsDocument = /*#__PURE__*/ gql`
   query Supports(
