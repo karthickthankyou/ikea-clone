@@ -6,7 +6,7 @@ import { useRedirectUnAuthenticatedUsers } from 'src/hooks'
 
 // useRedirectUnAuthenticatedUsers()
 const PostProductPage: NextPage = () => (
-  <div>
+  <div className='bg-gray-50'>
     <NextSeo
       title='New product - Ikea clone | Karthick Ragavendran'
       description='Post new product.'

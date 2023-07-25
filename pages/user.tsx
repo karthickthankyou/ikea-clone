@@ -10,6 +10,11 @@ import Link from 'next/link'
 import Badge from 'src/components/atoms/Badge/Badge'
 
 import { selectUid, selectUser } from 'src/store/user'
+import {
+  namedOperations,
+  useCreateSellerMutation,
+  useWhoamiQuery,
+} from 'src/generated'
 
 const GetBadge = ({
   isSeller,
@@ -18,9 +23,8 @@ const GetBadge = ({
   isSeller: boolean | undefined
   isUser: boolean | undefined
 }) => {
-  // eslint-disable-next-line no-nested-ternary
   const text = isSeller ? 'Seller' : isUser ? 'User' : 'Unauthenticated'
-  // eslint-disable-next-line no-nested-ternary
+
   const variant = isSeller ? 'red' : isUser ? 'primary' : 'gray'
   return (
     <Badge size='sm' variant={variant}>
@@ -30,24 +34,11 @@ const GetBadge = ({
 }
 
 const UserPage: NextPage = () => {
-  const { uid, roles } = useAppSelector(selectUser)
+  const { data, loading } = useWhoamiQuery()
+  const isSeller = Boolean(data?.whoami.seller?.uid)
+  const isUser = Boolean(data?.whoami.uid)
 
-  const [becoming, setBecoming] = useState(false)
-  const becomeSellerForIkeaClick = () => {
-    setBecoming(true)
-    const functions = getFunctions()
-    const becomeSellerForIkea = httpsCallable(functions, 'becomeSellerForIkea')
-    becomeSellerForIkea().then((result) => {
-      // Read result of the Cloud Function.
-      /** @type {any} */
-      const { data } = result
-      // eslint-disable-next-line no-console
-      setBecoming(false)
-    })
-  }
-
-  const isSeller = roles?.includes('seller')
-  const isUser = Boolean(uid)
+  const [createSeller, { loading: creating }] = useCreateSellerMutation()
 
   return (
     <Container className='min-h-screen'>
@@ -59,30 +50,22 @@ const UserPage: NextPage = () => {
         <div>My Account</div> <GetBadge isSeller={isSeller} isUser={isUser} />{' '}
       </div>
 
-      <div className='font-bold'>ID: {uid || 'Not logged in.'}</div>
-      <div className='mt-8 mb-12'>
-        <div className='mb-2 font-semibold'>Roles</div>
-        {!uid || roles?.length === 0 ? (
-          <div>No roles assigned.</div>
-        ) : (
-          <div className='flex gap-2 mb-2'>
-            {roles?.map((item) => (
-              <div
-                className='inline-block px-2 py-1 border-2 border-white bg-primary/10 hover:shadow-xl'
-                key={item}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        )}
+      <div className='font-bold'>
+        ID: {data?.whoami.uid || 'Not logged in.'}
       </div>
+
       <div>
-        {isUser && !isSeller && (
+        {data?.whoami.uid && !isSeller && (
           <Button
-            isLoading={becoming}
+            isLoading={creating}
             type='button'
-            onClick={becomeSellerForIkeaClick}
+            onClick={async () => {
+              await createSeller({
+                variables: { createSellerInput: { uid: data?.whoami.uid } },
+                awaitRefetchQueries: true,
+                refetchQueries: [namedOperations.Query.whoami],
+              })
+            }}
           >
             Become Seller
           </Button>

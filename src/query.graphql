@@ -300,14 +300,17 @@ mutation InsertSupport($createSupportInput: CreateSupportInput!) {
   }
 }
 
-# mutation CompleteOrder($objects: [orders_insert_input!]!) {
-#   insert_orders(objects: $objects) {
-#     affected_rows
-#   }
-# }
+query whoami {
+  whoami {
+    uid
+    seller {
+      uid
+    }
+  }
+}
 
-# mutation DeleteCartItems($uid: String!, $type: user_products_type_enum!) {
-#   delete_user_products(where: { uid: { _eq: $uid }, type: { _eq: $type } }) {
-#     affected_rows
-#   }
-# }
+mutation createSeller($createSellerInput: CreateSellerInput!) {
+  createSeller(createSellerInput: $createSellerInput) {
+    uid
+  }
+}

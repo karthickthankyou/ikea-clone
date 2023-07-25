@@ -572,6 +572,7 @@ export type Query = {
   users: Array<User>
   view: View
   views: Array<View>
+  whoami: User
 }
 
 export type QueryMyOrdersArgs = {
@@ -1488,6 +1489,26 @@ export type InsertSupportMutation = {
   }
 }
 
+export type WhoamiQueryVariables = Exact<{ [key: string]: never }>
+
+export type WhoamiQuery = {
+  __typename?: 'Query'
+  whoami: {
+    __typename?: 'User'
+    uid: string
+    seller?: { __typename?: 'Seller'; uid: string } | null
+  }
+}
+
+export type CreateSellerMutationVariables = Exact<{
+  createSellerInput: CreateSellerInput
+}>
+
+export type CreateSellerMutation = {
+  __typename?: 'Mutation'
+  createSeller: { __typename?: 'Seller'; uid: string }
+}
+
 export const namedOperations = {
   Query: {
     Products: 'Products',
@@ -1499,12 +1520,14 @@ export const namedOperations = {
     myViews: 'myViews',
     Supports: 'Supports',
     MySupports: 'MySupports',
+    whoami: 'whoami',
   },
   Mutation: {
     InsertUserProductsOne: 'InsertUserProductsOne',
     InsertProductView: 'InsertProductView',
     PostNewProduct: 'PostNewProduct',
     InsertSupport: 'InsertSupport',
+    createSeller: 'createSeller',
   },
 }
 
@@ -2451,4 +2474,104 @@ export type InsertSupportMutationResult =
 export type InsertSupportMutationOptions = Apollo.BaseMutationOptions<
   InsertSupportMutation,
   InsertSupportMutationVariables
+>
+export const WhoamiDocument = /*#__PURE__*/ gql`
+  query whoami {
+    whoami {
+      uid
+      seller {
+        uid
+      }
+    }
+  }
+`
+
+/**
+ * __useWhoamiQuery__
+ *
+ * To run a query within a React component, call `useWhoamiQuery` and pass it any options that fit your needs.
+ * When your component renders, `useWhoamiQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWhoamiQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useWhoamiQuery(
+  baseOptions?: Apollo.QueryHookOptions<WhoamiQuery, WhoamiQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useQuery<WhoamiQuery, WhoamiQueryVariables>(
+    WhoamiDocument,
+    options
+  )
+}
+export function useWhoamiLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<WhoamiQuery, WhoamiQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useLazyQuery<WhoamiQuery, WhoamiQueryVariables>(
+    WhoamiDocument,
+    options
+  )
+}
+export type WhoamiQueryHookResult = ReturnType<typeof useWhoamiQuery>
+export type WhoamiLazyQueryHookResult = ReturnType<typeof useWhoamiLazyQuery>
+export type WhoamiQueryResult = Apollo.QueryResult<
+  WhoamiQuery,
+  WhoamiQueryVariables
+>
+export const CreateSellerDocument = /*#__PURE__*/ gql`
+  mutation createSeller($createSellerInput: CreateSellerInput!) {
+    createSeller(createSellerInput: $createSellerInput) {
+      uid
+    }
+  }
+`
+export type CreateSellerMutationFn = Apollo.MutationFunction<
+  CreateSellerMutation,
+  CreateSellerMutationVariables
+>
+
+/**
+ * __useCreateSellerMutation__
+ *
+ * To run a mutation, you first call `useCreateSellerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSellerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSellerMutation, { data, loading, error }] = useCreateSellerMutation({
+ *   variables: {
+ *      createSellerInput: // value for 'createSellerInput'
+ *   },
+ * });
+ */
+export function useCreateSellerMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    CreateSellerMutation,
+    CreateSellerMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return Apollo.useMutation<
+    CreateSellerMutation,
+    CreateSellerMutationVariables
+  >(CreateSellerDocument, options)
+}
+export type CreateSellerMutationHookResult = ReturnType<
+  typeof useCreateSellerMutation
+>
+export type CreateSellerMutationResult =
+  Apollo.MutationResult<CreateSellerMutation>
+export type CreateSellerMutationOptions = Apollo.BaseMutationOptions<
+  CreateSellerMutation,
+  CreateSellerMutationVariables
 >

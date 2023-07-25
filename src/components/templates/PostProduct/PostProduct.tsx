@@ -101,7 +101,7 @@ const PostProductTemplate = () => {
       <Dialog
         open={showDialog}
         setOpen={setshowDialog}
-        className='max-w-md space-y-2'
+        className='max-w-md space-y-2 bg-white'
       >
         <div className='text-xl font-semibold'>Product posted!</div>
 
@@ -141,8 +141,8 @@ const PostProductTemplate = () => {
           </Link>
         </div>
       </Dialog>
-      <div className='grid gap-6 mt-8'>
-        <div className='w-full max-w-xl p-4 mx-auto space-y-6 shadow-xl'>
+      <div className='grid gap-6 mt-8 '>
+        <div className='w-full max-w-xl p-4 mx-auto space-y-6 bg-white shadow-xl'>
           <div className='mt-4 text-2xl '>Add new product</div>
           <Label title='Product name' error={errors.name}>
             <Input
@@ -177,13 +177,17 @@ const PostProductTemplate = () => {
           </div>
           <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
             <Label title='Price' error={errors.price}>
-              <Input type='number' placeholder='Rs. ' {...register('price')} />
+              <Input
+                type='number'
+                placeholder='Rs. '
+                {...register('price', { valueAsNumber: true })}
+              />
             </Label>
             <Label title='Discount % (Optional)' error={errors.discount}>
               <Input
                 type='number'
                 placeholder='Enter the discount of the product.'
-                {...register('discount')}
+                {...register('discount', { valueAsNumber: true })}
               />
             </Label>
           </div>
